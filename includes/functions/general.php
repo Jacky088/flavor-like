@@ -285,7 +285,16 @@ if( ! function_exists( 'wp_ulike_get_user_access_capability' ) ){
 	function wp_ulike_get_user_access_capability( $type ){
 		$current_user  = wp_get_current_user();
 		$allowed_roles = apply_filters( 'wp_ulike_display_capabilities', array('administrator'), $type );
-		return ! empty( $allowed_roles ) && array_intersect( $allowed_roles, $current_user->roles ) ? key($current_user->allcaps) : 'manage_options';
+
+		// Check if user has one of the allowed roles
+		if ( ! empty( $allowed_roles ) && array_intersect( $allowed_roles, $current_user->roles ) ) {
+			// Always return 'manage_options' for allowed roles
+			// Previously used key($current_user->allcaps) which returns unpredictable
+			// first capability (alphabetically ordered), causing menu access issues
+			return 'manage_options';
+		}
+
+		return 'manage_options';
 	}
 }
 
