@@ -1,0 +1,161 @@
+/**
+ * Settings page + admin notices (WordPress 7–aligned, minimal)
+ */
+
+.wp-ulike-settings-notice,
+.wp-ulike-notice-wrapper {
+	position: relative;
+	box-sizing: border-box;
+
+	&.wp-ulike-notice-control {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		padding: 12px;
+		padding-inline-end: 40px;
+		padding-inline-start: 14px;
+		margin: 12px 0 !important;
+		border: none;
+		border-inline-start: 4px solid var(--wp-admin-theme-color, #3858e9);
+		border-radius: 2px;
+		background: #fff;
+		box-shadow: none;
+		color: #1d2327;
+		overflow: visible;
+
+		@media screen and (max-width: 782px) {
+			flex-wrap: wrap;
+			padding: 12px;
+			padding-inline-end: 36px;
+		}
+	}
+
+	&.wp-ulike-notice-skin-success {
+		border-inline-start-color: #00a32a;
+		background: #f6fffa;
+	}
+
+	&.wp-ulike-notice-skin-info {
+		border-inline-start-color: #dba617;
+		background: #fffbf0;
+	}
+
+	&.wp-ulike-notice-skin-upgrade {
+		border-inline-start-color: #2271b1;
+		background: #f0f6fc;
+	}
+
+	&.wp-ulike-notice-skin-error {
+		border-inline-start-color: #d63638;
+		background: #fcf0f1;
+	}
+
+	.wp-ulike-notice-image {
+		flex: 0 0 auto;
+		margin: 2px 0 0;
+
+		img {
+			display: block;
+			width: 56px;
+			height: auto;
+			max-width: 56px;
+		}
+
+		@media screen and (max-width: 782px) {
+			img {
+				width: 48px;
+				max-width: 48px;
+			}
+		}
+	}
+
+	.wp-ulike-notice-info {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	.wp-ulike-notice-title {
+		margin: 0 0 4px;
+		padding: 0;
+		font-size: 14px;
+		line-height: 1.4;
+		font-weight: 600;
+		color: #1d2327;
+		letter-spacing: normal;
+		background: none;
+		-webkit-text-fill-color: currentColor;
+	}
+
+	.wp-ulike-notice-description {
+		margin: 0 0 10px;
+		padding: 0;
+		font-size: 13px;
+		line-height: 1.5;
+		font-weight: 400;
+		color: #50575e;
+
+		strong {
+			font-weight: 600;
+			color: #1d2327;
+		}
+
+		a {
+			color: var(--wp-admin-theme-color, #3858e9);
+			text-decoration: underline;
+			text-underline-offset: 2px;
+
+			&:hover,
+			&:focus {
+				color: var(--wp-admin-theme-color-darker-10, #2145e6);
+			}
+		}
+
+		code {
+			background: #f0f0f1;
+			border-radius: 2px;
+			padding: 2px 6px;
+			font-size: 12px;
+		}
+	}
+
+	.wp-ulike-notice-submit {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		padding: 0;
+	}
+
+	.wp-ulike-close-notice {
+		position: absolute;
+		top: 0;
+		inset-inline-end: 0;
+		text-decoration: none !important;
+		box-shadow: none !important;
+	}
+}
+
+.wp-ulike-settings-license-activation {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.settings-error {
+		flex: 0 1 100%;
+	}
+
+	.regular-text {
+		font-size: 18px;
+		font-weight: 600;
+		width: 400px;
+		max-width: 100%;
+		height: 45px;
+	}
+
+	.button {
+		height: 45px;
+		font-weight: 700;
+		padding: 0 20px;
+	}
+}

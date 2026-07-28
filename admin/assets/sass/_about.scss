@@ -1,0 +1,788 @@
+/**
+ * About screen — WordPress 7–aligned admin layout
+ */
+
+.wp-ulike-about {
+	max-width: 1100px;
+	margin-top: 10px;
+
+	// Keep native import notices visible; hide unrelated plugin banners in wrap only.
+	> .notice {
+		display: block !important;
+	}
+
+	&__title {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 10px;
+		font-size: 23px;
+		font-weight: 400;
+		line-height: 1.3;
+		margin: 0 0 8px;
+		padding: 0;
+	}
+
+	&__lead {
+		font-size: 14px;
+		color: #646970;
+		max-width: 640px;
+		margin: 0 0 20px;
+		line-height: 1.6;
+	}
+
+	&__badge {
+		display: inline-block;
+		padding: 2px 8px;
+		font-size: 11px;
+		font-weight: 600;
+		line-height: 1.5;
+		border-radius: 2px;
+		background: #f0f0f1;
+		color: #50575e;
+		vertical-align: middle;
+
+		&--pro {
+			background: #fcf9e8;
+			color: #6e4e00;
+		}
+	}
+
+	&__layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 280px;
+		gap: 20px;
+		align-items: start;
+
+		@media (max-width: 960px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		min-width: 0;
+	}
+
+	&__aside {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+}
+
+.wp-ulike-about-getting-started {
+	margin: 0;
+	padding-inline-start: 1.25em;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #1d2327;
+
+	li + li {
+		margin-top: 0.6em;
+	}
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.wp-ulike-about-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	padding: 16px 20px;
+	margin: 0;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		margin-bottom: 12px;
+	}
+
+	&__title {
+		margin: 0 0 12px;
+		padding: 0;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1.4;
+		color: #1d2327;
+	}
+
+	&__header &__title {
+		margin-bottom: 0;
+	}
+
+	&__links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+	}
+
+	&__link {
+		font-size: 13px;
+		text-decoration: none;
+	}
+
+	&__hint {
+		margin: 12px 0 0;
+		font-size: 13px;
+		color: #646970;
+		line-height: 1.5;
+
+		&--warn {
+			color: #8a2424;
+		}
+	}
+
+	&__body {
+		margin-top: 12px;
+	}
+
+	&--pro {
+		border-color: #dba617;
+		background: #fffdf5;
+	}
+
+	&--upsell {
+		border-color: #c3c4c7;
+		background: linear-gradient(180deg, #fff 0%, #f6f7f7 100%);
+	}
+
+	&--task-optional {
+		background: #f0f6fc;
+	}
+
+	&--task-cleanup {
+		border-color: #68de7c;
+		background: #f6fff8;
+	}
+
+	&--muted {
+		background: #f6f7f7;
+		box-shadow: none;
+
+		p {
+			margin: 0;
+			font-size: 13px;
+			color: #646970;
+			line-height: 1.55;
+		}
+	}
+
+	&--details {
+		summary {
+			cursor: pointer;
+			list-style: none;
+			margin-bottom: 0;
+
+			&::-webkit-details-marker {
+				display: none;
+			}
+
+			&::before {
+				content: '▸';
+				display: inline-block;
+				margin-inline-end: 6px;
+				transition: transform 0.15s ease;
+			}
+		}
+
+		&[open] summary::before {
+			transform: rotate(90deg);
+		}
+	}
+}
+
+.wp-ulike-about-task {
+	&__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		margin-bottom: 8px;
+
+		.wp-ulike-about-card__title {
+			margin-bottom: 0;
+		}
+	}
+
+	&__intro {
+		margin: 0 0 12px;
+		font-size: 13px;
+		color: #50575e;
+		line-height: 1.6;
+	}
+
+	&__reassurance {
+		margin: 0 0 14px;
+		padding: 0;
+		list-style: none;
+
+		li {
+			position: relative;
+			margin: 0 0 6px;
+			padding-inline-start: 22px;
+			font-size: 13px;
+			color: #50575e;
+			line-height: 1.5;
+
+			&::before {
+				content: '✓';
+				position: absolute;
+				inset-inline-start: 0;
+				top: 0;
+				color: #00a32a;
+				font-weight: 700;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&__status {
+		margin-bottom: 12px;
+	}
+
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: 0;
+	}
+}
+
+.wp-ulike-about-upsell {
+	&__header {
+		margin-bottom: 16px;
+
+		.wp-ulike-about-card__title {
+			margin-bottom: 6px;
+		}
+	}
+
+	&__intro {
+		margin: 0;
+		font-size: 13px;
+		color: #50575e;
+		line-height: 1.6;
+	}
+
+	&__features {
+		margin: 0 0 16px;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+
+		@media (max-width: 782px) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&__feature {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		margin: 0;
+		padding: 12px;
+		background: #fff;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+
+		.dashicons {
+			flex-shrink: 0;
+			width: 20px;
+			height: 20px;
+			font-size: 20px;
+			color: #2271b1;
+			margin-top: 1px;
+		}
+
+		&--highlight {
+			border-color: #dba617;
+			background: #fffdf5;
+
+			.dashicons {
+				color: #996800;
+			}
+
+			.wp-ulike-about-upsell__feature-title {
+				color: #1d2327;
+			}
+		}
+	}
+
+	&__feature-body {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+	}
+
+	&__feature-title {
+		font-size: 13px;
+		line-height: 1.4;
+		color: #1d2327;
+	}
+
+	&__feature-desc {
+		font-size: 12px;
+		line-height: 1.5;
+		color: #646970;
+	}
+
+	&__footnote {
+		margin: 0 0 14px;
+		padding: 10px 12px;
+		font-size: 12px;
+		line-height: 1.55;
+		color: #646970;
+		background: #fff;
+		border-inline-start: 3px solid #c3c4c7;
+	}
+
+	&__actions {
+		margin: 0;
+	}
+}
+
+.wp-ulike-about-summary {
+	margin: 0 0 16px;
+	padding: 10px 12px;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #1d2327;
+	background: #f6f7f7;
+	border-inline-start: 3px solid #2271b1;
+}
+
+.wp-ulike-about-status-group {
+	margin-bottom: 16px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&__title {
+		margin: 0 0 8px;
+		padding: 0;
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: #646970;
+	}
+}
+
+.wp-ulike-about-status {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 10px;
+
+	@media (max-width: 782px) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	@media (max-width: 480px) {
+		grid-template-columns: 1fr;
+	}
+
+	&__item {
+		padding: 10px 12px;
+		border: 1px solid #dcdcde;
+		border-radius: 2px;
+		background: #f6f7f7;
+
+		&--good {
+			border-color: #b8e6bf;
+			background: #edfaef;
+		}
+
+		&--bad {
+			border-color: #f1aeb5;
+			background: #fcf0f1;
+		}
+	}
+
+	&__label {
+		display: block;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		color: #646970;
+		margin-bottom: 4px;
+	}
+
+	&__value {
+		display: block;
+		font-size: 14px;
+		font-weight: 600;
+		color: #1d2327;
+	}
+
+	&__hint {
+		display: block;
+		margin-top: 4px;
+		font-size: 11px;
+		font-weight: 400;
+		color: #646970;
+		line-height: 1.4;
+	}
+}
+
+.wp-ulike-about-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+
+	&__btn {
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center;
+		gap: 6px;
+		min-height: 32px;
+		line-height: 1.2 !important;
+		vertical-align: middle;
+		padding: 4px 12px !important;
+
+		.dashicons {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 18px;
+			height: 18px;
+			font-size: 18px;
+			line-height: 1;
+			margin: 0;
+			padding: 0;
+			flex: 0 0 18px;
+
+			&::before {
+				width: 18px;
+				height: 18px;
+				font-size: 18px;
+				line-height: 1;
+			}
+		}
+	}
+}
+
+.wp-ulike-about-modules {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	&__item {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		padding: 12px 0;
+		border-bottom: 1px solid #dcdcde;
+
+		&:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+
+		> .dashicons {
+			margin-top: 2px;
+			color: #2271b1;
+		}
+
+		.button {
+			flex-shrink: 0;
+			margin-left: auto;
+		}
+	}
+
+	&__body {
+		flex: 1;
+		min-width: 0;
+
+		strong {
+			display: block;
+			font-size: 14px;
+			margin-bottom: 4px;
+		}
+
+		p {
+			margin: 0;
+			font-size: 13px;
+			color: #646970;
+			line-height: 1.5;
+		}
+	}
+}
+
+.wp-ulike-about-help {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid #f0f0f1;
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	a {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 12px 0;
+		text-decoration: none;
+		color: #2271b1;
+
+		&:hover {
+			color: #135e96;
+
+			strong {
+				color: #135e96;
+			}
+		}
+
+		.dashicons {
+			margin-top: 2px;
+			color: #646970;
+		}
+	}
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+
+		strong {
+			font-size: 14px;
+			color: #1d2327;
+		}
+
+		span {
+			font-size: 13px;
+			color: #646970;
+		}
+	}
+}
+
+.wp-ulike-about-meta {
+	margin: 0;
+
+	div {
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 8px 0;
+		border-bottom: 1px solid #f0f0f1;
+		font-size: 13px;
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	dt {
+		margin: 0;
+		color: #646970;
+		font-weight: 400;
+	}
+
+	dd {
+		margin: 0;
+		font-weight: 600;
+		color: #1d2327;
+		text-align: right;
+	}
+}
+
+.wp-ulike-about-troubleshoot__list {
+	margin: 0 0 4px;
+	padding-inline-start: 1.2em;
+	font-size: 13px;
+	color: #50575e;
+	line-height: 1.6;
+
+	li {
+		margin-bottom: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		a {
+			white-space: nowrap;
+		}
+	}
+}
+
+.wp-ulike-about-backup {
+	.wp-ulike-about-card__title {
+		margin-bottom: 8px;
+	}
+
+	&__intro {
+		margin: 0;
+		font-size: 12px;
+		line-height: 1.55;
+		color: #646970;
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		.button {
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+		}
+	}
+
+	&__import {
+		margin-top: 0;
+		padding-top: 12px;
+		border-top: 1px solid #dcdcde;
+
+		summary {
+			cursor: pointer;
+			font-size: 13px;
+			font-weight: 600;
+			color: #2271b1;
+			list-style: none;
+
+			&::-webkit-details-marker {
+				display: none;
+			}
+
+			&::before {
+				content: '▸';
+				display: inline-block;
+				margin-inline-end: 6px;
+				transition: transform 0.15s ease;
+			}
+		}
+
+		&[open] summary::before {
+			transform: rotate(90deg);
+		}
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 10px;
+		padding-top: 0;
+		border-top: 0;
+	}
+
+	&__label {
+		margin: 0;
+		font-size: 12px;
+		font-weight: 600;
+		color: #50575e;
+	}
+
+	&__file {
+		width: 100%;
+		max-width: 100%;
+		font-size: 12px;
+	}
+
+	.button {
+		width: 100%;
+		justify-content: center;
+		text-align: center;
+	}
+}
+
+.wp-ulike-about-transfer {
+	&__title {
+		margin: 0 0 8px;
+		padding: 0;
+		font-size: 13px;
+		font-weight: 600;
+		color: #1d2327;
+	}
+
+	&__intro {
+		margin: 0 0 10px;
+		font-size: 13px;
+		line-height: 1.6;
+		color: #50575e;
+	}
+
+	&__form {
+		margin-top: 8px;
+	}
+}
+
+.wp-ulike-about-tools {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px;
+
+	fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		width: 100%;
+	}
+
+	&__label {
+		flex: 0 0 100%;
+		margin: 0 0 4px;
+		font-size: 13px;
+		font-weight: 600;
+	}
+}
+
+hr.wp-ulike-about-card__body + hr,
+.wp-ulike-about-card__body hr {
+	border: none;
+	border-top: 1px solid #dcdcde;
+	margin: 16px 0;
+}
+
+[dir='rtl'] .wp-ulike-about-meta dd,
+.rtl .wp-ulike-about-meta dd {
+	text-align: start;
+}
+
+[dir='rtl'] .wp-ulike-about-troubleshoot__list,
+.rtl .wp-ulike-about-troubleshoot__list {
+	padding-inline-start: 1.2em;
+	padding-inline-end: 0;
+}
+
+[dir='rtl'] .wp-ulike-about-card--details summary::before,
+.rtl .wp-ulike-about-card--details summary::before {
+	margin-inline-end: 6px;
+	margin-inline-start: 0;
+}

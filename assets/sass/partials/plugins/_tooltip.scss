@@ -1,0 +1,300 @@
+/* WP ULike Tooltip - Modern Social Media Style */
+
+// Variables
+$tooltip-border-color: #e2e8f0;
+$tooltip-border-width: 1px;
+$tooltip-border-radius: 0.25em;
+$tooltip-spacing: 13px;
+$arrow-size: 7px; // Size of rotated square
+$arrow-size-tiny: 6px;
+
+$color-white: #ffffff;
+$color-dark: #262626;
+$color-text-dark: #1a202c;
+$color-text-light: #262626;
+$color-spinner: #8e8e8e;
+$color-spinner-dark: #a8a8a8;
+
+// Animations
+@keyframes ulf-tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ulf-spinner-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Base Tooltip
+.ulf-tooltip {
+  position: absolute;
+  z-index: 9999;
+  max-width: 320px;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  pointer-events: auto;
+  animation: ulf-tooltip-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+// Content
+.ulf-content {
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $color-text-light;
+  word-wrap: break-word;
+  overflow: visible;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 20px; // Prevent height jump between loading and content
+}
+
+// Arrow Base - Using rotated square technique (like counter box)
+.ulf-arrow {
+  position: absolute;
+  width: $arrow-size;
+  height: $arrow-size;
+  background: $color-white;
+  border: $tooltip-border-width solid transparent;
+  box-sizing: content-box;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0; // Hide until positioned
+  transition: opacity 0.1s ease;
+}
+
+// Show arrow when positioned
+.ulf-tooltip[data-positioned="true"] .ulf-arrow {
+  opacity: 1;
+}
+
+// Arrow Positions - Rotated squares with borders (like counter box)
+// Arrow bottom: when tooltip is above, arrow points down (at bottom of tooltip)
+.ulf-arrow-bottom {
+  bottom: -($arrow-size / 2) - 0.5px;
+  left: 50%;
+  margin-left: -($arrow-size / 2);
+  transform: rotate(45deg);
+  border-bottom-color: $tooltip-border-color;
+  border-right-color: $tooltip-border-color;
+}
+
+// Arrow top: when tooltip is below, arrow points up (at top of tooltip)
+.ulf-arrow-top {
+  top: -($arrow-size / 2) - 0.5px;
+  left: 50%;
+  margin-left: -($arrow-size / 2);
+  transform: rotate(45deg);
+  border-top-color: $tooltip-border-color;
+  border-left-color: $tooltip-border-color;
+}
+
+// Arrow left: when tooltip is on right, arrow points left (at left of tooltip)
+.ulf-arrow-left {
+  left: -($arrow-size / 2) - 0.5px;
+  top: 50%;
+  margin-top: -($arrow-size / 2);
+  transform: rotate(45deg);
+  border-bottom-color: $tooltip-border-color;
+  border-left-color: $tooltip-border-color;
+}
+
+// Arrow right: when tooltip is on left, arrow points right (at right of tooltip)
+.ulf-arrow-right {
+  right: -($arrow-size / 2) - 0.5px;
+  top: 50%;
+  margin-top: -($arrow-size / 2);
+  transform: rotate(45deg);
+  border-top-color: $tooltip-border-color;
+  border-right-color: $tooltip-border-color;
+}
+
+// White Theme (for likers popover)
+.ulf-white-theme {
+  background: $color-white;
+  border: $tooltip-border-width solid $tooltip-border-color;
+  border-radius: $tooltip-border-radius;
+  overflow: visible;
+
+  .ulf-content {
+    color: $color-text-light;
+    padding: 8px 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .ulf-arrow-bottom {
+    background: $color-white;
+    border-bottom-color: $tooltip-border-color;
+    border-right-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-top {
+    background: $color-white;
+    border-top-color: $tooltip-border-color;
+    border-left-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-left {
+    background: $color-white;
+    border-bottom-color: $tooltip-border-color;
+    border-left-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-right {
+    background: $color-white;
+    border-top-color: $tooltip-border-color;
+    border-right-color: $tooltip-border-color;
+  }
+
+  .ulf-spinner-circle {
+    background-color: $color-spinner;
+  }
+}
+
+// Light Theme
+.ulf-light-theme {
+  background: $color-white;
+  border: $tooltip-border-width solid $tooltip-border-color;
+  border-radius: $tooltip-border-radius;
+  overflow: visible;
+
+  .ulf-content {
+    color: $color-text-dark;
+    padding: 8px 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .ulf-arrow-bottom {
+    background: $color-white;
+    border-bottom-color: $tooltip-border-color;
+    border-right-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-top {
+    background: $color-white;
+    border-top-color: $tooltip-border-color;
+    border-left-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-left {
+    background: $color-white;
+    border-bottom-color: $tooltip-border-color;
+    border-left-color: $tooltip-border-color;
+  }
+
+  .ulf-arrow-right {
+    background: $color-white;
+    border-top-color: $tooltip-border-color;
+    border-right-color: $tooltip-border-color;
+  }
+
+  .ulf-spinner-circle {
+    background-color: $color-spinner;
+  }
+}
+
+// Sizes
+.ulf-small {
+  .ulf-content {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+.ulf-tiny {
+  max-width: 280px;
+
+  .ulf-content {
+    padding: 3px 5px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .ulf-arrow {
+    width: $arrow-size-tiny;
+    height: $arrow-size-tiny;
+  }
+
+  .ulf-arrow-bottom {
+    bottom: -($arrow-size-tiny / 2) - 0.5px;
+  }
+
+  .ulf-arrow-top {
+    top: -($arrow-size-tiny / 2) - 0.5px;
+  }
+
+  .ulf-arrow-left {
+    left: -($arrow-size-tiny / 2) - 0.5px;
+  }
+
+  .ulf-arrow-right {
+    right: -($arrow-size-tiny / 2) - 0.5px;
+  }
+}
+
+.ulf-large {
+  max-width: 480px;
+
+  .ulf-content {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+}
+
+// Loading Spinner
+.ulf-loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px; // Match white theme content padding
+  gap: 6px;
+  min-height: 20px; // Match content min-height
+}
+
+.ulf-spinner-circle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $color-spinner;
+  animation: ulf-spinner-bounce 1.2s infinite ease-in-out both;
+  flex-shrink: 0;
+
+  &:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0;
+  }
+}
+
+// Centered tooltip (fallback)
+.ulf-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,117 @@
+/**
+ * Heart template
+ */
+.wpulike-heart {
+
+    .wp_ulike_general_class {
+        box-shadow: 0 0 0 1px #bdbdbd inset;
+        border-radius: .25em;
+        padding: 5px;
+    }
+
+    .wp_ulike_put_text {
+        padding: 0 5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #757575;
+    }
+
+    button.wp_ulike_btn {
+        background: transparent;
+        padding: 15px;
+
+        &:hover,
+        &:focus {
+            color: #757575;
+            background-color: transparent;
+            text-decoration: none;
+        }
+    }
+
+    .wp_ulike_put_image {
+        background: none;
+        padding: 15px;
+
+        &[disabled=disabled],
+        &:disabled {
+
+            &:hover,
+            &:active,
+            &:focus {
+                padding: 15px;
+            }
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            background: url(../img/svg/love.svg) no-repeat;
+            background-position: center center;
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        &.wp_ulike_btn_is_active {
+            &:after {
+                filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+            }
+        }
+    }
+
+    .count-box {
+        font-size: 14px;
+        text-decoration: none;
+        line-height: 28px;
+        display: inline-block;
+        color: #616161;
+        text-align: center;
+        font-weight: 600;
+        vertical-align: middle;
+        padding: 0 5px;
+    }
+
+}
+
+#buddypress #activity-stream {
+
+    .activity-meta,
+    .activity-comments,
+    .activity-inner {
+        .wpulike-heart {
+            button.wp_ulike_btn {
+                background-color: transparent;
+                border: 0;
+                font-size: initial;
+                padding: 1em;
+            }
+
+            .wp_ulike_put_image {
+                padding: 10px 15px;
+
+                &:after {
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+
+            .wp_ulike_general_class {
+                border-radius: 0;
+                padding: 0.1em 0.3em;
+                margin-bottom: 0;
+            }
+
+            .wp_ulike_is_loading {
+                button.wp_ulike_btn {
+                    background-image: url(../img/svg/loader.svg);
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                }
+            }
+        }
+    }
+}

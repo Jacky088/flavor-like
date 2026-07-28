@@ -1,0 +1,41 @@
+/**
+ *  Statistics Page
+ */
+
+.wp-ulike-table {
+    display: table;
+
+    .wp-ulike-table-cell {
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+
+.wp-ulike-empty-stats {
+    text-align: center;
+    height: 50em;
+    position: relative;
+
+    >div {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .wp-ulike-icon {
+        font-size: 110px;
+        color: #8B93A6;
+    }
+
+    .wp-ulike-info {
+        font-size: 28px;
+        line-height: 42px;
+        font-weight: 300;
+        margin-top: 50px;
+
+        p{
+            margin: 10px 0;
+        }
+    }
+}

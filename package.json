@@ -1,0 +1,37 @@
+{
+  "name": "wp-ulike",
+  "title": "WP ULike",
+  "version": "1.0.2",
+  "description": "为 WordPress 网站添加投票按钮，提升用户互动。支持自定义设置和详细分析，追踪用户参与度，优化内容，建立忠实用户群。",
+  "homepage": "https://wpulike.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alimir/wp-ulike.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "木木",
+    "email": "wpulike@gmail.com",
+    "url": "https://wpulike.com"
+  },
+  "scripts": {
+    "build": "wp-toolkit build",
+    "build:js": "wp-toolkit build:js",
+    "build:css": "wp-toolkit build:css",
+    "build:assets": "wp-toolkit build:js && wp-toolkit build:css",
+    "dev": "wp-toolkit dev",
+    "i18n": "wp-toolkit i18n",
+    "i18n:json": "wp-toolkit i18n:json",
+    "release": "wp-toolkit release",
+    "product": "wp-toolkit product",
+    "product:kinsta": "wp-toolkit product kinsta",
+    "build:blocks": "npm run build --prefix includes/blocks/button && npm run build --prefix includes/blocks/top-content",
+    "build:blocks:i18n": "npm run build:blocks && npm run i18n:json"
+  },
+  "devDependencies": {
+    "@alimir/wp-toolkit": "^2.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Alimir/wp-ulike/issues"
+  }
+}

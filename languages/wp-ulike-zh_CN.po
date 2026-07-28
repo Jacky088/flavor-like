@@ -1,0 +1,3156 @@
+# Chinese (Simplified) translation for WP ULike
+# Copyright (C) 2026 TechnoWich
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP ULike 5.2.0\n"
+"Report-Msgid-Bugs-To: https://wpulike.com\n"
+"Last-Translator: 木木\n"
+"Language-Team: 木木\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-23T12:35:20+00:00\n"
+"PO-Revision-Date: 2026-07-23T12:35:20+00:00\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: wp-ulike\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Plugin Name of the plugin
+msgid "WP ULike"
+msgstr "WP ULike"
+
+#. Plugin URI of the plugin
+msgid "https://wpulike.com/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash"
+msgstr "https://wpulike.com/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash"
+
+#. Description of the plugin
+msgid "Add one-click like buttons to WordPress. Built-in statistics dashboard, top lists, and privacy tools. Setup in minutes."
+msgstr "为 WordPress 添加一键点赞按钮。内置统计仪表盘、热门列表和隐私工具。几分钟即可完成设置。"
+
+#. Author of the plugin
+msgid "TechnoWich"
+msgstr "TechnoWich"
+
+#. Author URI of the plugin
+msgid "https://technowich.com/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash"
+msgstr "https://technowich.com/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash"
+
+msgid "Permission denied."
+msgstr "权限不足。"
+
+msgid "Token Error."
+msgstr "令牌错误。"
+
+msgid "It's OK."
+msgstr "操作成功。"
+
+msgid "Invalid preferences payload."
+msgstr "无效的偏好设置数据。"
+
+msgid "Preferences storage is unavailable."
+msgstr "偏好设置存储不可用。"
+
+msgid "Invalid content type."
+msgstr "无效的内容类型。"
+
+msgid "Error: You do not have permission to do that."
+msgstr "错误：您没有权限执行此操作。"
+
+msgid "Overview"
+msgstr "概览"
+
+msgid "Reports"
+msgstr "报告"
+
+msgid "Engagement"
+msgstr "互动"
+
+msgid "Intelligence"
+msgstr "智能分析"
+
+msgid "Content intelligence"
+msgstr "内容分析"
+
+msgid "Audience"
+msgstr "受众"
+
+msgid "Countries"
+msgstr "国家/地区"
+
+msgid "Technology"
+msgstr "技术"
+
+msgid "Devices"
+msgstr "设备"
+
+msgid "Logs"
+msgstr "日志"
+
+msgid "Insights"
+msgstr "洞察"
+
+msgid "View"
+msgstr "查看"
+
+msgid "Filters"
+msgstr "筛选"
+
+msgid "Clear all"
+msgstr "清除全部"
+
+msgid "Apply"
+msgstr "应用"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Actionable engagement intelligence for your site"
+msgstr "为您的站点提供可操作的互动分析"
+
+msgid "Your engagement dashboard at a glance"
+msgstr "互动仪表盘概览"
+
+msgid "Publishing schedule, categories, and commerce insights"
+msgstr "发布计划、分类和电商洞察"
+
+msgid "Publishing schedule and category performance"
+msgstr "发布计划和分类表现"
+
+msgid "Connect product engagement with sales to spot opportunities and plan campaigns"
+msgstr "将产品互动与销售关联，发现机会并规划营销活动"
+
+msgid "See where your audience engages from"
+msgstr "查看受众的互动来源"
+
+msgid "Audience by location"
+msgstr "按地区划分的受众"
+
+msgid "Device, OS and browser breakdown by unique voters"
+msgstr "按独立投票者划分的设备、操作系统和浏览器分布"
+
+msgid "Voters by device & browser"
+msgstr "按设备和浏览器划分的投票者"
+
+msgid "Trends and totals for {{type}}"
+msgstr "{{type}}的趋势和总计"
+
+msgid "Top {{type}} your audience engages with most"
+msgstr "受众互动最多的热门{{type}}"
+
+msgid "Browse and manage vote history"
+msgstr "浏览和管理投票历史"
+
+msgid "Browse and manage vote history for {{type}}"
+msgstr "浏览和管理{{type}}的投票历史"
+
+msgid "Engagement This Week"
+msgstr "本周互动"
+
+msgid "Monthly Engagement Overview"
+msgstr "月度互动概览"
+
+msgid "Yearly Engagement Trends"
+msgstr "年度互动趋势"
+
+msgid "Overall Performance"
+msgstr "整体表现"
+
+msgid "All time"
+msgstr "所有时间"
+
+msgid "This Week"
+msgstr "本周"
+
+msgid "This Month"
+msgstr "本月"
+
+msgid "This Year"
+msgstr "今年"
+
+msgid "Today"
+msgstr "今天"
+
+msgid "Yesterday"
+msgstr "昨天"
+
+msgid "vs last week"
+msgstr "与上周相比"
+
+msgid "vs last month"
+msgstr "与上月相比"
+
+msgid "vs last year"
+msgstr "与去年相比"
+
+msgid "Total Interactions To Date"
+msgstr "截至目前的总互动数"
+
+msgid "Engagement Summary"
+msgstr "互动摘要"
+
+msgid "Totals at a glance"
+msgstr "总计概览"
+
+msgid "{{total}} total · {{today}} today"
+msgstr "共 {{total}} · 今天 {{today}}"
+
+msgid "Trends"
+msgstr "趋势"
+
+msgid "Top content"
+msgstr "热门内容"
+
+msgid "positive"
+msgstr "正面"
+
+msgid "Vote history · {{type}}"
+msgstr "投票历史 · {{type}}"
+
+msgid "Only {{ratio}}% positive this week — check Top content for items getting dislikes."
+msgstr "本周仅 {{ratio}}% 为正面评价——请检查热门内容中被踩的项目。"
+
+msgid "Use Content intelligence to find the best publish times for your audience."
+msgstr "使用内容分析功能为您的受众找到最佳发布时间。"
+
+msgid "{{likes}} likes this week — use Top content to find what resonates."
+msgstr "本周 {{likes}} 次点赞——使用热门内容查找引起共鸣的内容。"
+
+msgid "{{likes}} likes and {{dislikes}} dislikes — use Top content to find what resonates."
+msgstr "{{likes}} 次赞和 {{dislikes}} 次踩——使用热门内容查找引起共鸣的内容。"
+
+msgid "Posts"
+msgstr "文章"
+
+msgid "Comments"
+msgstr "评论"
+
+msgid "Activities"
+msgstr "活动"
+
+msgid "Topics"
+msgstr "话题"
+
+msgid "Engagers"
+msgstr "互动者"
+
+msgid "Top members"
+msgstr "活跃成员"
+
+msgid "Most active engagers recently"
+msgstr "近期最活跃的互动者"
+
+msgid "Most active members recently"
+msgstr "近期最活跃的成员"
+
+msgid "Most active visitors recently"
+msgstr "近期最活跃的访客"
+
+msgid "{{count}} actions this week — reward top engagers to build loyalty."
+msgstr "本周 {{count}} 次操作——奖励活跃互动者以建立忠诚度。"
+
+msgid "{{count}} actions this week — reward top members to build loyalty."
+msgstr "本周 {{count}} 次操作——奖励活跃成员以建立忠诚度。"
+
+msgid "{{count}} actions this week — see which visitors engage most often."
+msgstr "本周 {{count}} 次操作——查看哪些访客互动最频繁。"
+
+msgid "Like"
+msgstr "赞"
+
+msgid "Unlike"
+msgstr "取消赞"
+
+msgid "Dislike"
+msgstr "踩"
+
+msgid "Undislike"
+msgstr "取消踩"
+
+msgid "Status Filter"
+msgstr "状态筛选"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Date Range"
+msgstr "日期范围"
+
+msgid "Start date"
+msgstr "开始日期"
+
+msgid "End date"
+msgstr "结束日期"
+
+msgid "Select..."
+msgstr "选择..."
+
+msgid "Content type"
+msgstr "内容类型"
+
+msgid "Content Types"
+msgstr "内容类型"
+
+msgid "View By"
+msgstr "查看方式"
+
+msgid "OS"
+msgstr "操作系统"
+
+msgid "Browser"
+msgstr "浏览器"
+
+msgid "Post type"
+msgstr "文章类型"
+
+msgid "Taxonomy"
+msgstr "分类法"
+
+msgid "Sort by"
+msgstr "排序方式"
+
+msgid "Highest first"
+msgstr "最高优先"
+
+msgid "Lowest first"
+msgstr "最低优先"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "{{count}} selected"
+msgstr "已选择 {{count}} 项"
+
+msgid "Custom"
+msgstr "自定义"
+
+msgid "This week"
+msgstr "本周"
+
+msgid "Last week"
+msgstr "上周"
+
+msgid "Last {{count}} days"
+msgstr "最近 {{count}} 天"
+
+msgid "Last {{count}} months"
+msgstr "最近 {{count}} 个月"
+
+msgid "This month"
+msgstr "本月"
+
+msgid "Last month"
+msgstr "上月"
+
+msgid "Quarter to date"
+msgstr "本季度至今"
+
+msgid "This year"
+msgstr "今年"
+
+msgid "Last calendar year"
+msgstr "上一日历年"
+
+msgid "Content"
+msgstr "内容"
+
+msgid "Performance"
+msgstr "性能"
+
+msgid "Published"
+msgstr "已发布"
+
+msgid "Views"
+msgstr "浏览量"
+
+msgid "Dislikes"
+msgstr "踩"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "User"
+msgstr "用户"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Comment Author"
+msgstr "评论作者"
+
+msgid "Comment Content"
+msgstr "评论内容"
+
+msgid "Activity Title"
+msgstr "活动标题"
+
+msgid "Topic Title"
+msgstr "话题标题"
+
+msgid "Post Title"
+msgstr "文章标题"
+
+msgid "Categories"
+msgstr "分类"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Share"
+msgstr "分享"
+
+msgid "Growth"
+msgstr "增长"
+
+msgid "Country"
+msgstr "国家"
+
+msgid "Device"
+msgstr "设备"
+
+msgid "Voters"
+msgstr "投票者"
+
+msgid "User(s)"
+msgstr "用户"
+
+msgid "Engaged Users"
+msgstr "参与用户"
+
+msgid "Unique users"
+msgstr "独立用户"
+
+msgid "Selected period"
+msgstr "选定时间段"
+
+msgid "Untitled"
+msgstr "无标题"
+
+msgid "Unknown User"
+msgstr "未知用户"
+
+msgid "Showing {{from}} to {{to}} of {{total}} results"
+msgstr "显示第 {{from}} 到 {{to}} 条，共 {{total}} 条结果"
+
+msgid "per page"
+msgstr "每页"
+
+msgid "Total records"
+msgstr "总记录数"
+
+msgid "Delete Selected"
+msgstr "删除选中"
+
+msgid "Download CSV"
+msgstr "下载 CSV"
+
+msgid "Failed to delete the log entry."
+msgstr "删除日志条目失败。"
+
+msgid "An error occurred while deleting the log entry."
+msgstr "删除日志条目时发生错误。"
+
+msgid "No logs found for this category"
+msgstr "此分类下未找到日志"
+
+msgid "No data for this period"
+msgstr "该时间段暂无数据"
+
+msgid "Try changing your filters or search."
+msgstr "请尝试更改筛选条件或搜索内容。"
+
+msgid "Unable to load data. Please try again."
+msgstr "无法加载数据。请重试。"
+
+msgid "Something went wrong"
+msgstr "出现错误"
+
+msgid "Unable to load data. Refresh the page or contact support."
+msgstr "无法加载数据。请刷新页面或联系支持。"
+
+msgid "Page Not Found"
+msgstr "页面未找到"
+
+msgid "This page does not exist or was moved."
+msgstr "此页面不存在或已被移动。"
+
+msgid "No Data Available"
+msgstr "暂无数据"
+
+msgid "No data yet. Records will appear here once engagement starts."
+msgstr "暂无数据。互动开始后，记录将显示在此处。"
+
+msgid "Go to Home"
+msgstr "返回首页"
+
+msgid "Refresh Page"
+msgstr "刷新页面"
+
+msgid "User Engagement by Country"
+msgstr "按国家划分的用户互动"
+
+msgid "Activity by country"
+msgstr "按国家划分的活动"
+
+msgid "Top countries"
+msgstr "热门国家"
+
+msgid "No country data yet"
+msgstr "暂无国家数据"
+
+msgid "{{country}} is your top market with {{share}}% of engaged voters."
+msgstr "{{country}} 是您的主要市场，占参与投票者的 {{share}}%。"
+
+msgid "Performance snapshot"
+msgstr "性能概览"
+
+msgid "Engagement rate"
+msgstr "互动率"
+
+msgid "Positive sentiment"
+msgstr "正面情感"
+
+msgid "Total likes"
+msgstr "总赞数"
+
+msgid "Engagement trend"
+msgstr "互动趋势"
+
+msgid "Button impressions"
+msgstr "按钮展示量"
+
+msgid "Total views"
+msgstr "总浏览量"
+
+msgid "Reach"
+msgstr "覆盖范围"
+
+msgid "Daily activity"
+msgstr "每日活动"
+
+msgid "Likes this month"
+msgstr "本月赞数"
+
+msgid "Interactions this month"
+msgstr "本月互动数"
+
+msgid "Likes per view"
+msgstr "每次浏览的赞数"
+
+msgid "Likes + dislikes per view"
+msgstr "每次浏览的赞和踩数"
+
+msgid "Like vs dislike ratio"
+msgstr "赞踩比"
+
+msgid "Like-only template"
+msgstr "仅赞模板"
+
+msgid "{{likes}} likes · {{dislikes}} dislikes"
+msgstr "{{likes}} 赞 · {{dislikes}} 踩"
+
+msgid "All likes in this period."
+msgstr "此时间段内的所有赞。"
+
+msgid "Daily counts for this period."
+msgstr "此时间段内的每日计数。"
+
+msgid "Enable it in General settings to see engagement rate and button impressions."
+msgstr "在常规设置中启用以查看互动率和按钮展示量。"
+
+msgid "Enable view tracking in General settings if you have not already to see engagement rate and button impressions."
+msgstr "如果尚未启用，请在常规设置中启用浏览量跟踪以查看互动率和按钮展示量。"
+
+msgid "Engagement as a share of page views."
+msgstr "互动占页面浏览量的比例。"
+
+msgid "Impressions will appear as visitors view pages with your like button."
+msgstr "当访客查看包含点赞按钮的页面时，展示量将会显示。"
+
+msgid "How page views convert to engagement."
+msgstr "页面浏览量如何转化为互动。"
+
+msgid "No button impressions in this period yet."
+msgstr "此时间段内暂无按钮展示量。"
+
+msgid "Likes as a share of all reactions."
+msgstr "赞占所有反应的比例。"
+
+msgid "{{likes}} of {{total}} reactions"
+msgstr "{{total}} 个反应中有 {{likes}} 个赞"
+
+msgid "Change compared to the previous period."
+msgstr "与上一时间段的变化。"
+
+msgid "{{rate}}% engagement rate"
+msgstr "{{rate}}% 互动率"
+
+msgid "How often your like button was shown. Compare with engagements."
+msgstr "点赞按钮的展示频率。与互动数据进行对比。"
+
+msgid "Reaction and voter metrics."
+msgstr "反应和投票者指标。"
+
+msgid "View tracking is off."
+msgstr "浏览量跟踪已关闭。"
+
+msgid "When to publish"
+msgstr "何时发布"
+
+msgid "When your audience is most likely to react."
+msgstr "您的受众最有可能做出反应的时间。"
+
+msgid "Sweet spot"
+msgstr "最佳时机"
+
+msgid "Peak"
+msgstr "峰值"
+
+msgid "Hourly pattern"
+msgstr "每小时模式"
+
+msgid "Full report"
+msgstr "完整报告"
+
+msgid "{{day}} · {{time}}"
+msgstr "{{day}} · {{time}}"
+
+msgid "{{share}}% of weekly activity"
+msgstr "占每周活动的 {{share}}%"
+
+msgid "{{share}}% of all activity · {{range}}"
+msgstr "占所有活动的 {{share}}% · {{range}}"
+
+msgid "{{count}} engagements in this slot"
+msgstr "此时段有 {{count}} 次互动"
+
+msgid "Activity heatmap"
+msgstr "活动热力图"
+
+msgid "Engagement by day and hour"
+msgstr "按天和小时划分的互动"
+
+msgid "When your audience engages"
+msgstr "受众互动时间"
+
+msgid "Time windows"
+msgstr "时间窗口"
+
+msgid "Best day(s)"
+msgstr "最佳日期"
+
+msgid "Share of weekly activity"
+msgstr "每周活动占比"
+
+msgid "Best hour"
+msgstr "最佳时间"
+
+msgid "Best hours to post"
+msgstr "最佳发布时间"
+
+msgid "Category performance"
+msgstr "分类表现"
+
+msgid "Engagements"
+msgstr "互动数"
+
+msgid "Hour"
+msgstr "小时"
+
+msgid "Top categories"
+msgstr "热门分类"
+
+msgid "Shop spotlight"
+msgstr "店铺聚焦"
+
+msgid "Less"
+msgstr "更少"
+
+msgid "More"
+msgstr "更多"
+
+msgid "Publish on {{day}} around {{time}} for maximum engagement."
+msgstr "在 {{day}} {{time}} 左右发布以获得最大互动量。"
+
+msgid "Your audience is most active in the {{window}} window ({{range}})."
+msgstr "您的受众在 {{window}} 时段（{{range}}）最活跃。"
+
+msgid "{{share}}% of engagers use mobile — optimize for small screens."
+msgstr "{{share}}% 的互动者使用移动设备——请针对小屏幕进行优化。"
+
+msgid "{{share}}% engage from desktop — long-form content may perform better."
+msgstr "{{share}}% 的互动来自桌面端——长内容可能表现更好。"
+
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+msgid "WooCommerce report unavailable"
+msgstr "WooCommerce 报告不可用"
+
+msgid "Enable likes on products or reviews, or wait for store orders, to unlock commerce intelligence."
+msgstr "启用产品或评论的点赞功能，或等待商店订单，以解锁电商分析。"
+
+msgid "Store snapshot"
+msgstr "店铺概览"
+
+msgid "Engagement correlated with sales"
+msgstr "互动与销售的关联"
+
+msgid "Unique view: see whether shopper reactions align with orders and revenue."
+msgstr "独特视角：查看购物者反应是否与订单和收入一致。"
+
+msgid "Product likes"
+msgstr "产品赞数"
+
+msgid "Likes and dislikes on WooCommerce products."
+msgstr "WooCommerce 产品的赞和踩。"
+
+msgid "Product engagement"
+msgstr "产品互动"
+
+msgid "Reactions on verified customer product reviews."
+msgstr "已验证客户产品评价的反应。"
+
+msgid "Review engagement"
+msgstr "评价互动"
+
+msgid "Completed and processing orders."
+msgstr "已完成和处理中的订单。"
+
+msgid "Orders"
+msgstr "订单"
+
+msgid "Net product revenue in this period."
+msgstr "此时间段内的产品净收入。"
+
+msgid "Revenue"
+msgstr "收入"
+
+msgid "Product units sold in this period."
+msgstr "此时间段内售出的产品数量。"
+
+msgid "Units sold"
+msgstr "售出数量"
+
+msgid "Average revenue per order in this period."
+msgstr "此时间段内每笔订单的平均收入。"
+
+msgid "Average order value"
+msgstr "平均订单价值"
+
+msgid "Average product and review reactions per order — a pre-purchase interest signal."
+msgstr "每笔订单的平均产品和评价反应——购买前的兴趣信号。"
+
+msgid "Engagement per order"
+msgstr "每笔订单的互动数"
+
+msgid "Revenue generated per like or dislike — helps compare campaign ROI."
+msgstr "每次赞或踩产生的收入——有助于比较营销活动的投资回报率。"
+
+msgid "Revenue per engagement"
+msgstr "每次互动的收入"
+
+msgid "Engagement vs orders trend"
+msgstr "互动与订单趋势"
+
+msgid "Daily product reactions compared with store orders"
+msgstr "每日产品反应与商店订单的对比"
+
+msgid "Look for days when engagement rises before orders — a sign your social proof is working."
+msgstr "关注互动在订单之前上升的日期——这表明您的社交证明正在发挥作用。"
+
+msgid "Top products"
+msgstr "热门产品"
+
+msgid "Engagement and sales side by side"
+msgstr "互动与销售并排对比"
+
+msgid "No product engagement yet"
+msgstr "暂无产品互动"
+
+msgid "Product"
+msgstr "产品"
+
+msgid "Match score"
+msgstr "匹配分数"
+
+msgid "Opportunities"
+msgstr "机会"
+
+msgid "Where engagement and sales diverge"
+msgstr "互动与销售出现差异的地方"
+
+msgid "High interest, lower sales — optimize merchandising, pricing, or checkout."
+msgstr "高兴趣但低销量——优化商品展示、定价或结账流程。"
+
+msgid "Strong sellers with few likes — surface social proof with like buttons or badges."
+msgstr "高销量但少点赞——通过点赞按钮或徽章展示社交证明。"
+
+msgid "Engagement and revenue by product category"
+msgstr "按产品分类的互动和收入"
+
+msgid "Engagement vs sales intelligence"
+msgstr "互动与销售分析"
+
+msgid "See how product likes and review reactions relate to orders and revenue — available in Pro."
+msgstr "查看产品赞和评价反应与订单和收入的关系——专业版可用。"
+
+msgid "Actionable recommendations based on your data"
+msgstr "基于您的数据的可操作建议"
+
+msgid "Best time to publish"
+msgstr "最佳发布时间"
+
+msgid "{{day}} around {{time}} gets the most engagement — schedule content then."
+msgstr "{{day}} {{time}} 左右获得最多互动——请在此时安排内容。"
+
+msgid "{{category}} drives {{share}}% of engagement — create more on this topic."
+msgstr "{{category}} 贡献了 {{share}}% 的互动——多创作此类内容。"
+
+msgid "Low conversion"
+msgstr "低转化"
+
+msgid "Only {{rate}}% of viewers engage — improve button placement and CTAs."
+msgstr "仅 {{rate}}% 的浏览者参与互动——改善按钮位置和行动号召。"
+
+msgid "Momentum"
+msgstr "势头"
+
+msgid "Sentiment drop"
+msgstr "情感下降"
+
+msgid "Positive reactions fell to {{ratio}}% — review content getting dislikes."
+msgstr "正面反应降至 {{ratio}}%——检查被踩的内容。"
+
+msgid "{{title}} leads with {{count}} likes in this period."
+msgstr "{{title}} 在此时间段以 {{count}} 个赞领先。"
+
+msgid "{{title}} converts best at {{rate}}% — replicate this format."
+msgstr "{{title}} 转化率最高为 {{rate}}%——复制此格式。"
+
+msgid "{{name}} is your most active user — consider a loyalty perk."
+msgstr "{{name}} 是您最活跃的用户——可考虑提供忠诚度奖励。"
+
+msgid "Refresh data"
+msgstr "刷新数据"
+
+msgid "Total engagements"
+msgstr "总互动数"
+
+msgid "Distinct people who engaged in this period."
+msgstr "此时间段内参与互动的独立用户数。"
+
+msgid "Current period"
+msgstr "当前时间段"
+
+msgid "Previous period"
+msgstr "上一时间段"
+
+msgid "Likes"
+msgstr "赞"
+
+msgid "Interactions"
+msgstr "互动"
+
+msgid "Impressions"
+msgstr "展示量"
+
+msgid "Dismiss"
+msgstr "关闭"
+
+msgid "New Notifications"
+msgstr "新通知"
+
+msgid "No new notifications"
+msgstr "暂无新通知"
+
+msgid "{{current}} of {{total}}"
+msgstr "{{current}} / {{total}}"
+
+msgid "License Not Found!"
+msgstr "未找到许可证！"
+
+msgid "Your license is invalid or missing. Enter a valid key or purchase Pro to continue."
+msgstr "您的许可证无效或缺失。请输入有效密钥或购买专业版以继续。"
+
+msgid "Get License"
+msgstr "获取许可证"
+
+msgid "Upgrade to Pro"
+msgstr "升级到专业版"
+
+msgid "Learn more"
+msgstr "了解更多"
+
+msgid "Pro"
+msgstr "专业版"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "Get Pro"
+msgstr "获取专业版"
+
+msgid "Get Pro reports"
+msgstr "获取专业版报告"
+
+msgid "Unlock live audience maps, top fans, and publishing insights with Pro."
+msgstr "使用专业版解锁实时受众地图、顶级粉丝和发布洞察。"
+
+msgid "See who's engaging most"
+msgstr "查看谁互动最多"
+
+msgid "{{count}} engagements so far — unlock audience maps, top fans, and publishing insights."
+msgstr "目前已有 {{count}} 次互动——解锁受众地图、顶级粉丝和发布洞察。"
+
+msgid "Minimize Pro promo"
+msgstr "最小化专业版推广"
+
+msgid "Find your best posting times and top-performing topics"
+msgstr "找到最佳发布时间和表现最好的话题"
+
+msgid "Learn which devices and browsers your voters use"
+msgstr "了解您的投票者使用哪些设备和浏览器"
+
+msgid "Sidebar Pro card"
+msgstr "侧边栏专业版卡片"
+
+msgid "Minimized to \"Get Pro\" in the sidebar."
+msgstr "已最小化为侧边栏中的"获取专业版"。"
+
+msgid "Full card visible in the sidebar."
+msgstr "完整卡片在侧边栏中可见。"
+
+msgid "Show full card"
+msgstr "显示完整卡片"
+
+msgid "Milestone"
+msgstr "里程碑"
+
+msgid "You have passed {{count}} total engagements — {{remaining}} to go until {{next}}."
+msgstr "您已达到 {{count}} 次总互动——距离 {{next}} 还差 {{remaining}} 次。"
+
+msgid "Your community has reached {{count}} total engagements!"
+msgstr "您的社区已达到 {{count}} 次总互动！"
+
+msgid "Total"
+msgstr "总计"
+
+msgid "Engagement is up {{percent}}% compared to last week."
+msgstr "互动量比上周增长了 {{percent}}%。"
+
+msgid "Engagement is down {{percent}}% compared to last week."
+msgstr "互动量比上周下降了 {{percent}}%。"
+
+msgid "Getting started"
+msgstr "开始使用"
+
+msgid "{{count}} engagements so far — {{remaining}} more to reach {{target}}."
+msgstr "目前已有 {{count}} 次互动——再有 {{remaining}} 次即可达到 {{target}}。"
+
+msgid "{{count}} engagements today — keep it going."
+msgstr "今天已有 {{count}} 次互动——继续保持。"
+
+msgid "No engagements yet today — yesterday had {{count}}."
+msgstr "今天暂无互动——昨天有 {{count}} 次。"
+
+msgid "Engagement is up {{percent}}% compared to yesterday."
+msgstr "互动量比昨天增长了 {{percent}}%。"
+
+msgid "Engagement is down {{percent}}% compared to yesterday."
+msgstr "互动量比昨天下降了 {{percent}}%。"
+
+msgid "Around {{time}} gets the most engagement — schedule content then."
+msgstr "{{time}} 左右获得最多互动——请在此时安排内容。"
+
+msgid "A quick look at where your audience engages from."
+msgstr "快速了解受众的互动来源。"
+
+msgid "See full map in Pro"
+msgstr "在专业版中查看完整地图"
+
+msgid "Explore"
+msgstr "探索"
+
+msgid "Preferences for your stats dashboard experience."
+msgstr "统计仪表盘体验的偏好设置。"
+
+msgid "Announcements"
+msgstr "公告"
+
+msgid "Show announcement modals"
+msgstr "显示公告弹窗"
+
+msgid "Display popup announcements when you open the stats dashboard. Multiple announcements are shown one at a time."
+msgstr "打开统计仪表盘时显示弹窗公告。多个公告将逐一显示。"
+
+msgid "Dismissed announcements"
+msgstr "已关闭的公告"
+
+msgid "No dismissed announcements."
+msgstr "没有已关闭的公告。"
+
+msgid "{{count}} dismissed announcement(s) stored for your account."
+msgstr "已为您的账户存储了 {{count}} 条已关闭的公告。"
+
+msgid "Clear dismissed"
+msgstr "清除已关闭"
+
+msgid "Dismissals were cleared. Popup announcements will appear again the next time you open the stats dashboard."
+msgstr "已清除关闭记录。下次打开统计仪表盘时，弹窗公告将再次出现。"
+
+msgid "Plugin configuration"
+msgstr "插件配置"
+
+msgid "Open plugin settings"
+msgstr "打开插件设置"
+
+msgid "Help & documentation"
+msgstr "帮助与文档"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Theme preference is stored locally in this browser, not in your WordPress user account."
+msgstr "主题偏好仅存储在此浏览器本地，不在您的 WordPress 用户账户中。"
+
+msgid "Publishing schedule, category insights, and commerce analytics — available in Pro."
+msgstr "发布计划、分类洞察和电商分析——专业版可用。"
+
+msgid "Publishing schedule and category insights — available in Pro."
+msgstr "发布计划和分类洞察——专业版可用。"
+
+msgid "See where your audience engages from with country breakdowns and trends."
+msgstr "通过国家分布和趋势查看受众的互动来源。"
+
+msgid "Device, OS, and browser breakdowns for every vote."
+msgstr "每次投票的设备、操作系统和浏览器分布。"
+
+msgid "Discover your most active members and reward loyal engagers."
+msgstr "发现最活跃的成员并奖励忠实的互动者。"
+
+msgid "See exactly who engaged with each piece of content."
+msgstr "精确查看每条内容的互动者。"
+
+msgid "Users who engaged with this content"
+msgstr "与此内容互动的用户"
+
+msgid "Member"
+msgstr "成员"
+
+msgid "Last active"
+msgstr "最后活跃"
+
+msgid "Reactions"
+msgstr "反应"
+
+msgid "Back to engagement"
+msgstr "返回互动"
+
+msgid "No registered engagers yet"
+msgstr "暂无注册互动者"
+
+msgid "No registered engagers for {{title}}"
+msgstr "{{title}} 暂无注册互动者"
+
+msgid "Guest votes are counted in totals but only registered members appear here."
+msgstr "访客投票计入总数，但此处仅显示注册成员。"
+
+msgid "Like / Dislike Buttons"
+msgstr "赞 / 踩 按钮"
+
+msgid "{{count}} engaged users"
+msgstr "{{count}} 位参与用户"
+
+msgid "{{count}} users engaged with {{title}}"
+msgstr "{{count}} 位用户与 {{title}} 互动"
+
+msgid "{{count}} engager(s)"
+msgstr "{{count}} 位互动者"
+
+msgid "No engagers"
+msgstr "暂无互动者"
+
+msgid "No engagers yet"
+msgstr "暂无互动者"
+
+msgid "{{count}} total"
+msgstr "共 {{count}}"
+
+msgid "Totals and charts for {{type}}"
+msgstr "{{type}}的总计和图表"
+
+msgid "Trends and top content for {{type}}"
+msgstr "{{type}}的趋势和热门内容"
+
+msgid "Morning"
+msgstr "早晨"
+
+msgid "Afternoon"
+msgstr "下午"
+
+msgid "Evening"
+msgstr "傍晚"
+
+msgid "Night"
+msgstr "夜晚"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "See who"
+msgstr "查看谁"
+
+msgid "Ratings"
+msgstr "评分"
+
+msgid "Average rating"
+msgstr "平均评分"
+
+msgid "Star Rating"
+msgstr "星级评分"
+
+msgid "Star rating template"
+msgstr "星级评分模板"
+
+msgid "Star ratings in this period."
+msgstr "此时间段内的星级评分。"
+
+msgid "Emoji Reactions"
+msgstr "表情反应"
+
+msgid "Emoji template"
+msgstr "表情模板"
+
+msgid "Emoji reactions in this period."
+msgstr "此时间段内的表情反应。"
+
+msgid "Reactions are up {{percent}}% compared to last week."
+msgstr "反应比上周增长了 {{percent}}%。"
+
+msgid "Ratings are up {{percent}}% compared to last week."
+msgstr "评分比上周增长了 {{percent}}%。"
+
+msgid "{{count}} emoji reactions this week — use Top content to find what resonates."
+msgstr "本周 {{count}} 个表情反应——使用热门内容查找引起共鸣的内容。"
+
+msgid "{{count}} star ratings this week — use Top content to find what resonates."
+msgstr "本周 {{count}} 个星级评分——使用热门内容查找引起共鸣的内容。"
+
+msgid "{{name}} is your top rater — consider a loyalty perk."
+msgstr "{{name}} 是您的顶级评分者——可考虑提供忠诚度奖励。"
+
+msgid "{{title}} averages ★ {{avg}} — replicate this format."
+msgstr "{{title}} 平均 ★ {{avg}}——复制此格式。"
+
+msgid "{{title}} leads with {{count}} reactions in this period."
+msgstr "{{title}} 在此时间段以 {{count}} 个反应领先。"
+
+msgid "★ {{avg}} site average"
+msgstr "★ {{avg}} 站点平均"
+
+msgid "Device Insights"
+msgstr "设备洞察"
+
+msgid "Intelligence Report"
+msgstr "智能报告"
+
+msgid "WooCommerce Report"
+msgstr "WooCommerce 报告"
+
+msgid "Upgrade like storage"
+msgstr "升级点赞存储"
+
+msgid "Unable to load data"
+msgstr "无法加载数据"
+
+msgid "Please refresh the page or try again later."
+msgstr "请刷新页面或稍后重试。"
+
+msgid "{{count}} {{interval}} ago"
+msgstr "{{count}} {{interval}}前"
+
+msgid "year"
+msgstr "年"
+
+msgid "years"
+msgstr "年"
+
+msgid "month"
+msgstr "月"
+
+msgid "months"
+msgstr "月"
+
+msgid "week"
+msgstr "周"
+
+msgid "weeks"
+msgstr "周"
+
+msgid "day"
+msgstr "天"
+
+msgid "days"
+msgstr "天"
+
+msgid "hour"
+msgstr "小时"
+
+msgid "hours"
+msgstr "小时"
+
+msgid "minute"
+msgstr "分钟"
+
+msgid "minutes"
+msgstr "分钟"
+
+msgid "second"
+msgstr "秒"
+
+msgid "seconds"
+msgstr "秒"
+
+msgid "just now"
+msgstr "刚刚"
+
+msgid "Error: Settings API not available."
+msgstr "错误：设置 API 不可用。"
+
+msgid "Invalid request data. Expected an object with setting values."
+msgstr "无效的请求数据。预期为包含设置值的对象。"
+
+msgid "Error: Customizer API not available."
+msgstr "错误：自定义 API 不可用。"
+
+msgid "Invalid request data. Expected an object with customizer values."
+msgstr "无效的请求数据。预期为包含自定义值的对象。"
+
+msgid "Button"
+msgstr "按钮"
+
+msgid "Proudly Powered By"
+msgstr "技术支持"
+
+msgid "Congrats!"
+msgstr "恭喜！"
+
+msgid "You've logged %s likes with WP ULike so far. Nice work! If the plugin's been good to you, we'd love a 5-star review on WordPress.org. It helps us keep improving and helps others discover WP ULike too."
+msgstr "您已通过 WP ULike 记录了 %s 次点赞。做得好！如果插件对您有帮助，希望您能在 WordPress.org 上给我们一个 5 星评价。"
+
+msgid "Happy to help"
+msgstr "乐意帮忙"
+
+msgid "Maybe later"
+msgstr "以后再说"
+
+msgid "Don't ask again"
+msgstr "不再询问"
+
+msgid "Your license needs attention"
+msgstr "您的许可证需要关注"
+
+msgid "Your license has expired"
+msgstr "您的许可证已过期"
+
+msgid "Your license has been disabled"
+msgstr "您的许可证已被禁用"
+
+msgid "Unable to verify your license"
+msgstr "无法验证您的许可证"
+
+msgid "Special offer: save %s on WP ULike Pro"
+msgstr "特别优惠：WP ULike 专业版节省 %s"
+
+msgid "We noticed your license needs a quick update. Renew with code %s to save %s on premium features, updates, and support."
+msgstr "我们注意到您的许可证需要更新。使用代码 %s 续费，可节省 %s 的高级功能、更新和支持费用。"
+
+msgid "Claim %s discount"
+msgstr "领取 %s 折扣"
+
+msgid "Go Pro"
+msgstr "升级专业版"
+
+msgid "PHP Snippets"
+msgstr "PHP 代码片段"
+
+msgid "Add PHP snippets without opening and closing tags (&lt;?php and ?&gt;). If you have lots of snippets, you may want to consider using Code Snippets plugin."
+msgstr "添加 PHP 代码片段，无需开头和结尾标签（&lt;?php 和 ?&gt;）。如果您有大量代码片段，可以考虑使用 Code Snippets 插件。"
+
+msgid "Javascript Snippets"
+msgstr "JavaScript 代码片段"
+
+msgid "This code will output immediately before the closing &lt;/body&gt; tag in the document source. (Scripts must not be property wrapped in &lt;script&gt; tag.)"
+msgstr "此代码将在文档源代码的 &lt;/body&gt; 结束标签之前输出。（脚本不需要包裹在 &lt;script&gt; 标签中。）"
+
+msgid "Metrics Dashboard"
+msgstr "数据仪表盘"
+
+msgid "Free up disk space."
+msgstr "释放磁盘空间。"
+
+msgid "Like records already use the faster storage. Remove the old log tables when you are ready to reclaim disk space."
+msgstr "点赞记录已使用更快的存储。当您准备好回收磁盘空间时，请移除旧的日志表。"
+
+msgid "Review cleanup"
+msgstr "检查清理"
+
+msgid "Faster statistics with Pulse storage."
+msgstr "使用 Pulse 存储实现更快的统计。"
+
+msgid "Your statistics are already complete — WP ULike reads both legacy and Pulse data automatically. Migrating fully to Pulse storage makes charts faster and lets you clean up the old tables."
+msgstr "您的统计数据已经完整——WP ULike 会自动读取旧版和 Pulse 数据。完全迁移到 Pulse 存储可使图表更快，并让您清理旧表。"
+
+msgid "Customize"
+msgstr "自定义"
+
+msgid "Statistics"
+msgstr "统计"
+
+msgid "WP ULike Settings"
+msgstr "WP ULike 设置"
+
+msgid "Configuration"
+msgstr "配置"
+
+msgid "General"
+msgstr "常规"
+
+msgid "In-app Notifications"
+msgstr "应用内通知"
+
+msgid "Show a brief confirmation message after users like/unlike."
+msgstr "用户点赞/取消赞后显示简短确认消息。"
+
+msgid "Disable Notifications On"
+msgstr "禁用通知位置"
+
+msgid "Choose where notifications are disabled."
+msgstr "选择禁用通知的位置。"
+
+msgid "Compact Counter (1k, 1.2k)"
+msgstr "紧凑计数器 (1k, 1.2k)"
+
+msgid "Show large like counts in a short format. Example: 1250 → 1.2k (applies at 1,000+)."
+msgstr "以简短格式显示大量赞数。示例：1250 → 1.2k（适用于 1,000+）。"
+
+msgid "Add text before or after the counter value."
+msgstr "在计数器值前后添加文本。"
+
+msgid "Counter Prefix & Suffix"
+msgstr "计数器前缀和后缀"
+
+msgid "Prefix"
+msgstr "前缀"
+
+msgid "Like Prefix"
+msgstr "赞前缀"
+
+msgid "Text shown before the count (e.g., \"+\" displays as \"+125\")."
+msgstr "显示在计数前的文本（例如，\"+\" 显示为 \"+125\"）。"
+
+msgid "Unlike Prefix"
+msgstr "取消赞前缀"
+
+msgid "Suffix"
+msgstr "后缀"
+
+msgid "Like Suffix"
+msgstr "赞后缀"
+
+msgid "Text shown after the count (e.g., \" likes\" displays as \"125 likes\")."
+msgstr "显示在计数后的文本（例如，\" likes\" 显示为 \"125 likes\"）。"
+
+msgid "Unlike Suffix"
+msgstr "取消赞后缀"
+
+msgid "Anonymize IP Addresses"
+msgstr "匿名化 IP 地址"
+
+msgid "Mask part of each IP address so votes cannot be traced to individual users (last octet in IPv4, last 80 bits in IPv6)."
+msgstr "屏蔽 IP 地址的部分内容，使投票无法追溯到个人（IPv4 的最后一个字节，IPv6 的最后 80 位）。"
+
+msgid "Do Not Store IPs"
+msgstr "不存储 IP"
+
+msgid "Stop saving user IP addresses in your database."
+msgstr "停止在数据库中保存用户 IP 地址。"
+
+msgid "Site Uses Caching"
+msgstr "站点使用缓存"
+
+msgid "Turn this on if your site uses a caching plugin or service."
+msgstr "如果您的站点使用缓存插件或服务，请启用此选项。"
+
+msgid "Disable Assets On"
+msgstr "禁用资源加载位置"
+
+msgid "Prevent loading WP ULike CSS/JS on selected page types."
+msgstr "阻止在选定页面类型上加载 WP ULike CSS/JS。"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Singular"
+msgstr "单页"
+
+msgid "Archives"
+msgstr "归档"
+
+msgid "Search Results"
+msgstr "搜索结果"
+
+msgid "Tags"
+msgstr "标签"
+
+msgid "Author Page"
+msgstr "作者页面"
+
+msgid "BuddyPress Pages"
+msgstr "BuddyPress 页面"
+
+msgid "bbPress Pages"
+msgstr "bbPress 页面"
+
+msgid "WooCommerce Pages"
+msgstr "WooCommerce 页面"
+
+msgid "Hide Plugin Admin Notices"
+msgstr "隐藏插件管理通知"
+
+msgid "Completely hide WP ULike admin notices for all users."
+msgstr "对所有用户完全隐藏 WP ULike 管理通知。"
+
+msgid "Show Admin Columns"
+msgstr "显示管理列"
+
+msgid "Add a likes counter column to the admin list."
+msgstr "在管理列表中添加赞数列。"
+
+msgid "Blacklist"
+msgstr "黑名单"
+
+msgid "Use the WP Ulike Blacklist"
+msgstr "使用 WP ULike 黑名单"
+
+msgid "Use the WordPress Disallowed Comment Keys"
+msgstr "使用 WordPress 评论禁止关键词"
+
+msgid "Choose which blacklist to use for voting. The %s setting is available on the WordPress Discussion Settings page."
+msgstr "选择用于投票的黑名单。%s 设置在 WordPress 讨论设置页面中可用。"
+
+msgid "Disallowed Comment Keys"
+msgstr "评论禁止关键词"
+
+msgid "Blacklist Entries"
+msgstr "黑名单条目"
+
+msgid "Enter one IP address per line. Votes from matching IPs will be rejected."
+msgstr "每行输入一个 IP 地址。来自匹配 IP 的投票将被拒绝。"
+
+msgid "Enable WPML Synchronization"
+msgstr "启用 WPML 同步"
+
+msgid "Sync likes for translated post types when using the WPML plugin."
+msgstr "使用 WPML 插件时同步翻译文章类型的赞。"
+
+msgid "Activity Content"
+msgstr "活动内容"
+
+msgid "Activity Meta"
+msgstr "活动元数据"
+
+msgid "Enable Activity Comment Likes"
+msgstr "启用活动评论点赞"
+
+msgid "Allow liking BuddyPress comments in the activity stream."
+msgstr "允许在 BuddyPress 活动流中点赞评论。"
+
+msgid "Add Activity Entries for Likes"
+msgstr "为点赞添加活动条目"
+
+msgid "Create a BuddyPress activity item when someone likes content."
+msgstr "当有人点赞内容时创建 BuddyPress 活动条目。"
+
+msgid "Post Activity Text"
+msgstr "文章活动文本"
+
+msgid "Allowed Variables:"
+msgstr "允许的变量："
+
+msgid "Comment Activity Text"
+msgstr "评论活动文本"
+
+msgid "Enable User Notifications"
+msgstr "启用用户通知"
+
+msgid "Send a notification when your content receives a like."
+msgstr "当您的内容收到赞时发送通知。"
+
+msgid "Profiles"
+msgstr "个人资料"
+
+msgid "Login & Signup"
+msgstr "登录与注册"
+
+msgid "Social Logins"
+msgstr "社交登录"
+
+msgid "Share Buttons"
+msgstr "分享按钮"
+
+msgid "Translations"
+msgstr "翻译"
+
+msgid "Strings"
+msgstr "字符串"
+
+msgid "Your vote cannot be submitted at this time."
+msgstr "您的投票暂时无法提交。"
+
+msgid "Validation Notice Message"
+msgstr "验证通知消息"
+
+msgid "Message shown when a vote cannot be processed due to validation errors."
+msgstr "由于验证错误导致投票无法处理时显示的消息。"
+
+msgid "You have already registered a vote."
+msgstr "您已经投过票了。"
+
+msgid "Already Voted Message"
+msgstr "已投票消息"
+
+msgid "Message shown when a user tries to vote again after already voting."
+msgstr "用户已投票后再次尝试投票时显示的消息。"
+
+msgid "You Should Login To Submit Your Like"
+msgstr "请登录后点赞"
+
+msgid "Login Required Message"
+msgstr "需要登录消息"
+
+msgid "Message shown to visitors who need to log in before they can vote."
+msgstr "需要登录才能投票的访客看到的消息。"
+
+msgid "Thanks! You Liked This."
+msgstr "感谢！您已点赞。"
+
+msgid "Liked Notice Message"
+msgstr "已点赞通知消息"
+
+msgid "Confirmation message shown after a user successfully likes content."
+msgstr "用户成功点赞内容后显示的确认消息。"
+
+msgid "Sorry! You unliked this."
+msgstr "您已取消点赞。"
+
+msgid "Unliked Notice Message"
+msgstr "取消点赞通知消息"
+
+msgid "Confirmation message shown after a user removes their like."
+msgstr "用户取消点赞后显示的确认消息。"
+
+msgid "Could not save your vote. Please refresh the page and try again."
+msgstr "无法保存您的投票。请刷新页面后重试。"
+
+msgid "Connection Error Message"
+msgstr "连接错误消息"
+
+msgid "Message shown when a vote cannot be saved due to a network or server error."
+msgstr "由于网络或服务器错误导致投票无法保存时显示的消息。"
+
+msgid "Like Button"
+msgstr "点赞按钮"
+
+msgid "Like Button Aria Label"
+msgstr "点赞按钮无障碍标签"
+
+msgid "Accessibility label for screen readers. Helps visually impaired users understand what the button does."
+msgstr "屏幕阅读器的无障碍标签。帮助视障用户理解按钮的功能。"
+
+msgid "Emails"
+msgstr "邮件"
+
+msgid "Developer Tools"
+msgstr "开发者工具"
+
+msgid "Scripts"
+msgstr "脚本"
+
+msgid "Custom CSS"
+msgstr "自定义 CSS"
+
+msgid "Add custom CSS to style the like button and related elements. This CSS will be loaded on all pages."
+msgstr "添加自定义 CSS 来设置点赞按钮和相关元素的样式。此 CSS 将在所有页面上加载。"
+
+msgid "Custom Spinner"
+msgstr "自定义加载动画"
+
+msgid "Upload a custom loading animation image that appears while processing votes."
+msgstr "上传在处理投票时显示的自定义加载动画图片。"
+
+msgid "Enable Inline Custom CSS"
+msgstr "启用内联自定义 CSS"
+
+msgid "Output styles inline on the page instead of loading custom.css file. The CSS file will still be generated for debugging and inspection purposes."
+msgstr "在页面上内联输出样式，而不是加载 custom.css 文件。CSS 文件仍会生成，用于调试和检查。"
+
+msgid "Select a Template"
+msgstr "选择模板"
+
+msgid "Pick a style for your like button."
+msgstr "为您的点赞按钮选择样式。"
+
+msgid "Preview online"
+msgstr "在线预览"
+
+msgid "Unlock additional button styles with Pro."
+msgstr "使用专业版解锁更多按钮样式。"
+
+msgid "Automatic Display"
+msgstr "自动显示"
+
+msgid "Automatically show the like button on your content without manually adding shortcodes."
+msgstr "自动在内容上显示点赞按钮，无需手动添加短代码。"
+
+msgid "Button Position"
+msgstr "按钮位置"
+
+msgid "Choose where the like button appears relative to your content."
+msgstr "选择点赞按钮相对于内容的显示位置。"
+
+msgid "Show Buttons On"
+msgstr "显示按钮位置"
+
+msgid "Checked places show the like button. Default is Singular (single posts & pages). Turn on Home or archives only if you need buttons there."
+msgstr "勾选的位置将显示点赞按钮。默认为单页（单篇文章和页面）。仅在需要时启用首页或归档页。"
+
+msgid "Singular (posts & pages)"
+msgstr "单页（文章和页面）"
+
+msgid "Also Show on Excerpts / List Views"
+msgstr "在摘要/列表视图中也显示"
+
+msgid "Off by default so archive lists do not repeat like buttons. Turn on only if you want buttons in excerpts."
+msgstr "默认关闭，以避免归档列表中重复显示点赞按钮。仅在需要在摘要中显示按钮时启用。"
+
+msgid "Always Show On Post Types"
+msgstr "始终在文章类型上显示"
+
+msgid "Select post types"
+msgstr "选择文章类型"
+
+msgid "Show the button on these post types even if Singular is unchecked above. (Many older sites use this for Posts.)"
+msgstr "即使上面的单页未勾选，也在这些文章类型上显示按钮。（许多旧站点将此用于文章。）"
+
+msgid "Button Type"
+msgstr "按钮类型"
+
+msgid "Choose whether to display an image icon or text label on the button."
+msgstr "选择在按钮上显示图片图标还是文本标签。"
+
+msgid "Image"
+msgstr "图片"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Set custom button text. HTML is allowed."
+msgstr "设置自定义按钮文本。允许使用 HTML。"
+
+msgid "Button Text"
+msgstr "按钮文本"
+
+msgid "Button Label"
+msgstr "按钮标签"
+
+msgid "Text displayed on the like button (e.g., \"Like\", \"👍\", \"Love\")."
+msgstr "点赞按钮上显示的文本（例如，\"赞\"、\"👍\"、\"喜欢\"）。"
+
+msgid "Text displayed on the button after liking (e.g., \"Liked\", \"❤️\", \"Unlike\")."
+msgstr "点赞后按钮上显示的文本（例如，\"已赞\"、\"❤️\"、\"取消赞\"）。"
+
+msgid "Liked"
+msgstr "已赞"
+
+msgid "Button Image"
+msgstr "按钮图片"
+
+msgid "Upload custom images for the like and unlike button states."
+msgstr "上传点赞和取消赞按钮状态的自定义图片。"
+
+msgid "Upload an image icon for the button state."
+msgstr "上传按钮状态的图片图标。"
+
+msgid "Control when the vote counter is shown next to the button."
+msgstr "控制投票计数器何时显示在按钮旁边。"
+
+msgid "Counter Display"
+msgstr "计数器显示"
+
+msgid "Always Visible"
+msgstr "始终可见"
+
+msgid "Hidden"
+msgstr "隐藏"
+
+msgid "Restrict to Logged-in Users"
+msgstr "仅登录用户可见"
+
+msgid "Hide Zero Counter"
+msgstr "隐藏零计数"
+
+msgid "Hide the vote counter when no votes have been submitted."
+msgstr "当没有投票时隐藏投票计数器。"
+
+msgid "Logged-out Button Display"
+msgstr "未登录按钮显示"
+
+msgid "Template"
+msgstr "模板"
+
+msgid "You need to login in order to like this post: "
+msgstr "您需要登录才能点赞此文章："
+
+msgid "click here"
+msgstr "点击此处"
+
+msgid "Custom HTML Template"
+msgstr "自定义 HTML 模板"
+
+msgid "Select how votes are tracked. You can allow unlimited votes, or restrict users using cookies, their username/IP, or both to prevent duplicate or repeated votes."
+msgstr "选择如何跟踪投票。您可以允许无限投票，或使用 Cookie、用户名/IP 或两者来限制用户以防止重复投票。"
+
+msgid "Logging Method"
+msgstr "记录方式"
+
+msgid "\"No Limit\": There will be no restrictions and users can submit their points each time they refresh the page. In this option, it will not be possible to resubmit reverse points (un-like/un-dislike)."
+msgstr "\"无限制\"：没有任何限制，用户每次刷新页面都可以提交。此选项下无法提交反向操作（取消赞/取消踩）。"
+
+msgid "\"Cookie\": By saving users' cookies, it is possible to submit points only once per user and in case of re-clicking, the appropriate message will be displayed."
+msgstr "\"Cookie\"：通过保存用户的 Cookie，每个用户只能提交一次，重复点击时将显示相应消息。"
+
+msgid "Username/IP: By saving the username/IP of users, It supports the reverse feature  (un-like and un-dislike) and users can change their reactions and are only allowed to have a specific point type."
+msgstr "用户名/IP：通过保存用户的用户名/IP，支持反向功能（取消赞和取消踩），用户可以更改反应，但只允许拥有一种特定的点类型。"
+
+msgid "Username/IP + Cookie: Same as username/IP description, However, if the user IP or username changes and the cookie is set, it does not allow the user to like /dislike."
+msgstr "用户名/IP + Cookie：与用户名/IP 相同，但如果用户 IP 或用户名更改且已设置 Cookie，则不允许用户点赞/踩。"
+
+msgid "Cookie Expiration"
+msgstr "Cookie 过期时间"
+
+msgid "Specify how long, in seconds, the cookie expires. Default: 31536000 (1 year)."
+msgstr "指定 Cookie 过期时间（秒）。默认值：31536000（1 年）。"
+
+msgid "Maximum Votes Allowed"
+msgstr "最大投票次数"
+
+msgid "Sets a maximum number of votes each user can submit on an item."
+msgstr "设置每个用户可以对一个项目提交的最大投票次数。"
+
+msgid "Display a list of users who have voted, allowing you to see who engaged with each item."
+msgstr "显示投票用户列表，让您查看谁参与了每个项目的互动。"
+
+msgid "Display Likers Box"
+msgstr "显示点赞者列表"
+
+msgid "Likers List Order"
+msgstr "点赞者排序"
+
+msgid "Sort users in the likers box by newest first (descending) or oldest first (ascending)."
+msgstr "按最新优先（降序）或最早优先（升序）对点赞者框中的用户排序。"
+
+msgid "Ascending"
+msgstr "升序"
+
+msgid "Descending"
+msgstr "降序"
+
+msgid "Hide For Anonymous Users"
+msgstr "对匿名用户隐藏"
+
+msgid "Hide the likers box from visitors who are not logged in."
+msgstr "对未登录的访客隐藏点赞者框。"
+
+msgid "Likers Box Layout"
+msgstr "点赞者框布局"
+
+msgid "Inline: Show avatars directly below the button. Popover: Show avatars in a popup when hovering over the counter."
+msgstr "内联：在按钮下方直接显示头像。弹出框：悬停在计数器上时在弹窗中显示头像。"
+
+msgid "Inline"
+msgstr "内联"
+
+msgid "Popover"
+msgstr "弹出框"
+
+msgid "Avatar Size"
+msgstr "头像大小"
+
+msgid "Set the size of user avatars displayed in the likers box."
+msgstr "设置点赞者框中显示的用户头像大小。"
+
+msgid "Likers to Show"
+msgstr "显示点赞者数量"
+
+msgid "Number of users displayed in the likers box"
+msgstr "点赞者框中显示的用户数量"
+
+msgid "Enable Old Meta Values"
+msgstr "启用旧元数据值"
+
+msgid "By activating this option, users who have upgraded to version +4 and deleted their old logs can add the number of old likes to the new figures."
+msgstr "启用此选项后，升级到 4+ 版本并删除旧日志的用户可以将旧赞数添加到新数据中。"
+
+msgid "Attention: If you have been using WP ULike +v4 from the beginning Or you haven't deleted any logs yet, do not enable this option."
+msgstr "注意：如果您从一开始就使用 WP ULike v4+ 版本，或者尚未删除任何日志，请不要启用此选项。"
+
+msgid "Enable Deprecated Options"
+msgstr "启用弃用选项"
+
+msgid "By activating this option, users who have upgraded to version +4.1 and lost their old options can restore and enable previous settings."
+msgstr "启用此选项后，升级到 4.1+ 版本并丢失旧选项的用户可以恢复和启用之前的设置。"
+
+msgid "Attention: If you have been using WP ULike +v4.1 from the beginning, do not enable this option."
+msgstr "注意：如果您从一开始就使用 WP ULike v4.1+ 版本，请不要启用此选项。"
+
+msgid "Integrations"
+msgstr "集成"
+
+msgid "User Profiles"
+msgstr "用户资料"
+
+msgid "Like history and engagement stats"
+msgstr "点赞历史和互动统计"
+
+msgid "Custom profile layouts"
+msgstr "自定义个人资料布局"
+
+msgid "Badges and activity feeds"
+msgstr "徽章和活动动态"
+
+msgid "Enable %s"
+msgstr "启用 %s"
+
+msgid "Select %s Page"
+msgstr "选择 %s 页面"
+
+msgid "Profile"
+msgstr "个人资料"
+
+msgid "Ajax Login & Register"
+msgstr "Ajax 登录与注册"
+
+msgid "Login and register without reload"
+msgstr "无需刷新页面即可登录和注册"
+
+msgid "Custom branded pages"
+msgstr "自定义品牌页面"
+
+msgid "Email verification & 2FA"
+msgstr "邮箱验证和双因素认证"
+
+msgid "Login"
+msgstr "登录"
+
+msgid "Login Redirect URL"
+msgstr "登录重定向 URL"
+
+msgid "Social Login"
+msgstr "社交登录"
+
+msgid "14+ social networks"
+msgstr "14+ 社交网络"
+
+msgid "Works with login forms"
+msgstr "兼容登录表单"
+
+msgid "Customizable buttons"
+msgstr "可自定义按钮"
+
+msgid "Enable Social Logins"
+msgstr "启用社交登录"
+
+msgid "Social networks"
+msgstr "社交网络"
+
+msgid "Social Share Buttons"
+msgstr "社交分享按钮"
+
+msgid "23+ social networks"
+msgstr "23+ 社交网络"
+
+msgid "Auto-display with likes"
+msgstr "随点赞按钮自动显示"
+
+msgid "Shortcode placement"
+msgstr "短代码放置"
+
+msgid "Add Share Items"
+msgstr "添加分享项"
+
+msgid "Email Templates"
+msgstr "邮件模板"
+
+msgid "Custom email templates"
+msgstr "自定义邮件模板"
+
+msgid "HTML formatting & variables"
+msgstr "HTML 格式和变量"
+
+msgid "Custom sender details"
+msgstr "自定义发件人信息"
+
+msgid "Subject Line"
+msgstr "邮件主题"
+
+msgid "Admin E-mail Address"
+msgstr "管理员电子邮件地址"
+
+msgid "Read More"
+msgstr "了解更多"
+
+msgid "Customizer settings saved successfully."
+msgstr "自定义设置已成功保存。"
+
+msgid "WP ULike Customizer Preview"
+msgstr "WP ULike 自定义预览"
+
+msgid "Template preview not found."
+msgstr "未找到模板预览。"
+
+msgid "Toast Messages"
+msgstr "提示消息"
+
+msgid "Info"
+msgstr "信息"
+
+msgid "Please wait..."
+msgstr "请稍候..."
+
+msgid "Success"
+msgstr "成功"
+
+msgid "You liked this post."
+msgstr "您已点赞此文章。"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Warning"
+msgstr "警告"
+
+msgid "Please check your settings."
+msgstr "请检查您的设置。"
+
+msgid "Guest User"
+msgstr "访客用户"
+
+msgid "Activity Permalink"
+msgstr "活动固定链接"
+
+msgid "Not Found!"
+msgstr "未找到！"
+
+msgid "You need to enter a unique id for notice."
+msgstr "您需要为通知输入唯一 ID。"
+
+msgid "Skip"
+msgstr "跳过"
+
+msgid "Authorization failed. Please refresh the page and try again."
+msgstr "授权失败。请刷新页面后重试。"
+
+msgid "Settings saved successfully."
+msgstr "设置已成功保存。"
+
+msgid "Something went wrong. Please try refreshing the page."
+msgstr "出现错误。请尝试刷新页面。"
+
+msgid "Unable to complete request"
+msgstr "无法完成请求"
+
+msgid "Unable to connect to server. Please contact your administrator."
+msgstr "无法连接到服务器。请联系您的管理员。"
+
+msgid "Server endpoint not found. Please check your configuration."
+msgstr "未找到服务器端点。请检查您的配置。"
+
+msgid "Server error. Please try again later."
+msgstr "服务器错误。请稍后重试。"
+
+msgid "Unable to connect to server. Please check your internet connection and try again."
+msgstr "无法连接到服务器。请检查您的网络连接后重试。"
+
+msgid "Connection blocked. Please contact your administrator."
+msgstr "连接被阻止。请联系您的管理员。"
+
+msgid "Request timed out. Please try again."
+msgstr "请求超时。请重试。"
+
+msgid "Unable to load settings. Configuration data is missing."
+msgstr "无法加载设置。配置数据缺失。"
+
+msgid "Save Changes"
+msgstr "保存更改"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Saving..."
+msgstr "保存中..."
+
+msgid "Reset to Defaults"
+msgstr "恢复默认"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "Resetting..."
+msgstr "重置中..."
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "Import"
+msgstr "导入"
+
+msgid "Importing..."
+msgstr "导入中..."
+
+msgid "Export and Download"
+msgstr "导出并下载"
+
+msgid "Add %s"
+msgstr "添加 %s"
+
+msgid "Select %s"
+msgstr "选择 %s"
+
+msgid "Use this %s"
+msgstr "使用此 %s"
+
+msgid "Selected %s has no URL"
+msgstr "所选 %s 没有 URL"
+
+msgid "No file selected"
+msgstr "未选择文件"
+
+msgid "Invalid URL format from media library"
+msgstr "媒体库中的 URL 格式无效"
+
+msgid "Settings %s successfully."
+msgstr "设置已成功%s。"
+
+msgid "Settings reset to defaults."
+msgstr "设置已恢复为默认值。"
+
+msgid "Reset all settings to defaults? This cannot be undone."
+msgstr "将所有设置恢复为默认值？此操作无法撤消。"
+
+msgid "You have unsaved changes. Are you sure you want to leave?"
+msgstr "您有未保存的更改。确定要离开吗？"
+
+msgid "You have unsaved changes."
+msgstr "您有未保存的更改。"
+
+msgid "Save when you are done editing these settings."
+msgstr "编辑完这些设置后请保存。"
+
+msgid "Search settings..."
+msgstr "搜索设置..."
+
+msgid "No settings found."
+msgstr "未找到设置。"
+
+msgid ""
+"Please fix the following errors before saving:\n"
+"%s"
+msgstr ""
+"请在保存前修复以下错误：\n"
+"%s"
+
+msgid "Settings imported locally but failed to save to server. Please try saving again."
+msgstr "设置已本地导入但未能保存到服务器。请尝试再次保存。"
+
+msgid "Invalid %1$s format%2$s"
+msgstr "无效的 %1$s 格式%2$s"
+
+msgid "Invalid URL protocol. Only http, https, and data URLs are allowed."
+msgstr "无效的 URL 协议。仅允许 http、https 和 data URL。"
+
+msgid "Text must be no more than %d characters"
+msgstr "文本不能超过 %d 个字符"
+
+msgid "Value must be at least %d"
+msgstr "值必须至少为 %d"
+
+msgid "Value must be at most %d"
+msgstr "值必须不超过 %d"
+
+msgid "Upload value must be a URL string"
+msgstr "上传值必须是 URL 字符串"
+
+msgid "Media value must be an object with a url property or a valid URL string"
+msgstr "媒体值必须是具有 url 属性的对象或有效的 URL 字符串"
+
+msgid "Import Settings"
+msgstr "导入设置"
+
+msgid "Paste your exported settings JSON below and click Import to restore your configuration. The import should contain only setting values (not schema structure)."
+msgstr "将导出的设置 JSON 粘贴到下方，然后点击导入以恢复配置。导入应仅包含设置值（不含架构结构）。"
+
+msgid "Paste your JSON settings here..."
+msgstr "在此处粘贴您的 JSON 设置..."
+
+msgid "Export Settings"
+msgstr "导出设置"
+
+msgid "Copy the JSON below or download it as a file to backup your current settings. The export contains only your setting values (not the schema structure)."
+msgstr "复制下方的 JSON 或将其下载为文件以备份当前设置。导出仅包含您的设置值（不含架构结构）。"
+
+msgid "Invalid JSON format. Please check your JSON syntax."
+msgstr "无效的 JSON 格式。请检查 JSON 语法。"
+
+msgid "No values found in the import data."
+msgstr "导入数据中未找到值。"
+
+msgid ""
+"Security threat detected. The import contains potentially dangerous content:\n"
+"%s\n"
+"\n"
+"Import blocked for security reasons."
+msgstr ""
+"检测到安全威胁。导入包含潜在危险内容：\n"
+"%s\n"
+"\n"
+"出于安全原因已阻止导入。"
+
+msgid ""
+"Validation failed. The imported data contains invalid values:\n"
+"%s\n"
+"\n"
+"Please fix these errors and try again."
+msgstr ""
+"验证失败。导入数据包含无效值：\n"
+"%s\n"
+"\n"
+"请修复这些错误后重试。"
+
+msgid "Tip: Select text to wrap it, or click to insert at cursor position"
+msgstr "提示：选择文本以包裹它，或点击在光标位置插入"
+
+msgid "Visual"
+msgstr "可视化"
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "No content to preview"
+msgstr "无内容可预览"
+
+msgid "Select options..."
+msgstr "选择选项..."
+
+msgid "Select an option"
+msgstr "选择一个选项"
+
+msgid "No options available for this field. Please check the schema definition."
+msgstr "此字段没有可用选项。请检查架构定义。"
+
+msgid "Options not available. Please check your configuration."
+msgstr "选项不可用。请检查您的配置。"
+
+msgid "Pro Feature"
+msgstr "专业版功能"
+
+msgid "This feature is available in WP ULike Pro"
+msgstr "此功能仅在 WP ULike 专业版中可用"
+
+msgid "SQL Injection"
+msgstr "SQL 注入"
+
+msgid "XSS"
+msgstr "XSS"
+
+msgid "Command Injection"
+msgstr "命令注入"
+
+msgid "Retry"
+msgstr "重试"
+
+msgid "Live Preview"
+msgstr "实时预览"
+
+msgid "Failed to load preview"
+msgstr "加载预览失败"
+
+msgid "Templates"
+msgstr "模板"
+
+msgid "List View"
+msgstr "列表视图"
+
+msgid "Section"
+msgstr "区域"
+
+msgid "Back to preview"
+msgstr "返回预览"
+
+msgid "No preview templates available"
+msgstr "无可用预览模板"
+
+msgid "Select a template section to customize"
+msgstr "选择要自定义的模板区域"
+
+msgid "Width"
+msgstr "宽度"
+
+msgid "Height"
+msgstr "高度"
+
+msgid "Color"
+msgstr "颜色"
+
+msgid "Style"
+msgstr "样式"
+
+msgid "Options"
+msgstr "选项"
+
+msgid "New"
+msgstr "新建"
+
+msgid "Item"
+msgstr "项目"
+
+msgid "Quick add"
+msgstr "快速添加"
+
+msgid "Emoji"
+msgstr "表情"
+
+msgid "Label"
+msgstr "标签"
+
+msgid "Add reaction"
+msgstr "添加反应"
+
+msgid "Choose emoji"
+msgstr "选择表情"
+
+msgid "%1$s on %2$s"
+msgstr "%1$s 于 %2$s"
+
+msgid "(Untitled post)"
+msgstr "（无标题文章）"
+
+msgid "Comment by %s"
+msgstr "%s 的评论"
+
+msgid "WP Ulike Widget"
+msgstr "WP ULike 小工具"
+
+msgid "An advanced widget that gives you all most liked records with different types"
+msgstr "一个高级小工具，展示不同类型的最受欢迎记录"
+
+msgid "No results were found in"
+msgstr "未找到结果在"
+
+msgid "period"
+msgstr "时间段"
+
+msgid "on"
+msgstr "于"
+
+msgid "you haven't liked any post yet!"
+msgstr "您还没有点赞任何文章！"
+
+msgid "%s is Not Activated!"
+msgstr "%s 未激活！"
+
+msgid "bbPress"
+msgstr "bbPress"
+
+msgid "BuddyPress"
+msgstr "BuddyPress"
+
+msgid "Most Liked"
+msgstr "最受欢迎"
+
+msgid "Title:"
+msgstr "标题："
+
+msgid "Type:"
+msgstr "类型："
+
+msgid "Most Liked Posts"
+msgstr "最受欢迎文章"
+
+msgid "Most Liked Comments"
+msgstr "最受欢迎评论"
+
+msgid "Most Liked Activities"
+msgstr "最受欢迎活动"
+
+msgid "Most Liked Topics"
+msgstr "最受欢迎话题"
+
+msgid "Most Liked Users"
+msgstr "最活跃用户"
+
+msgid "Last Posts Liked By User"
+msgstr "用户最近点赞的文章"
+
+msgid "Number of items to show:"
+msgstr "显示项目数量："
+
+msgid "Period:"
+msgstr "时间段："
+
+msgid "All The Times"
+msgstr "所有时间"
+
+msgid "Year"
+msgstr "年"
+
+msgid "Week"
+msgstr "周"
+
+msgid "Simple"
+msgstr "简约"
+
+msgid "Heart"
+msgstr "爱心"
+
+msgid "Title Trim (Length):"
+msgstr "标题截取（长度）："
+
+msgid "Profile URL:"
+msgstr "个人资料 URL："
+
+msgid "UltimateMember"
+msgstr "UltimateMember"
+
+msgid "Activate Like Counter"
+msgstr "激活赞数计数器"
+
+msgid "Activate Thumbnail/Avatar"
+msgstr "激活缩略图/头像"
+
+msgid "Thumbnail/Avatar size:"
+msgstr "缩略图/头像大小："
+
+msgid "Like buttons and a Statistics dashboard for your WordPress site. Open Statistics for charts and growth tips, or use the shortcuts below to configure display and check status."
+msgstr "为您的 WordPress 网站提供点赞按钮和统计仪表盘。打开统计查看图表和增长建议，或使用下方快捷方式配置显示和检查状态。"
+
+msgid "Settings imported and saved successfully!"
+msgstr "设置已成功导入并保存！"
+
+msgid "No settings file was uploaded. Choose a JSON file and try again."
+msgstr "未上传设置文件。请选择 JSON 文件后重试。"
+
+msgid "This file does not look like a WP ULike settings export. Use a file exported from Settings backup in the Overview sidebar."
+msgstr "此文件不像 WP ULike 设置导出文件。请使用概览侧边栏中从设置备份导出的文件。"
+
+msgid "Settings import failed. Please try again."
+msgstr "设置导入失败。请重试。"
+
+msgid "Database tables repaired successfully."
+msgstr "数据库表已成功修复。"
+
+msgid "Some database tables could not be created. Please contact your host or try deactivating and reactivating the plugin."
+msgstr "部分数据库表无法创建。请联系您的主机商或尝试停用后重新激活插件。"
+
+msgid "Statistics cache refreshed. Totals and charts will rebuild on the next view."
+msgstr "统计缓存已刷新。总计和图表将在下次查看时重建。"
+
+msgid "At a glance"
+msgstr "概览"
+
+msgid "Database tables need repair"
+msgstr "数据库表需要修复"
+
+msgid "Missing tables: %s."
+msgstr "缺少的表：%s。"
+
+msgid "One or more WP ULike tables are missing."
+msgstr "一个或多个 WP ULike 表缺失。"
+
+msgid "Repair database tables"
+msgstr "修复数据库表"
+
+msgid "Refresh statistics cache"
+msgstr "刷新统计缓存"
+
+msgid "Quick actions"
+msgstr "快捷操作"
+
+msgid "Pro tools"
+msgstr "专业版工具"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Help & resources"
+msgstr "帮助与资源"
+
+msgid "Troubleshooting tips"
+msgstr "故障排除提示"
+
+msgid "No extra tips right now. Your setup looks good."
+msgstr "目前没有额外提示。您的设置看起来很好。"
+
+msgid "Plugin details and settings tools"
+msgstr "插件详情与设置工具"
+
+msgid "Plugin info"
+msgstr "插件信息"
+
+msgid "Edition"
+msgstr "版本"
+
+msgid "Free"
+msgstr "免费版"
+
+msgid "Pro package"
+msgstr "专业版包"
+
+msgid "WordPress"
+msgstr "WordPress"
+
+msgid "Database schema"
+msgstr "数据库架构"
+
+msgid "Settings backup"
+msgstr "设置备份"
+
+msgid "Export"
+msgstr "导出"
+
+msgid "Import settings"
+msgstr "导入设置"
+
+msgid "Import will replace your current WP ULike settings and customizer values. Continue?"
+msgstr "导入将替换您当前的 WP ULike 设置和自定义值。是否继续？"
+
+msgid "JSON file"
+msgstr "JSON 文件"
+
+msgid "Thanks for installing WP ULike!"
+msgstr "感谢安装 WP ULike！"
+
+msgid "Like buttons appear on single posts by default. Home and blog lists stay off until you enable them under Content Types. Open a post to try a button, then adjust where they show."
+msgstr "点赞按钮默认显示在单篇文章上。首页和博客列表默认关闭，直到您在内容类型中启用。打开一篇文章试用按钮，然后调整显示位置。"
+
+msgid "Need a hand? Visit <a href=\"%1$s\">Overview</a> in this menu or read the <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>."
+msgstr "需要帮助？请访问此菜单中的<a href=\"%1$s\">概览</a>或阅读<a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">文档</a>。"
+
+msgid "View a sample post"
+msgstr "查看示例文章"
+
+msgid "Open Settings"
+msgstr "打开设置"
+
+msgid "Got it"
+msgstr "知道了"
+
+msgid "Deactivate WP ULike"
+msgstr "停用 WP ULike"
+
+msgid "Mind sharing why? It helps us improve WP ULike. Totally optional — or skip below."
+msgstr "介意分享原因吗？这有助于我们改进 WP ULike。完全可选——或点击下方跳过。"
+
+msgid "Your vote data stays on this site if you reactivate later."
+msgstr "如果您稍后重新激活，您的投票数据将保留在此站点上。"
+
+msgid "Deactivation reason"
+msgstr "停用原因"
+
+msgid "Please select a reason before submitting."
+msgstr "请在提交前选择一个原因。"
+
+msgid "Please add a short note so we can improve WP ULike."
+msgstr "请添加简短说明以帮助我们改进 WP ULike。"
+
+msgid "Where did it fail?"
+msgstr "哪里出了问题？"
+
+msgid "Buttons appear on single posts by default—not on the homepage. %s for a quick setup checklist."
+msgstr "按钮默认显示在单篇文章上——而非首页。%s 以查看快速设置清单。"
+
+msgid "Open Overview"
+msgstr "打开概览"
+
+msgid "WP ULike is active on your network."
+msgstr "WP ULike 已在您的网络上激活。"
+
+msgid "Open a site dashboard to see the getting-started guide next to the WP ULike menu."
+msgstr "打开站点仪表盘以查看 WP ULike 菜单旁的入门指南。"
+
+msgid "Go to site dashboard"
+msgstr "前往站点仪表盘"
+
+msgid "There was an error processing the request."
+msgstr "处理请求时出错。"
+
+msgid "Invalid item type."
+msgstr "无效的项目类型。"
+
+msgid "Unable to obtain lock for this request."
+msgstr "无法获取此请求的锁。"
+
+msgid "Template Wrapper"
+msgstr "模板容器"
+
+msgid "Typography"
+msgstr "排版"
+
+msgid "Normal"
+msgstr "正常"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Border"
+msgstr "边框"
+
+msgid "Hover"
+msgstr "悬停"
+
+msgid "Active"
+msgstr "激活"
+
+msgid "Padding"
+msgstr "内边距"
+
+msgid "Margin"
+msgstr "外边距"
+
+msgid "Text Color"
+msgstr "文字颜色"
+
+msgid "Image Dimensions"
+msgstr "图片尺寸"
+
+msgid "Like Image"
+msgstr "赞图片"
+
+msgid "Button Dimensions"
+msgstr "按钮尺寸"
+
+msgid "Button Alignment"
+msgstr "按钮对齐"
+
+msgid "Left"
+msgstr "左对齐"
+
+msgid "Center"
+msgstr "居中"
+
+msgid "Right"
+msgstr "右对齐"
+
+msgid "Counter"
+msgstr "计数器"
+
+msgid "Icon Image"
+msgstr "图标图片"
+
+msgid "I couldn't get the plugin to work"
+msgstr "我无法让插件正常工作"
+
+msgid "What happened? e.g. button missing, vote fails, theme conflict"
+msgstr "发生了什么？例如按钮缺失、投票失败、主题冲突"
+
+msgid "I found a better plugin"
+msgstr "我找到了更好的插件"
+
+msgid "Which plugin?"
+msgstr "哪个插件？"
+
+msgid "It's a temporary deactivation"
+msgstr "这是临时停用"
+
+msgid "I no longer need the plugin"
+msgstr "我不再需要这个插件"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Tell us more (optional)"
+msgstr "告诉我们更多（可选）"
+
+msgid "Homepage"
+msgstr "首页"
+
+msgid "Archive / list"
+msgstr "归档/列表"
+
+msgid "Page"
+msgstr "页面"
+
+msgid "Single post"
+msgstr "单篇文章"
+
+msgid "Theme issue"
+msgstr "主题问题"
+
+msgid "Submit & deactivate"
+msgstr "提交并停用"
+
+msgid "Skip & deactivate"
+msgstr "跳过并停用"
+
+msgid "Select where it failed, or add a short note."
+msgstr "选择问题出现的位置，或添加简短说明。"
+
+msgid "WP ULike database tables"
+msgstr "WP ULike 数据库表"
+
+msgid "WP ULike storage & migration"
+msgstr "WP ULike 存储和迁移"
+
+msgid "WP ULike old log tables"
+msgstr "WP ULike 旧日志表"
+
+msgid "WP ULike database tables are installed"
+msgstr "WP ULike 数据库表已安装"
+
+msgid "All database tables required by WP ULike are present."
+msgstr "WP ULike 所需的所有数据库表均已存在。"
+
+msgid "Some WP ULike tables need repair. Use Repair on the Overview page, or deactivate and reactivate the plugin once."
+msgstr "部分 WP ULike 表需要修复。请使用概览页面的修复功能，或停用后重新激活插件。"
+
+msgid "Missing: %s."
+msgstr "缺失：%s。"
+
+msgid "WP ULike database tables are missing"
+msgstr "WP ULike 数据库表缺失"
+
+msgid "Open Overview to repair tables"
+msgstr "打开概览以修复表"
+
+msgid "Storage mode is unrecognized."
+msgstr "存储模式无法识别。"
+
+msgid "Read mode is unrecognized."
+msgstr "读取模式无法识别。"
+
+msgid "The Pulse table is missing. Deactivate and reactivate WP ULike once to create it."
+msgstr "Pulse 表缺失。请停用后重新激活 WP ULike 以创建它。"
+
+msgid "Pulse table columns are out of date."
+msgstr "Pulse 表列已过时。"
+
+msgid "New votes are not routing to Pulse storage."
+msgstr "新投票未路由到 Pulse 存储。"
+
+msgid "Storage migration is pending or in progress. Counts and buttons keep working — finish the upgrade when convenient."
+msgstr "存储迁移待处理或进行中。计数和按钮仍正常工作——请在方便时完成升级。"
+
+msgid "Dual mode is active but the cutoff timestamp (dual_since) is missing."
+msgstr "双模式已激活，但截止时间戳 (dual_since) 缺失。"
+
+msgid "Legacy and Pulse row counts do not match after migration. Re-run verification or the storage upgrade."
+msgstr "迁移后旧版和 Pulse 的行数不匹配。请重新运行验证或存储升级。"
+
+msgid "Storage mode: %1$s · Read mode: %2$s."
+msgstr "存储模式：%1$s · 读取模式：%2$s。"
+
+msgid "WP ULike storage looks healthy"
+msgstr "WP ULike 存储状态良好"
+
+msgid "Open storage upgrade"
+msgstr "打开存储升级"
+
+msgid "WP ULike storage needs attention"
+msgstr "WP ULike 存储需要关注"
+
+msgid "No leftover classic like tables were found. Storage cleanup is complete."
+msgstr "未发现残留的经典点赞表。存储清理已完成。"
+
+msgid "Classic like tables are still in use (or migration has not finished). Nothing to remove yet."
+msgstr "经典点赞表仍在使用中（或迁移尚未完成）。暂无需移除的内容。"
+
+msgid "WP ULike has no leftover log tables to remove"
+msgstr "WP ULike 没有需要移除的残留日志表"
+
+msgid "WP ULike can free disk space by removing old log tables"
+msgstr "WP ULike 可以通过移除旧日志表释放磁盘空间"
+
+msgid "Likes already use the faster Pulse storage. Old classic log tables are still on disk and can be removed when you are ready. Back up your database first."
+msgstr "点赞已使用更快的 Pulse 存储。旧的经典日志表仍在磁盘上，准备好后可以移除。请先备份数据库。"
+
+msgid "%d old log table is still present."
+msgid_plural "%d old log tables are still present."
+msgstr[0] "%d 个旧日志表仍然存在。"
+
+msgid "Needs attention"
+msgstr "需要关注"
+
+msgid "Ready"
+msgstr "就绪"
+
+msgid "Points for liking content"
+msgstr "点赞内容获得积分"
+
+msgid "Points"
+msgstr "积分"
+
+msgid "Use zero to disable."
+msgstr "使用零来禁用。"
+
+msgid "Limit"
+msgstr "限制"
+
+msgid "Log template"
+msgstr "日志模板"
+
+msgid "required"
+msgstr "必填"
+
+msgid "Points for Author Who Get Liked"
+msgstr "被点赞作者获得的积分"
+
+msgid "Points for unliking content"
+msgstr "取消点赞扣除的积分"
+
+msgid "Points for Author Who Get Unliked"
+msgstr "被取消点赞作者扣除的积分"
+
+msgid "Limits"
+msgstr "限制"
+
+msgid "%plural% is to be awarded even when item authors Like/Unlike their own item."
+msgstr "即使项目作者对自己的项目点赞/取消赞，也会授予 %plural%。"
+
+msgid "%s votes today — unlock who liked each post, audience maps, and star ratings in search with Pro."
+msgstr "今天 %s 次投票——使用专业版解锁每篇文章的点赞者、受众地图和搜索中的星级评分。"
+
+msgid "%s votes stored so far. Upgrade to Pro for deeper reports, Display Automation, and SEO markup."
+msgstr "目前已存储 %s 次投票。升级到专业版获取更深入的报告、显示自动化和 SEO 标记。"
+
+msgid "Need more than basic likes? Pro adds voter names, geography, placement presets, and schema stars in search."
+msgstr "需要更多基本点赞以外的功能？专业版添加投票者姓名、地理位置、展示预设和搜索中的星级评分。"
+
+msgid "WP ULike Pro"
+msgstr "WP ULike 专业版"
+
+msgid "One license unlocks deeper analytics, automation, and SEO tools across your site."
+msgstr "一个许可证即可解锁整个站点的深度分析、自动化和 SEO 工具。"
+
+msgid "Deeper statistics"
+msgstr "更深入的统计"
+
+msgid "See who liked each post, top countries, engagement rates, store reports, and CSV export."
+msgstr "查看每篇文章的点赞者、热门国家、互动率、商店报告和 CSV 导出。"
+
+msgid "Display Automation"
+msgstr "显示自动化"
+
+msgid "Quick Start presets and per-rule placement for posts, products, and custom hooks."
+msgstr "快速开始预设和文章、产品和自定义挂钩的按规则展示。"
+
+msgid "Schema star ratings"
+msgstr "Schema 星级评分"
+
+msgid "Turn vote counts into star ratings in Google with Schema.org and FAQ markup."
+msgstr "通过 Schema.org 和 FAQ 标记将投票数转化为 Google 中的星级评分。"
+
+msgid "Customize buttons"
+msgstr "自定义按钮"
+
+msgid "View on site"
+msgstr "在站点查看"
+
+msgid "Votes today"
+msgstr "今日投票"
+
+msgid "New since last visit"
+msgstr "上次访问以来的新增"
+
+msgid "Total votes"
+msgstr "总投票数"
+
+msgid "Snapshot only—open Statistics for charts."
+msgstr "仅为快照——打开统计查看图表。"
+
+msgid "Auto-display on"
+msgstr "自动显示开启"
+
+msgid "Off / manual"
+msgstr "关闭/手动"
+
+msgid "Off"
+msgstr "关闭"
+
+msgid "Database"
+msgstr "数据库"
+
+msgid "Missing: %s"
+msgstr "缺失：%s"
+
+msgid "Caching"
+msgstr "缓存"
+
+msgid "Compatibility mode on"
+msgstr "兼容模式已开启"
+
+msgid "Like storage"
+msgstr "点赞存储"
+
+msgid "Quick check"
+msgstr "快速检查"
+
+msgid "Test on a single post, not the homepage"
+msgstr "在单篇文章上测试，而非首页"
+
+msgid "Template: %1$s · Position: %2$s"
+msgstr "模板：%1$s · 位置：%2$s"
+
+msgid "Documentation"
+msgstr "文档"
+
+msgid "Setup, shortcodes, and developer hooks."
+msgstr "设置、短代码和开发者挂钩。"
+
+msgid "Free vs Pro breakdown"
+msgstr "免费版与专业版对比"
+
+msgid "Compare free and Pro features before you upgrade."
+msgstr "升级前比较免费版和专业版功能。"
+
+msgid "Support"
+msgstr "支持"
+
+msgid "Get help from the WP ULike team."
+msgstr "获取 WP ULike 团队的帮助。"
+
+msgid "Leave a review"
+msgstr "留下评价"
+
+msgid "Share feedback on WordPress.org."
+msgstr "在 WordPress.org 上分享反馈。"
+
+msgid "Download your settings and customizer values as JSON."
+msgstr "将设置和自定义值下载为 JSON。"
+
+msgid "View sample post"
+msgstr "查看示例文章"
+
+msgid "No button on the page? Add [wp_ulike] or the ULike block, or enable \"%s\" under Settings → Posts."
+msgstr "页面上没有按钮？添加 [wp_ulike] 或 ULike 区块，或在设置 → 文章中启用\"%s\"。"
+
+msgid "Stale vote counts with a cache plugin? Enable \"%s\" in Settings → General, then purge cache."
+msgstr "使用缓存插件后投票计数过时？在设置 → 常规中启用\"%s\"，然后清除缓存。"
+
+msgid "Too many admin notices? Turn on \"%s\" in Settings → General."
+msgstr "管理通知太多？在设置 → 常规中启用\"%s\"。"
+
+msgid "You have <strong>%1$s</strong> new votes since your last visit to Statistics. <a href=\"%2$s\">Open Statistics</a> for charts and filters."
+msgstr "自上次访问统计以来，您有 <strong>%1$s</strong> 个新投票。<a href=\"%2$s\">打开统计</a>查看图表和筛选。"
+
+msgid "<strong>%1$s</strong> votes today on your site. Numbers below are a quick snapshot—<a href=\"%2$s\">Statistics</a> has the full breakdown."
+msgstr "今天您的站点有 <strong>%1$s</strong> 次投票。下面的数字是快速概览——<a href=\"%2$s\">统计</a>有完整的详细信息。"
+
+msgid "No votes recorded yet. Test the button on a <a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">single post</a> (not the homepage). Adjust display under <a href=\"%2$s\">Settings → Content Types → Posts</a>."
+msgstr "尚未记录投票。在<a href=\"%1$s\" target=\"_blank\" rel=\"noopener noreferrer\">单篇文章</a>（非首页）上测试按钮。在<a href=\"%2$s\">设置 → 内容类型 → 文章</a>中调整显示。"
+
+msgid "No votes recorded yet. Buttons show on single posts by default, not on the homepage. Check display under <a href=\"%s\">Settings → Content Types → Posts</a>."
+msgstr "尚未记录投票。按钮默认显示在单篇文章上，而非首页。在<a href=\"%s\">设置 → 内容类型 → 文章</a>中检查显示设置。"
+
+msgid "Your setup looks ready. Configure buttons below or open Statistics when you start receiving votes."
+msgstr "设置看起来已就绪。在下方配置按钮，或在开始收到投票时打开统计。"
+
+msgid "Engagement snapshot"
+msgstr "互动概览"
+
+msgid "Site setup"
+msgstr "站点设置"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "Detected on site"
+msgstr "在站点检测到"
+
+msgid "Active theme"
+msgstr "当前主题"
+
+msgid "Caching helper"
+msgstr "缓存助手"
+
+msgid "On (Settings → General)"
+msgstr "开启（设置 → 常规）"
+
+msgid "Setup & hooks"
+msgstr "设置和挂钩"
+
+msgid "Manual (shortcode or block)"
+msgstr "手动（短代码或区块）"
+
+msgid "Auto on posts"
+msgstr "文章自动显示"
+
+msgid "homepage hidden"
+msgstr "首页隐藏"
+
+msgid "singular views filtered"
+msgstr "单页视图已过滤"
+
+msgid "archives hidden"
+msgstr "归档隐藏"
+
+msgid "categories hidden"
+msgstr "分类隐藏"
+
+msgid "search hidden"
+msgstr "搜索隐藏"
+
+msgid "tags hidden"
+msgstr "标签隐藏"
+
+msgid "author pages hidden"
+msgstr "作者页面隐藏"
+
+msgid "exceptions: %s"
+msgstr "例外：%s"
+
+msgid "Invalid settings file. Expected a JSON export from Help → Settings backup."
+msgstr "无效的设置文件。预期为从帮助 → 设置备份导出的 JSON 文件。"
+
+msgid "Please enter some value for required variables."
+msgstr "请为必填变量输入值。"
+
+msgid "Table info is empty."
+msgstr "表信息为空。"
+
+msgid "No Limit"
+msgstr "无限制"
+
+msgid "Cookie"
+msgstr "Cookie"
+
+msgid "Username/IP"
+msgstr "用户名/IP"
+
+msgid "Username/IP + Cookie"
+msgstr "用户名/IP + Cookie"
+
+msgid "Top of Content"
+msgstr "内容顶部"
+
+msgid "Bottom of Content"
+msgstr "内容底部"
+
+msgid "Top and Bottom"
+msgstr "顶部和底部"
+
+msgid "Twitter Heart"
+msgstr "Twitter 爱心"
+
+msgid "Animated Heart"
+msgstr "动态爱心"
+
+msgid "Simple Up/Down Vote"
+msgstr "简约赞/踩"
+
+msgid "Book Heart"
+msgstr "书本爱心"
+
+msgid "Check Mark"
+msgstr "对勾"
+
+msgid "Voter Thumb"
+msgstr "投票拇指"
+
+msgid "Check Vote"
+msgstr "勾选投票"
+
+msgid "Broken Heart"
+msgstr "碎心"
+
+msgid "Positive/Negative Circles"
+msgstr "正/负圆形"
+
+msgid "FeedBack"
+msgstr "反馈"
+
+msgid "Rating Face"
+msgstr "评分表情"
+
+msgid "Rating Boy"
+msgstr "评分男孩"
+
+msgid "Rating Girl"
+msgstr "评分女孩"
+
+msgid "Up/Down Votes"
+msgstr "赞/踩投票"
+
+msgid "Star Thumb"
+msgstr "星星拇指"
+
+msgid "Arrow Votings"
+msgstr "箭头投票"
+
+msgid "Minimal Votings"
+msgstr "极简投票"
+
+msgid "Badge Thumb"
+msgstr "徽章拇指"
+
+msgid "Fave Star"
+msgstr "收藏星"
+
+msgid "Pin Button"
+msgstr "图钉按钮"
+
+msgid "Clapping Button"
+msgstr "鼓掌按钮"
+
+msgid "Smiley Switch button"
+msgstr "笑脸切换按钮"
+
+msgid "Could not read request body."
+msgstr "无法读取请求体。"
+
+msgid "Request body is too large."
+msgstr "请求体过大。"
+
+msgid "Fingerprint"
+msgstr "指纹"
+
+msgid "Removed %d WP ULike log row(s) for this user."
+msgstr "已为该用户删除 %d 条 WP ULike 日志记录。"
+
+msgid "WP ULike vote logs"
+msgstr "WP ULike 投票日志"
+
+msgid "Invalid type specified for [wp_ulike_likers_box] shortcode."
+msgstr "为 [wp_ulike_likers_box] 短代码指定了无效的类型。"
+
+msgid "Error receiving input parameters"
+msgstr "接收输入参数出错"
+
+msgid "WP ULike Activity"
+msgstr "WP ULike 活动"
+
+msgid "Votes"
+msgstr "投票"
+
+msgid "Replies"
+msgstr "回复"
+
+msgid "You have %1$d new %2$s likes"
+msgstr "您有 %1$d 个新的%2$s赞"
+
+msgid "%1$s liked one of your %2$s"
+msgstr "%1$s 赞了您的一个%2$s"
+
+msgid "New activity liked"
+msgstr "新活动被点赞"
+
+msgid "New comment liked"
+msgstr "新评论被点赞"
+
+msgid "New post liked"
+msgstr "新文章被点赞"
+
+msgid "New topic liked"
+msgstr "新话题被点赞"
+
+msgid "This hook award / deducts points from users who Like/Unlike any content of WordPress, bbPress, BuddyPress & ..."
+msgstr "此挂钩对 WordPress、bbPress、BuddyPress 等内容中点赞/取消赞的用户奖励/扣除积分..."
+
+msgid "Liking Content"
+msgstr "点赞内容"
+
+msgid "Liked Content"
+msgstr "被点赞的内容"
+
+msgid "Unliking Content"
+msgstr "取消点赞内容"
+
+msgid "Unliked Content"
+msgstr "被取消点赞的内容"
+
+msgid "Recent Posts Liked"
+msgstr "最近点赞的文章"
+
+msgid "Recent Comments Liked"
+msgstr "最近点赞的评论"
+
+msgid "This user has not made any likes."
+msgstr "该用户还没有点赞任何内容。"
+
+msgid "WP ULike is using the new faster like storage (%3$s mode). Please update <strong>WP ULike Pro</strong> to version %1$s or later — your installed Pro version (%2$s) reads from the old tables and may show stale or incomplete statistics until updated."
+msgstr "WP ULike 正在使用更快的新点赞存储（%3$s 模式）。请将 <strong>WP ULike Pro</strong> 更新至 %1$s 或更高版本——您安装的 Pro 版本（%2$s）读取旧表，更新前可能显示过时或不完整的统计数据。"
+
+msgid "Go to Plugins"
+msgstr "前往插件"
+
+msgid "Security check failed. Please try again."
+msgstr "安全检查失败。请重试。"
+
+msgid "Invalid license has been cleared successfully. You can now enter your new valid license key in the WP ULike Pro settings."
+msgstr "无效许可证已成功清除。您现在可以在 WP ULike Pro 设置中输入新的有效许可证密钥。"
+
+msgid "Important Update Notice"
+msgstr "重要更新通知"
+
+msgid "We noticed you're using a version of WP ULike Pro that may have been obtained from outside our official channels. Unfortunately, versions from these sources sometimes contain modified or injected code that could affect your site's performance and security. We strongly recommend updating to the official version to keep your site safe."
+msgstr "我们注意到您正在使用可能从非官方渠道获取的 WP ULike Pro 版本。不幸的是，来自这些来源的版本有时包含修改或注入的代码，可能影响您站点的性能和安全性。我们强烈建议更新到官方版本以确保站点安全。"
+
+msgid "Here's what to do: Clear your current license key using the button below, uninstall the current Pro version, then download and install the latest version from your account after purchasing. Once you install it, just enter your new license key in the settings."
+msgstr "操作步骤：使用下方按钮清除当前许可证密钥，卸载当前 Pro 版本，然后购买后从您的账户下载并安装最新版本。安装后，只需在设置中输入新的许可证密钥。"
+
+msgid "Clear License Key"
+msgstr "清除许可证密钥"
+
+msgid "View Pricing"
+msgstr "查看定价"
+
+msgid "We're currently offering a special price for users upgrading to the latest version. Questions? We're here to help—just reach out at"
+msgstr "我们目前为升级到最新版本的用户提供特别价格。有问题？我们随时为您提供帮助——请联系"
+
+msgid "WP ULike: faster like storage is ready"
+msgstr "WP ULike：更快的点赞存储已就绪"
+
+msgid "Move your existing like records to a faster table for better performance on busy sites. Counts and buttons keep working — nothing is deleted."
+msgstr "将现有点赞记录迁移到更快的表以在繁忙站点上获得更好的性能。计数和按钮继续工作——不会删除任何内容。"
+
+msgid "Begin upgrade"
+msgstr "开始升级"
+
+msgid "Plugin not loaded."
+msgstr "插件未加载。"
+
+msgid "WP ULike requires PHP version %s+, plugin is currently NOT RUNNING."
+msgstr "WP ULike 需要 PHP %s+ 版本，插件当前未运行。"
+
+msgid "WP ULike requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING."
+msgstr "WP ULike 需要 WordPress %s+ 版本。由于您使用的是较早版本，插件当前未运行。"
+

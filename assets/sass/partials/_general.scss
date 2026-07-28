@@ -1,0 +1,172 @@
+.wpulike {
+    display: block;
+    position: relative;
+    line-height: normal;
+    margin: 0;
+    padding: 10px 0;
+    box-sizing: border-box;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
+
+    .wp_ulike_general_class {
+        display: inline-flex;
+        align-items: center;
+        max-width: 100%;
+    }
+
+    button.wp_ulike_btn{
+        margin: 0;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: .25em;
+        box-shadow: none;
+        padding: 1em;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        transition: none;
+        cursor: pointer;
+        font-family: inherit;
+        line-height: inherit;
+        appearance: none;
+        -webkit-appearance: none;
+        width: auto;
+        max-width: none;
+        text-transform: none;
+        letter-spacing: normal;
+        font-weight: inherit;
+
+        &:hover,
+        &:active,
+        &:focus {
+            outline: none;
+        }
+
+        &::-moz-focus-inner {
+            border: 0;
+        }
+
+        &[disabled=disabled],
+        &:disabled {
+            cursor: not-allowed;
+
+            &:hover,
+            &:active,
+            &:focus {
+                outline: none;
+                background-color: initial;
+            }
+        }
+
+        &.wp_ulike_put_text {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 28px;
+            padding: 0 10px;
+            min-width: 50px;
+        }
+    }
+
+    .wp_ulike_is_loading {
+        button.wp_ulike_btn{
+            background-image: url(../img/svg/loader.svg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: auto;
+
+            span {
+                visibility: hidden;
+            }
+
+            &.wp_ulike_put_image {
+                &::after {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    &.wpulike-hide-counter {
+        .count-box {
+            display: none;
+        }
+    }
+
+    .count-box {
+        &:empty {
+            display: none;
+        }
+    }
+
+}
+
+#buddypress #activity-stream {
+
+    .activity-meta,
+    .activity-comments,
+    .activity-inner {
+        .wpulike {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    .wp_ulike_likers_wrapper {
+
+        li,
+        .wp-ulike-liker {
+            border: none;
+            padding: 0;
+
+            a,
+            img {
+                float: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+}
+
+#bbpress-forums {
+
+    .bbp-reply-content,
+    .bbp-topic-content,
+    .bbp-forum-content {
+
+        .wpulike {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .wp_ulike_likers_wrapper {
+
+            li,
+            .wp-ulike-liker {
+                border: none;
+                padding: 0;
+
+                a,
+                img {
+                    float: none;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+.wp_ulike_click_is_disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.wp_ulike_hide_me {
+    visibility: hidden;
+}
