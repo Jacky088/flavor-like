@@ -162,6 +162,17 @@ final class wp_ulike_cta_listener extends wp_ulike_ajax_listener_base {
 			$this->response( $response );
 
 		} catch ( \Exception $e ){
+			// Log error for debugging
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				error_log( sprintf(
+					'WP ULike Process Error: %s | Item Type: %s | Item ID: %s | User IP: %s',
+					$e->getMessage(),
+					isset( $this->data['type'] ) ? $this->data['type'] : 'unknown',
+					isset( $this->data['id'] ) ? $this->data['id'] : 'unknown',
+					isset( $this->data['client_address'] ) ? wp_privacy_anonymize_ip( $this->data['client_address'] ) : 'unknown'
+				) );
+			}
+
 			return $this->sendError( array(
 				'message'     => $e->getMessage(),
 				'messageType' => 'error',

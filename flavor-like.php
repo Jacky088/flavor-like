@@ -99,9 +99,6 @@ require WP_ULIKE_INC_DIR . '/action.php';
 register_activation_hook  ( __FILE__, array( 'wp_ulike_register_action_hook', 'activate'   ) );
 register_deactivation_hook( __FILE__, array( 'wp_ulike_register_action_hook', 'deactivate' ) );
 
-// Load Pro license validator
-// require_once WP_ULIKE_INC_DIR . '/pro.php'; // Pro functionality removed
-
 if ( ! version_compare( PHP_VERSION, '7.2.5', '>=' ) ) {
 	add_action( 'admin_notices', 'wp_ulike_fail_php_version' );
 } elseif ( ! version_compare( get_bloginfo( 'version' ), '6.0', '>=' ) ) {

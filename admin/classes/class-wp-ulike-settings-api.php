@@ -1240,18 +1240,6 @@ if ( ! class_exists( 'wp_ulike_settings_api' ) ) {
                 /* translators: Error when dynamic options cannot be resolved. Simplified message for users */
                 'field.options_unresolved' => esc_html__( 'Options not available. Please check your configuration.', 'wp-ulike' ),
 
-                // Pro Lock
-                /* translators: Label for pro feature */
-                'pro.feature' => esc_html__( 'Pro Feature', 'wp-ulike' ),
-                /* translators: Description text for pro feature */
-                'pro.description' => esc_html__( 'This feature is available in WP ULike Pro', 'wp-ulike' ),
-                /* translators: Button text to upgrade to pro version */
-                'pro.upgrade' => esc_html__( 'Upgrade to Pro', 'wp-ulike' ),
-                /* translators: Link text to read more about pro feature */
-                'pro.read_more' => esc_html__( 'Read More', 'wp-ulike' ),
-                /* translators: Tag label for pro features */
-                'pro.tag' => esc_html__( 'Pro', 'wp-ulike' ),
-
                 // Security
                 /* translators: Security threat type name - SQL Injection */
                 'security.sql_injection' => esc_html__( 'SQL Injection', 'wp-ulike' ),

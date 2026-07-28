@@ -115,7 +115,7 @@ if ( ! class_exists( 'wp_ulike_customizer_api' ) ) {
                 'source' => 'free'
             );
 
-            // Allow pro version and other extensions to add their assets
+            // Allow extensions to add their assets
             $assets = apply_filters( 'wp_ulike_customizer_assets', $assets );
 
             return $assets;
@@ -668,7 +668,7 @@ if ( ! class_exists( 'wp_ulike_customizer_api' ) ) {
                 $template_type = sanitize_text_field( wp_unslash( $_POST['template'] ) );
             }
 
-            // Add preview parameter to detect preview mode in pro version
+            // Add preview parameter to detect preview mode
             $_GET['preview'] = true;
 
             // Render template preview

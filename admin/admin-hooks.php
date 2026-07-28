@@ -158,7 +158,6 @@ function wp_ulike_notice_manager(){
 		}
 	}
 
-	// Show discount notice for Pro users - removed (Pro functionality removed)
 
     $notice_list = apply_filters( 'wp_ulike_admin_notices_instances', $notice_list );
 
