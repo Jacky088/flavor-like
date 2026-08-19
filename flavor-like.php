@@ -3,7 +3,7 @@
  * Plugin Name:       Flavor Like
  * Plugin URI:        https://github.com/Jacky088/wp-ulike
  * Description:       为 WordPress 添加一键点赞按钮。内置统计仪表盘、热门内容排行和隐私工具，几分钟即可完成设置。
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            木木
  * Author URI:        https://github.com/Jacky088
  * Requires PHP:      7.2.5
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Do not change these values
 define( 'WP_ULIKE_PLUGIN_URI'   , 'https://github.com/Jacky088/wp-ulike' 	);
-define( 'WP_ULIKE_VERSION'      , '1.0.4' 					 		    	);
+define( 'WP_ULIKE_VERSION'      , '1.0.5' 					 		    	);
 define( 'WP_ULIKE_DB_VERSION'   , '2.5' 					 	 			);
 define( 'WP_ULIKE_SLUG'         , 'wp-ulike' 					 			);
 define( 'WP_ULIKE_NAME'         , 'Flavor Like'	    						);

@@ -53,15 +53,23 @@ if ( ! class_exists( 'WP_Ulike_Ip_Detector' ) ) {
 		private static $private_ip_cache = array();
 
 		/**
+		 * Cached trusted proxy list for the current request.
+		 *
+		 * @var array|null
+		 */
+		private static $trusted_proxies_cache = null;
+
+		/**
 		 * Get user IP address
 		 *
 		 * Handles Cloudflare, proxy headers, and direct connections.
 		 * Results are cached per request for performance.
 		 *
-		 * Security Note: For non-security-critical use cases (like tracking likes),
-		 * this implementation prioritizes functionality over strict security.
-		 * Proxy headers are checked but not validated against a trusted proxy whitelist.
-		 * This is acceptable for engagement tracking but should not be used for authentication.
+		 * Security Note: By default proxy headers are trusted as before (kept
+		 * for backwards compatibility on reverse-proxied sites). Configure the
+		 * "Trusted Proxy IPs" option (or the wp_ulike_trusted_proxies filter)
+		 * to restrict header trust to requests whose REMOTE_ADDR belongs to
+		 * your proxy / load balancer.
 		 *
 		 * @return string
 		 */
@@ -88,6 +96,23 @@ if ( ! class_exists( 'WP_Ulike_Ip_Detector' ) ) {
 				}
 			}
 
+			// Trusted proxy whitelist: when configured, generic proxy headers
+			// are only honoured if the request actually arrives from a listed
+			// proxy IP. This prevents clients from spoofing X-Forwarded-For to
+			// bypass IP-based vote dedupe / blacklists.
+			$trusted_proxies = self::get_trusted_proxies();
+			$is_from_trusted_proxy = false;
+			if ( empty( $trusted_proxies ) ) {
+				// No whitelist configured — legacy behaviour (trust headers).
+				$is_from_trusted_proxy = true;
+			} else {
+				$remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+				if ( ! empty( $remote_addr ) && self::ip_matches_list( $remote_addr, $trusted_proxies ) ) {
+					$is_from_trusted_proxy = true;
+				}
+			}
+
+			if ( $is_from_trusted_proxy ) {
 			// Check other proxy headers (in order of reliability)
 			// Note: These headers can be spoofed, but for engagement tracking this is acceptable
 			$proxy_headers = array(
@@ -130,6 +155,7 @@ if ( ! class_exists( 'WP_Ulike_Ip_Detector' ) ) {
 					}
 				}
 			}
+			}
 
 			// Fallback to REMOTE_ADDR (most reliable for direct connections)
 			if ( $ip === '127.0.0.1' || ! self::validate_ip( $ip ) ) {
@@ -146,6 +172,87 @@ if ( ! class_exists( 'WP_Ulike_Ip_Detector' ) ) {
 
 			self::$cached_ip = apply_filters( 'wp_ulike_get_user_ip', $ip );
 			return self::$cached_ip;
+		}
+
+		/**
+		 * Get configured trusted proxy list.
+		 *
+		 * Reads the "trusted_proxy_ips" option (one IP or IPv4 CIDR per line,
+		 * comma separated also accepted). Returns an empty array when nothing
+		 * is configured, which keeps the legacy "trust all headers" behaviour.
+		 *
+		 * @return array
+		 */
+		private static function get_trusted_proxies() {
+			if ( self::$trusted_proxies_cache !== null ) {
+				return self::$trusted_proxies_cache;
+			}
+
+			$raw = wp_ulike_get_option( 'trusted_proxy_ips', '' );
+			$list = array();
+
+			if ( is_string( $raw ) && '' !== trim( $raw ) ) {
+				foreach ( preg_split( '/[\s,]+/', $raw ) as $entry ) {
+					$entry = trim( $entry );
+					if ( '' !== $entry ) {
+						$list[] = $entry;
+					}
+				}
+			}
+
+			/**
+			 * Filter the trusted proxy IPs / CIDRs.
+			 *
+			 * @param array $list IP and IPv4 CIDR strings.
+			 */
+			$list = apply_filters( 'wp_ulike_trusted_proxies', $list );
+
+			self::$trusted_proxies_cache = $list;
+			return self::$trusted_proxies_cache;
+		}
+
+		/**
+		 * Check whether an IP matches a list of IPs / IPv4 CIDRs.
+		 *
+		 * IPv6 entries are matched by exact string comparison only.
+		 *
+		 * @param string $ip   Candidate IP (e.g. REMOTE_ADDR).
+		 * @param array  $list IPs or IPv4 CIDR ranges.
+		 * @return bool
+		 */
+		private static function ip_matches_list( $ip, $list ) {
+			if ( ! self::validate_ip( $ip ) ) {
+				return false;
+			}
+
+			foreach ( (array) $list as $entry ) {
+				$entry = trim( (string) $entry );
+				if ( '' === $entry ) {
+					continue;
+				}
+
+				if ( strpos( $entry, '/' ) !== false ) {
+					// IPv4 CIDR matching
+					list( $range, $prefix ) = explode( '/', $entry, 2 );
+					$prefix = (int) $prefix;
+					if ( $prefix < 0 || $prefix > 32 || false === filter_var( $range, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+						continue;
+					}
+					if ( false === filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+						continue;
+					}
+					$ip_long     = ip2long( $ip );
+					$range_long  = ip2long( $range );
+					$mask        = $prefix === 0 ? 0 : ( -1 << ( 32 - $prefix ) ) & 0xFFFFFFFF;
+					if ( ( $ip_long & $mask ) === ( $range_long & $mask ) ) {
+						return true;
+					}
+				} elseif ( $ip === $entry ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		/**
@@ -301,11 +408,18 @@ if ( ! class_exists( 'WP_Ulike_Ip_Detector' ) ) {
 					);
 
 					$ip_addresses[ $version ] = $ranges;
-				}
+			}
 
-				// Cache for 1 week
+			if ( empty( $ip_addresses['v4'] ) && empty( $ip_addresses['v6'] ) ) {
+				// Fetch failed (network error / non-200). Do not pin the empty
+				// result for a week — cache briefly so the next request retries
+				// and Cloudflare-fronted sites recover fast.
+				set_transient( $transient_key, $ip_addresses, 5 * MINUTE_IN_SECONDS );
+			} else {
+				// Cache successful fetch for 1 week
 				set_transient( $transient_key, $ip_addresses, WEEK_IN_SECONDS );
 			}
+		}
 
 			self::$cloudflare_ips = $ip_addresses;
 			return self::$cloudflare_ips;

@@ -17,22 +17,75 @@ if ( ! class_exists( 'wp_ulike_frontend_assets' ) ) {
 
 	  	private $hook;
 
+		/**
+		 * Whether a like button has been rendered on this page.
+		 *
+		 * @var boolean
+		 */
+		private static $assets_needed = false;
+
 	  	/**
 	   	 * __construct
 	   	 */
 	  	function __construct() {
-			// general assets
-        	add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
+			// Register handles early (no output cost by itself).
+			add_action( 'wp_enqueue_scripts', array( $this, 'register' ) );
+			// Enqueue late: after templates have rendered, so the on-demand
+			// strategy knows whether the page actually contains a button.
+			// Priority 5 keeps us before _wp_footer_scripts (priority 20)
+			// so late-enqueued styles/scripts are still printed.
+			add_action( 'wp_footer', array( $this, 'maybe_enqueue' ), 5 );
 	  	}
 
-		public function enqueue(){
-	    	// If user has been disabled this page in options, then return.
+		/**
+		 * Mark that a like button is present and frontend assets are required.
+		 * Called from wp_ulike_display_button() when a template is rendered.
+		 *
+		 * @return void
+		 */
+		public static function mark_assets_needed() {
+			self::$assets_needed = true;
+		}
+
+		/**
+		 * Register (not enqueue) all handles with their inline data.
+		 *
+		 * @return void
+		 */
+		public function register() {
+			$this->register_styles();
+			$this->register_scripts();
+		}
+
+		/**
+		 * Enqueue assets depending on strategy.
+		 *
+		 * global   — legacy behaviour, enqueue everywhere (except pages
+		 *            excluded via "Disable Assets On").
+		 * on_demand — enqueue only when wp_ulike_display_button() rendered
+		 *            at least one button on this request.
+		 *
+		 * @return void
+		 */
+		public function maybe_enqueue() {
+			// If user has been disabled this page in options, then return.
 			if( ! is_wp_ulike( wp_ulike_get_option( 'disable_plugin_files' ), array(), true ) ) {
 				return;
 			}
-	        // general assets
-	        $this->load_styles();
-	        $this->load_scripts();
+
+			$strategy = wp_ulike_get_option( 'assets_load_strategy', 'global' );
+			if ( 'on_demand' === $strategy && ! self::$assets_needed ) {
+				return;
+			}
+
+			wp_enqueue_style( WP_ULIKE_SLUG );
+			if ( wp_style_is( WP_ULIKE_SLUG . '-custom', 'registered' ) ) {
+				wp_enqueue_style( WP_ULIKE_SLUG . '-custom' );
+			}
+
+			if ( ! defined( 'WP_ULIKE_PRO_VERSION' ) || version_compare( WP_ULIKE_PRO_VERSION, '1.5.3', '<' ) ) {
+				wp_enqueue_script( 'wp_ulike' );
+			}
 		}
 
 	  	/**
@@ -40,17 +93,17 @@ if ( ! class_exists( 'wp_ulike_frontend_assets' ) ) {
 	   	 *
 	   	 * @return void
 	   	 */
-	  	public function load_styles() {
+	  	public function register_styles() {
 
 	        // @if DEV
 	        /*
 	        // @endif
-	        wp_enqueue_style( WP_ULIKE_SLUG, WP_ULIKE_ASSETS_URL . '/css/wp-ulike.min.css', array(), WP_ULIKE_VERSION );
+	        wp_register_style( WP_ULIKE_SLUG, WP_ULIKE_ASSETS_URL . '/css/wp-ulike.min.css', array(), WP_ULIKE_VERSION );
 	        // @if DEV
 	        */
 	        // @endif
 	        // @if DEV
-			wp_enqueue_style( WP_ULIKE_SLUG, WP_ULIKE_ASSETS_URL . '/css/wp-ulike.css', array(), WP_ULIKE_VERSION );
+			wp_register_style( WP_ULIKE_SLUG, WP_ULIKE_ASSETS_URL . '/css/wp-ulike.css', array(), WP_ULIKE_VERSION );
 			// @endif
 
 			// Check user preference for CSS delivery method
@@ -62,7 +115,7 @@ if ( ! class_exists( 'wp_ulike_frontend_assets' ) ) {
 				//add your custom style from setting panel (now includes customizer CSS).
 				wp_add_inline_style( WP_ULIKE_SLUG, wp_ulike_get_custom_style() );
 			} else {
-				wp_enqueue_style( WP_ULIKE_SLUG . '-custom', WP_ULIKE_CUSTOM_URL . '/custom.css', array( WP_ULIKE_SLUG ), WP_ULIKE_VERSION );
+				wp_register_style( WP_ULIKE_SLUG . '-custom', WP_ULIKE_CUSTOM_URL . '/custom.css', array( WP_ULIKE_SLUG ), WP_ULIKE_VERSION );
 			}
 
 	  	}
@@ -72,7 +125,7 @@ if ( ! class_exists( 'wp_ulike_frontend_assets' ) ) {
 	     *
 	     * @return void
 	     */
-	  	public function load_scripts() {
+	  	public function register_scripts() {
 			// Return if pro assets exist (Pro >= 1.5.3 includes free scripts, so don't load free version).
 			if ( defined( 'WP_ULIKE_PRO_VERSION' ) && version_compare( WP_ULIKE_PRO_VERSION, '1.5.3', '>=' ) ) {
 				return;
@@ -82,16 +135,75 @@ if ( ! class_exists( 'wp_ulike_frontend_assets' ) ) {
 			/*
 			// @endif
 			//Add wp_ulike script file with special functions.
-			wp_ulike_enqueue_script_with_defer( 'wp_ulike', WP_ULIKE_ASSETS_URL . '/js/wp-ulike.min.js', array(), WP_ULIKE_VERSION );
+			$this->register_script_with_defer( 'wp_ulike', WP_ULIKE_ASSETS_URL . '/js/wp-ulike.min.js', array(), WP_ULIKE_VERSION );
 			// @if DEV
 			*/
 			// @endif
 			// @if DEV
-			wp_ulike_enqueue_script_with_defer( 'wp_ulike', WP_ULIKE_ASSETS_URL . '/js/wp-ulike.js', array(), WP_ULIKE_VERSION );
+			$this->register_script_with_defer( 'wp_ulike', WP_ULIKE_ASSETS_URL . '/js/wp-ulike.js', array(), WP_ULIKE_VERSION );
 			// @endif
 
 			wp_ulike_add_inline_script_data( 'wp_ulike', 'wp_ulike_params', $this->get_frontend_script_params() );
 	  	}
+
+		/**
+		 * Register + immediately enqueue styles.
+		 *
+		 * Kept for external callers (block editor assets in
+		 * includes/blocks/index.php) that need the assets right away,
+		 * bypassing the deferred maybe_enqueue() decision.
+		 *
+		 * @return void
+		 */
+		public function load_styles() {
+			$this->register_styles();
+			wp_enqueue_style( WP_ULIKE_SLUG );
+			if ( wp_style_is( WP_ULIKE_SLUG . '-custom', 'registered' ) ) {
+				wp_enqueue_style( WP_ULIKE_SLUG . '-custom' );
+			}
+		}
+
+		/**
+		 * Register + immediately enqueue scripts.
+		 *
+		 * Kept for external callers (block editor assets in
+		 * includes/blocks/index.php).
+		 *
+		 * @return void
+		 */
+		public function load_scripts() {
+			$this->register_scripts();
+			if ( ! defined( 'WP_ULIKE_PRO_VERSION' ) || version_compare( WP_ULIKE_PRO_VERSION, '1.5.3', '<' ) ) {
+				wp_enqueue_script( 'wp_ulike' );
+			}
+		}
+
+		/**
+		 * Register a script with defer strategy when supported.
+		 *
+		 * @param string $handle Script handle.
+		 * @param string $src    Script URL.
+		 * @param array  $deps   Dependencies.
+		 * @param string $ver    Version.
+		 * @return void
+		 */
+		private function register_script_with_defer( $handle, $src, $deps = array(), $ver = false ) {
+			if ( function_exists( 'wp_register_script' ) && version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
+				wp_register_script(
+					$handle,
+					$src,
+					$deps,
+					$ver,
+					array(
+						'in_footer' => true,
+						'strategy'  => 'defer',
+					)
+				);
+				return;
+			}
+
+			wp_register_script( $handle, $src, $deps, $ver, true );
+		}
 
 		/**
 		 * Frontend params for the free voting script.

@@ -239,8 +239,9 @@ class wp_ulike_uninstall {
 	/**
 	 * Delete stale vote lock files from the system temp directory.
 	 *
-	 * Lock files use wp-ulike-{type}-{id}.lock (no blog ID). They are removed
-	 * after each vote; uninstall only cleans leftovers from crashed requests.
+	 * Vote mutexes now use MySQL GET_LOCK (no files are created). This only
+	 * cleans up wp-ulike-{type}-{id}.lock leftovers from plugin versions
+	 * that used file locks.
 	 *
 	 * On single-site installs the temp dir is site-specific enough to glob safely.
 	 * On multisite, the same temp dir may be shared — skip to avoid touching other sites.

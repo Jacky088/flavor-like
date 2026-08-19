@@ -414,6 +414,12 @@ if( ! function_exists( 'wp_ulike_display_button' ) ){
 	 * @return          String
 	 */
 	function wp_ulike_display_button( array $args, $deprecated_value = null ){
+		// Flag that this page rendered a like button, so the on-demand
+		// assets strategy knows frontend CSS/JS are required.
+		if ( class_exists( 'wp_ulike_frontend_assets' ) ) {
+			wp_ulike_frontend_assets::mark_assets_needed();
+		}
+
 		$template = new wp_ulike_cta_template( $args );
 
 		if( ! wp_ulike_is_true( $args['only_logged_in_users'] ) || is_user_logged_in() ) {
@@ -623,72 +629,80 @@ if( ! function_exists('wp_ulike_get_the_id') ){
 
 if( ! function_exists('wp_ulike_acquire_lock') ){
 	/**
-	 *  Use mutex lock to prevent race condition.
+	 * Acquire a mutex lock to prevent race conditions on concurrent votes.
 	 *
-	 * @param string $item_type
+	 * Uses MySQL GET_LOCK instead of file locks:
+	 * - No unlink-after-release race (flock + unlink lets two processes hold
+	 *   different inodes of the same lock path simultaneously).
+	 * - No filesystem path construction from untrusted item_type values.
+	 * - Works across multisite installs sharing a temp directory.
+	 * - Auto-releases when the DB connection closes, so crashed requests
+	 *   never leave a stale lock.
+	 *
+	 * @param string  $item_type
 	 * @param integer $item_id
-	 * @return resource
+	 * @return string|false Lock name on success, false when already held.
 	 */
-    function wp_ulike_acquire_lock( $item_type, $item_id ) {
-        $lock_file = wp_ulike_lock_file( $item_type, $item_id );
-        $fp = fopen( $lock_file, 'w+' );
+	function wp_ulike_acquire_lock( $item_type, $item_id ) {
+		global $wpdb;
 
-        if ( ! $fp || ! flock( $fp, LOCK_EX | LOCK_NB ) ) {
-            if ($fp) {
-                fclose($fp);
-            }
-            return false;
-        }
+		$lock_name = wp_ulike_lock_name( $item_type, $item_id );
+		// Timeout 0 = non-blocking, matching the previous flock( LOCK_NB ) semantics.
+		$acquired = $wpdb->get_var(
+			$wpdb->prepare( 'SELECT GET_LOCK( %s, 0 )', $lock_name )
+		);
 
-        ftruncate( $fp, 0 );
-        fwrite( $fp, microtime( true ) );
-
-        return $fp;
-    }
+		return ( '1' === (string) $acquired ) ? $lock_name : false;
+	}
 }
 
 if( ! function_exists('wp_ulike_release_lock') ){
 	/**
-	 * release mutex
+	 * Release the mutex lock acquired by wp_ulike_acquire_lock().
 	 *
-	 * @param resource $fp
-	 * @param string $item_type
-	 * @param integer $item_id
+	 * @param string|false $lock_name Lock name returned by wp_ulike_acquire_lock().
+	 * @param string       $item_type Kept for backward compatibility.
+	 * @param integer      $item_id   Kept for backward compatibility.
 	 * @return boolean
 	 */
-    function wp_ulike_release_lock( $fp, $item_type, $item_id ) {
-        if ( is_resource( $fp ) ) {
-            fflush( $fp );
-            flock( $fp, LOCK_UN );
-            fclose( $fp );
+	function wp_ulike_release_lock( $lock_name, $item_type = '', $item_id = 0 ) {
+		global $wpdb;
 
-            $lock_file = wp_ulike_lock_file( $item_type, $item_id );
+		if ( empty( $lock_name ) || ! is_string( $lock_name ) ) {
+			return false;
+		}
 
-            // Use WordPress core function for file deletion (available since WP 4.2.0)
-            if ( function_exists( 'wp_delete_file' ) ) {
-                wp_delete_file( $lock_file );
-            } elseif ( file_exists( $lock_file ) ) {
-                // Fallback for older WordPress versions (though plugin requires 6.0+)
-                @unlink( $lock_file );
-            }
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- lock name is generated internally
+		$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK( %s )', $lock_name ) );
 
-            return true;
-        }
-
-        return false;
-    }
+		return true;
+	}
 }
 
-if( ! function_exists('wp_ulike_lock_file') ){
+if( ! function_exists('wp_ulike_lock_name') ){
 	/**
-	 * get lock file
+	 * Build a blog-scoped, type+item-scoped MySQL lock name.
 	 *
-	 * @param string $item_type
+	 * GET_LOCK names are server-wide and limited to 64 chars on MySQL < 5.7.5,
+	 * so the prefix (which encodes the multisite blog) is hashed.
+	 *
+	 * @param string  $item_type
 	 * @param integer $item_id
 	 * @return string
 	 */
-	function wp_ulike_lock_file( $item_type, $item_id ) {
-		return apply_filters( 'wp_ulike_lock_file', get_temp_dir() . 'wp-ulike-' . $item_type . '-' . $item_id . '.lock', $item_type, $item_id );
+	function wp_ulike_lock_name( $item_type, $item_id ) {
+		global $wpdb;
+
+		$name = 'wp_ulike_vote_' . md5( (string) $wpdb->prefix . $item_type . '-' . (int) $item_id );
+
+		/**
+		 * Filter the MySQL lock name used for a vote mutex.
+		 *
+		 * @param string  $name      Generated lock name.
+		 * @param string  $item_type Item type.
+		 * @param integer $item_id   Item ID.
+		 */
+		return apply_filters( 'wp_ulike_lock_name', $name, $item_type, $item_id );
 	}
 }
 

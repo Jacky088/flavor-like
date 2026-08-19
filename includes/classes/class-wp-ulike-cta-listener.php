@@ -71,93 +71,98 @@ final class wp_ulike_cta_listener extends wp_ulike_ajax_listener_base {
 			}
 
 			// Acquire lock
-			$fp_lock = wp_ulike_acquire_lock( $this->data['type'], $this->data['id'] );
-			if ( $fp_lock === false ) {
+			$lock_name = wp_ulike_acquire_lock( $this->data['type'], $this->data['id'] );
+			if ( false === $lock_name ) {
 				throw new \Exception( esc_html__( 'Unable to obtain lock for this request.', 'wp-ulike' ) );
 			}
 
-			$process  = new wp_ulike_cta_process( array(
-				'item_id'       => $this->data['id'],
-				'item_type'     => $this->settings_type->getType(),
-				'item_factor'   => $this->data['factor'],
-				'item_template' => $this->data['template'],
-				'user_ip'       => $this->data['client_address']
-			) );
+			try {
+				$process  = new wp_ulike_cta_process( array(
+					'item_id'       => $this->data['id'],
+					'item_type'     => $this->settings_type->getType(),
+					'item_factor'   => $this->data['factor'],
+					'item_template' => $this->data['template'],
+					'user_ip'       => $this->data['client_address']
+				) );
 
-			if( wp_ulike_setting_repo::requireLogin( $this->settings_type->getType() ) && ! $this->user ){
-				$this->response['message']      = wp_ulike_setting_repo::getLoginNotice();
-				$this->response['status']       = 4;
-				$this->response['requireLogin'] = true;
-			} else {
-				// Start process
-				$has_permission = $process->update();
-				// Check permission
-				if( ! $has_permission ){
-					$this->response['message']     = wp_ulike_setting_repo::getPermissionNotice();
-					$this->response['btnText']     = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
-					$this->response['status']      = 5;
-					$this->response['messageType'] = 'warning';
+				if( wp_ulike_setting_repo::requireLogin( $this->settings_type->getType() ) && ! $this->user ){
+					$this->response['message']      = wp_ulike_setting_repo::getLoginNotice();
+					$this->response['status']       = 4;
+					$this->response['requireLogin'] = true;
 				} else {
-					$this->response['status'] = $process->getStatusCode();
-					$counter_value = $process->getCounterValue();
+					// Start process
+					$has_permission = $process->update();
+					// Check permission
+					if( ! $has_permission ){
+						$this->response['message']     = wp_ulike_setting_repo::getPermissionNotice();
+						$this->response['btnText']     = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
+						$this->response['status']      = 5;
+						$this->response['messageType'] = 'warning';
+					} else {
+						$this->response['status'] = $process->getStatusCode();
+						$counter_value = $process->getCounterValue();
 
-					switch ( $this->response['status'] ){
-						case 1:
-							$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
-							$this->response['messageType'] = 'success';
-							$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'like' );
-							$this->response['data'] = apply_filters( 'wp_ulike_respond_for_not_liked_data', $counter_value, $this->data['id'] );
-							break;
-						case 2:
-							$this->response['message']     = wp_ulike_setting_repo::getUnLikeNotice();
-							$this->response['messageType'] = 'info';
-							$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'like' );
-							$this->response['data'] = apply_filters( 'wp_ulike_respond_for_unliked_data', $counter_value, $this->data['id'] );
-							break;
-						case 3:
-							$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
-							$this->response['messageType'] = 'success';
-							$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
-							$this->response['data'] = apply_filters( 'wp_ulike_respond_for_liked_data', $counter_value, $this->data['id'] );
-							break;
-						case 4:
-							$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
-							$this->response['messageType'] = 'success';
-							$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
-							$this->response['data'] = apply_filters( 'wp_ulike_respond_for_no_limit_data', $counter_value, $this->data['id'] );
-							break;
+						switch ( $this->response['status'] ){
+							case 1:
+								$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
+								$this->response['messageType'] = 'success';
+								$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'like' );
+								$this->response['data'] = apply_filters( 'wp_ulike_respond_for_not_liked_data', $counter_value, $this->data['id'] );
+								break;
+							case 2:
+								$this->response['message']     = wp_ulike_setting_repo::getUnLikeNotice();
+								$this->response['messageType'] = 'info';
+								$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'like' );
+								$this->response['data'] = apply_filters( 'wp_ulike_respond_for_unliked_data', $counter_value, $this->data['id'] );
+								break;
+							case 3:
+								$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
+								$this->response['messageType'] = 'success';
+								$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
+								$this->response['data'] = apply_filters( 'wp_ulike_respond_for_liked_data', $counter_value, $this->data['id'] );
+								break;
+							case 4:
+								$this->response['message']     = wp_ulike_setting_repo::getLikeNotice();
+								$this->response['messageType'] = 'success';
+								$this->response['btnText'] = wp_ulike_setting_repo::getButtonText( $this->settings_type->getType(), 'unlike' );
+								$this->response['data'] = apply_filters( 'wp_ulike_respond_for_no_limit_data', $counter_value, $this->data['id'] );
+								break;
+						}
 					}
 				}
+
+				// Display likers
+				if( $this->data['displayLikers'] && ( ! wp_ulike_setting_repo::restrictLikersBox( $this->settings_type->getType() ) || $this->user ) && ! in_array( $this->response['status'], array(4,5) ) ){
+					$template = wp_ulike_get_likers_template_for_type(
+						$this->settings_type->getItemType(),
+						$this->data['id'],
+						array(
+							'style' => $this->data['likersTemplate']
+						)
+					);
+					$this->response['likers'] = ! empty( $template ) ? array(
+						'template' => $this->data['likersTemplate'] != 'popover' ? $template :  sprintf(
+						'<div class="wp_ulike_likers_wrapper wp_%s_likers_%s">%s</div>', $this->settings_type->getType(), $this->data['id'], $template )
+					) : array( 'template' => '' );
+				}
+
+				// Display toasts condition
+				$this->response['hasToast'] = wp_ulike_setting_repo::hasToast( $this->settings_type->getType() );
+
+				// Hide data when counter is not visible
+				if( ! wp_ulike_setting_repo::isCounterBoxVisible( $this->settings_type->getType() ) ){
+					$this->response['data'] = '';
+				}
+
+				$response = apply_filters( 'wp_ulike_ajax_respond', $this->response, $this->data['id'], $this->response['status'], $process->getAjaxProcessAtts() );
+
+				$this->afterUpdateAction( $process->getActionAtts() );
+			} finally {
+				// Always release the mutex, including when an exception is
+				// thrown mid-process; the outer catch re-throws after cleanup.
+				wp_ulike_release_lock( $lock_name, $this->data['type'], $this->data['id'] );
 			}
 
-			// Display likers
-			if( $this->data['displayLikers'] && ( ! wp_ulike_setting_repo::restrictLikersBox( $this->settings_type->getType() ) || $this->user ) && ! in_array( $this->response['status'], array(4,5) ) ){
-				$template = wp_ulike_get_likers_template_for_type(
-					$this->settings_type->getItemType(),
-					$this->data['id'],
-					array(
-                		'style' => $this->data['likersTemplate']
-            		)
-				);
-				$this->response['likers'] = ! empty( $template ) ? array(
-					'template' => $this->data['likersTemplate'] != 'popover' ? $template :  sprintf(
-					'<div class="wp_ulike_likers_wrapper wp_%s_likers_%s">%s</div>', $this->settings_type->getType(), $this->data['id'], $template )
-				) : array( 'template' => '' );
-			}
-
-			// Display toasts condition
-			$this->response['hasToast'] = wp_ulike_setting_repo::hasToast( $this->settings_type->getType() );
-
-			// Hide data when counter is not visible
-			if( ! wp_ulike_setting_repo::isCounterBoxVisible( $this->settings_type->getType() ) ){
-				$this->response['data'] = '';
-			}
-
-			$response = apply_filters( 'wp_ulike_ajax_respond', $this->response, $this->data['id'], $this->response['status'], $process->getAjaxProcessAtts() );
-
-			$this->afterUpdateAction( $process->getActionAtts() );
-
-			wp_ulike_release_lock( $fp_lock, $this->data['type'], $this->data['id'] );
 			// success
 			$this->response( $response );
 

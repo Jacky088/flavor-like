@@ -141,6 +141,14 @@ if ( ! class_exists( 'wp_ulike_admin_panel' ) ) {
                         'dependency' => array( 'enable_anonymise_ip', '==', 'true' ),
                     ),
                     array(
+                        'id'          => 'trusted_proxy_ips',
+                        'type'        => 'textarea',
+                        'title'       => esc_html__('Trusted Proxy IPs', 'wp-ulike'),
+                        'desc'        => '每行一个反向代理 / 负载均衡的 IP 或 IPv4 CIDR（如 10.0.0.0/8）。配置后，仅当请求确实来自这些地址时才读取 X-Forwarded-For 等代理头，防止伪造 IP 绕过投票去重与黑名单。留空则维持旧行为（始终信任代理头）。',
+                        'placeholder' => "10.0.0.0/8\n172.16.0.1",
+                        'sanitize'    => 'sanitize_textarea_field',
+                    ),
+                    array(
                         'id'    => 'cache_exist',
                         'type'  => 'switcher',
                         'title' => esc_html__('Site Uses Caching', 'wp-ulike'),
@@ -149,7 +157,7 @@ if ( ! class_exists( 'wp_ulike_admin_panel' ) ) {
                     array(
                         'id'          => 'disable_plugin_files',
                         'type'        => 'select',
-                        'title'       => esc_html__( 'Disable Assets On','wp-ulike' ),
+                        'title'       => esc_html__( 'Disable Assets On','wp-ulike'),
                         'desc'        => '阻止在选定页面类型上加载插件 CSS/JS。',
                         'chosen'      => true,
                         'multiple'    => true,
@@ -165,6 +173,17 @@ if ( ! class_exists( 'wp_ulike_admin_panel' ) ) {
                             'bbpress'     => esc_html__('bbPress Pages', 'wp-ulike'),
                             'woocommerce' => esc_html__('WooCommerce Pages', 'wp-ulike')
                         )
+                    ),
+                    array(
+                        'id'      => 'assets_load_strategy',
+                        'type'    => 'select',
+                        'title'   => esc_html__( 'Assets Load Strategy','wp-ulike'),
+                        'desc'    => '资源加载策略：全局加载（默认，兼容所有场景）或按需加载（仅当页面包含点赞按钮时才输出 CSS/JS，可减少无关节页面的资源开销）。',
+                        'options' => array(
+                            'global'    => esc_html__('Load Globally (default)', 'wp-ulike'),
+                            'on_demand' => esc_html__('Load On Demand', 'wp-ulike'),
+                        ),
+                        'default' => 'global',
                     ),
                     array(
                         'id'    => 'disable_admin_notice',
