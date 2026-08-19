@@ -9,4 +9,4 @@ if ( ! defined( 'WPINC' ) ) {
     die('No Naughty Business Please !');
 }
 
-new wp_ulike_frontend_assets();
+new flavor_like_frontend_assets();

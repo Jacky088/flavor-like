@@ -1,18 +1,18 @@
 {
-  "name": "wp-ulike",
-  "title": "WP ULike",
-  "version": "1.0.2",
+  "name": "flavor-like",
+  "title": "Flavor Like",
+  "version": "1.0.6",
   "description": "为 WordPress 网站添加投票按钮，提升用户互动。支持自定义设置和详细分析，追踪用户参与度，优化内容，建立忠实用户群。",
-  "homepage": "https://wpulike.com",
+  "homepage": "https://github.com/Jacky088/flavor-like",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alimir/wp-ulike.git"
+    "url": "git+https://github.com/Jacky088/flavor-like.git"
   },
   "license": "MIT",
   "author": {
-    "name": "木木",
-    "email": "wpulike@gmail.com",
-    "url": "https://wpulike.com"
+    "name": "Jacky088",
+    "email": "Jacky088@users.noreply.github.com",
+    "url": "https://github.com/Jacky088/flavor-like"
   },
   "scripts": {
     "build": "wp-toolkit build",
@@ -32,6 +32,6 @@
     "@alimir/wp-toolkit": "^2.0.1"
   },
   "bugs": {
-    "url": "https://github.com/Alimir/wp-ulike/issues"
+    "url": "https://github.com/Jacky088/flavor-like/issues"
   }
 }

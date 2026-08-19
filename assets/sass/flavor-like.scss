@@ -1,0 +1,24 @@
+@import "config";
+
+/*!
+===============================================================
+ * Flavor Like
+ * @author Alimir [https://wordpress.org/plugins/flavor-like/]
+===============================================================
+*/
+
+@import "partials/general";
+@import "partials/templates/default";
+@import "partials/templates/heart";
+@import "partials/templates/twitter";
+@import "partials/templates/animated-heart";
+@import "partials/widget/likes";
+@import "partials/plugins/notifications";
+@import "partials/plugins/tooltip";
+
+/*!>>>>>>>>>>>>>>>>>>>>>>> #RTL <<<<<<<<<<<<<<<<<<<<<<<<<<< */
+
+@import "rtl/templates/default";
+@import "rtl/widget/likes";
+@import "rtl/plugins/notifications";
+@import "rtl/plugins/tooltip";

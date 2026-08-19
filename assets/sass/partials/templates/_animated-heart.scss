@@ -2,9 +2,9 @@
  * Animated heart template
  */
 
-.wpulike-animated-heart {
+.flavorlike-animated-heart {
 
-  button.wp_ulike_btn {
+  button.flavor_like_btn {
     position: relative;
     border-radius: 50em;
     background-color: #ffffff;
@@ -30,7 +30,7 @@
       }
     }
 
-    &.wp_ulike_btn_is_active {
+    &.flavor_like_btn_is_active {
       background-color: rgba(255, 111, 99, 1);
 
       &[disabled=disabled],
@@ -43,7 +43,7 @@
         }
       }
 
-      .wpulike-svg-heart {
+      .flavorlike-svg-heart {
         fill: #ffffff;
 
         &-pop {
@@ -57,12 +57,12 @@
     }
   }
 
-  .wp_ulike_is_loading {
-    button.wp_ulike_btn {
+  .flavor_like_is_loading {
+    button.flavor_like_btn {
       background-image: initial;
       padding: 0;
 
-      &.wp_ulike_put_image {
+      &.flavor_like_put_image {
         &:after {
           content: '';
         }
@@ -70,7 +70,7 @@
     }
   }
 
-  .wpulike-svg-heart {
+  .flavorlike-svg-heart {
     width: 20px;
     fill: #ff6f63;
     transition: fill .5s, transform .5s;
@@ -158,8 +158,8 @@
   .activity-meta,
   .activity-comments,
   .activity-inner {
-    .wpulike-animated-heart {
-      button.wp_ulike_btn {
+    .flavorlike-animated-heart {
+      button.flavor_like_btn {
         border-radius: 50em;
         background-color: #ffffff;
         padding: 0;
@@ -184,7 +184,7 @@
           }
         }
 
-        &.wp_ulike_btn_is_active {
+        &.flavor_like_btn_is_active {
           background-color: rgba(255, 111, 99, 1);
 
           &[disabled=disabled],
@@ -205,8 +205,8 @@
       }
     }
 
-    .wp_ulike_is_loading {
-      button.wp_ulike_btn {
+    .flavor_like_is_loading {
+      button.flavor_like_btn {
         background-image: initial;
       }
     }

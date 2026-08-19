@@ -1,10 +1,10 @@
 /**
- * WP ULike Scripts - Initialization
+ * Flavor Like Scripts - Initialization
  *
- * @fileoverview Auto-initializes WP ULike plugin on page load and dynamic content
+ * @fileoverview Auto-initializes Flavor Like plugin on page load and dynamic content
  * @requires ES7 (ES2016) compatible browser
- * @author WP ULike Team
- * @see https://github.com/alimir/wp-ulike
+ * @author Flavor Like Team
+ * @see https://github.com/Jacky088/flavor-like
  */
 (function (window, document) {
   "use strict";
@@ -16,29 +16,29 @@
     return Array.prototype.slice.call(arrayLike);
   };
 
-  const initUlike = (elements) => {
-    if (!elements || typeof WordpressUlike === "undefined") {
+  const initFlavorLike = (elements) => {
+    if (!elements || typeof FlavorLike === "undefined") {
       return;
     }
 
     const elementArray = elements.length !== undefined ? arrayFrom(elements) : [elements];
 
     elementArray.forEach((element) => {
-      if (element && !element.hasAttribute("data-ulike-initialized")) {
+      if (element && !element.hasAttribute("data-flavor-like-initialized")) {
         // Isolate each button init so one broken instance (CSS conflict,
         // malformed markup, theme-injected wrappers) cannot leave the rest
         // of the page unbound — see deactivation reports of "squished
         // button that doesn't do anything".
         try {
-          new WordpressUlike(element);
-          element.setAttribute("data-ulike-initialized", "true");
+          new FlavorLike(element);
+          element.setAttribute("data-flavor-like-initialized", "true");
         } catch (err) {
           if (window.console && typeof window.console.error === "function") {
-            window.console.error("WP ULike: failed to initialize button", element, err);
+            window.console.error("Flavor Like: failed to initialize button", element, err);
           }
           // Mark as initialized so we don't retry on every mutation batch.
           if (element && element.setAttribute) {
-            element.setAttribute("data-ulike-initialized", "error");
+            element.setAttribute("data-flavor-like-initialized", "error");
           }
         }
       }
@@ -57,11 +57,11 @@
 
     const batch = arrayFrom(pendingElements);
     pendingElements.clear();
-    initUlike(batch);
+    initFlavorLike(batch);
   };
 
   const queueInit = (element) => {
-    if (!element || element.nodeType !== 1 || !element.matches(".wpulike")) {
+    if (!element || element.nodeType !== 1 || !element.matches(".flavorlike")) {
       return;
     }
 
@@ -89,7 +89,7 @@
     }
   };
 
-  const WordpressUlikeOnElementInserted = (containerSelector, elementSelector, callback) => {
+  const FlavorLikeOnElementInserted = (containerSelector, elementSelector, callback) => {
     const onMutationsObserved = (mutations) => {
       mutations.forEach((mutation) => {
         if (!mutation.addedNodes.length) {
@@ -121,8 +121,8 @@
     return observer;
   };
 
-  initUlike(document.querySelectorAll(".wpulike"));
+  initFlavorLike(document.querySelectorAll(".flavorlike"));
 
   // Observe body so custom load-more, AJAX, and page-builder injections keep working.
-  WordpressUlikeOnElementInserted("body", ".wpulike", queueInit);
+  FlavorLikeOnElementInserted("body", ".flavorlike", queueInit);
 })(window, document);

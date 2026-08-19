@@ -14,31 +14,31 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @return integer
  */
-function wp_ulike_get_number_of_new_likes() {
-    if( ! apply_filters( 'wp_ulike_display_admin_new_likes', true ) ){
+function flavor_like_get_number_of_new_likes() {
+    if( ! apply_filters( 'flavor_like_display_admin_new_likes', true ) ){
         return 0;
     }
 
-    $cache_key = WP_Ulike_Query_Cache::ADMIN_NEW_VOTES_KEY;
+    $cache_key = Flavor_Like_Query_Cache::ADMIN_NEW_VOTES_KEY;
     // Get new votes
-    $calculate_new_votes = wp_ulike_get_meta_data(
-		WP_Ulike_Query_Cache::STATS_ITEM_ID,
-		WP_Ulike_Query_Cache::STATS_META_GROUP,
+    $calculate_new_votes = flavor_like_get_meta_data(
+		Flavor_Like_Query_Cache::STATS_ITEM_ID,
+		Flavor_Like_Query_Cache::STATS_META_GROUP,
 		$cache_key,
 		true
 	);
 
     if( empty( $calculate_new_votes ) ){
         if( $calculate_new_votes === '' ){
-            WP_Ulike_Query_Cache::reset_admin_new_votes();
+            Flavor_Like_Query_Cache::reset_admin_new_votes();
         }
 
         return 0;
     }
 
     // Refresh likes
-	if( isset( $_GET["page"] ) && stripos( sanitize_text_field( wp_unslash( $_GET["page"] ) ), "wp-ulike-statistics" ) !== false && is_super_admin() ) {
-        WP_Ulike_Query_Cache::reset_admin_new_votes();
+	if( isset( $_GET["page"] ) && stripos( sanitize_text_field( wp_unslash( $_GET["page"] ) ), "flavor-like-statistics" ) !== false && is_super_admin() ) {
+        Flavor_Like_Query_Cache::reset_admin_new_votes();
 
         return 0;
     }
@@ -52,8 +52,8 @@ function wp_ulike_get_number_of_new_likes() {
  * @param integer $number
  * @return string
  */
-function wp_ulike_badge_count_format( $number ){
-	return ! empty( $number ) ? sprintf( ' <span class="update-plugins wp-ulike-notification-count-container count-%1$s"><span class="update-count wp-ulike-notification-count-value">%1$s</span></span>',
+function flavor_like_badge_count_format( $number ){
+	return ! empty( $number ) ? sprintf( ' <span class="update-plugins flavor-like-notification-count-container count-%1$s"><span class="update-count flavor-like-notification-count-value">%1$s</span></span>',
 		number_format_i18n( $number )
 	) : '';
 }
@@ -64,7 +64,7 @@ function wp_ulike_badge_count_format( $number ){
  * @param array $atts
  * @return string
  */
-function wp_ulike_widget_button_callback( $atts = array() ){
+function flavor_like_widget_button_callback( $atts = array() ){
 
     // Defining default attributes
     $default_atts = array(
@@ -89,8 +89,8 @@ function wp_ulike_widget_button_callback( $atts = array() ){
 	$extra_classes = isset( $parsed_args['extra_classes'] ) ? $parsed_args['extra_classes'] : '';
 
     // --------------------------------------------
-    $btn_css_classes = array( 'wp-ulike-btn' );
-    $btn_css_classes[] = 'wp-ulike-btn-' . $color_name;   // appearance
+    $btn_css_classes = array( 'flavor-like-btn' );
+    $btn_css_classes[] = 'flavor-like-btn-' . $color_name;   // appearance
 
     // add extra attributes to button element if defined
     $btn_other_attrs = '';
@@ -127,13 +127,13 @@ function wp_ulike_widget_button_callback( $atts = array() ){
     }
 
     // get escaped class attributes
-    $button_class_attr = wp_ulike_make_html_class_attribute( $btn_css_classes );
+    $button_class_attr = flavor_like_make_html_class_attribute( $btn_css_classes );
 
-    $label = empty( $label ) ? esc_html__( "Button", 'wp-ulike' ) : $label;
+    $label = empty( $label ) ? esc_html__( "Button", 'flavor-like' ) : $label;
 
-    $btn_content = '<span class="wp-ulike-text">'. wp_ulike_do_cleanup_shortcode( $label ) .'</span>';
+    $btn_content = '<span class="flavor-like-text">'. flavor_like_do_cleanup_shortcode( $label ) .'</span>';
     $btn_tag     = empty( $link ) ? 'button' : 'a';
-    $btn_rel     = wp_ulike_is_true ( $nofollow ) ? ' rel="nofollow"' : '';
+    $btn_rel     = flavor_like_is_true ( $nofollow ) ? ' rel="nofollow"' : '';
     $btn_href    = empty( $link ) ? '' : ' href="'. esc_url( $link ) .'" target="'. esc_attr( $target ) .'" ' . $btn_rel;
 
     $output   = '';
@@ -156,9 +156,9 @@ function wp_ulike_widget_button_callback( $atts = array() ){
  *
  * @return string                  HTML class attribute
  */
-function wp_ulike_make_html_class_attribute( $classes = '', $class = '' ){
+function flavor_like_make_html_class_attribute( $classes = '', $class = '' ){
 
-    if( ! $merged_classes = wp_ulike_merge_css_classes( $classes, $class ) ){
+    if( ! $merged_classes = flavor_like_merge_css_classes( $classes, $class ) ){
         return '';
     }
 
@@ -173,7 +173,7 @@ function wp_ulike_make_html_class_attribute( $classes = '', $class = '' ){
  *
  * @return                         Array of classes
  */
-function wp_ulike_merge_css_classes( $classes = array(), $class = '' ){
+function flavor_like_merge_css_classes( $classes = array(), $class = '' ){
 
     if( empty( $classes ) && empty( $class ) )
         return array();
@@ -194,13 +194,13 @@ function wp_ulike_merge_css_classes( $classes = array(), $class = '' ){
  * @param string $content
  * @return string
  */
-function wp_ulike_do_cleanup_shortcode( $content ) {
+function flavor_like_do_cleanup_shortcode( $content ) {
 
 	/* Parse nested shortcodes and add formatting. */
 	$content = trim( wpautop( do_shortcode( $content ) ) );
 
 	/* Remove any instances of '<p>' '</p>'. */
-	$content = wp_ulike_cleanup_content( $content );
+	$content = flavor_like_cleanup_content( $content );
 
 	return $content;
 }
@@ -211,7 +211,7 @@ function wp_ulike_do_cleanup_shortcode( $content ) {
  * @param string $content
  * @return string
  */
-function wp_ulike_cleanup_content( $content ) {
+function flavor_like_cleanup_content( $content ) {
 	/* Remove any instances of '<p>' '</p>'. */
 	return str_replace( array('<p>','</p>'), array('','') , $content );
 }
@@ -221,10 +221,10 @@ function wp_ulike_cleanup_content( $content ) {
  * @param array $data
  * @return array
  */
-function wp_ulike_convert_old_options_array( $data ){
+function flavor_like_convert_old_options_array( $data ){
 	$output = array();
 	foreach ($data as $key => $value) {
-		if( wp_ulike_is_true( $value ) ){
+		if( flavor_like_is_true( $value ) ){
 			$output[] = $key;
 		}
 	}
@@ -236,15 +236,15 @@ function wp_ulike_convert_old_options_array( $data ){
  *
  * @return bool
  */
-function wp_ulike_is_plugin_screen(){
+function flavor_like_is_plugin_screen(){
     $screen = get_current_screen();
 
 	if ( ! $screen ) {
 		return false;
 	}
 
-	if( strpos( $screen->base, WP_ULIKE_SLUG ) === false ){
-        if( defined( 'WP_ULIKE_PRO_DOMAIN' ) && in_array( $screen->base, array( 'post' ) ) ){
+	if( strpos( $screen->base, FLAVOR_LIKE_SLUG ) === false ){
+        if( defined( 'FLAVOR_LIKE_PRO_DOMAIN' ) && in_array( $screen->base, array( 'post' ) ) ){
             return true;
         }
         return false;
@@ -259,7 +259,7 @@ function wp_ulike_is_plugin_screen(){
  * @param array $args
  * @return void
  */
-function wp_ulike_get_notice_render( $args = array() ){
+function flavor_like_get_notice_render( $args = array() ){
     $defaults   = array(
         'id'             => NULL,
         'title'          => '',
@@ -274,7 +274,7 @@ function wp_ulike_get_notice_render( $args = array() ){
     $parsed_args = wp_parse_args( $args, $defaults );
 
     // Create notice instance
-    $notice_instance = new wp_ulike_notices($parsed_args);
+    $notice_instance = new flavor_like_notices($parsed_args);
 	$notice_instance->render();
 }
 
@@ -285,7 +285,7 @@ function wp_ulike_get_notice_render( $args = array() ){
  * @param string $input
  * @return string
  */
-function wp_ulike_minify_css( $input ) {
+function flavor_like_minify_css( $input ) {
     if( trim( $input ) === "" ){
         return $input;
     }
@@ -337,7 +337,7 @@ function wp_ulike_minify_css( $input ) {
  *
  * @return  array
  */
-function wp_ulike_sanitize_multiple_select( $value ) {
+function flavor_like_sanitize_multiple_select( $value ) {
     $multiple_selects = array(
         'auto_display_filter',
         'auto_display_filter_post_types',
@@ -352,14 +352,14 @@ function wp_ulike_sanitize_multiple_select( $value ) {
     return $value;
 }
 
-if ( ! function_exists( 'wp_ulike_get_site_stats_meta' ) ) {
+if ( ! function_exists( 'flavor_like_get_site_stats_meta' ) ) {
 	/**
 	 * Combined stats meta for the free React admin bootstrap API.
 	 *
 	 * @param array $content_types Active stats content types.
 	 * @return array
 	 */
-	function wp_ulike_get_site_stats_meta( $content_types = array() ) {
-		return WP_Ulike_Stats_Meta::get_site_stats_meta( $content_types );
+	function flavor_like_get_site_stats_meta( $content_types = array() ) {
+		return Flavor_Like_Stats_Meta::get_site_stats_meta( $content_types );
 	}
 }

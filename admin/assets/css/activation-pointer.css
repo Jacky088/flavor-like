@@ -1,8 +1,8 @@
 /**
- * Welcome pointer anchored to the WP ULike admin menu item.
+ * Welcome pointer anchored to the Flavor Like admin menu item.
  */
 
-.wp-ulike-activation-pointer {
+.flavor-like-activation-pointer {
 	position: fixed;
 	z-index: 100001;
 	width: min( 320px, calc( 100vw - 24px ) );
@@ -10,7 +10,7 @@
 	pointer-events: auto;
 }
 
-.wp-ulike-activation-pointer__panel {
+.flavor-like-activation-pointer__panel {
 	position: relative;
 	margin: 0;
 	padding: 16px 18px 14px;
@@ -21,7 +21,7 @@
 	overflow: auto;
 }
 
-.wp-ulike-activation-pointer::before {
+.flavor-like-activation-pointer::before {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -31,12 +31,12 @@
 	transform: translateY( -50% );
 }
 
-.wp-ulike-activation-pointer:not( .is-rtl )::before {
+.flavor-like-activation-pointer:not( .is-rtl )::before {
 	left: -16px;
 	border-right-color: #c3c4c7;
 }
 
-.wp-ulike-activation-pointer:not( .is-rtl )::after {
+.flavor-like-activation-pointer:not( .is-rtl )::after {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -48,12 +48,12 @@
 	transform: translateY( -50% );
 }
 
-.wp-ulike-activation-pointer.is-rtl::before {
+.flavor-like-activation-pointer.is-rtl::before {
 	right: -16px;
 	border-left-color: #c3c4c7;
 }
 
-.wp-ulike-activation-pointer.is-rtl::after {
+.flavor-like-activation-pointer.is-rtl::after {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -65,7 +65,7 @@
 	transform: translateY( -50% );
 }
 
-.wp-ulike-activation-pointer__close {
+.flavor-like-activation-pointer__close {
 	position: absolute;
 	top: 6px;
 	inset-inline-end: 8px;
@@ -78,7 +78,7 @@
 	cursor: pointer;
 }
 
-.wp-ulike-activation-pointer__title {
+.flavor-like-activation-pointer__title {
 	margin-block: 0 8px;
 	margin-inline: 0 28px;
 	padding: 0;
@@ -86,21 +86,21 @@
 	line-height: 1.4;
 }
 
-.wp-ulike-activation-pointer__lead,
-.wp-ulike-activation-pointer__links {
+.flavor-like-activation-pointer__lead,
+.flavor-like-activation-pointer__links {
 	margin: 0 0 10px;
 	font-size: 13px;
 	line-height: 1.5;
 	color: #1d2327;
 }
 
-.wp-ulike-activation-pointer__actions {
+.flavor-like-activation-pointer__actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 	margin: 0;
 }
 
-#wp-ulike-activation-pointer-template {
+#flavor-like-activation-pointer-template {
 	display: none;
 }

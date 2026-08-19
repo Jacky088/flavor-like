@@ -2,7 +2,7 @@
 /**
  * Top Content block server-side render.
  *
- * @package WP_ULike
+ * @package WP_Flavor Like
  */
 
 // If this file is called directly, abort.
@@ -17,4 +17,4 @@ $context = isset( $context ) && is_array( $context ) ? $context : array();
 $attributes    = isset( $context['attributes'] ) && is_array( $context['attributes'] ) ? $context['attributes'] : array();
 $wrapper_class = isset( $context['wrapperClass'] ) ? $context['wrapperClass'] : '';
 
-echo WP_Ulike_Top_Content_Renderer::render( $attributes, $wrapper_class ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo Flavor_Like_Top_Content_Renderer::render( $attributes, $wrapper_class ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

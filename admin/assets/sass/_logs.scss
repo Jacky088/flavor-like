@@ -3,17 +3,17 @@
  *  Logs Page
  */
 
- .wp_ulike_logs {
+ .flavor_like_logs {
     .button {
         line-height: 20px;
     }
     i{
         font-size: 1.9em;
 
-        &.wp-ulike-icons-thumb_up:before {
+        &.flavor-like-icons-thumb_up:before {
             color: #4caf50;
         }
-        &.wp-ulike-icons-thumb_down:before {
+        &.flavor-like-icons-thumb_down:before {
             color: #f44336;
         }
     }

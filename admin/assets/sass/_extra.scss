@@ -23,7 +23,7 @@
 
 
 // Admin menu icon — CSS mask inherits link color (default, hover, active).
-#adminmenu #toplevel_page_wp-ulike-settings .wp-menu-image {
+#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image {
   background: none !important;
 
   &::before {
@@ -39,7 +39,7 @@
 }
 
 // About Menu Link
-.wp-ulike-menu-icon {
+.flavor-like-menu-icon {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -52,7 +52,7 @@
 }
 
 // Go Pro submenu — Elementor-style layout, brand accent.
-#adminmenu #toplevel_page_wp-ulike-settings a[href*="page=wp-ulike-go-pro"] {
+#adminmenu #toplevel_page_flavor-like-settings a[href*="page=flavor-like-go-pro"] {
   font-weight: 600;
   background-color: #ff6d6f;
   color: #fff !important;
@@ -75,19 +75,19 @@
 // RTL Support
 [dir="rtl"] {
   // About Menu Link
-  .wp-ulike-menu-icon {
+  .flavor-like-menu-icon {
     .dashicons {
       margin-inline-start: 6px;
       margin-inline-end: 0;
     }
   }
 
-  #adminmenu #toplevel_page_wp-ulike-settings a[href*="page=wp-ulike-go-pro"] {
+  #adminmenu #toplevel_page_flavor-like-settings a[href*="page=flavor-like-go-pro"] {
     margin: 3px 10px 0;
   }
 }
 
- .wp-ulike-simple-table {
+ .flavor-like-simple-table {
    width: 100%;
    max-width: 100%;
    margin-bottom: 2rem;
@@ -168,27 +168,27 @@
      }
    }
 
-   .wp-ulike-table-icon {
+   .flavor-like-table-icon {
      width: 18px;
      height: 18px;
    }
  }
 
- .column-wp-ulike-thumbs-up,
- .column-wp-ulike-thumbs-down {
+ .column-flavor-like-thumbs-up,
+ .column-flavor-like-thumbs-down {
    width: 110px;
  }
 
- .wp-ulike-counter-box {
+ .flavor-like-counter-box {
    font-size: 1.3em;
    line-height: 1.3em;
    font-weight: 500;
  }
 
- .wp-ulike-btn-is-loading {
+ .flavor-like-btn-is-loading {
    position: relative;
 
-   .wp-ulike-text {
+   .flavor-like-text {
      visibility: hidden;
    }
 
@@ -208,7 +208,7 @@
    }
  }
 
- .wp-ulike-container {
+ .flavor-like-container {
   .tablenav {
     .tablenav-pages {
       color: #444;
@@ -261,9 +261,9 @@
 }
 
 // Help + storage upgrade: hide stacked admin notices above page content only.
-// Direct-child selector keeps in-page flash notices inside .wrap.wp-ulike-about / .wp-ulike-pulse-upgrade visible.
-body:has(.wp-ulike-about),
-body:has(.wp-ulike-pulse-upgrade) {
+// Direct-child selector keeps in-page flash notices inside .wrap.flavor-like-about / .flavor-like-pulse-upgrade visible.
+body:has(.flavor-like-about),
+body:has(.flavor-like-pulse-upgrade) {
   #wpbody-content {
     > .notice,
     > .updated,
@@ -271,7 +271,7 @@ body:has(.wp-ulike-pulse-upgrade) {
     > .warning,
     > .info,
     > .is-dismissible,
-    > .wp-ulike-notice {
+    > .flavor-like-notice {
       display: none !important;
     }
   }

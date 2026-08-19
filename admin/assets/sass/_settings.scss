@@ -2,12 +2,12 @@
  * Settings page + admin notices (WordPress 7–aligned, minimal)
  */
 
-.wp-ulike-settings-notice,
-.wp-ulike-notice-wrapper {
+.flavor-like-settings-notice,
+.flavor-like-notice-wrapper {
 	position: relative;
 	box-sizing: border-box;
 
-	&.wp-ulike-notice-control {
+	&.flavor-like-notice-control {
 		display: flex;
 		align-items: flex-start;
 		gap: 12px;
@@ -30,27 +30,27 @@
 		}
 	}
 
-	&.wp-ulike-notice-skin-success {
+	&.flavor-like-notice-skin-success {
 		border-inline-start-color: #00a32a;
 		background: #f6fffa;
 	}
 
-	&.wp-ulike-notice-skin-info {
+	&.flavor-like-notice-skin-info {
 		border-inline-start-color: #dba617;
 		background: #fffbf0;
 	}
 
-	&.wp-ulike-notice-skin-upgrade {
+	&.flavor-like-notice-skin-upgrade {
 		border-inline-start-color: #2271b1;
 		background: #f0f6fc;
 	}
 
-	&.wp-ulike-notice-skin-error {
+	&.flavor-like-notice-skin-error {
 		border-inline-start-color: #d63638;
 		background: #fcf0f1;
 	}
 
-	.wp-ulike-notice-image {
+	.flavor-like-notice-image {
 		flex: 0 0 auto;
 		margin: 2px 0 0;
 
@@ -69,12 +69,12 @@
 		}
 	}
 
-	.wp-ulike-notice-info {
+	.flavor-like-notice-info {
 		flex: 1 1 auto;
 		min-width: 0;
 	}
 
-	.wp-ulike-notice-title {
+	.flavor-like-notice-title {
 		margin: 0 0 4px;
 		padding: 0;
 		font-size: 14px;
@@ -86,7 +86,7 @@
 		-webkit-text-fill-color: currentColor;
 	}
 
-	.wp-ulike-notice-description {
+	.flavor-like-notice-description {
 		margin: 0 0 10px;
 		padding: 0;
 		font-size: 13px;
@@ -118,7 +118,7 @@
 		}
 	}
 
-	.wp-ulike-notice-submit {
+	.flavor-like-notice-submit {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
@@ -127,7 +127,7 @@
 		padding: 0;
 	}
 
-	.wp-ulike-close-notice {
+	.flavor-like-close-notice {
 		position: absolute;
 		top: 0;
 		inset-inline-end: 0;
@@ -136,7 +136,7 @@
 	}
 }
 
-.wp-ulike-settings-license-activation {
+.flavor-like-settings-license-activation {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;

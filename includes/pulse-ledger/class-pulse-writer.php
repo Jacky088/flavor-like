@@ -2,16 +2,16 @@
 /**
  * Pulse Ledger — vote write path.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Writer' ) ) {
 
-	final class WP_Ulike_Pulse_Writer {
+	final class Flavor_Like_Pulse_Writer {
 
 		/**
 		 * True while bulk migration import is running (suppresses hooks + cache bumps).
@@ -238,8 +238,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 				return 'skipped';
 			}
 
-		$legacy_status = isset( $legacy_row->status ) ? (string) $legacy_row->status : WP_Ulike_Pulse_Vote_Map::ACTION_LIKE;
-		$mapped        = WP_Ulike_Pulse_Vote_Map::legacy_to_row( $legacy_status );
+		$legacy_status = isset( $legacy_row->status ) ? (string) $legacy_row->status : Flavor_Like_Pulse_Vote_Map::ACTION_LIKE;
+		$mapped        = Flavor_Like_Pulse_Vote_Map::legacy_to_row( $legacy_status );
 
 		// Early Pro builds stored device as a `device_type` ENUM (D/M/T) before
 		// it was renamed to `device` (full UA-derived label). Fall back to it so
@@ -272,7 +272,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 		// Legacy date_time may be site-local while dual_since is UTC; clamping
 		// prevents those rows from also matching date_time >= dual_since and
 		// double-counting in merged reads.
-		$since = WP_Ulike_Pulse_Config::dual_since();
+		$since = Flavor_Like_Pulse_Config::dual_since();
 		if ( $since && isset( $payload['date_time'] ) && $payload['date_time'] >= $since ) {
 			$payload['date_time'] = gmdate( 'Y-m-d H:i:s', strtotime( $since . ' UTC' ) - 1 );
 		}
@@ -311,13 +311,13 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 	public static function delete( $item_id, $item_type, $user_id, $engagement_key = '', $fingerprint = '' ) {
 		global $wpdb;
 
-		$item_type = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
+		$item_type = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
 		$user_id   = (string) $user_id;
 
 		$where  = array(
 			'item_id'         => absint( $item_id ),
 			'item_type'       => $item_type,
-			'engagement_kind' => WP_Ulike_Pulse_Registry::KIND_VOTE,
+			'engagement_kind' => Flavor_Like_Pulse_Registry::KIND_VOTE,
 		);
 		$format = array( '%d', '%s', '%s' );
 
@@ -342,10 +342,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 
 		if ( $deleted ) {
 			do_action(
-				'wp_ulike_delete_vote_data',
+				'flavor_like_delete_vote_data',
 				absint( $item_id ),
 				$item_type,
-				wp_ulike_setting_type::get_instance( $item_type ),
+				flavor_like_setting_type::get_instance( $item_type ),
 				(int) $deleted
 			);
 		}
@@ -357,11 +357,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 	 * Delete classic vote rows for an item (keeps emoji/star intact).
 	 *
 	 * @param int    $item_id       Item ID.
-	 * @param string $setting_type  wp_ulike_setting_type slug.
+	 * @param string $setting_type  flavor_like_setting_type slug.
 	 * @return int Rows removed across pulse and legacy tables.
 	 */
 	public static function delete_item_votes( $item_id, $setting_type ) {
-		return self::delete_item_rows( $item_id, $setting_type, WP_Ulike_Pulse_Registry::KIND_VOTE );
+		return self::delete_item_rows( $item_id, $setting_type, Flavor_Like_Pulse_Registry::KIND_VOTE );
 	}
 
 	/**
@@ -388,9 +388,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 
 			$deleted   = 0;
 			$item_id   = absint( $item_id );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $setting_type );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $setting_type );
 
-			if ( WP_Ulike_Pulse_Schema::table_exists() ) {
+			if ( Flavor_Like_Pulse_Schema::table_exists() ) {
 				$where = array(
 					'item_id'   => $item_id,
 					'item_type' => $item_type,
@@ -405,8 +405,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 				$deleted += (int) $wpdb->delete( self::table(), $where, $format );
 			}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$column = esc_sql( $source['column'] );
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -432,21 +432,21 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 				return null;
 			}
 
-			$item_type = WP_Ulike_Pulse_Registry::normalize_item_type(
+			$item_type = Flavor_Like_Pulse_Registry::normalize_item_type(
 				isset( $payload['item_type'] ) ? $payload['item_type'] : 'post'
 			);
 
 			if ( isset( $payload['legacy_status'] ) ) {
-				$mapped = WP_Ulike_Pulse_Vote_Map::legacy_to_row( $payload['legacy_status'] );
+				$mapped = Flavor_Like_Pulse_Vote_Map::legacy_to_row( $payload['legacy_status'] );
 			} else {
 				$mapped = array(
-					'engagement_key' => isset( $payload['engagement_key'] ) ? sanitize_key( $payload['engagement_key'] ) : WP_Ulike_Pulse_Vote_Map::KEY_LIKE,
-					'status'         => isset( $payload['status'] ) ? sanitize_key( $payload['status'] ) : WP_Ulike_Pulse_Vote_Map::ROW_ACTIVE,
+					'engagement_key' => isset( $payload['engagement_key'] ) ? sanitize_key( $payload['engagement_key'] ) : Flavor_Like_Pulse_Vote_Map::KEY_LIKE,
+					'status'         => isset( $payload['status'] ) ? sanitize_key( $payload['status'] ) : Flavor_Like_Pulse_Vote_Map::ROW_ACTIVE,
 				);
 			}
 
 			$user_id = isset( $payload['user_id'] ) ? (string) $payload['user_id'] : '0';
-			$kind    = isset( $payload['engagement_kind'] ) ? sanitize_key( $payload['engagement_kind'] ) : WP_Ulike_Pulse_Registry::KIND_VOTE;
+			$kind    = isset( $payload['engagement_kind'] ) ? sanitize_key( $payload['engagement_kind'] ) : Flavor_Like_Pulse_Registry::KIND_VOTE;
 
 		// Distinct rows get a kind-scoped dedupe token (one row per
 		// user+item+kind). Append (multi-vote) rows get an explicit NULL —
@@ -456,7 +456,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 		// the insert does not depend on the column DEFAULT being NULL.
 	$dedupe = null;
 	if ( $distinct || ! empty( $payload['is_distinct'] ) ) {
-		$dedupe = WP_Ulike_Pulse_Schema::dedupe_token(
+		$dedupe = Flavor_Like_Pulse_Schema::dedupe_token(
 			$item_id,
 			$item_type,
 			$user_id,
@@ -490,7 +490,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 			'data'          => $data,
 			'format'        => $format,
 			'dedupe_token'  => $dedupe,
-			'legacy_status' => isset( $payload['legacy_status'] ) ? $payload['legacy_status'] : WP_Ulike_Pulse_Vote_Map::row_to_legacy( $mapped['engagement_key'], $mapped['status'] ),
+			'legacy_status' => isset( $payload['legacy_status'] ) ? $payload['legacy_status'] : Flavor_Like_Pulse_Vote_Map::row_to_legacy( $mapped['engagement_key'], $mapped['status'] ),
 		);
 	}
 
@@ -557,7 +557,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 		 * @return string
 		 */
 		private static function table() {
-			return WP_Ulike_Pulse_Schema::table();
+			return Flavor_Like_Pulse_Schema::table();
 		}
 
 		/**
@@ -569,15 +569,15 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 		private static function fire_inserted( $id, array $payload, $legacy_status ) {
 			$kind = isset( $payload['engagement_kind'] )
 				? sanitize_key( $payload['engagement_kind'] )
-				: WP_Ulike_Pulse_Registry::KIND_VOTE;
+				: Flavor_Like_Pulse_Registry::KIND_VOTE;
 
 			// Non-vote rows are written for Pro; Pro owns engagement_* hooks.
-			if ( WP_Ulike_Pulse_Registry::KIND_VOTE !== $kind ) {
+			if ( Flavor_Like_Pulse_Registry::KIND_VOTE !== $kind ) {
 				return;
 			}
 
 			do_action(
-				'wp_ulike_data_inserted',
+				'flavor_like_data_inserted',
 				array(
 					'id'             => $id,
 					'item_id'        => $payload['item_id'],
@@ -601,15 +601,15 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Writer' ) ) {
 		private static function fire_updated( $id, array $payload, $legacy_status ) {
 			$kind = isset( $payload['engagement_kind'] )
 				? sanitize_key( $payload['engagement_kind'] )
-				: WP_Ulike_Pulse_Registry::KIND_VOTE;
+				: Flavor_Like_Pulse_Registry::KIND_VOTE;
 
 			// Non-vote rows are written for Pro; Pro owns engagement_* hooks.
-			if ( WP_Ulike_Pulse_Registry::KIND_VOTE !== $kind ) {
+			if ( Flavor_Like_Pulse_Registry::KIND_VOTE !== $kind ) {
 				return;
 			}
 
 			do_action(
-				'wp_ulike_data_updated',
+				'flavor_like_data_updated',
 				array(
 					'id'             => $id,
 					'item_id'        => $payload['item_id'],

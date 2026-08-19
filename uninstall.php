@@ -10,10 +10,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 /**
  * Uninstall class
  *
- * @class wp_ulike_uninstall
+ * @class flavor_like_uninstall
  * @since 1.0.0
  */
-class wp_ulike_uninstall {
+class flavor_like_uninstall {
 
 	/**
 	 * Constructor
@@ -65,11 +65,11 @@ class wp_ulike_uninstall {
 	 */
 	public function uninstall_site() {
 		/*
-		* Only remove ALL data if WP_ULIKE_REMOVE_ALL_DATA constant is set to true in user's
+		* Only remove ALL data if FLAVOR_LIKE_REMOVE_ALL_DATA constant is set to true in user's
 		* wp-config.php. This is to prevent data loss when deleting the plugin from the backend
 		* and to ensure only the site owner can perform this action.
 		*/
-		if ( defined( 'WP_ULIKE_REMOVE_ALL_DATA' ) && true === WP_ULIKE_REMOVE_ALL_DATA ) {
+		if ( defined( 'FLAVOR_LIKE_REMOVE_ALL_DATA' ) && true === FLAVOR_LIKE_REMOVE_ALL_DATA ) {
 			$this->clear_scheduled_tasks();
 			$this->drop_tables();
 			$this->delete_transients();
@@ -89,7 +89,7 @@ class wp_ulike_uninstall {
 	 * @return void
 	 */
 	public function clear_scheduled_tasks() {
-		wp_clear_scheduled_hook( 'wp_ulike_pulse_sync_batch' );
+		wp_clear_scheduled_hook( 'flavor_like_pulse_sync_batch' );
 	}
 
 	/**
@@ -104,12 +104,12 @@ class wp_ulike_uninstall {
 
 		$wpdb->query(
 			"DROP TABLE IF EXISTS
-			{$wpdb->prefix}ulike,
-			{$wpdb->prefix}ulike_comments,
-			{$wpdb->prefix}ulike_activities,
-			{$wpdb->prefix}ulike_forums,
-			{$wpdb->prefix}ulike_meta,
-			{$wpdb->prefix}ulike_pulse"
+			{$wpdb->prefix}flavor_like,
+			{$wpdb->prefix}flavor_like_comments,
+			{$wpdb->prefix}flavor_like_activities,
+			{$wpdb->prefix}flavor_like_forums,
+			{$wpdb->prefix}flavor_like_meta,
+			{$wpdb->prefix}flavor_like_pulse"
 		);
 
 	}
@@ -126,10 +126,10 @@ class wp_ulike_uninstall {
 
 		// Delete all plugin metadata.
 		$options_table = $wpdb->options;
-		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_wp-ulike%' ) );
-		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_timeout_wp-ulike%' ) );
-		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_wp_ulike%' ) );
-		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_timeout_wp_ulike%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_flavor-like%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_timeout_flavor-like%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_flavor_like%' ) );
+		$wpdb->query( $wpdb->prepare( "DELETE from `{$options_table}` WHERE option_name LIKE %s", '_transient_timeout_flavor_like%' ) );
 	}
 
 	/**
@@ -142,17 +142,17 @@ class wp_ulike_uninstall {
 
 		global $wpdb;
 
-		delete_option( 'widget_wp_ulike' );
+		delete_option( 'widget_flavor_like' );
 
-		// Remove wp_ulike_* options (free, pulse, legacy, unknown), but keep Pro's
+		// Remove flavor_like_* options (free, pulse, legacy, unknown), but keep Pro's
 		// license options intact -- consistent with delete_user_meta() below, so
 		// uninstalling Free doesn't silently de-license a co-installed Pro.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query(
 			$wpdb->prepare(
 				"DELETE FROM `{$wpdb->options}` WHERE option_name LIKE %s AND option_name NOT LIKE %s",
-				$wpdb->esc_like( 'wp_ulike_' ) . '%',
-				$wpdb->esc_like( 'wp_ulike_pro_' ) . '%'
+				$wpdb->esc_like( 'flavor_like_' ) . '%',
+				$wpdb->esc_like( 'flavor_like_pro_' ) . '%'
 			)
 		);
 	}
@@ -180,7 +180,7 @@ class wp_ulike_uninstall {
 
 		$wp_content = $wp_filesystem->wp_content_dir();
 
-		$wp_filesystem->delete( $wp_content . '/uploads/wp-ulike', true );
+		$wp_filesystem->delete( $wp_content . '/uploads/flavor-like', true );
 	}
 
 	/**
@@ -198,8 +198,8 @@ class wp_ulike_uninstall {
 		$wpdb->query(
 			$wpdb->prepare(
 				"DELETE FROM `{$wpdb->usermeta}` WHERE meta_key LIKE %s AND meta_key NOT LIKE %s",
-				$wpdb->esc_like( 'wp_ulike_' ) . '%',
-				$wpdb->esc_like( 'wp_ulike_pro_' ) . '%'
+				$wpdb->esc_like( 'flavor_like_' ) . '%',
+				$wpdb->esc_like( 'flavor_like_pro_' ) . '%'
 			)
 		);
 	}
@@ -240,7 +240,7 @@ class wp_ulike_uninstall {
 	 * Delete stale vote lock files from the system temp directory.
 	 *
 	 * Vote mutexes now use MySQL GET_LOCK (no files are created). This only
-	 * cleans up wp-ulike-{type}-{id}.lock leftovers from plugin versions
+	 * cleans up flavor-like-{type}-{id}.lock leftovers from plugin versions
 	 * that used file locks.
 	 *
 	 * On single-site installs the temp dir is site-specific enough to glob safely.
@@ -256,7 +256,7 @@ class wp_ulike_uninstall {
 			return;
 		}
 
-		$pattern = trailingslashit( get_temp_dir() ) . 'wp-ulike-*.lock';
+		$pattern = trailingslashit( get_temp_dir() ) . 'flavor-like-*.lock';
 		$files   = glob( $pattern );
 
 		if ( ! is_array( $files ) ) {
@@ -271,4 +271,4 @@ class wp_ulike_uninstall {
 	}
 }
 
-new wp_ulike_uninstall();
+new flavor_like_uninstall();

@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 Add-Type -AssemblyName System.IO.Compression
 
-$sourceDir = "C:\Users\littl\Desktop\wp-ulike-master"
+$sourceDir = "C:\Users\littl\Desktop\flavor-like-master"
 $zipPath = "C:\Users\littl\Desktop\flavor-like.zip"
 $prefix = "flavor-like"
 

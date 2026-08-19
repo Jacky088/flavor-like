@@ -1,11 +1,11 @@
 /**
- * WP ULike admin notice interactions (vanilla JS).
+ * Flavor Like admin notice interactions (vanilla JS).
  */
 ( function () {
 	'use strict';
 
 	function getNoticeWrapper( element ) {
-		return element.closest( '.wp-ulike-notice-wrapper' );
+		return element.closest( '.flavor-like-notice-wrapper' );
 	}
 
 	function hideNoticeWrapper( wrapper ) {
@@ -37,7 +37,7 @@
 	}
 
 	document.addEventListener( 'click', function ( event ) {
-		var ctaButton = event.target.closest( '.wp-ulike-notice-cta-btn' );
+		var ctaButton = event.target.closest( '.flavor-like-notice-cta-btn' );
 
 		if ( ctaButton ) {
 			var ajaxAction = ctaButton.getAttribute( 'data-ajax-action' );
@@ -50,7 +50,7 @@
 
 			event.preventDefault();
 
-			ctaButton.classList.add( 'wp-ulike-btn-is-loading' );
+			ctaButton.classList.add( 'flavor-like-btn-is-loading' );
 
 			postNoticeRequest( {
 				action: ajaxAction,
@@ -58,7 +58,7 @@
 				id: noticeId,
 			} )
 				.then( function ( response ) {
-					ctaButton.classList.remove( 'wp-ulike-btn-is-loading' );
+					ctaButton.classList.remove( 'flavor-like-btn-is-loading' );
 					hideNoticeWrapper( getNoticeWrapper( ctaButton ) );
 
 					if ( response && response.success ) {
@@ -66,13 +66,13 @@
 					}
 				} )
 				.catch( function () {
-					ctaButton.classList.remove( 'wp-ulike-btn-is-loading' );
+					ctaButton.classList.remove( 'flavor-like-btn-is-loading' );
 				} );
 
 			return;
 		}
 
-		var skipButton = event.target.closest( '.wp-ulike-skip-notice' );
+		var skipButton = event.target.closest( '.flavor-like-skip-notice' );
 
 		if ( ! skipButton ) {
 			return;
@@ -92,7 +92,7 @@
 		}
 
 		postNoticeRequest( {
-			action: 'wp_ulike_dismissed_notice',
+			action: 'flavor_like_dismissed_notice',
 			id: dismissId,
 			nonce: dismissNonce,
 			expiration: expiration || '',

@@ -1,7 +1,7 @@
 (function ($) {
 	'use strict';
 
-	if (typeof wpUlikePulse === 'undefined') {
+	if (typeof flavorLikePulse === 'undefined') {
 		return;
 	}
 
@@ -9,26 +9,26 @@
 	var browserActive = false;
 
 	function post(action, extra) {
-		return $.post(wpUlikePulse.ajaxUrl, $.extend({
-			action: 'wp_ulike_pulse_sync_action',
-			nonce: wpUlikePulse.nonce,
+		return $.post(flavorLikePulse.ajaxUrl, $.extend({
+			action: 'flavor_like_pulse_sync_action',
+			nonce: flavorLikePulse.nonce,
 			pulse_action: action
 		}, extra || {}));
 	}
 
 	function fetchStatus() {
-		return $.post(wpUlikePulse.ajaxUrl, {
-			action: 'wp_ulike_pulse_sync_status',
-			nonce: wpUlikePulse.nonce
+		return $.post(flavorLikePulse.ajaxUrl, {
+			action: 'flavor_like_pulse_sync_status',
+			nonce: flavorLikePulse.nonce
 		});
 	}
 
 	function log(msg) {
-		$('#wp-ulike-pulse-log').text(msg || '');
+		$('#flavor-like-pulse-log').text(msg || '');
 	}
 
 	function redirectAfterAction(res) {
-		var url = (res && res.data && res.data.redirect) ? res.data.redirect : wpUlikePulse.redirectUrl;
+		var url = (res && res.data && res.data.redirect) ? res.data.redirect : flavorLikePulse.redirectUrl;
 		if (url) {
 			window.location.href = url;
 			return;
@@ -44,7 +44,7 @@
 		var imported = parseInt(progress.total_imported, 10) || 0;
 		var skipped = parseInt(progress.total_skipped, 10) || 0;
 		var percent = parseFloat(progress.percent_estimate);
-		var strings = wpUlikePulse.strings || {};
+		var strings = flavorLikePulse.strings || {};
 		var text;
 
 		if (complete) {
@@ -94,18 +94,18 @@
 			? { text: data.progress_label, percent: complete ? 100 : (parseFloat(progress.percent_estimate) || 0) }
 			: formatProgressText(progress, complete);
 
-		$('#wp-ulike-pulse-sync-status').text(statusLabel);
-		$('#wp-ulike-pulse-progress-text').text(display.text);
-		$('#wp-ulike-pulse-progress-bar').css('width', Math.min(100, display.percent) + '%');
+		$('#flavor-like-pulse-sync-status').text(statusLabel);
+		$('#flavor-like-pulse-progress-text').text(display.text);
+		$('#flavor-like-pulse-progress-bar').css('width', Math.min(100, display.percent) + '%');
 
-		$('#wp-ulike-pulse-start').prop('disabled', running || complete);
-		$('#wp-ulike-pulse-pause').prop('disabled', !running);
+		$('#flavor-like-pulse-start').prop('disabled', running || complete);
+		$('#flavor-like-pulse-pause').prop('disabled', !running);
 
 		if (complete && !data.is_pulse) {
-			$('#wp-ulike-pulse-start').hide();
-			$('#wp-ulike-pulse-pause').hide();
-			$('#wp-ulike-pulse-enable').prop('disabled', false).addClass('button-primary');
-			$('#wp-ulike-pulse-next-step').show();
+			$('#flavor-like-pulse-start').hide();
+			$('#flavor-like-pulse-pause').hide();
+			$('#flavor-like-pulse-enable').prop('disabled', false).addClass('button-primary');
+			$('#flavor-like-pulse-next-step').show();
 			browserActive = false;
 			stopPolling();
 		}
@@ -117,7 +117,7 @@
 				updateUi(res.data);
 
 				if (syncComplete(res.data) && !res.data.is_pulse) {
-					log(wpUlikePulse.strings.syncComplete);
+					log(flavorLikePulse.strings.syncComplete);
 				}
 			}
 		});
@@ -156,7 +156,7 @@
 
 			if (res.data.done) {
 				browserActive = false;
-				log(wpUlikePulse.strings.syncComplete);
+				log(flavorLikePulse.strings.syncComplete);
 				pollStatus();
 				return;
 			}
@@ -166,10 +166,10 @@
 	}
 
 	function showActionError(msg) {
-		log(msg || wpUlikePulse.strings.actionFailed || 'Request failed.');
+		log(msg || flavorLikePulse.strings.actionFailed || 'Request failed.');
 	}
 
-	$('#wp-ulike-pulse-start').on('click', function () {
+	$('#flavor-like-pulse-start').on('click', function () {
 		post('start').done(function (res) {
 			if (!res || !res.success) {
 				showActionError();
@@ -177,9 +177,9 @@
 			}
 
 			browserActive = true;
-			log(wpUlikePulse.strings.started);
-			$('#wp-ulike-pulse-start').prop('disabled', true);
-			$('#wp-ulike-pulse-pause').prop('disabled', false).show();
+			log(flavorLikePulse.strings.started);
+			$('#flavor-like-pulse-start').prop('disabled', true);
+			$('#flavor-like-pulse-pause').prop('disabled', false).show();
 			startPolling();
 			runBatch();
 		}).fail(function () {
@@ -187,7 +187,7 @@
 		});
 	});
 
-	$('#wp-ulike-pulse-pause').on('click', function () {
+	$('#flavor-like-pulse-pause').on('click', function () {
 		browserActive = false;
 		post('pause').done(function (res) {
 			if (!res || !res.success) {
@@ -203,56 +203,56 @@
 		});
 	});
 
-	$('#wp-ulike-pulse-enable').on('click', function () {
-		if (!window.confirm(wpUlikePulse.confirmEnable)) {
+	$('#flavor-like-pulse-enable').on('click', function () {
+		if (!window.confirm(flavorLikePulse.confirmEnable)) {
 			return;
 		}
 		post('enable').done(function (res) {
 			if (!res || !res.success) {
 				var reason = res && res.data ? res.data.reason : '';
 				if (reason === 'verify_failed') {
-					log(wpUlikePulse.strings.enableVerifyFailed || wpUlikePulse.strings.enableFailed);
+					log(flavorLikePulse.strings.enableVerifyFailed || flavorLikePulse.strings.enableFailed);
 				} else if (reason === 'sync_incomplete') {
-					log(wpUlikePulse.strings.enableSyncIncomplete || wpUlikePulse.strings.enableFailed);
+					log(flavorLikePulse.strings.enableSyncIncomplete || flavorLikePulse.strings.enableFailed);
 				} else {
-					log(wpUlikePulse.strings.enableFailed);
+					log(flavorLikePulse.strings.enableFailed);
 				}
 				return;
 			}
 			window.location.reload();
 		}).fail(function () {
-			log(wpUlikePulse.strings.enableFailed);
+			log(flavorLikePulse.strings.enableFailed);
 		});
 	});
 
-	$('#wp-ulike-pulse-dismiss').on('click', function () {
+	$('#flavor-like-pulse-dismiss').on('click', function () {
 		post('dismiss').done(function (res) {
-			log(wpUlikePulse.strings.dismissed);
+			log(flavorLikePulse.strings.dismissed);
 			redirectAfterAction(res);
 		}).fail(function () {
 			showActionError();
 		});
 	});
 
-	$('#wp-ulike-pulse-drop-legacy').on('click', function () {
-		if (!window.confirm(wpUlikePulse.confirmDrop)) {
+	$('#flavor-like-pulse-drop-legacy').on('click', function () {
+		if (!window.confirm(flavorLikePulse.confirmDrop)) {
 			return;
 		}
 		post('drop_legacy').done(function (res) {
 			if (!res || !res.success) {
-				log(wpUlikePulse.strings.dropFailed);
+				log(flavorLikePulse.strings.dropFailed);
 				return;
 			}
-			log(wpUlikePulse.strings.dropped);
+			log(flavorLikePulse.strings.dropped);
 			redirectAfterAction(res);
 		}).fail(function () {
-			log(wpUlikePulse.strings.dropFailed);
+			log(flavorLikePulse.strings.dropFailed);
 		});
 	});
 
-	if (!wpUlikePulse.isPulse && wpUlikePulse.syncComplete) {
-		log(wpUlikePulse.strings.syncComplete);
-	} else if (wpUlikePulse.isRunning) {
+	if (!flavorLikePulse.isPulse && flavorLikePulse.syncComplete) {
+		log(flavorLikePulse.strings.syncComplete);
+	} else if (flavorLikePulse.isRunning) {
 		browserActive = true;
 		startPolling();
 		runBatch();

@@ -10,41 +10,41 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Add WP ULike CopyRight in footer
+ * Add Flavor Like CopyRight in footer
  *
  * @author       	Alimir
  * @param           string $text
  * @since           2.0
  * @return			string
  */
-function wp_ulike_copyright( $text ) {
-	if ( ! wp_ulike_is_plugin_screen() ) {
+function flavor_like_copyright( $text ) {
+	if ( ! flavor_like_is_plugin_screen() ) {
 		return $text;
 	}
 
 	$url = add_query_arg(
 		array(
 			'utm_source'   => 'footer-link',
-			'utm_campaign' => 'wp-ulike',
+			'utm_campaign' => 'flavor-like',
 			'utm_medium'   => 'wp-dash',
 		),
-		WP_ULIKE_PLUGIN_URI
+		FLAVOR_LIKE_PLUGIN_URI
 	);
 
 	$link = sprintf(
 		'<a href="%1$s" title="%2$s" target="_blank" rel="noopener noreferrer">%3$s</a>',
 		esc_url( $url ),
-		esc_attr( WP_ULIKE_NAME ),
-		esc_html( WP_ULIKE_NAME )
+		esc_attr( FLAVOR_LIKE_NAME ),
+		esc_html( FLAVOR_LIKE_NAME )
 	);
 
 	return sprintf(
 		'<span id="footer-thankyou">%1$s %2$s</span>',
-		esc_html__( 'Proudly Powered By', 'wp-ulike' ),
+		esc_html__( 'Proudly Powered By', 'flavor-like' ),
 		$link
 	);
 }
-add_filter( 'admin_footer_text', 'wp_ulike_copyright' );
+add_filter( 'admin_footer_text', 'flavor_like_copyright' );
 
 
  /**
@@ -53,24 +53,24 @@ add_filter( 'admin_footer_text', 'wp_ulike_copyright' );
   * @param string $avatar Image tag for the user's avatar.
   * @return string $avatar
   */
-function wp_ulike_remove_photo_class($avatar) {
+function flavor_like_remove_photo_class($avatar) {
 	return str_replace(' photo', ' gravatar', $avatar);
 }
-add_filter('get_avatar', 'wp_ulike_remove_photo_class');
+add_filter('get_avatar', 'flavor_like_remove_photo_class');
 
 /**
  * On user logged out
  *
  * @return void
  */
-function wp_ulike_on_logout_hook() {
+function flavor_like_on_logout_hook() {
 	if ( ! is_super_admin() ) {
 		return;
 	}
 	// Refresh new votes
-	WP_Ulike_Query_Cache::reset_admin_new_votes();
+	Flavor_Like_Query_Cache::reset_admin_new_votes();
 }
-add_action('wp_logout', 'wp_ulike_on_logout_hook');
+add_action('wp_logout', 'flavor_like_on_logout_hook');
 
 /**
  *  Undocumented function
@@ -79,13 +79,13 @@ add_action('wp_logout', 'wp_ulike_on_logout_hook');
  * @param integer $count
  * @return integer $count
  */
-function wp_ulike_update_menu_badge_count( $count ) {
-	if( 0 !== ( $count_new_likes = wp_ulike_get_number_of_new_likes() ) ){
+function flavor_like_update_menu_badge_count( $count ) {
+	if( 0 !== ( $count_new_likes = flavor_like_get_number_of_new_likes() ) ){
 		$count += $count_new_likes;
 	}
 	return $count;
 }
-add_filter( 'wp_ulike_menu_badge_count', 'wp_ulike_update_menu_badge_count' );
+add_filter( 'flavor_like_menu_badge_count', 'flavor_like_update_menu_badge_count' );
 
 
 /**
@@ -96,20 +96,20 @@ add_filter( 'wp_ulike_menu_badge_count', 'wp_ulike_update_menu_badge_count' );
  * @param string $menu_slug
  * @return string $title
  */
-function wp_ulike_update_admin_sub_menu_title( $title, $menu_slug ) {
-	if( ( 0 !== ( $count_new_likes = wp_ulike_get_number_of_new_likes() ) ) && $menu_slug === 'wp-ulike-statistics' ){
-		$title .=  wp_ulike_badge_count_format( $count_new_likes );
+function flavor_like_update_admin_sub_menu_title( $title, $menu_slug ) {
+	if( ( 0 !== ( $count_new_likes = flavor_like_get_number_of_new_likes() ) ) && $menu_slug === 'flavor-like-statistics' ){
+		$title .=  flavor_like_badge_count_format( $count_new_likes );
 	}
 	return $title;
 }
-add_filter( 'wp_ulike_admin_sub_menu_title', 'wp_ulike_update_admin_sub_menu_title', 10, 2 );
+add_filter( 'flavor_like_admin_sub_menu_title', 'flavor_like_update_admin_sub_menu_title', 10, 2 );
 
 /**
  * Admin notice controller
  *
  * @return void
  */
-function wp_ulike_notice_manager(){
+function flavor_like_notice_manager(){
 
 	// Display notices only for admin users
 	if( !current_user_can( 'manage_options' ) ){
@@ -119,35 +119,35 @@ function wp_ulike_notice_manager(){
 	$notice_list = [];
 
 	// Show review notice once the site has meaningful engagement (likes only).
-	if ( ! wp_ulike_get_transient( 'wp-ulike-notice-wp_ulike_leave_a_review' ) ) {
-		$count_logs = wp_ulike_count_all_logs();
+	if ( ! flavor_like_get_transient( 'flavor-like-notice-flavor_like_leave_a_review' ) ) {
+		$count_logs = flavor_like_count_all_logs();
 
 		if ( $count_logs >= 25 ) {
-			$notice_list['wp_ulike_leave_a_review'] = new wp_ulike_notices(
+			$notice_list['flavor_like_leave_a_review'] = new flavor_like_notices(
 				array(
-					'id'          => 'wp_ulike_leave_a_review',
-					'title'       => esc_html__( 'Congrats!', 'wp-ulike' ),
+					'id'          => 'flavor_like_leave_a_review',
+					'title'       => esc_html__( 'Congrats!', 'flavor-like' ),
 					'description' => sprintf(
 						/* translators: %s: total like count */
-						esc_html__( 'You\'ve logged %s likes with WP ULike so far. Nice work! If the plugin\'s been good to you, we\'d love a 5-star review on WordPress.org. It helps us keep improving and helps others discover WP ULike too.', 'wp-ulike' ),
+						esc_html__( 'You\'ve logged %s likes with Flavor Like so far. Nice work! If the plugin\'s been good to you, we\'d love a 5-star review on WordPress.org. It helps us keep improving and helps others discover Flavor Like too.', 'flavor-like' ),
 						'<strong>' . number_format_i18n( $count_logs ) . '</strong>'
 					),
 					'skin'        => 'default',
 					'has_close'   => true,
 					'buttons'     => array(
 						array(
-							'label'      => esc_html__( 'Happy to help', 'wp-ulike' ),
-							'link'       => 'https://wordpress.org/support/plugin/wp-ulike/reviews/#new-post',
+							'label'      => esc_html__( 'Happy to help', 'flavor-like' ),
+							'link'       => 'https://wordpress.org/support/plugin/flavor-like/reviews/#new-post',
 							'color_name' => 'default',
 						),
 						array(
-							'label'      => esc_html__( 'Maybe later', 'wp-ulike' ),
+							'label'      => esc_html__( 'Maybe later', 'flavor-like' ),
 							'type'       => 'skip',
 							'color_name' => 'default',
 							'expiration' => WEEK_IN_SECONDS * 2,
 						),
 						array(
-							'label'      => esc_html__( 'Don\'t ask again', 'wp-ulike' ),
+							'label'      => esc_html__( 'Don\'t ask again', 'flavor-like' ),
 							'type'       => 'skip',
 							'color_name' => 'default',
 							'expiration' => YEAR_IN_SECONDS * 10,
@@ -159,32 +159,32 @@ function wp_ulike_notice_manager(){
 	}
 
 
-    $notice_list = apply_filters( 'wp_ulike_admin_notices_instances', $notice_list );
+    $notice_list = apply_filters( 'flavor_like_admin_notices_instances', $notice_list );
 
     foreach ( $notice_list as $notice ) {
-        if( $notice instanceof wp_ulike_notices ){
+        if( $notice instanceof flavor_like_notices ){
             $notice->render();
         }
     }
 }
-add_action( 'admin_notices', 'wp_ulike_notice_manager' );
+add_action( 'admin_notices', 'flavor_like_notice_manager' );
 
 /**
  * Disable admin notices
  * @param array $notice_list
  * @return array|null
  */
-function wp_ulike_hide_admin_notifications( $notice_list ){
+function flavor_like_hide_admin_notifications( $notice_list ){
 	$screen = get_current_screen();
 
 	if ( ! $screen ) {
 		return $notice_list;
 	}
 
-	$hide_admin_notice = wp_ulike_get_option( 'disable_admin_notice', false );
-	return wp_ulike_is_true( $hide_admin_notice ) && strpos( $screen->base, WP_ULIKE_SLUG ) === false ? array() : $notice_list;
+	$hide_admin_notice = flavor_like_get_option( 'disable_admin_notice', false );
+	return flavor_like_is_true( $hide_admin_notice ) && strpos( $screen->base, FLAVOR_LIKE_SLUG ) === false ? array() : $notice_list;
 }
-add_filter( 'wp_ulike_admin_notices_instances', 'wp_ulike_hide_admin_notifications', 20, 1 );
+add_filter( 'flavor_like_admin_notices_instances', 'flavor_like_hide_admin_notifications', 20, 1 );
 
 
 /**
@@ -195,15 +195,15 @@ add_filter( 'wp_ulike_admin_notices_instances', 'wp_ulike_hide_admin_notificatio
  *
  * @return  void
  */
-function wp_ulike_manage_posts_custom_column( $column, $post_id ) {
-    if ( $column === 'wp-ulike-thumbs-up' ){
-		$is_distinct = wp_ulike_setting_repo::isDistinct('post');
-		$post_id     = wp_ulike_get_the_id( $post_id );
-        echo sprintf( '<span class="wp-ulike-counter-box">%d</span>',  wp_ulike_get_counter_value( $post_id, 'post', 'like', $is_distinct ) );
+function flavor_like_manage_posts_custom_column( $column, $post_id ) {
+    if ( $column === 'flavor-like-thumbs-up' ){
+		$is_distinct = flavor_like_setting_repo::isDistinct('post');
+		$post_id     = flavor_like_get_the_id( $post_id );
+        echo sprintf( '<span class="flavor-like-counter-box">%d</span>',  flavor_like_get_counter_value( $post_id, 'post', 'like', $is_distinct ) );
     }
 }
-add_action( 'manage_posts_custom_column' , 'wp_ulike_manage_posts_custom_column', 10, 2 );
-add_action( 'manage_pages_custom_column' , 'wp_ulike_manage_posts_custom_column', 10, 2 );
+add_action( 'manage_posts_custom_column' , 'flavor_like_manage_posts_custom_column', 10, 2 );
+add_action( 'manage_pages_custom_column' , 'flavor_like_manage_posts_custom_column', 10, 2 );
 
 /**
  * Add custom column to post list
@@ -212,19 +212,19 @@ add_action( 'manage_pages_custom_column' , 'wp_ulike_manage_posts_custom_column'
  *
  * @return  array
  */
-function wp_ulike_manage_posts_columns( $columns ) {
+function flavor_like_manage_posts_columns( $columns ) {
 	// Get settings list
-	$post_types = wp_ulike_get_option( 'enable_admin_posts_columns', array() );
+	$post_types = flavor_like_get_option( 'enable_admin_posts_columns', array() );
 	// Get current post type
-	$current_post_type = isset( $_GET['post_type'] ) && sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) === 'page' ? 'page' : get_post_type( wp_ulike_get_the_id() );
+	$current_post_type = isset( $_GET['post_type'] ) && sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) === 'page' ? 'page' : get_post_type( flavor_like_get_the_id() );
 
 	if( ! empty( $post_types ) && false !== $current_post_type ){
 		if( in_array( $current_post_type, $post_types ) ){
-			$columns = apply_filters( 'wp_ulike_manage_posts_columns', array_merge( $columns,
-			array( 'wp-ulike-thumbs-up' => '<i class="dashicons dashicons-thumbs-up"></i> ' . esc_html__('Like','wp-ulike') ) ), $current_post_type );
+			$columns = apply_filters( 'flavor_like_manage_posts_columns', array_merge( $columns,
+			array( 'flavor-like-thumbs-up' => '<i class="dashicons dashicons-thumbs-up"></i> ' . esc_html__('Like','flavor-like') ) ), $current_post_type );
 			// add sortable columns
 			add_filter( 'manage_edit-' . $current_post_type . '_sortable_columns', function( $columns ){
-				$columns['wp-ulike-thumbs-up'] = 'likes';
+				$columns['flavor-like-thumbs-up'] = 'likes';
 				return $columns;
 			} );
 		}
@@ -232,8 +232,8 @@ function wp_ulike_manage_posts_columns( $columns ) {
 
     return $columns;
 }
-add_filter( 'manage_posts_columns' , 'wp_ulike_manage_posts_columns', 10 );
-add_filter( 'manage_pages_columns' , 'wp_ulike_manage_posts_columns', 10 );
+add_filter( 'manage_posts_columns' , 'flavor_like_manage_posts_columns', 10 );
+add_filter( 'manage_pages_columns' , 'flavor_like_manage_posts_columns', 10 );
 
 
 /**
@@ -242,13 +242,13 @@ add_filter( 'manage_pages_columns' , 'wp_ulike_manage_posts_columns', 10 );
  * @param object $query
  * @return void
  */
-function wp_ulike_manage_sortable_columns_order( $query ) {
+function flavor_like_manage_sortable_columns_order( $query ) {
 	if ( ! is_admin() ){
 		return;
 	}
 
 	if ( ! empty( $query->query['orderby'] ) && 'likes' == $query->query['orderby'] ) {
-		$post__in = wp_ulike_get_popular_items_ids(array(
+		$post__in = flavor_like_get_popular_items_ids(array(
 			'rel_type' => $query->get('post_type'),
 			'status'   => 'like',
 			"order"    => $query->get('order'),
@@ -261,9 +261,9 @@ function wp_ulike_manage_sortable_columns_order( $query ) {
 		$query->set( 'orderby', 'post__in' );
 	}
 
-	do_action( 'wp_ulike_manage_sortable_columns_order', $query );
+	do_action( 'flavor_like_manage_sortable_columns_order', $query );
 }
-add_action( 'pre_get_posts', 'wp_ulike_manage_sortable_columns_order', 10, 1 );
+add_action( 'pre_get_posts', 'flavor_like_manage_sortable_columns_order', 10, 1 );
 
 /**
  * Count founded posts on manage columns
@@ -272,13 +272,13 @@ add_action( 'pre_get_posts', 'wp_ulike_manage_sortable_columns_order', 10, 1 );
  * @param object $query
  * @return integer
  */
-function wp_ulike_manage_columns_found_posts( $found_posts, $query ){
+function flavor_like_manage_columns_found_posts( $found_posts, $query ){
 	if ( ! is_admin() ){
 		return $found_posts;
 	}
 
 	if ( ! empty( $query->query['orderby'] ) && 'likes' == $query->query['orderby'] ) {
-		$found_posts = wp_ulike_get_popular_items_total_number(array(
+		$found_posts = flavor_like_get_popular_items_total_number(array(
 			"rel_type" => $query->get('post_type'),
 			"status"   => 'like'
 		));
@@ -286,7 +286,7 @@ function wp_ulike_manage_columns_found_posts( $found_posts, $query ){
 
 	return $found_posts;
 }
-add_filter( 'found_posts', 'wp_ulike_manage_columns_found_posts', 10, 2 );
+add_filter( 'found_posts', 'flavor_like_manage_columns_found_posts', 10, 2 );
 
 /**
  * Add comment columns
@@ -294,14 +294,14 @@ add_filter( 'found_posts', 'wp_ulike_manage_columns_found_posts', 10, 2 );
  * @param array $columns
  * @return array
  */
-function wp_ulike_comment_columns( $columns ) {
-	if( wp_ulike_get_option( 'comments_group|enable_admin_columns', false ) ){
-		$columns['wp-ulike-thumbs-up'] = '<i class="dashicons dashicons-thumbs-up"></i> ' . esc_html__('Like','wp-ulike');
+function flavor_like_comment_columns( $columns ) {
+	if( flavor_like_get_option( 'comments_group|enable_admin_columns', false ) ){
+		$columns['flavor-like-thumbs-up'] = '<i class="dashicons dashicons-thumbs-up"></i> ' . esc_html__('Like','flavor-like');
 	}
 
 	return $columns;
 }
-add_filter( 'manage_edit-comments_columns', 'wp_ulike_comment_columns' );
+add_filter( 'manage_edit-comments_columns', 'flavor_like_comment_columns' );
 
 /**
  * Set sortable columns for comments
@@ -309,14 +309,14 @@ add_filter( 'manage_edit-comments_columns', 'wp_ulike_comment_columns' );
  * @param array $columns
  * @return array
  */
-function wp_ulike_comments_sortable_columns( $columns ) {
-	if( wp_ulike_get_option( 'comments_group|enable_admin_columns', false ) ){
-    	$columns['wp-ulike-thumbs-up'] = 'likes';
+function flavor_like_comments_sortable_columns( $columns ) {
+	if( flavor_like_get_option( 'comments_group|enable_admin_columns', false ) ){
+    	$columns['flavor-like-thumbs-up'] = 'likes';
 	}
 
     return $columns;
 }
-add_filter( 'manage_edit-comments_sortable_columns', 'wp_ulike_comments_sortable_columns' );
+add_filter( 'manage_edit-comments_sortable_columns', 'flavor_like_comments_sortable_columns' );
 
 /**
  * Display column content for comment
@@ -325,13 +325,13 @@ add_filter( 'manage_edit-comments_sortable_columns', 'wp_ulike_comments_sortable
  * @param integer $comment_ID
  * @return void
  */
-function wp_ulike_comment_column_content( $column, $comment_ID ) {
-    if ( $column === 'wp-ulike-thumbs-up' ){
-		$is_distinct = wp_ulike_setting_repo::isDistinct('comment');
-        echo sprintf( '<span class="wp-ulike-counter-box">%d</span>',  wp_ulike_get_counter_value( $comment_ID, 'comment', 'like', $is_distinct ) );
+function flavor_like_comment_column_content( $column, $comment_ID ) {
+    if ( $column === 'flavor-like-thumbs-up' ){
+		$is_distinct = flavor_like_setting_repo::isDistinct('comment');
+        echo sprintf( '<span class="flavor-like-counter-box">%d</span>',  flavor_like_get_counter_value( $comment_ID, 'comment', 'like', $is_distinct ) );
     }
 }
-add_filter( 'manage_comments_custom_column', 'wp_ulike_comment_column_content', 10, 2 );
+add_filter( 'manage_comments_custom_column', 'flavor_like_comment_column_content', 10, 2 );
 
 /**
  * Manage the query of sortable columns for comments
@@ -339,13 +339,13 @@ add_filter( 'manage_comments_custom_column', 'wp_ulike_comment_column_content', 
  * @param object $query
  * @return void
  */
-function wp_ulike_manage_comment_sortable_columns_order( $query ) {
+function flavor_like_manage_comment_sortable_columns_order( $query ) {
 	if ( ! is_admin() ){
 		return;
 	}
 
 	if ( ! empty( $query->query_vars['orderby'] ) && 'likes' == $query->query_vars['orderby'] ) {
-		$comment__in = wp_ulike_get_popular_items_ids(array(
+		$comment__in = flavor_like_get_popular_items_ids(array(
 			'type'     => 'comment',
 			'status'   => 'like',
 			"order"    => $query->query_vars['order'],
@@ -357,13 +357,13 @@ function wp_ulike_manage_comment_sortable_columns_order( $query ) {
 		$query->query_vars['orderby']     = 'comment__in';
 	}
 
-	do_action( 'wp_ulike_manage_comment_sortable_columns_order', $query );
+	do_action( 'flavor_like_manage_comment_sortable_columns_order', $query );
 }
-add_action( 'pre_get_comments', 'wp_ulike_manage_comment_sortable_columns_order', 10, 1 );
+add_action( 'pre_get_comments', 'flavor_like_manage_comment_sortable_columns_order', 10, 1 );
 
 
-function wp_ulike_panel_customization_section( $options ) {
-	if( wp_ulike_setting_repo::isCodeSnippetsDisabled() ){
+function flavor_like_panel_customization_section( $options ) {
+	if( flavor_like_setting_repo::isCodeSnippetsDisabled() ){
 		return $options;
 	}
 
@@ -374,9 +374,9 @@ function wp_ulike_panel_customization_section( $options ) {
 			'theme'  => 'mbo',
 			'mode'   => 'php',
 		),
-		'title'    => esc_html__('PHP Snippets','wp-ulike'),
-		'sanitize' => 'wp_ulike_html_entity_decode',
-		'desc'     => esc_html__('Add PHP snippets without opening and closing tags (&lt;?php and ?&gt;). If you have lots of snippets, you may want to consider using Code Snippets plugin.', 'wp-ulike')
+		'title'    => esc_html__('PHP Snippets','flavor-like'),
+		'sanitize' => 'flavor_like_html_entity_decode',
+		'desc'     => esc_html__('Add PHP snippets without opening and closing tags (&lt;?php and ?&gt;). If you have lots of snippets, you may want to consider using Code Snippets plugin.', 'flavor-like')
 	);
 	$options[] = array(
 		'id'    => 'js_snippets',
@@ -385,14 +385,14 @@ function wp_ulike_panel_customization_section( $options ) {
 			'theme'  => 'mbo',
 			'mode'   => 'javascript',
 		),
-		'title'    => esc_html__('Javascript Snippets','wp-ulike'),
-		'sanitize' => 'wp_ulike_html_entity_decode',
-		'desc'     => esc_html__('This code will output immediately before the closing &lt;/body&gt; tag in the document source. (Scripts must not be property wrapped in &lt;script&gt; tag.)', 'wp-ulike')
+		'title'    => esc_html__('Javascript Snippets','flavor-like'),
+		'sanitize' => 'flavor_like_html_entity_decode',
+		'desc'     => esc_html__('This code will output immediately before the closing &lt;/body&gt; tag in the document source. (Scripts must not be property wrapped in &lt;script&gt; tag.)', 'flavor-like')
 	);
 
 	return $options;
 }
-add_filter( 'wp_ulike_panel_customization', 'wp_ulike_panel_customization_section', 10, 1 );
+add_filter( 'flavor_like_panel_customization', 'flavor_like_panel_customization_section', 10, 1 );
 
 /**
  * Stores css content in custom css file when settings or customizer are saved
@@ -402,24 +402,24 @@ add_filter( 'wp_ulike_panel_customization', 'wp_ulike_panel_customization_sectio
  * @param array $values The saved values (not used but available)
  * @return boolean Returns true if the file is created and updated successfully, false on failure
  */
-function wp_ulike_save_custom_css( $values = null ){
-    $css_string = wp_ulike_get_custom_style();
-    $css_string = wp_ulike_minify_css( $css_string );
+function flavor_like_save_custom_css( $values = null ){
+    $css_string = flavor_like_get_custom_style();
+    $css_string = flavor_like_minify_css( $css_string );
 
-    if ( ! empty( $css_string ) && wp_ulike_put_contents_dir( $css_string, 'custom.css' ) ) {
+    if ( ! empty( $css_string ) && flavor_like_put_contents_dir( $css_string, 'custom.css' ) ) {
         // File created successfully - directory is writable
-        update_option( 'wp_ulike_use_inline_custom_css' , 0 );
+        update_option( 'flavor_like_use_inline_custom_css' , 0 );
         return true;
     } else {
         // File creation failed - directory not writable, must use inline fallback
-        update_option( 'wp_ulike_use_inline_custom_css' , 1 );
+        update_option( 'flavor_like_use_inline_custom_css' , 1 );
         return false;
     }
 }
 // Hook to save CSS file when settings are saved
-add_action( 'wp_ulike_settings_saved', 'wp_ulike_save_custom_css', 15, 1 );
+add_action( 'flavor_like_settings_saved', 'flavor_like_save_custom_css', 15, 1 );
 // Hook to save CSS file when customizer is saved
-add_action( 'wp_ulike_customizer_saved', 'wp_ulike_save_custom_css', 15, 1 );
+add_action( 'flavor_like_customizer_saved', 'flavor_like_save_custom_css', 15, 1 );
 
 /**
  * Clear CSS generator cache when customizer is saved
@@ -428,30 +428,30 @@ add_action( 'wp_ulike_customizer_saved', 'wp_ulike_save_custom_css', 15, 1 );
  * @param array $new_values Optional. New customizer values
  * @return void
  */
-function wp_ulike_clear_css_generator_cache( $new_values = null ) {
-	if ( class_exists( 'wp_ulike_css_generator' ) ) {
-		$css_generator = new wp_ulike_css_generator();
+function flavor_like_clear_css_generator_cache( $new_values = null ) {
+	if ( class_exists( 'flavor_like_css_generator' ) ) {
+		$css_generator = new flavor_like_css_generator();
 		if ( method_exists( $css_generator, 'clear_cache' ) ) {
 			$css_generator->clear_cache( $new_values );
 		}
 	}
 }
 // Hook to clear CSS cache when customizer is saved
-add_action( 'wp_ulike_customizer_saved', 'wp_ulike_clear_css_generator_cache', 10, 1 );
+add_action( 'flavor_like_customizer_saved', 'flavor_like_clear_css_generator_cache', 10, 1 );
 
 /**
  * Auto-display option model (final):
  *
  * - Users see "Show Buttons On" (checked = button appears there).
- * - DB keeps posts_group|auto_display_filter as a hide-list for is_wp_ulike().
+ * - DB keeps posts_group|auto_display_filter as a hide-list for is_flavor_like().
  * - No migration: if the key exists, invert it for the form; if missing, Singular only.
  * - Save writes a hide-list again (lossless for existing saved values).
  *
  * @param array $values Optiwich values.
  * @return array
  */
-function wp_ulike_hydrate_auto_display_filter_for_ui( $values ) {
-	if ( ! is_array( $values ) || ! class_exists( 'wp_ulike_setting_repo' ) ) {
+function flavor_like_hydrate_auto_display_filter_for_ui( $values ) {
+	if ( ! is_array( $values ) || ! class_exists( 'flavor_like_setting_repo' ) ) {
 		return $values;
 	}
 
@@ -461,17 +461,17 @@ function wp_ulike_hydrate_auto_display_filter_for_ui( $values ) {
 
 	if ( isset( $values['posts_group']['auto_display_filter'] ) ) {
 		// Existing site: stored hide-list → show-list for the form.
-		$values['posts_group']['auto_display_filter'] = wp_ulike_setting_repo::convertHideFiltersToShowOn(
+		$values['posts_group']['auto_display_filter'] = flavor_like_setting_repo::convertHideFiltersToShowOn(
 			(array) $values['posts_group']['auto_display_filter']
 		);
 	} else {
 		// Never saved: product default (Singular).
-		$values['posts_group']['auto_display_filter'] = wp_ulike_setting_repo::getAutoDisplayShowOnDefault();
+		$values['posts_group']['auto_display_filter'] = flavor_like_setting_repo::getAutoDisplayShowOnDefault();
 	}
 
 	return $values;
 }
-add_filter( 'wp_ulike_optiwich_values', 'wp_ulike_hydrate_auto_display_filter_for_ui' );
+add_filter( 'flavor_like_optiwich_values', 'flavor_like_hydrate_auto_display_filter_for_ui' );
 
 /**
  * Show-list from the form → hide-list for DB.
@@ -479,19 +479,19 @@ add_filter( 'wp_ulike_optiwich_values', 'wp_ulike_hydrate_auto_display_filter_fo
  * @param array $values Values about to be saved.
  * @return array
  */
-function wp_ulike_sync_auto_display_filter_on_save( $values ) {
+function flavor_like_sync_auto_display_filter_on_save( $values ) {
 	if ( ! is_array( $values ) || empty( $values['posts_group'] ) || ! is_array( $values['posts_group'] ) ) {
 		return $values;
 	}
 
-	if ( ! class_exists( 'wp_ulike_setting_repo' ) || ! isset( $values['posts_group']['auto_display_filter'] ) ) {
+	if ( ! class_exists( 'flavor_like_setting_repo' ) || ! isset( $values['posts_group']['auto_display_filter'] ) ) {
 		return $values;
 	}
 
-	$values['posts_group']['auto_display_filter'] = wp_ulike_setting_repo::convertShowOnToHideFilters(
+	$values['posts_group']['auto_display_filter'] = flavor_like_setting_repo::convertShowOnToHideFilters(
 		(array) $values['posts_group']['auto_display_filter']
 	);
 
 	return $values;
 }
-add_filter( 'wp_ulike_optiwich_save_values', 'wp_ulike_sync_auto_display_filter_on_save' );
+add_filter( 'flavor_like_optiwich_save_values', 'flavor_like_sync_auto_display_filter_on_save' );

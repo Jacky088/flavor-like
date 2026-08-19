@@ -2,16 +2,16 @@
 /**
  * Pulse Ledger — per-user vote state reader.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Reader' ) ) {
 
-	final class WP_Ulike_Pulse_Reader {
+	final class Flavor_Like_Pulse_Reader {
 
 		/**
 		 * Resolve user's latest legacy action for an item.
@@ -22,14 +22,14 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 		 * @return string|false like|dislike|unlike|undislike|false
 		 */
 		public static function user_action( $item_id, $user_id, $item_type ) {
-			$item_type = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-			$read_mode = WP_Ulike_Pulse_Config::read_mode();
+			$item_type = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+			$read_mode = Flavor_Like_Pulse_Config::read_mode();
 
-			if ( WP_Ulike_Pulse_Config::READ_PULSE === $read_mode ) {
+			if ( Flavor_Like_Pulse_Config::READ_PULSE === $read_mode ) {
 				return self::from_pulse( $item_id, $user_id, $item_type );
 			}
 
-			if ( WP_Ulike_Pulse_Config::READ_LEGACY === $read_mode ) {
+			if ( Flavor_Like_Pulse_Config::READ_LEGACY === $read_mode ) {
 				return self::from_legacy( $item_id, $user_id, $item_type );
 			}
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 		private static function from_pulse( $item_id, $user_id, $item_type ) {
 			global $wpdb;
 
-			$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			$row   = $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT engagement_key, status, date_time
@@ -56,7 +56,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 					absint( $item_id ),
 					$item_type,
 					(string) $user_id,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 
@@ -64,7 +64,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 				return false;
 			}
 
-			return WP_Ulike_Pulse_Vote_Map::row_to_legacy( $row->engagement_key, $row->status );
+			return Flavor_Like_Pulse_Vote_Map::row_to_legacy( $row->engagement_key, $row->status );
 		}
 
 		/**
@@ -76,8 +76,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 		private static function from_legacy( $item_id, $user_id, $item_type ) {
 			global $wpdb;
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return false;
 			}
 
@@ -116,14 +116,14 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 			}
 
 			if ( $pulse && ! $legacy ) {
-				return WP_Ulike_Pulse_Vote_Map::row_to_legacy( $pulse->engagement_key, $pulse->status );
+				return Flavor_Like_Pulse_Vote_Map::row_to_legacy( $pulse->engagement_key, $pulse->status );
 			}
 
 			$legacy_time = strtotime( $legacy->date_time );
 			$pulse_time  = strtotime( $pulse->date_time );
 
 			if ( $pulse_time >= $legacy_time ) {
-				return WP_Ulike_Pulse_Vote_Map::row_to_legacy( $pulse->engagement_key, $pulse->status );
+				return Flavor_Like_Pulse_Vote_Map::row_to_legacy( $pulse->engagement_key, $pulse->status );
 			}
 
 			return (string) $legacy->status;
@@ -138,8 +138,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 		private static function legacy_latest_row( $item_id, $user_id, $item_type ) {
 			global $wpdb;
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return null;
 			}
 
@@ -164,7 +164,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 		private static function pulse_latest_row( $item_id, $user_id, $item_type ) {
 			global $wpdb;
 
-			$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			return $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT engagement_key, status, date_time FROM `{$table}`
@@ -173,7 +173,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Reader' ) ) {
 					absint( $item_id ),
 					$item_type,
 					(string) $user_id,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}

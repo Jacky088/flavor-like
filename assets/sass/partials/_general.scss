@@ -1,4 +1,4 @@
-.wpulike {
+.flavorlike {
     display: block;
     position: relative;
     line-height: normal;
@@ -12,13 +12,13 @@
         box-sizing: inherit;
     }
 
-    .wp_ulike_general_class {
+    .flavor_like_general_class {
         display: inline-flex;
         align-items: center;
         max-width: 100%;
     }
 
-    button.wp_ulike_btn{
+    button.flavor_like_btn{
         margin: 0;
         position: relative;
         display: inline-block;
@@ -63,7 +63,7 @@
             }
         }
 
-        &.wp_ulike_put_text {
+        &.flavor_like_put_text {
             font-size: 14px;
             font-weight: 600;
             line-height: 28px;
@@ -72,8 +72,8 @@
         }
     }
 
-    .wp_ulike_is_loading {
-        button.wp_ulike_btn{
+    .flavor_like_is_loading {
+        button.flavor_like_btn{
             background-image: url(../img/svg/loader.svg);
             background-repeat: no-repeat;
             background-position: center center;
@@ -83,7 +83,7 @@
                 visibility: hidden;
             }
 
-            &.wp_ulike_put_image {
+            &.flavor_like_put_image {
                 &::after {
                     content: none;
                 }
@@ -91,7 +91,7 @@
         }
     }
 
-    &.wpulike-hide-counter {
+    &.flavorlike-hide-counter {
         .count-box {
             display: none;
         }
@@ -110,16 +110,16 @@
     .activity-meta,
     .activity-comments,
     .activity-inner {
-        .wpulike {
+        .flavorlike {
             display: inline-block;
             vertical-align: middle;
         }
     }
 
-    .wp_ulike_likers_wrapper {
+    .flavor_like_likers_wrapper {
 
         li,
-        .wp-ulike-liker {
+        .flavor-like-liker {
             border: none;
             padding: 0;
 
@@ -139,15 +139,15 @@
     .bbp-topic-content,
     .bbp-forum-content {
 
-        .wpulike {
+        .flavorlike {
             display: inline-block;
             vertical-align: middle;
         }
 
-        .wp_ulike_likers_wrapper {
+        .flavor_like_likers_wrapper {
 
             li,
-            .wp-ulike-liker {
+            .flavor-like-liker {
                 border: none;
                 padding: 0;
 
@@ -162,11 +162,11 @@
     }
 }
 
-.wp_ulike_click_is_disabled {
+.flavor_like_click_is_disabled {
     pointer-events: none;
     cursor: default;
 }
 
-.wp_ulike_hide_me {
+.flavor_like_hide_me {
     visibility: hidden;
 }

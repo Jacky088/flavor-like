@@ -1,7 +1,7 @@
 {
-	"name": "@wp-ulike/block",
+	"name": "@flavor-like/block",
 	"version": "1.0.0",
-	"description": "WP ULike Gutenberg Block",
+	"description": "Flavor Like Gutenberg Block",
 	"author": "TechnoWich",
 	"license": "GPL-2.0-or-later",
 	"main": "index.js",

@@ -1,22 +1,22 @@
 /**
  * Heart template
  */
-.wpulike-heart {
+.flavorlike-heart {
 
-    .wp_ulike_general_class {
+    .flavor_like_general_class {
         box-shadow: 0 0 0 1px #bdbdbd inset;
         border-radius: .25em;
         padding: 5px;
     }
 
-    .wp_ulike_put_text {
+    .flavor_like_put_text {
         padding: 0 5px;
         text-transform: uppercase;
         font-weight: 600;
         color: #757575;
     }
 
-    button.wp_ulike_btn {
+    button.flavor_like_btn {
         background: transparent;
         padding: 15px;
 
@@ -28,7 +28,7 @@
         }
     }
 
-    .wp_ulike_put_image {
+    .flavor_like_put_image {
         background: none;
         padding: 15px;
 
@@ -56,7 +56,7 @@
             transform: translateX(-50%) translateY(-50%);
         }
 
-        &.wp_ulike_btn_is_active {
+        &.flavor_like_btn_is_active {
             &:after {
                 filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
             }
@@ -82,15 +82,15 @@
     .activity-meta,
     .activity-comments,
     .activity-inner {
-        .wpulike-heart {
-            button.wp_ulike_btn {
+        .flavorlike-heart {
+            button.flavor_like_btn {
                 background-color: transparent;
                 border: 0;
                 font-size: initial;
                 padding: 1em;
             }
 
-            .wp_ulike_put_image {
+            .flavor_like_put_image {
                 padding: 10px 15px;
 
                 &:after {
@@ -99,14 +99,14 @@
                 }
             }
 
-            .wp_ulike_general_class {
+            .flavor_like_general_class {
                 border-radius: 0;
                 padding: 0.1em 0.3em;
                 margin-bottom: 0;
             }
 
-            .wp_ulike_is_loading {
-                button.wp_ulike_btn {
+            .flavor_like_is_loading {
+                button.flavor_like_btn {
                     background-image: url(../img/svg/loader.svg);
                     background-repeat: no-repeat;
                     background-position: center center;

@@ -2,18 +2,18 @@
 /**
  * Pulse Ledger admin UI.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Admin' ) ) {
 
-	final class WP_Ulike_Pulse_Admin {
+	final class Flavor_Like_Pulse_Admin {
 
-		const PAGE_SLUG = 'wp-ulike-pulse';
+		const PAGE_SLUG = 'flavor-like-pulse';
 
 		/**
 		 * Admin hook suffix from add_submenu_page().
@@ -28,9 +28,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		public static function init() {
 			add_action( 'admin_menu', array( __CLASS__, 'register_page' ), 30 );
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_assets' ) );
-			add_action( 'wp_ajax_wp_ulike_pulse_sync_status', array( __CLASS__, 'ajax_status' ) );
-			add_action( 'wp_ajax_wp_ulike_pulse_sync_action', array( __CLASS__, 'ajax_action' ) );
-			add_action( 'wp_ajax_wp_ulike_pulse_dismiss_notice', array( __CLASS__, 'ajax_dismiss_notice' ) );
+			add_action( 'wp_ajax_flavor_like_pulse_sync_status', array( __CLASS__, 'ajax_status' ) );
+			add_action( 'wp_ajax_flavor_like_pulse_sync_action', array( __CLASS__, 'ajax_action' ) );
+			add_action( 'wp_ajax_flavor_like_pulse_dismiss_notice', array( __CLASS__, 'ajax_dismiss_notice' ) );
 			add_action( 'admin_notices', array( __CLASS__, 'storage_upgrade_notice' ) );
 		}
 
@@ -54,7 +54,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return string
 		 */
 		public static function get_help_url() {
-			return admin_url( 'admin.php?page=wp-ulike-about' );
+			return admin_url( 'admin.php?page=flavor-like-about' );
 		}
 
 		/**
@@ -65,7 +65,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		public static function register_page() {
 			// Keep the page registered while work remains, even if the notice was
 			// dismissed — Site Health "Review cleanup" links here.
-			if ( ! WP_Ulike_Pulse_Config::has_storage_upgrade_work() ) {
+			if ( ! Flavor_Like_Pulse_Config::has_storage_upgrade_work() ) {
 				return;
 			}
 
@@ -88,11 +88,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return bool
 		 */
 		public static function should_show_notice() {
-			if ( WP_Ulike_Pulse_Config::is_admin_dismissed() ) {
+			if ( Flavor_Like_Pulse_Config::is_admin_dismissed() ) {
 				return false;
 			}
 
-			return current_user_can( 'manage_options' ) && wp_ulike_pulse_needs_migration();
+			return current_user_can( 'manage_options' ) && flavor_like_pulse_needs_migration();
 		}
 
 		/**
@@ -101,17 +101,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return array<string,mixed>|null
 		 */
 		public static function get_help_card_data() {
-			if ( ! current_user_can( 'manage_options' ) || ! WP_Ulike_Pulse_Config::should_show_storage_upgrade_ui() ) {
+			if ( ! current_user_can( 'manage_options' ) || ! Flavor_Like_Pulse_Config::should_show_storage_upgrade_ui() ) {
 				return null;
 			}
 
-			$config        = WP_Ulike_Pulse_Config::get();
+			$config        = Flavor_Like_Pulse_Config::get();
 			$sync_status   = $config['migration']['status'] ?? 'idle';
-			$progress      = WP_Ulike_Pulse_Sync::get_progress();
-			$sync_complete = WP_Ulike_Pulse_Sync::is_sync_complete( $progress ) || 'done' === $sync_status;
-			$is_pulse      = WP_Ulike_Pulse_Config::MODE_PULSE === WP_Ulike_Pulse_Config::mode();
+			$progress      = Flavor_Like_Pulse_Sync::get_progress();
+			$sync_complete = Flavor_Like_Pulse_Sync::is_sync_complete( $progress ) || 'done' === $sync_status;
+			$is_pulse      = Flavor_Like_Pulse_Config::MODE_PULSE === Flavor_Like_Pulse_Config::mode();
 			$status_label  = self::status_label( $sync_status, $sync_complete );
-			$progress_label = WP_Ulike_Pulse_Sync::progress_label( $progress );
+			$progress_label = Flavor_Like_Pulse_Sync::progress_label( $progress );
 
 			if ( $is_pulse ) {
 				return array(
@@ -119,7 +119,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 					'title'       => 'Free up disk space',
 					'intro'       => 'Like records already use the faster storage. Remove the old log tables when you are ready to reclaim disk space.',
 					'reassurance' => array(
-						'WP ULike is fully working with the new storage.',
+						'Flavor Like is fully working with the new storage.',
 						'Old tables stay until you remove them.',
 						'Back up your database before deleting anything.',
 					),
@@ -178,22 +178,22 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 			}
 
 			wp_enqueue_script(
-				'wp-ulike-pulse-admin',
-				WP_ULIKE_ADMIN_URL . '/assets/js/pulse-admin.js',
+				'flavor-like-pulse-admin',
+				FLAVOR_LIKE_ADMIN_URL . '/assets/js/pulse-admin.js',
 				array( 'jquery' ),
-				WP_ULIKE_VERSION,
+				FLAVOR_LIKE_VERSION,
 				true
 			);
 
 			wp_localize_script(
-				'wp-ulike-pulse-admin',
-				'wpUlikePulse',
+				'flavor-like-pulse-admin',
+				'flavorLikePulse',
 				array(
 					'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
-					'nonce'         => wp_create_nonce( 'wp_ulike_pulse_admin' ),
+					'nonce'         => wp_create_nonce( 'flavor_like_pulse_admin' ),
 					'isRunning'     => self::should_run_browser_batches(),
-					'syncComplete'  => WP_Ulike_Pulse_Sync::is_sync_complete(),
-					'isPulse'       => WP_Ulike_Pulse_Config::MODE_PULSE === WP_Ulike_Pulse_Config::mode(),
+					'syncComplete'  => Flavor_Like_Pulse_Sync::is_sync_complete(),
+					'isPulse'       => Flavor_Like_Pulse_Config::MODE_PULSE === Flavor_Like_Pulse_Config::mode(),
 				'confirmEnable' => 'Switch to the faster storage for all reads? Your old tables are kept — nothing is deleted.',
 				'confirmDrop'   => 'Permanently delete old log tables? This cannot be undone. Make sure you have a database backup.',
 				'redirectUrl'   => self::get_help_url(),
@@ -205,8 +205,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 					'dismissed'               => 'Done. Redirecting…',
 					'dropFailed'              => 'Could not remove old tables. Please try again or use WP-CLI.',
 					'enableFailed'            => 'Could not finish the upgrade yet. Please wait until all records are moved.',
-					'enableVerifyFailed'      => 'Move finished but verification failed. Run “wp ulike pulse verify” for details, or contact support if failed rows are reported.',
-					'enableSyncIncomplete'    => 'Not finished yet. Wait until status shows Complete, or run “wp ulike pulse sync”.',
+					'enableVerifyFailed'      => 'Move finished but verification failed. Run “wp flavor_like pulse verify” for details, or contact support if failed rows are reported.',
+					'enableSyncIncomplete'    => 'Not finished yet. Wait until status shows Complete, or run “wp flavor_like pulse sync”.',
 					'actionFailed'            => 'Something went wrong. Please refresh the page and try again.',
 					'progressWaiting'         => 'Waiting to start…',
 					'progressCopied'          => '%1$s records moved',
@@ -225,7 +225,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return bool
 		 */
 		private static function should_run_browser_batches() {
-			return WP_Ulike_Pulse_Config::migration_running() && ! WP_Ulike_Pulse_Sync::is_sync_complete();
+			return Flavor_Like_Pulse_Config::migration_running() && ! Flavor_Like_Pulse_Sync::is_sync_complete();
 		}
 
 		/**
@@ -264,29 +264,29 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 				return;
 			}
 			?>
-			<div class="notice notice-info is-dismissible" data-wp-ulike-pulse-notice>
+			<div class="notice notice-info is-dismissible" data-flavor-like-pulse-notice>
 				<p>
-					<strong><?php esc_html_e( 'WP ULike: faster like storage is ready', 'wp-ulike' ); ?></strong>
+					<strong><?php esc_html_e( 'Flavor Like: faster like storage is ready', 'flavor-like' ); ?></strong>
 				</p>
 				<p>
-					<?php esc_html_e( 'Move your existing like records to a faster table for better performance on busy sites. Counts and buttons keep working — nothing is deleted.', 'wp-ulike' ); ?>
+					<?php esc_html_e( 'Move your existing like records to a faster table for better performance on busy sites. Counts and buttons keep working — nothing is deleted.', 'flavor-like' ); ?>
 				</p>
 				<p>
 					<a class="button button-primary" href="<?php echo esc_url( self::get_page_url() ); ?>">
-						<?php esc_html_e( 'Begin upgrade', 'wp-ulike' ); ?>
+						<?php esc_html_e( 'Begin upgrade', 'flavor-like' ); ?>
 					</a>
 				</p>
 			</div>
 			<script>
 			( function () {
-				var notice = document.querySelector( '[data-wp-ulike-pulse-notice]' );
+				var notice = document.querySelector( '[data-flavor-like-pulse-notice]' );
 				if ( ! notice ) { return; }
 				var btn = notice.querySelector( '.notice-dismiss' );
 				if ( ! btn ) { return; }
 				btn.addEventListener( 'click', function () {
 					var data = new FormData();
-					data.append( 'action', 'wp_ulike_pulse_dismiss_notice' );
-					data.append( 'nonce', '<?php echo esc_js( wp_create_nonce( 'wp_ulike_pulse_admin' ) ); ?>' );
+					data.append( 'action', 'flavor_like_pulse_dismiss_notice' );
+					data.append( 'nonce', '<?php echo esc_js( wp_create_nonce( 'flavor_like_pulse_admin' ) ); ?>' );
 					navigator.sendBeacon( '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>', data );
 				} );
 			} )();
@@ -300,12 +300,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return void
 		 */
 		public static function ajax_dismiss_notice() {
-			check_ajax_referer( 'wp_ulike_pulse_admin', 'nonce' );
+			check_ajax_referer( 'flavor_like_pulse_admin', 'nonce' );
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
 			}
 
-			WP_Ulike_Pulse_Config::mark_admin_dismissed();
+			Flavor_Like_Pulse_Config::mark_admin_dismissed();
 			wp_send_json_success();
 		}
 
@@ -317,24 +317,24 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 				return;
 			}
 
-			if ( ! WP_Ulike_Pulse_Config::has_storage_upgrade_work() ) {
+			if ( ! Flavor_Like_Pulse_Config::has_storage_upgrade_work() ) {
 				wp_safe_redirect( self::get_help_url() );
 				exit;
 			}
 
-			$progress        = WP_Ulike_Pulse_Sync::get_progress();
-			$config          = WP_Ulike_Pulse_Config::get();
+			$progress        = Flavor_Like_Pulse_Sync::get_progress();
+			$config          = Flavor_Like_Pulse_Config::get();
 			$sync_status     = $config['migration']['status'] ?? 'idle';
-			$sync_complete   = WP_Ulike_Pulse_Sync::is_sync_complete( $progress ) || 'done' === $sync_status;
+			$sync_complete   = Flavor_Like_Pulse_Sync::is_sync_complete( $progress ) || 'done' === $sync_status;
 			$is_running      = 'running' === $sync_status && ! $sync_complete;
-			$is_pulse        = WP_Ulike_Pulse_Config::MODE_PULSE === WP_Ulike_Pulse_Config::mode();
+			$is_pulse        = Flavor_Like_Pulse_Config::MODE_PULSE === Flavor_Like_Pulse_Config::mode();
 			$status_label    = self::status_label( $sync_status, $sync_complete );
-			$legacy_tables   = WP_Ulike_Pulse_Legacy_Cleanup::existing_legacy_tables();
+			$legacy_tables   = Flavor_Like_Pulse_Legacy_Cleanup::existing_legacy_tables();
 			$show_cleanup    = $is_pulse && ! empty( $legacy_tables );
 			// Progress-only gate for the UI — deep COUNT(*) runs only on drop.
-			$can_drop_legacy = $show_cleanup && WP_Ulike_Pulse_Legacy_Cleanup::can_offer_drop();
+			$can_drop_legacy = $show_cleanup && Flavor_Like_Pulse_Legacy_Cleanup::can_offer_drop();
 			$percent         = $sync_complete ? 100 : (float) ( $progress['percent_estimate'] ?? 0 );
-			$progress_label  = WP_Ulike_Pulse_Sync::progress_label( $progress );
+			$progress_label  = Flavor_Like_Pulse_Sync::progress_label( $progress );
 			$page_title      = self::get_page_title();
 
 			$cli_commands = self::cli_commands();
@@ -350,23 +350,23 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		public static function cli_commands() {
 			return array(
 				array(
-					'cmd'  => 'wp ulike pulse status',
+					'cmd'  => 'wp flavor_like pulse status',
 					'desc' => 'Check progress',
 				),
 				array(
-					'cmd'  => 'wp ulike pulse start',
+					'cmd'  => 'wp flavor_like pulse start',
 					'desc' => 'Start sync',
 				),
 				array(
-					'cmd'  => 'wp ulike pulse sync',
+					'cmd'  => 'wp flavor_like pulse sync',
 					'desc' => 'Run one batch',
 				),
 				array(
-					'cmd'  => 'wp ulike pulse verify',
+					'cmd'  => 'wp flavor_like pulse verify',
 					'desc' => 'Verify records (add --deep for COUNT scans)',
 				),
 			array(
-				'cmd'  => 'wp ulike pulse enable',
+				'cmd'  => 'wp flavor_like pulse enable',
 				'desc' => 'Finish upgrade',
 			),
 		);
@@ -377,21 +377,21 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 */
 		public static function ajax_status() {
 			self::verify_ajax();
-			$progress      = WP_Ulike_Pulse_Sync::get_progress();
-			$config        = WP_Ulike_Pulse_Config::get();
+			$progress      = Flavor_Like_Pulse_Sync::get_progress();
+			$config        = Flavor_Like_Pulse_Config::get();
 			$sync_status   = $config['migration']['status'] ?? 'idle';
-			$sync_complete = WP_Ulike_Pulse_Sync::is_sync_complete( $progress );
+			$sync_complete = Flavor_Like_Pulse_Sync::is_sync_complete( $progress );
 
 			wp_send_json_success(
 				array(
-					'mode'              => WP_Ulike_Pulse_Config::mode(),
-					'read'              => WP_Ulike_Pulse_Config::read_mode(),
+					'mode'              => Flavor_Like_Pulse_Config::mode(),
+					'read'              => Flavor_Like_Pulse_Config::read_mode(),
 					'migration_status'  => $sync_status,
 					'sync_complete'     => $sync_complete,
 					'status_label'      => self::status_label( $sync_status, $sync_complete ),
-					'is_pulse'          => WP_Ulike_Pulse_Config::MODE_PULSE === WP_Ulike_Pulse_Config::mode(),
+					'is_pulse'          => Flavor_Like_Pulse_Config::MODE_PULSE === Flavor_Like_Pulse_Config::mode(),
 					'progress'          => $progress,
-					'progress_label'    => WP_Ulike_Pulse_Sync::progress_label( $progress ),
+					'progress_label'    => Flavor_Like_Pulse_Sync::progress_label( $progress ),
 				)
 			);
 		}
@@ -406,24 +406,24 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 
 			switch ( $action ) {
 				case 'start':
-					if ( WP_Ulike_Pulse_Sync::is_sync_complete() ) {
+					if ( Flavor_Like_Pulse_Sync::is_sync_complete() ) {
 						wp_send_json_error( array( 'message' => 'already_complete' ) );
 					}
-					WP_Ulike_Pulse_Sync::start();
+					Flavor_Like_Pulse_Sync::start();
 					wp_send_json_success( array( 'message' => 'started' ) );
 					break;
 
 				case 'pause':
-					WP_Ulike_Pulse_Sync::pause();
+					Flavor_Like_Pulse_Sync::pause();
 					wp_send_json_success( array( 'message' => 'paused' ) );
 					break;
 
 				case 'batch':
-					wp_send_json_success( WP_Ulike_Pulse_Sync::run_batch() );
+					wp_send_json_success( Flavor_Like_Pulse_Sync::run_batch() );
 					break;
 
 				case 'enable':
-					if ( ! WP_Ulike_Pulse_Sync::is_sync_complete() ) {
+					if ( ! Flavor_Like_Pulse_Sync::is_sync_complete() ) {
 						wp_send_json_error(
 							array(
 								'message' => 'sync_incomplete',
@@ -431,7 +431,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 							)
 						);
 					}
-					$verify = WP_Ulike_Pulse_Sync::verify();
+					$verify = Flavor_Like_Pulse_Sync::verify();
 					if ( ! $verify['ok'] ) {
 						wp_send_json_error(
 							array_merge(
@@ -443,17 +443,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 							)
 						);
 					}
-					WP_Ulike_Pulse_Config::switch_to_pulse();
+					Flavor_Like_Pulse_Config::switch_to_pulse();
 					wp_send_json_success(
 						array(
 							'message'       => 'pulse_enabled',
-							'show_cleanup'  => WP_Ulike_Pulse_Legacy_Cleanup::legacy_tables_exist(),
+							'show_cleanup'  => Flavor_Like_Pulse_Legacy_Cleanup::legacy_tables_exist(),
 						)
 					);
 					break;
 
 				case 'dismiss':
-					WP_Ulike_Pulse_Config::mark_admin_dismissed();
+					Flavor_Like_Pulse_Config::mark_admin_dismissed();
 					wp_send_json_success(
 						array(
 							'redirect' => self::get_help_url(),
@@ -462,7 +462,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 					break;
 
 				case 'drop_legacy':
-					$result = WP_Ulike_Pulse_Legacy_Cleanup::drop_legacy_tables();
+					$result = Flavor_Like_Pulse_Legacy_Cleanup::drop_legacy_tables();
 					if ( empty( $result['ok'] ) ) {
 						wp_send_json_error( $result );
 					}
@@ -483,7 +483,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Admin' ) ) {
 		 * @return void
 		 */
 		private static function verify_ajax() {
-			check_ajax_referer( 'wp_ulike_pulse_admin', 'nonce' );
+			check_ajax_referer( 'flavor_like_pulse_admin', 'nonce' );
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
 			}

@@ -1,9 +1,9 @@
 .rtl {
-	.wpulike-notification {
+	.flavorlike-notification {
 		left: 20px;
 		right: inherit;
 
-		.wpulike-message {
+		.flavorlike-message {
 			padding: 14px 65px 14px 15px;
 
 
@@ -15,20 +15,20 @@
 	}
 
 	@media screen and (max-width:768px) {
-		.wpulike-notification {
+		.flavorlike-notification {
 
-			.wpulike-message {
+			.flavorlike-message {
 				padding: 11px 55px 11px 11px;
 			}
 		}
 	}
 
 	@media screen and (max-width:320px) {
-		.wpulike-notification {
+		.flavorlike-notification {
 			left: 10px;
 			right: 10px;
 
-			.wpulike-message {
+			.flavorlike-message {
 				padding: 9px 45px 9px 9px;
 			}
 		}

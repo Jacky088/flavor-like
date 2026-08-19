@@ -2,17 +2,17 @@
  *  Statistics Page
  */
 
-.wp-ulike-table {
+.flavor-like-table {
     display: table;
 
-    .wp-ulike-table-cell {
+    .flavor-like-table-cell {
         display: table-cell;
         vertical-align: middle;
     }
 }
 
 
-.wp-ulike-empty-stats {
+.flavor-like-empty-stats {
     text-align: center;
     height: 50em;
     position: relative;
@@ -23,12 +23,12 @@
         transform: translateY(-50%);
     }
 
-    .wp-ulike-icon {
+    .flavor-like-icon {
         font-size: 110px;
         color: #8B93A6;
     }
 
-    .wp-ulike-info {
+    .flavor-like-info {
         font-size: 28px;
         line-height: 42px;
         font-weight: 300;

@@ -2,7 +2,7 @@
  * Notification styles
  */
 
-.wpulike-notification {
+.flavorlike-notification {
     position: fixed;
     z-index: 999999;
     pointer-events: none;
@@ -13,7 +13,7 @@
         box-sizing: border-box;
     }
 
-    .wpulike-message {
+    .flavorlike-message {
         position: relative;
         pointer-events: auto;
         word-wrap: break-word;
@@ -23,8 +23,8 @@
         width: 290px;
         border-radius: 3px;
         background-color: #007bc3;
-        color: $wp-ulike-color-light;
-        animation: wpUlikeNotifitcationsAnimation 200ms backwards;
+        color: $flavor-like-color-light;
+        animation: flavorLikeNotifitcationsAnimation 200ms backwards;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
         font-size: 0.9rem;
         font-weight: 500;
@@ -39,7 +39,7 @@
         }
 
         // Fade out animation class (no inline styles needed)
-        &.wpulike-message-fadeout {
+        &.flavorlike-message-fadeout {
             opacity: 0;
             transform: translateY(-20px);
             pointer-events: none;
@@ -60,7 +60,7 @@
             background-color: rgba(0, 0, 0, 0.06);
         }
 
-        &.wpulike-success {
+        &.flavorlike-success {
             background-color: #20a779;
 
             &:before {
@@ -68,7 +68,7 @@
             }
         }
 
-        &.wpulike-error {
+        &.flavorlike-error {
             background-color: #ec4d2c;
 
             &:before {
@@ -76,7 +76,7 @@
             }
         }
 
-        &.wpulike-warning {
+        &.flavorlike-warning {
             background-color: #f0a82f;
 
             &:before {
@@ -86,7 +86,7 @@
     }
 }
 
-@keyframes wpUlikeNotifitcationsAnimation {
+@keyframes flavorLikeNotifitcationsAnimation {
     from {
         opacity: 0;
         transform: translateY(100%);
@@ -100,9 +100,9 @@
 
 
 @media screen and (max-width:768px) {
-    .wpulike-notification {
+    .flavorlike-notification {
 
-        .wpulike-message {
+        .flavorlike-message {
             padding: 11px 11px 11px 55px;
             font-size: 13px;
 
@@ -115,11 +115,11 @@
 }
 
 @media screen and (max-width:320px) {
-    .wpulike-notification {
+    .flavorlike-notification {
         left: 10px;
         right: 10px;
 
-        .wpulike-message {
+        .flavorlike-message {
             padding: 9px 9px 9px 45px;
             font-size: 12px;
             width: 100%;

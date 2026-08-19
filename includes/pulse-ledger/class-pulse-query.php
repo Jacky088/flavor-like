@@ -5,16 +5,16 @@
  * One class replaces the old five-trait Read Gateway. Mode branching is centralized
  * via branch() instead of triplicating every query path.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Query' ) ) {
 
-	final class WP_Ulike_Pulse_Query {
+	final class Flavor_Like_Pulse_Query {
 
 		const CACHE_TTL = 300;
 
@@ -22,14 +22,14 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		 * @return string legacy|merged|pulse
 		 */
 		public static function read_mode() {
-			return WP_Ulike_Pulse_Config::read_mode();
+			return Flavor_Like_Pulse_Config::read_mode();
 		}
 
 		/**
 		 * @return string[]
 		 */
 		public static function log_table_names() {
-			return WP_Ulike_Pulse_Registry::log_table_names();
+			return Flavor_Like_Pulse_Registry::log_table_names();
 		}
 
 		/**
@@ -55,8 +55,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			global $wpdb;
 
 			$item_id      = absint( $item_id );
-			$period_limit = wp_ulike_get_period_limit_sql( $date_range );
-			$table_info   = wp_ulike_get_table_info( $type );
+			$period_limit = flavor_like_get_period_limit_sql( $date_range );
+			$table_info   = flavor_like_get_table_info( $type );
 
 			if ( empty( $table_info['table'] ) ) {
 				return 0;
@@ -68,12 +68,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return self::count_pulse_item_votes( $item_id, $type, $status, $is_distinct, $period_limit, '' );
 			}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type(
-				WP_Ulike_Pulse_Registry::from_setting_type( $type )
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type(
+				Flavor_Like_Pulse_Registry::from_setting_type( $type )
 			);
 			$legacy = 0;
 
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$column = esc_sql( $source['column'] );
 				$count  = $is_distinct ? 'DISTINCT `user_id`' : '*';
@@ -94,7 +94,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			if ( $is_distinct ) {
-				if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+				if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 					return self::count_merged_distinct_item( $item_id, $type, $status, $period_limit, $table_info );
 				}
 
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$status,
 					true,
 					$period_limit,
-					WP_Ulike_Pulse_Config::dual_since()
+					Flavor_Like_Pulse_Config::dual_since()
 				);
 			}
 
@@ -114,7 +114,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				$status,
 				false,
 				$period_limit,
-				WP_Ulike_Pulse_Config::dual_since()
+				Flavor_Like_Pulse_Config::dual_since()
 			);
 		}
 
@@ -128,8 +128,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			global $wpdb;
 
 			$mode   = self::read_mode();
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type(
-				WP_Ulike_Pulse_Registry::from_setting_type( $type )
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type(
+				Flavor_Like_Pulse_Registry::from_setting_type( $type )
 			);
 
 			if ( 'pulse' === $mode ) {
@@ -137,7 +137,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			$legacy = 0;
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$column = esc_sql( $source['column'] );
 				$legacy = (int) $wpdb->get_var(
@@ -157,7 +157,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				$fingerprint,
 				$item_id,
 				$type,
-				WP_Ulike_Pulse_Config::dual_since()
+				Flavor_Like_Pulse_Config::dual_since()
 			);
 		}
 
@@ -171,8 +171,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_pulse_fingerprint_votes( $fingerprint, $item_id, $type, $since = '' ) {
 			global $wpdb;
 
-			$pulse_table = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type   = WP_Ulike_Pulse_Registry::from_setting_type( $type );
+			$pulse_table = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type   = Flavor_Like_Pulse_Registry::from_setting_type( $type );
 			$since_sql   = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 
 			return (int) $wpdb->get_var(
@@ -182,7 +182,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					absint( $item_id ),
 					$item_type,
 					$fingerprint,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -207,7 +207,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			return $legacy + self::count_pulse_non_vote_logs( $period );
 		}
 
-		return $legacy + self::count_pulse_logs( $period, WP_Ulike_Pulse_Config::dual_since() );
+		return $legacy + self::count_pulse_logs( $period, Flavor_Like_Pulse_Config::dual_since() );
 	}
 
 		/**
@@ -220,10 +220,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function count_logs_for_type( $item_type, $period = 'all' ) {
 			global $wpdb;
 
-			$item_type    = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
+			$item_type    = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
 			$mode         = self::read_mode();
-			$source       = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
+			$source       = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
 
 			if ( 'pulse' === $mode ) {
 				if ( ! $source ) {
@@ -233,7 +233,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			$legacy = 0;
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$legacy = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}` WHERE 1=1 {$period_limit}" );
 			}
@@ -244,7 +244,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			return $legacy + self::count_pulse_non_vote_logs( $period, '', $item_type );
 		}
 
-		return $legacy + self::count_pulse_logs_for_type( $item_type, $period, WP_Ulike_Pulse_Config::dual_since() );
+		return $legacy + self::count_pulse_logs_for_type( $item_type, $period, Flavor_Like_Pulse_Config::dual_since() );
 	}
 
 		/**
@@ -262,10 +262,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function count_vote_logs_for_type( $item_type, $period = 'all' ) {
 			global $wpdb;
 
-			$item_type    = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
+			$item_type    = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
 			$mode         = self::read_mode();
-			$source       = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
+			$source       = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
 
 			if ( 'pulse' === $mode ) {
 				if ( ! $source ) {
@@ -275,7 +275,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			$legacy = 0;
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$legacy = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `{$table}` WHERE 1=1 {$period_limit}" );
 			}
@@ -284,18 +284,18 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return $legacy;
 			}
 
-			return $legacy + self::count_pulse_vote_logs_for_type( $item_type, $period, WP_Ulike_Pulse_Config::dual_since() );
+			return $legacy + self::count_pulse_vote_logs_for_type( $item_type, $period, Flavor_Like_Pulse_Config::dual_since() );
 		}
 
 	/**
-	 * Count logs by legacy table suffix (ulike, ulike_comments, …).
+	 * Count logs by legacy table suffix (flavor_like, flavor_like_comments, …).
 		 *
 		 * @param string $table_suffix Table name without prefix.
 		 * @param mixed  $period       Period filter.
 		 * @return int
 		 */
 		public static function count_logs_for_table( $table_suffix, $period = 'all' ) {
-			$item_type = WP_Ulike_Pulse_Registry::resolve_log_identifier( $table_suffix );
+			$item_type = Flavor_Like_Pulse_Registry::resolve_log_identifier( $table_suffix );
 
 			if ( ! $item_type ) {
 				return 0;
@@ -307,13 +307,13 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		/**
 		 * Count vote rows for one legacy status (like|dislike|unlike|undislike) by table suffix.
 		 *
-		 * @param string $table_suffix    ulike|ulike_comments|...
+		 * @param string $table_suffix    flavor_like|flavor_like_comments|...
 		 * @param string $legacy_status   Legacy status string.
 		 * @param mixed  $period          Period filter.
 		 * @return int
 		 */
 		public static function count_status_for_table( $table_suffix, $legacy_status, $period = 'all' ) {
-			$item_type = WP_Ulike_Pulse_Registry::resolve_log_identifier( $table_suffix );
+			$item_type = Flavor_Like_Pulse_Registry::resolve_log_identifier( $table_suffix );
 
 			if ( ! $item_type ) {
 				return 0;
@@ -325,12 +325,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		/**
 		 * Count distinct voters by legacy table suffix.
 		 *
-		 * @param string $table_suffix ulike|ulike_comments|...
+		 * @param string $table_suffix flavor_like|flavor_like_comments|...
 		 * @param mixed  $period       Period filter.
 		 * @return int
 		 */
 		public static function count_unique_voters_for_table( $table_suffix, $period = 'all' ) {
-			$item_type = WP_Ulike_Pulse_Registry::resolve_log_identifier( $table_suffix );
+			$item_type = Flavor_Like_Pulse_Registry::resolve_log_identifier( $table_suffix );
 
 			if ( ! $item_type ) {
 				return 0;
@@ -348,27 +348,27 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function distinct_voted_item_ids( $item_type ) {
 			global $wpdb;
 
-			$item_type = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
+			$item_type = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
 			$mode      = self::read_mode();
-			$source    = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
+			$source    = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
 			$ids       = array();
 
-			if ( ( 'legacy' === $mode || 'merged' === $mode ) && $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( ( 'legacy' === $mode || 'merged' === $mode ) && $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$column = esc_sql( $source['column'] );
 				$table  = esc_sql( $source['table'] );
 				$ids    = array_map( 'absint', (array) $wpdb->get_col( "SELECT DISTINCT `{$column}` FROM `{$table}`" ) );
 			}
 
 			if ( 'pulse' === $mode || 'merged' === $mode ) {
-				$pulse     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-				$since_sql = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', WP_Ulike_Pulse_Config::dual_since() ) : '';
+				$pulse     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+				$since_sql = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', Flavor_Like_Pulse_Config::dual_since() ) : '';
 				$pulse_ids = array_map(
 					'absint',
 					(array) $wpdb->get_col(
 						$wpdb->prepare(
 							"SELECT DISTINCT item_id FROM `{$pulse}` WHERE item_type = %s AND engagement_kind = %s {$since_sql}",
 							$item_type,
-							WP_Ulike_Pulse_Registry::KIND_VOTE
+							Flavor_Like_Pulse_Registry::KIND_VOTE
 						)
 					)
 				);
@@ -387,17 +387,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function count_status_for_type( $item_type, $legacy_status, $period = 'all' ) {
 			global $wpdb;
 
-			$item_type    = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
+			$item_type    = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
 			$mode         = self::read_mode();
-			$source       = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
+			$source       = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
 
 			if ( 'pulse' === $mode ) {
 				return self::count_pulse_status_for_type( $item_type, $legacy_status, $period_limit, '' );
 			}
 
 			$legacy = 0;
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$legacy = (int) $wpdb->get_var(
 					$wpdb->prepare(
@@ -415,7 +415,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				$item_type,
 				$legacy_status,
 				$period_limit,
-				WP_Ulike_Pulse_Config::dual_since()
+				Flavor_Like_Pulse_Config::dual_since()
 			);
 		}
 
@@ -427,16 +427,16 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function count_unique_voters_for_type( $item_type, $period = 'all' ) {
 			global $wpdb;
 
-			$item_type    = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
+			$item_type    = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
 			$mode         = self::read_mode();
-			$source       = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
+			$source       = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
 
 			if ( 'pulse' === $mode ) {
 				return self::count_pulse_unique_voters_for_type( $item_type, $period_limit, '' );
 			}
 
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				// No legacy store: fall back to pulse reads since the cutover.
 				if ( 'legacy' === $mode ) {
 					return 0;
@@ -444,7 +444,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return self::count_pulse_unique_voters_for_type(
 					$item_type,
 					$period_limit,
-					WP_Ulike_Pulse_Config::dual_since()
+					Flavor_Like_Pulse_Config::dual_since()
 				);
 			}
 
@@ -510,11 +510,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function get_user_latest_activity( $item_id, $user_id, $type ) {
 			global $wpdb;
 
-			$settings = wp_ulike_setting_type::get_instance( $type );
+			$settings = flavor_like_setting_type::get_instance( $type );
 			$mode     = self::read_mode();
 
 	if ( 'pulse' === $mode ) {
-		$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		return $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT id, item_id, user_id, date_time,
@@ -525,20 +525,20 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				AND engagement_kind = %s AND status = %s
 				ORDER BY date_time DESC, id DESC LIMIT 1",
 				absint( $item_id ),
-				WP_Ulike_Pulse_Registry::from_setting_type( $type ),
+				Flavor_Like_Pulse_Registry::from_setting_type( $type ),
 				(string) $user_id,
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
 				'active'
 			)
 		);
 	}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type(
-				WP_Ulike_Pulse_Registry::from_setting_type( $settings->getType() )
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type(
+				Flavor_Like_Pulse_Registry::from_setting_type( $settings->getType() )
 			);
 			$row    = null;
 
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$column = esc_sql( $source['column'] );
 
@@ -576,12 +576,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		 * @return bool
 		 */
 		public static function is_user_liked( $item_id, $user_id, $type = 'likeThis' ) {
-			$action = WP_Ulike_Pulse_Reader::user_action( $item_id, $user_id, $type );
+			$action = Flavor_Like_Pulse_Reader::user_action( $item_id, $user_id, $type );
 			return 'like' === $action;
 		}
 
 		/**
-		 * @param array<string,mixed> $args item_id, current_user, settings (wp_ulike_setting_type).
+		 * @param array<string,mixed> $args item_id, current_user, settings (flavor_like_setting_type).
 		 * @return int
 		 */
 		public static function count_user_votes_today( array $args ) {
@@ -603,8 +603,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return self::count_pulse_votes_in_range( $item_id, $settings->getType(), $user_id, $today_start, $today_end, '' );
 			}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $settings->getType() );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $settings->getType() );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return self::count_pulse_votes_in_range( $item_id, $settings->getType(), $user_id, $today_start, $today_end, '' );
 			}
 
@@ -630,7 +630,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				$user_id,
 				$today_start,
 				$today_end,
-				WP_Ulike_Pulse_Config::dual_since()
+				Flavor_Like_Pulse_Config::dual_since()
 			);
 		}
 
@@ -651,8 +651,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				'per_page' => 10,
 			);
 			$parsed_args  = wp_parse_args( $args, $defaults );
-			$parsed_args  = array_merge( wp_ulike_get_table_info( $parsed_args['type'] ), $parsed_args );
-			$period_limit = wp_ulike_get_period_limit_sql( $parsed_args['period'] );
+			$parsed_args  = array_merge( flavor_like_get_table_info( $parsed_args['type'] ), $parsed_args );
+			$period_limit = flavor_like_get_period_limit_sql( $parsed_args['period'] );
 			$status_sql   = self::legacy_status_where( 'status', $parsed_args['status'] );
 			$mode         = self::read_mode();
 			$offset       = ( (int) $parsed_args['page'] - 1 ) * (int) $parsed_args['per_page'];
@@ -663,8 +663,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return self::query_user_items_pulse( $user_id, $parsed_args['type'], $parsed_args['status'], $period_limit, $order, $offset, $limit );
 			}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return self::query_user_items_pulse( $user_id, $parsed_args['type'], $parsed_args['status'], $period_limit, $order, $offset, $limit );
 			}
 
@@ -687,7 +687,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			// Merged: newest row wins per item (incl. pulse removed), then filter.
-			$filter    = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
+			$filter    = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
 			$key_in    = implode(
 				',',
 				array_map(
@@ -697,9 +697,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$filter['keys']
 				)
 			);
-			$pulse     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $parsed_args['type'] );
-			$since     = WP_Ulike_Pulse_Config::dual_since();
+			$pulse     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $parsed_args['type'] );
+			$since     = Flavor_Like_Pulse_Config::dual_since();
 			$since_sql = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 			$limit_sql = $limit > 0 ? $wpdb->prepare( ' LIMIT %d, %d', $offset, $limit ) : '';
 			$active_w  = $filter['active_only'] ? " WHERE lastStatus <> 'removed'" : '';
@@ -727,7 +727,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$user_id,
 					(string) $user_id,
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -748,8 +748,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				'per_page' => 10,
 			);
 			$parsed_args  = wp_parse_args( $args, $defaults );
-			$parsed_args  = array_merge( wp_ulike_get_table_info( $parsed_args['type'] ), $parsed_args );
-			$period_limit = wp_ulike_get_period_limit_sql( $parsed_args['period'] );
+			$parsed_args  = array_merge( flavor_like_get_table_info( $parsed_args['type'] ), $parsed_args );
+			$period_limit = flavor_like_get_period_limit_sql( $parsed_args['period'] );
 			$status_sql   = self::legacy_status_where( 'status', $parsed_args['status'] );
 			$mode         = self::read_mode();
 			$offset       = ( (int) $parsed_args['page'] - 1 ) * (int) $parsed_args['per_page'];
@@ -760,8 +760,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				return self::query_users_pulse( $parsed_args['type'], $parsed_args['status'], $period_limit, $order, $offset, $limit );
 			}
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return self::query_users_pulse( $parsed_args['type'], $parsed_args['status'], $period_limit, $order, $offset, $limit );
 			}
 
@@ -784,7 +784,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			// Merged: collapse to one row per (user, item); drop superseded unlikes.
-			$filter    = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
+			$filter    = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
 			$key_in    = implode(
 				',',
 				array_map(
@@ -794,9 +794,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$filter['keys']
 				)
 			);
-			$pulse     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $parsed_args['type'] );
-			$since     = WP_Ulike_Pulse_Config::dual_since();
+			$pulse     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $parsed_args['type'] );
+			$since     = Flavor_Like_Pulse_Config::dual_since();
 			$since_sql = $since ? $wpdb->prepare( ' AND p.date_time >= %s', $since ) : '';
 			$period_p  = str_replace( 'date_time', 'p.date_time', $period_limit );
 			$period_t  = str_replace( 'date_time', 't.date_time', $period_limit );
@@ -833,7 +833,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					GROUP BY userID
 					ORDER BY score {$order}{$limit_sql}",
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -891,8 +891,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function vote_events_sql( $period, $status = array( 'like', 'dislike' ) ) {
 			global $wpdb;
 
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
-			$statuses     = WP_Ulike_Pulse_Vote_Map::normalize_status_filter( $status );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
+			$statuses     = Flavor_Like_Pulse_Vote_Map::normalize_status_filter( $status );
 			$status_in    = implode(
 				',',
 				array_map(
@@ -907,8 +907,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			$union = array();
 
 			if ( 'legacy' === $mode || 'merged' === $mode ) {
-				foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
-					if ( ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+				foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
+					if ( ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 						continue;
 					}
 					$t         = esc_sql( $source['table'] );
@@ -919,9 +919,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			if ( 'pulse' === $mode || 'merged' === $mode ) {
-				$pulse  = esc_sql( WP_Ulike_Pulse_Schema::table() );
-				$since  = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', WP_Ulike_Pulse_Config::dual_since() ) : '';
-				$filter = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $statuses );
+				$pulse  = esc_sql( Flavor_Like_Pulse_Schema::table() );
+				$since  = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', Flavor_Like_Pulse_Config::dual_since() ) : '';
+				$filter = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $statuses );
 				$key_in = implode(
 					',',
 					array_map(
@@ -957,8 +957,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		public static function count_unique_engagers( $period, $status = array( 'like', 'dislike' ) ) {
 			global $wpdb;
 
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
-			$statuses     = WP_Ulike_Pulse_Vote_Map::normalize_status_filter( $status );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
+			$statuses     = Flavor_Like_Pulse_Vote_Map::normalize_status_filter( $status );
 			$status_in    = implode(
 				',',
 				array_map(
@@ -973,8 +973,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			$union = array();
 
 			if ( 'legacy' === $mode || 'merged' === $mode ) {
-				foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
-					if ( ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+				foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
+					if ( ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 						continue;
 					}
 					$t = esc_sql( $source['table'] );
@@ -983,9 +983,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			}
 
 			if ( 'pulse' === $mode || 'merged' === $mode ) {
-				$pulse  = esc_sql( WP_Ulike_Pulse_Schema::table() );
-				$since  = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', WP_Ulike_Pulse_Config::dual_since() ) : '';
-				$filter = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $statuses );
+				$pulse  = esc_sql( Flavor_Like_Pulse_Schema::table() );
+				$since  = 'merged' === $mode ? $wpdb->prepare( ' AND date_time >= %s', Flavor_Like_Pulse_Config::dual_since() ) : '';
+				$filter = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $statuses );
 				$key_in = implode(
 					',',
 					array_map(
@@ -1023,11 +1023,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			global $wpdb;
 
 			$item_id = absint( $item_id );
-			$type    = wp_ulike_get_type_by_table( str_replace( $wpdb->prefix, '', $table_name ) );
+			$type    = flavor_like_get_type_by_table( str_replace( $wpdb->prefix, '', $table_name ) );
 			$mode    = self::read_mode();
 
 		if ( 'pulse' === $mode ) {
-			$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			// Latest row per user, keep only active likes — one entry per user.
 			return $wpdb->get_col(
 				$wpdb->prepare(
@@ -1042,19 +1042,19 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					WHERE p.status = %s AND p.engagement_key = %s
 					ORDER BY p.date_time DESC LIMIT %d",
 					$item_id,
-					WP_Ulike_Pulse_Registry::from_setting_type( $type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
-					WP_Ulike_Pulse_Vote_Map::ROW_ACTIVE,
-					WP_Ulike_Pulse_Vote_Map::KEY_LIKE,
+					Flavor_Like_Pulse_Registry::from_setting_type( $type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Vote_Map::ROW_ACTIVE,
+					Flavor_Like_Pulse_Vote_Map::KEY_LIKE,
 					absint( $limit )
 				)
 			);
 		}
 
 			$users  = array();
-			$source = $type ? WP_Ulike_Pulse_Registry::legacy_source_for_type( $type ) : null;
+			$source = $type ? Flavor_Like_Pulse_Registry::legacy_source_for_type( $type ) : null;
 
-		if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+		if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 			$table  = esc_sql( $source['table'] );
 			$column = esc_sql( $source['column'] );
 			// Latest row per user whose latest action is a like — mirrors
@@ -1075,7 +1075,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					ORDER BY p.date_time DESC
 					LIMIT %d",
 					$item_id,
-					WP_Ulike_Pulse_Vote_Map::ACTION_LIKE,
+					Flavor_Like_Pulse_Vote_Map::ACTION_LIKE,
 					absint( $limit )
 				)
 			);
@@ -1089,7 +1089,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			$item_id,
 			$type,
 			$limit,
-			WP_Ulike_Pulse_Config::dual_since()
+			Flavor_Like_Pulse_Config::dual_since()
 		);
 
 		// Merged mode: a user may have liked pre-cutover (legacy status=like)
@@ -1100,7 +1100,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		// candidate user IDs needs checking -- not every unlike ever recorded
 		// for the item (unbounded on a viral post with heavy like/unlike churn).
 		if ( ! empty( $users ) ) {
-			$removed_users = self::fetch_pulse_unlikers( $item_id, $type, WP_Ulike_Pulse_Config::dual_since(), (array) $users );
+			$removed_users = self::fetch_pulse_unlikers( $item_id, $type, Flavor_Like_Pulse_Config::dual_since(), (array) $users );
 			if ( ! empty( $removed_users ) ) {
 				$users = array_diff( (array) $users, $removed_users );
 			}
@@ -1133,14 +1133,14 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_pulse_item_votes( $item_id, $type, $status, $is_distinct, $period_limit, $since ) {
 			global $wpdb;
 
-			$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $type );
+			$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $type );
 			$count     = $is_distinct ? 'DISTINCT user_id' : '*';
 
 			if ( 'all' === $status ) {
 				$status_sql = "engagement_key IN ('like','dislike') AND status = 'active'";
 			} else {
-				$mapped     = WP_Ulike_Pulse_Vote_Map::legacy_to_row( $status );
+				$mapped     = Flavor_Like_Pulse_Vote_Map::legacy_to_row( $status );
 				$status_sql = $wpdb->prepare(
 					'engagement_key = %s AND status = %s',
 					$mapped['engagement_key'],
@@ -1157,7 +1157,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					AND {$status_sql} {$since_sql} {$period_limit}",
 					absint( $item_id ),
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -1175,9 +1175,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 
 			$legacy_table = esc_sql( $wpdb->prefix . $table_info['table'] );
 			$column       = esc_sql( $table_info['column'] );
-			$pulse_table  = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type    = WP_Ulike_Pulse_Registry::from_setting_type( $type );
-			$since        = WP_Ulike_Pulse_Config::dual_since();
+			$pulse_table  = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type    = Flavor_Like_Pulse_Registry::from_setting_type( $type );
+			$since        = Flavor_Like_Pulse_Config::dual_since();
 			$item_id      = absint( $item_id );
 
 			if ( 'all' === $status ) {
@@ -1185,7 +1185,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				$eng_status    = "e.engagement_key IN ('like','dislike') AND e.status = 'active'";
 			} else {
 				$legacy_status = $wpdb->prepare( 'l.status = %s', $status );
-				$mapped        = WP_Ulike_Pulse_Vote_Map::legacy_to_row( $status );
+				$mapped        = Flavor_Like_Pulse_Vote_Map::legacy_to_row( $status );
 				$eng_status    = $wpdb->prepare( 'e.engagement_key = %s AND e.status = %s', $mapped['engagement_key'], $mapped['status'] );
 			}
 
@@ -1211,9 +1211,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					)",
 					$item_id,
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$since,
-					WP_Ulike_Pulse_Vote_Map::ROW_REMOVED
+					Flavor_Like_Pulse_Vote_Map::ROW_REMOVED
 				);
 			}
 
@@ -1230,7 +1230,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$item_id,
 					$item_id,
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$since
 				)
 			);
@@ -1244,8 +1244,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function count_pulse_logs( $period, $since = '' ) {
 		global $wpdb;
 
-		$period_limit = wp_ulike_get_period_limit_sql( $period );
-		$table        = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$period_limit = flavor_like_get_period_limit_sql( $period );
+		$table        = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		// In merged mode $since is dual_since. Vote rows are duplicated in
 		// legacy tables before the cutover, so scope only vote rows to
 		// $since. Emoji/star have no legacy counterpart — never since-filter.
@@ -1253,7 +1253,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		if ( $since ) {
 			$since_sql = $wpdb->prepare(
 				" AND ( engagement_kind IN ('emoji','star') OR ( engagement_kind = %s AND date_time >= %s ) )",
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
 				$since
 			);
 		}
@@ -1278,14 +1278,14 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function count_pulse_non_vote_logs( $period, $since = '', $item_type = '' ) {
 		global $wpdb;
 
-		$period_limit = wp_ulike_get_period_limit_sql( $period );
-		$table        = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$period_limit = flavor_like_get_period_limit_sql( $period );
+		$table        = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		$since_sql    = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 		$type_sql     = '';
 		if ( $item_type ) {
 			$type_sql = $wpdb->prepare(
 				' AND item_type = %s',
-				WP_Ulike_Pulse_Registry::normalize_item_type( $item_type )
+				Flavor_Like_Pulse_Registry::normalize_item_type( $item_type )
 			);
 		}
 
@@ -1303,15 +1303,15 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function count_pulse_logs_for_type( $item_type, $period, $since = '' ) {
 		global $wpdb;
 
-		$period_limit = wp_ulike_get_period_limit_sql( $period );
-		$table        = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$period_limit = flavor_like_get_period_limit_sql( $period );
+		$table        = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		// Scope only vote rows to $since (dual_since); emoji/star have no
 		// legacy counterpart and must never be since-filtered in merged mode.
 		$since_sql = '';
 		if ( $since ) {
 			$since_sql = $wpdb->prepare(
 				" AND ( engagement_kind IN ('emoji','star') OR ( engagement_kind = %s AND date_time >= %s ) )",
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
 				$since
 			);
 		}
@@ -1322,7 +1322,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		return (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM `{$table}` WHERE item_type = %s{$since_sql}{$period_limit}",
-				WP_Ulike_Pulse_Registry::normalize_item_type( $item_type )
+				Flavor_Like_Pulse_Registry::normalize_item_type( $item_type )
 			)
 		);
 	}
@@ -1341,15 +1341,15 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_pulse_vote_logs_for_type( $item_type, $period, $since = '' ) {
 			global $wpdb;
 
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
-			$table        = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
+			$table        = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			$since_sql    = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 
 			return (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM `{$table}` WHERE item_type = %s AND engagement_kind = %s{$since_sql}{$period_limit}",
-					WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -1364,8 +1364,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_pulse_status_for_type( $item_type, $legacy_status, $period_limit, $since ) {
 			global $wpdb;
 
-			$mapped    = WP_Ulike_Pulse_Vote_Map::legacy_to_row( $legacy_status );
-			$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$mapped    = Flavor_Like_Pulse_Vote_Map::legacy_to_row( $legacy_status );
+			$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			$since_sql = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 
 			return (int) $wpdb->get_var(
@@ -1373,8 +1373,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					"SELECT COUNT(*) FROM `{$table}`
 					WHERE item_type = %s AND engagement_kind = %s
 					AND engagement_key = %s AND status = %s {$since_sql} {$period_limit}",
-					WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$mapped['engagement_key'],
 					$mapped['status']
 				)
@@ -1400,9 +1400,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_merged_unique_voters_for_type( $item_type, $legacy_table, $legacy_column, $period_limit ) {
 			global $wpdb;
 
-			$pulse_table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$pulse_table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			$column      = esc_sql( $legacy_column );
-			$since       = WP_Ulike_Pulse_Config::dual_since();
+			$since       = Flavor_Like_Pulse_Config::dual_since();
 			$legacy_per  = str_replace( 'date_time', 'l.date_time', $period_limit );
 			$eng_per     = str_replace( 'date_time', 'e.date_time', $period_limit );
 
@@ -1419,10 +1419,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 						) latest ON p.id = latest.max_id
 						WHERE p.item_id = l.`{$column}` AND CAST(p.user_id AS CHAR) = CAST(l.user_id AS CHAR) AND p.status = %s
 					)",
-					WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$since,
-					WP_Ulike_Pulse_Vote_Map::ROW_REMOVED
+					Flavor_Like_Pulse_Vote_Map::ROW_REMOVED
 				);
 			}
 
@@ -1439,8 +1439,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 						WHERE e.item_type = %s AND e.engagement_kind = %s AND e.status = 'active'
 						AND e.date_time >= %s {$eng_per}
 					) AS combined WHERE actor IS NOT NULL",
-					WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$since
 				)
 			);
@@ -1474,7 +1474,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function count_pulse_unique_voters_for_type( $item_type, $period_limit, $since ) {
 		global $wpdb;
 
-		$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		$since_sql = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 		$actor_sql = self::distinct_actor_sql();
 
@@ -1484,8 +1484,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					SELECT {$actor_sql} AS actor FROM `{$table}`
 					WHERE item_type = %s AND engagement_kind = %s {$since_sql} {$period_limit}
 				) AS voters WHERE actor IS NOT NULL",
-				WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-				WP_Ulike_Pulse_Registry::KIND_VOTE
+				Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+				Flavor_Like_Pulse_Registry::KIND_VOTE
 			)
 		);
 	}
@@ -1503,25 +1503,25 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	public static function count_unique_interactors_for_type( $item_type, $period = 'all' ) {
 		global $wpdb;
 
-		$item_type    = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
-		$period_limit = wp_ulike_get_period_limit_sql( $period );
+		$item_type    = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
+		$period_limit = flavor_like_get_period_limit_sql( $period );
 		$mode         = self::read_mode();
-		$source       = WP_Ulike_Pulse_Registry::legacy_source_for_type( $item_type );
-		$pulse_table  = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$source       = Flavor_Like_Pulse_Registry::legacy_source_for_type( $item_type );
+		$pulse_table  = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		$actor_sql    = self::distinct_actor_sql();
 
 		// Pulse slice: all engagement kinds. In merged mode, scope vote rows to
 		// dual_since (legacy holds pre-cutover votes); emoji/star have no legacy
 		// counterpart so they are never since-filtered. Apply the period window.
 		$pulse_per = $period_limit;
-		if ( 'merged' === $mode && WP_Ulike_Pulse_Config::dual_since() ) {
-			$since     = WP_Ulike_Pulse_Config::dual_since();
+		if ( 'merged' === $mode && Flavor_Like_Pulse_Config::dual_since() ) {
+			$since     = Flavor_Like_Pulse_Config::dual_since();
 			$pulse_sql = $wpdb->prepare(
 				"SELECT {$actor_sql} AS actor FROM `{$pulse_table}`
 				WHERE item_type = %s AND status = 'active'
 				AND ( engagement_kind IN ('emoji','star') OR ( engagement_kind = %s AND date_time >= %s ) ) {$pulse_per}",
 				$item_type,
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
 				$since
 			);
 		} else {
@@ -1535,7 +1535,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		// Legacy slice: classic votes (legacy tables have no emoji/star).
 		$union = array( $pulse_sql );
 		if ( ( 'legacy' === $mode || 'merged' === $mode ) && $source
-			&& WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			&& Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 			$legacy_table = esc_sql( $source['table'] );
 			$legacy_per   = str_replace( 'date_time', 'l.date_time', $period_limit );
 			$legacy_actor = self::distinct_actor_sql( 'l' );
@@ -1555,11 +1555,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_all_legacy_logs( $period ) {
 			global $wpdb;
 
-			$period_limit = wp_ulike_get_period_limit_sql( $period );
+			$period_limit = flavor_like_get_period_limit_sql( $period );
 			$total        = 0;
 
 			foreach ( self::log_table_names() as $table ) {
-				if ( ! WP_Ulike_Pulse_Registry::table_exists( $table ) ) {
+				if ( ! Flavor_Like_Pulse_Registry::table_exists( $table ) ) {
 					continue;
 				}
 				$t = esc_sql( $table );
@@ -1581,12 +1581,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function popular_from_legacy( $parsed_args, $info_args, $period_limit, $user_condition, $related_condition, $limit_records ) {
 			global $wpdb;
 
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
-			if ( ! $source || ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
+			if ( ! $source || ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				return array();
 			}
 
-			$statuses = WP_Ulike_Pulse_Vote_Map::normalize_status_filter( $parsed_args['status'] );
+			$statuses = Flavor_Like_Pulse_Vote_Map::normalize_status_filter( $parsed_args['status'] );
 			$status_in = implode(
 				',',
 				array_map(
@@ -1599,7 +1599,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 
 			$table   = esc_sql( $source['table'] );
 			$column  = esc_sql( $source['column'] );
-			$count   = wp_ulike_setting_repo::isDistinct( $parsed_args['type'] ) ? 'COUNT(DISTINCT t.user_id)' : "COUNT(t.`{$column}`)";
+			$count   = flavor_like_setting_repo::isDistinct( $parsed_args['type'] ) ? 'COUNT(DISTINCT t.user_id)' : "COUNT(t.`{$column}`)";
 			$order_by = esc_sql( $parsed_args['is_popular'] ? 'counter' : 'item_ID' );
 			$order    = strtoupper( $parsed_args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
 			$join     = self::popular_content_join( $parsed_args, $info_args, $related_condition, 't', $column );
@@ -1625,13 +1625,13 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function popular_from_pulse( $parsed_args, $info_args, $period_limit, $user_condition, $related_condition, $limit_records, $since = '' ) {
 			global $wpdb;
 
-			if ( ! WP_Ulike_Pulse_Schema::table_exists() ) {
+			if ( ! Flavor_Like_Pulse_Schema::table_exists() ) {
 				return array();
 			}
 
-			$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $parsed_args['type'] );
-			$filter    = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
+			$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $parsed_args['type'] );
+			$filter    = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
 			$key_in    = implode(
 				',',
 				array_map(
@@ -1642,7 +1642,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				)
 			);
 			$status_sql = $filter['active_only'] ? "t.status = 'active'" : "t.status IN ('active','removed')";
-			$count      = wp_ulike_setting_repo::isDistinct( $parsed_args['type'] ) ? 'COUNT(DISTINCT t.user_id)' : 'COUNT(t.item_id)';
+			$count      = flavor_like_setting_repo::isDistinct( $parsed_args['type'] ) ? 'COUNT(DISTINCT t.user_id)' : 'COUNT(t.item_id)';
 			$order_by   = esc_sql( $parsed_args['is_popular'] ? 'counter' : 'item_ID' );
 			$order      = strtoupper( $parsed_args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
 			$join       = self::popular_content_join( $parsed_args, $info_args, $related_condition, 't', 'item_id', true );
@@ -1657,7 +1657,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					AND {$status_sql} {$user_condition} {$period_sql}{$since_sql}
 					GROUP BY t.item_id ORDER BY `{$order_by}` {$order} {$limit_records}",
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}
@@ -1678,11 +1678,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function popular_from_merged( $parsed_args, $info_args, $period_limit, $user_condition, $related_condition, $limit_records ) {
 			global $wpdb;
 
-			$since  = WP_Ulike_Pulse_Config::dual_since();
-			$source = WP_Ulike_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
+			$since  = Flavor_Like_Pulse_Config::dual_since();
+			$source = Flavor_Like_Pulse_Registry::legacy_source_for_type( $parsed_args['type'] );
 			$parts  = array();
 
-			$statuses  = WP_Ulike_Pulse_Vote_Map::normalize_status_filter( $parsed_args['status'] );
+			$statuses  = Flavor_Like_Pulse_Vote_Map::normalize_status_filter( $parsed_args['status'] );
 			$status_in = implode(
 				',',
 				array_map(
@@ -1692,17 +1692,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					$statuses
 				)
 			);
-			$is_distinct = wp_ulike_setting_repo::isDistinct( $parsed_args['type'] );
+			$is_distinct = flavor_like_setting_repo::isDistinct( $parsed_args['type'] );
 			$order_by    = esc_sql( $parsed_args['is_popular'] ? 'counter' : 'item_ID' );
 			$order       = strtoupper( $parsed_args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
-			$item_type   = WP_Ulike_Pulse_Registry::from_setting_type( $parsed_args['type'] );
-			$pulse       = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$item_type   = Flavor_Like_Pulse_Registry::from_setting_type( $parsed_args['type'] );
+			$pulse       = esc_sql( Flavor_Like_Pulse_Schema::table() );
 
 			// Distinct: union (item, user) once, then count — never SUM of two DISTINCT counts.
 			if ( $is_distinct ) {
 				$user_parts = array();
 
-				if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+				if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 					$table  = esc_sql( $source['table'] );
 					$column = esc_sql( $source['column'] );
 					$join   = self::popular_content_join( $parsed_args, $info_args, $related_condition, 't', $column );
@@ -1725,8 +1725,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 						)";
 				}
 
-				if ( WP_Ulike_Pulse_Schema::table_exists() ) {
-					$filter = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
+				if ( Flavor_Like_Pulse_Schema::table_exists() ) {
+					$filter = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
 					$key_in = implode(
 						',',
 						array_map(
@@ -1747,7 +1747,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 						WHERE t.item_type = %s AND t.engagement_kind = %s AND t.engagement_key IN ({$key_in})
 						AND {$status_sql} {$user_condition} {$period_sql}{$since_sql}",
 						$item_type,
-						WP_Ulike_Pulse_Registry::KIND_VOTE
+						Flavor_Like_Pulse_Registry::KIND_VOTE
 					);
 				}
 
@@ -1762,7 +1762,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				);
 			}
 
-			if ( $source && WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			if ( $source && Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 				$table  = esc_sql( $source['table'] );
 				$column = esc_sql( $source['column'] );
 				$count  = "COUNT(t.`{$column}`)";
@@ -1772,8 +1772,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					GROUP BY t.`{$column}`";
 			}
 
-			if ( WP_Ulike_Pulse_Schema::table_exists() ) {
-				$filter    = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
+			if ( Flavor_Like_Pulse_Schema::table_exists() ) {
+				$filter    = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $parsed_args['status'] );
 				$key_in    = implode(
 					',',
 					array_map(
@@ -1795,7 +1795,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					AND {$status_sql} {$user_condition} {$period_sql}{$since_sql}
 					GROUP BY t.item_id",
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				);
 			}
 
@@ -1849,7 +1849,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function fetch_pulse_activity_row( $item_id, $user_id, $type ) {
 		global $wpdb;
 
-		$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		return $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT id, item_id, user_id, date_time,
@@ -1859,9 +1859,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				AND engagement_kind = %s AND status = %s
 				ORDER BY date_time DESC, id DESC LIMIT 1",
 				absint( $item_id ),
-				WP_Ulike_Pulse_Registry::from_setting_type( $type ),
+				Flavor_Like_Pulse_Registry::from_setting_type( $type ),
 				(string) $user_id,
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
 				'active'
 			)
 		);
@@ -1879,7 +1879,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function count_pulse_votes_in_range( $item_id, $type, $user_id, $start, $end, $since ) {
 			global $wpdb;
 
-			$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			$since_sql = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 
 			return (int) $wpdb->get_var(
@@ -1888,9 +1888,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					WHERE item_id = %d AND item_type = %s AND user_id = %s AND engagement_kind = %s
 					AND date_time >= %s AND date_time <= %s {$since_sql}",
 					absint( $item_id ),
-					WP_Ulike_Pulse_Registry::from_setting_type( $type ),
+					Flavor_Like_Pulse_Registry::from_setting_type( $type ),
 					(string) $user_id,
-					WP_Ulike_Pulse_Registry::KIND_VOTE,
+					Flavor_Like_Pulse_Registry::KIND_VOTE,
 					$start,
 					$end
 				)
@@ -1905,7 +1905,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function legacy_status_where( $column, $status ) {
 			global $wpdb;
 
-			$status = wp_ulike_normalize_vote_statuses( $status );
+			$status = flavor_like_normalize_vote_statuses( $status );
 			if ( is_array( $status ) ) {
 				$values = array_map(
 					function ( $s ) use ( $wpdb ) {
@@ -1933,12 +1933,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function query_user_items_pulse( $user_id, $type, $status, $period_limit, $order, $offset, $limit, $since = '' ) {
 			global $wpdb;
 
-			$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $type );
+			$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $type );
 			$period    = $period_limit;
 			$limit_sql = $limit > 0 ? $wpdb->prepare( ' LIMIT %d, %d', $offset, $limit ) : '';
 
-			$filter     = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $status );
+			$filter     = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $status );
 			$key_in     = implode(
 				',',
 				array_map(
@@ -1963,7 +1963,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					ORDER BY datetime {$order} {$limit_sql}",
 					(string) $user_id,
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 
@@ -1983,12 +1983,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 		private static function query_users_pulse( $type, $status, $period_limit, $order, $offset, $limit, $since = '' ) {
 			global $wpdb;
 
-			$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
-			$item_type = WP_Ulike_Pulse_Registry::from_setting_type( $type );
+			$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
+			$item_type = Flavor_Like_Pulse_Registry::from_setting_type( $type );
 			$period    = $period_limit;
 			$limit_sql = $limit > 0 ? $wpdb->prepare( ' LIMIT %d, %d', $offset, $limit ) : '';
 
-			$filter     = WP_Ulike_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $status );
+			$filter     = Flavor_Like_Pulse_Vote_Map::pulse_filter_from_legacy_statuses( $status );
 			$key_in     = implode(
 				',',
 				array_map(
@@ -2014,7 +2014,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 					GROUP BY t.user_id
 					ORDER BY score {$order} {$limit_sql}",
 					$item_type,
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 
@@ -2031,7 +2031,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 	private static function fetch_pulse_likers( $item_id, $type, $limit, $since = '' ) {
 		global $wpdb;
 
-		$table     = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$table     = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		$since_sql = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 
 		// One entry per user, latest action wins: take the newest row per
@@ -2053,10 +2053,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				ORDER BY p.date_time DESC
 				LIMIT %d",
 				absint( $item_id ),
-				WP_Ulike_Pulse_Registry::from_setting_type( $type ),
-				WP_Ulike_Pulse_Registry::KIND_VOTE,
-				WP_Ulike_Pulse_Vote_Map::ROW_ACTIVE,
-				WP_Ulike_Pulse_Vote_Map::KEY_LIKE,
+				Flavor_Like_Pulse_Registry::from_setting_type( $type ),
+				Flavor_Like_Pulse_Registry::KIND_VOTE,
+				Flavor_Like_Pulse_Vote_Map::ROW_ACTIVE,
+				Flavor_Like_Pulse_Vote_Map::KEY_LIKE,
 				absint( $limit )
 			)
 		);
@@ -2081,7 +2081,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 			return array();
 		}
 
-		$table        = esc_sql( WP_Ulike_Pulse_Schema::table() );
+		$table        = esc_sql( Flavor_Like_Pulse_Schema::table() );
 		$since_sql    = $since ? $wpdb->prepare( ' AND date_time >= %s', $since ) : '';
 		$placeholders = implode( ',', array_fill( 0, count( $candidate_users ), '%s' ) );
 
@@ -2102,13 +2102,13 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Query' ) ) {
 				array_merge(
 					array(
 						absint( $item_id ),
-						WP_Ulike_Pulse_Registry::from_setting_type( $type ),
-						WP_Ulike_Pulse_Registry::KIND_VOTE,
+						Flavor_Like_Pulse_Registry::from_setting_type( $type ),
+						Flavor_Like_Pulse_Registry::KIND_VOTE,
 					),
 					array_map( 'strval', $candidate_users ),
 					array(
-						WP_Ulike_Pulse_Vote_Map::ROW_REMOVED,
-						WP_Ulike_Pulse_Vote_Map::KEY_LIKE,
+						Flavor_Like_Pulse_Vote_Map::ROW_REMOVED,
+						Flavor_Like_Pulse_Vote_Map::KEY_LIKE,
 					)
 				)
 			)

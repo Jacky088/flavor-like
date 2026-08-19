@@ -10,16 +10,16 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Register admin pages
-new wp_ulike_admin_pages();
+new flavor_like_admin_pages();
 
 // Include assets
-new wp_ulike_admin_assets();
+new flavor_like_admin_assets();
 
 // Trust, onboarding, health checks (autoload + file-level init hooks).
-WP_Ulike_Overview::init();
-WP_Ulike_Health::init();
+Flavor_Like_Overview::init();
+Flavor_Like_Health::init();
 
 // include about menu functions
-require_once( WP_ULIKE_ADMIN_DIR . '/admin-functions.php');
+require_once( FLAVOR_LIKE_ADMIN_DIR . '/admin-functions.php');
 // include logs menu functions
-require_once( WP_ULIKE_ADMIN_DIR . '/admin-hooks.php');
+require_once( FLAVOR_LIKE_ADMIN_DIR . '/admin-hooks.php');

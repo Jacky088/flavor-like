@@ -1,8 +1,8 @@
 <?php
 /**
- * WP ULike Block Server-Side Render
+ * Flavor Like Block Server-Side Render
  *
- * This file handles the server-side rendering of the WP ULike block
+ * This file handles the server-side rendering of the Flavor Like block
  */
 
 // If this file is called directly, abort.
@@ -34,7 +34,7 @@ $shortcode_atts = array(
 );
 
 // Detect if we're in a template builder context (REST API block rendering)
-$is_template_context = WpUlikeInit::is_rest();
+$is_template_context = FlavorLikeInit::is_rest();
 
 // Get current item ID dynamically based on type (if needed)
 $current_id = false;
@@ -77,9 +77,9 @@ if ( $use_current ) {
 				}
 			}
 
-			// Fallback: Use wp_ulike_get_the_id() (works in traditional post loops)
-			if ( empty( $current_id ) && function_exists( 'wp_ulike_get_the_id' ) ) {
-				$post_id = wp_ulike_get_the_id();
+			// Fallback: Use flavor_like_get_the_id() (works in traditional post loops)
+			if ( empty( $current_id ) && function_exists( 'flavor_like_get_the_id' ) ) {
+				$post_id = flavor_like_get_the_id();
 				if ( ! empty( $post_id ) ) {
 					$current_id = $post_id;
 				}
@@ -137,7 +137,7 @@ foreach ( $shortcode_atts as $key => $value ) {
 }
 
 // Generate shortcode
-$shortcode = '[wp_ulike ' . implode( ' ', $shortcode_args ) . ']';
+$shortcode = '[flavor_like ' . implode( ' ', $shortcode_args ) . ']';
 
 // Output the shortcode (it will be processed by WordPress)
 echo do_shortcode( $shortcode );

@@ -29,7 +29,7 @@ The following SVG images should be copied from the Pro version:
 ## Source Location
 
 Copy these images from:
-`/wp-content/plugins/wp-ulike-pro/assets/img/templates/`
+`/wp-content/plugins/flavor-like-pro/assets/img/templates/`
 
 ## Note
 

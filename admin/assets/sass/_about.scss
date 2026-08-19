@@ -2,7 +2,7 @@
  * About screen — WordPress 7–aligned admin layout
  */
 
-.wp-ulike-about {
+.flavor-like-about {
 	max-width: 1100px;
 	margin-top: 10px;
 
@@ -73,7 +73,7 @@
 	}
 }
 
-.wp-ulike-about-getting-started {
+.flavor-like-about-getting-started {
 	margin: 0;
 	padding-inline-start: 1.25em;
 	font-size: 14px;
@@ -93,7 +93,7 @@
 	}
 }
 
-.wp-ulike-about-card {
+.flavor-like-about-card {
 	background: #fff;
 	border: 1px solid #c3c4c7;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
@@ -203,7 +203,7 @@
 	}
 }
 
-.wp-ulike-about-task {
+.flavor-like-about-task {
 	&__header {
 		display: flex;
 		flex-wrap: wrap;
@@ -212,7 +212,7 @@
 		gap: 8px;
 		margin-bottom: 8px;
 
-		.wp-ulike-about-card__title {
+		.flavor-like-about-card__title {
 			margin-bottom: 0;
 		}
 	}
@@ -264,11 +264,11 @@
 	}
 }
 
-.wp-ulike-about-upsell {
+.flavor-like-about-upsell {
 	&__header {
 		margin-bottom: 16px;
 
-		.wp-ulike-about-card__title {
+		.flavor-like-about-card__title {
 			margin-bottom: 6px;
 		}
 	}
@@ -320,7 +320,7 @@
 				color: #996800;
 			}
 
-			.wp-ulike-about-upsell__feature-title {
+			.flavor-like-about-upsell__feature-title {
 				color: #1d2327;
 			}
 		}
@@ -360,7 +360,7 @@
 	}
 }
 
-.wp-ulike-about-summary {
+.flavor-like-about-summary {
 	margin: 0 0 16px;
 	padding: 10px 12px;
 	font-size: 13px;
@@ -370,7 +370,7 @@
 	border-inline-start: 3px solid #2271b1;
 }
 
-.wp-ulike-about-status-group {
+.flavor-like-about-status-group {
 	margin-bottom: 16px;
 
 	&:last-child {
@@ -388,7 +388,7 @@
 	}
 }
 
-.wp-ulike-about-status {
+.flavor-like-about-status {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 10px;
@@ -445,7 +445,7 @@
 	}
 }
 
-.wp-ulike-about-actions {
+.flavor-like-about-actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
@@ -483,7 +483,7 @@
 	}
 }
 
-.wp-ulike-about-modules {
+.flavor-like-about-modules {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -530,7 +530,7 @@
 	}
 }
 
-.wp-ulike-about-help {
+.flavor-like-about-help {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -584,7 +584,7 @@
 	}
 }
 
-.wp-ulike-about-meta {
+.flavor-like-about-meta {
 	margin: 0;
 
 	div {
@@ -614,7 +614,7 @@
 	}
 }
 
-.wp-ulike-about-troubleshoot__list {
+.flavor-like-about-troubleshoot__list {
 	margin: 0 0 4px;
 	padding-inline-start: 1.2em;
 	font-size: 13px;
@@ -634,8 +634,8 @@
 	}
 }
 
-.wp-ulike-about-backup {
-	.wp-ulike-about-card__title {
+.flavor-like-about-backup {
+	.flavor-like-about-card__title {
 		margin-bottom: 8px;
 	}
 
@@ -716,7 +716,7 @@
 	}
 }
 
-.wp-ulike-about-transfer {
+.flavor-like-about-transfer {
 	&__title {
 		margin: 0 0 8px;
 		padding: 0;
@@ -737,7 +737,7 @@
 	}
 }
 
-.wp-ulike-about-tools {
+.flavor-like-about-tools {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -763,26 +763,26 @@
 	}
 }
 
-hr.wp-ulike-about-card__body + hr,
-.wp-ulike-about-card__body hr {
+hr.flavor-like-about-card__body + hr,
+.flavor-like-about-card__body hr {
 	border: none;
 	border-top: 1px solid #dcdcde;
 	margin: 16px 0;
 }
 
-[dir='rtl'] .wp-ulike-about-meta dd,
-.rtl .wp-ulike-about-meta dd {
+[dir='rtl'] .flavor-like-about-meta dd,
+.rtl .flavor-like-about-meta dd {
 	text-align: start;
 }
 
-[dir='rtl'] .wp-ulike-about-troubleshoot__list,
-.rtl .wp-ulike-about-troubleshoot__list {
+[dir='rtl'] .flavor-like-about-troubleshoot__list,
+.rtl .flavor-like-about-troubleshoot__list {
 	padding-inline-start: 1.2em;
 	padding-inline-end: 0;
 }
 
-[dir='rtl'] .wp-ulike-about-card--details summary::before,
-.rtl .wp-ulike-about-card--details summary::before {
+[dir='rtl'] .flavor-like-about-card--details summary::before,
+.rtl .flavor-like-about-card--details summary::before {
 	margin-inline-end: 6px;
 	margin-inline-start: 0;
 }

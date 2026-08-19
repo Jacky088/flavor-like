@@ -2,16 +2,16 @@
 /**
  * Pulse Ledger — entity registry and legacy source mapping.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Registry' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Registry' ) ) {
 
-	final class WP_Ulike_Pulse_Registry {
+	final class Flavor_Like_Pulse_Registry {
 
 		const KIND_VOTE  = 'vote';
 		const KIND_EMOJI = 'emoji';
@@ -41,25 +41,25 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Registry' ) ) {
 			return array(
 				'posts' => array(
 					'item_type'   => self::ITEM_POST,
-					'table'       => $wpdb->prefix . 'ulike',
+					'table'       => $wpdb->prefix . 'flavor_like',
 					'column'      => 'post_id',
 					'meta_groups' => array( 'post', 'posts', 'likeThis' ),
 				),
 				'comments' => array(
 					'item_type'   => self::ITEM_COMMENT,
-					'table'       => $wpdb->prefix . 'ulike_comments',
+					'table'       => $wpdb->prefix . 'flavor_like_comments',
 					'column'      => 'comment_id',
 					'meta_groups' => array( 'comment', 'comments', 'likeThisComment' ),
 				),
 				'activities' => array(
 					'item_type'   => self::ITEM_ACTIVITY,
-					'table'       => $wpdb->prefix . 'ulike_activities',
+					'table'       => $wpdb->prefix . 'flavor_like_activities',
 					'column'      => 'activity_id',
 					'meta_groups' => array( 'activity', 'activities', 'buddypress', 'likeThisActivity' ),
 				),
 				'forums' => array(
 					'item_type'   => self::ITEM_TOPIC,
-					'table'       => $wpdb->prefix . 'ulike_forums',
+					'table'       => $wpdb->prefix . 'flavor_like_forums',
 					'column'      => 'topic_id',
 					'meta_groups' => array( 'topic', 'topics', 'bbpress', 'likeThisTopic' ),
 				),
@@ -98,7 +98,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Registry' ) ) {
 		}
 
 		/**
-		 * @param string $setting_type wp_ulike_setting_type slug.
+		 * @param string $setting_type flavor_like_setting_type slug.
 		 * @return string
 		 */
 		public static function from_setting_type( $setting_type ) {
@@ -186,7 +186,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Registry' ) ) {
 		}
 
 		/**
-		 * Query/join metadata for wp_ulike_get_table_info().
+		 * Query/join metadata for flavor_like_get_table_info().
 		 *
 		 * @param string $type Setting slug or canonical item type.
 		 * @return array<string,string>
@@ -323,7 +323,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Registry' ) ) {
 			global $wpdb;
 
 			$tables = array(
-				'meta' => $wpdb->prefix . 'ulike_meta',
+				'meta' => $wpdb->prefix . 'flavor_like_meta',
 			);
 
 			foreach ( self::legacy_sources() as $slug => $source ) {

@@ -1,0 +1,1323 @@
+/*!
+===============================================================
+ * Flavor Like
+ * @author Alimir [https://wordpress.org/plugins/flavor-like/]
+===============================================================
+*/
+.flavorlike {
+  display: block;
+  position: relative;
+  line-height: normal;
+  margin: 0;
+  padding: 10px 0;
+  box-sizing: border-box;
+  text-align: right;
+}
+.flavorlike *,
+.flavorlike *::before,
+.flavorlike *::after {
+  box-sizing: inherit;
+}
+.flavorlike .flavor_like_general_class {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+.flavorlike button.flavor_like_btn {
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 0.25em;
+  box-shadow: none;
+  padding: 1em;
+  font-size: 15px;
+  border: none;
+  text-align: center;
+  transition: none;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  width: auto;
+  max-width: none;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: inherit;
+}
+.flavorlike button.flavor_like_btn:hover, .flavorlike button.flavor_like_btn:active, .flavorlike button.flavor_like_btn:focus {
+  outline: none;
+}
+.flavorlike button.flavor_like_btn::-moz-focus-inner {
+  border: 0;
+}
+.flavorlike button.flavor_like_btn[disabled=disabled], .flavorlike button.flavor_like_btn:disabled {
+  cursor: not-allowed;
+}
+.flavorlike button.flavor_like_btn[disabled=disabled]:hover, .flavorlike button.flavor_like_btn[disabled=disabled]:active, .flavorlike button.flavor_like_btn[disabled=disabled]:focus, .flavorlike button.flavor_like_btn:disabled:hover, .flavorlike button.flavor_like_btn:disabled:active, .flavorlike button.flavor_like_btn:disabled:focus {
+  outline: none;
+  background-color: initial;
+}
+.flavorlike button.flavor_like_btn.flavor_like_put_text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 28px;
+  padding: 0 10px;
+  min-width: 50px;
+}
+.flavorlike .flavor_like_is_loading button.flavor_like_btn {
+  background-image: url(../img/svg/loader.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto;
+}
+.flavorlike .flavor_like_is_loading button.flavor_like_btn span {
+  visibility: hidden;
+}
+.flavorlike .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image::after {
+  content: none;
+}
+.flavorlike.flavorlike-hide-counter .count-box {
+  display: none;
+}
+.flavorlike .count-box:empty {
+  display: none;
+}
+
+#buddypress #activity-stream .activity-meta .flavorlike,
+#buddypress #activity-stream .activity-comments .flavorlike,
+#buddypress #activity-stream .activity-inner .flavorlike {
+  display: inline-block;
+  vertical-align: middle;
+}
+#buddypress #activity-stream .flavor_like_likers_wrapper li,
+#buddypress #activity-stream .flavor_like_likers_wrapper .flavor-like-liker {
+  border: none;
+  padding: 0;
+}
+#buddypress #activity-stream .flavor_like_likers_wrapper li a,
+#buddypress #activity-stream .flavor_like_likers_wrapper li img,
+#buddypress #activity-stream .flavor_like_likers_wrapper .flavor-like-liker a,
+#buddypress #activity-stream .flavor_like_likers_wrapper .flavor-like-liker img {
+  float: none;
+  padding: 0;
+  margin: 0;
+}
+
+#bbpress-forums .bbp-reply-content .flavorlike,
+#bbpress-forums .bbp-topic-content .flavorlike,
+#bbpress-forums .bbp-forum-content .flavorlike {
+  display: inline-block;
+  vertical-align: middle;
+}
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li,
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper .flavor-like-liker,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper li,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper .flavor-like-liker,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper li,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper .flavor-like-liker {
+  border: none;
+  padding: 0;
+}
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li a,
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li img,
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper .flavor-like-liker a,
+#bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper .flavor-like-liker img,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper li a,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper li img,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper .flavor-like-liker a,
+#bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper .flavor-like-liker img,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper li a,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper li img,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper .flavor-like-liker a,
+#bbpress-forums .bbp-forum-content .flavor_like_likers_wrapper .flavor-like-liker img {
+  float: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flavor_like_click_is_disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.flavor_like_hide_me {
+  visibility: hidden;
+}
+
+/**
+ * Default template
+ */
+.flavorlike-default button.flavor_like_btn {
+  color: #616161;
+  background-color: #e0e0e0;
+  min-height: 30px;
+  min-width: 50px;
+}
+.flavorlike-default button.flavor_like_btn:hover, .flavorlike-default button.flavor_like_btn:focus {
+  color: #616161;
+  background-color: #e0e0e0;
+  text-decoration: none;
+}
+.flavorlike-default button.flavor_like_btn[disabled=disabled]:hover, .flavorlike-default button.flavor_like_btn[disabled=disabled]:active, .flavorlike-default button.flavor_like_btn[disabled=disabled]:focus, .flavorlike-default button.flavor_like_btn:disabled:hover, .flavorlike-default button.flavor_like_btn:disabled:active, .flavorlike-default button.flavor_like_btn:disabled:focus {
+  background-color: #e0e0e0;
+}
+.flavorlike-default .flavor_like_is_liked .flavor_like_btn {
+  color: #757575;
+}
+.flavorlike-default .flavor_like_put_image:after {
+  content: "";
+  display: block;
+  background: url(../img/svg/like.svg) no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.flavorlike-default .flavor_like_put_image.flavor_like_btn_is_active:after {
+  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+}
+.flavorlike-default .count-box {
+  position: relative;
+  border-radius: 0.25em;
+  font-size: 13px;
+  text-decoration: none;
+  background-color: #FFFFFF;
+  margin-left: 8px;
+  line-height: 30px;
+  display: inline-block;
+  padding: 0 10px;
+  box-shadow: 0 0 0 1px #bdbdbd inset;
+  color: #616161;
+  vertical-align: middle;
+  text-align: center;
+}
+.flavorlike-default .count-box:before {
+  content: "";
+  display: block;
+  position: absolute;
+  border: 1px solid transparent;
+  background: #FFFFFF;
+  border-bottom-color: #bdbdbd;
+  left: -5px;
+  top: 50%;
+  border-left-color: #bdbdbd;
+  transform: rotate(45deg) translateY(-50%);
+  width: 5px;
+  height: 5px;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+#buddypress #activity-stream .activity-meta .flavorlike-default button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-default button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-default button.flavor_like_btn {
+  border-radius: 0;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #bdbdbd inset;
+  font-size: initial;
+  padding: 1em;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-default .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-default .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-default .flavor_like_is_loading button.flavor_like_btn {
+  background-image: url(../img/svg/loader.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/**
+ * Heart template
+ */
+.flavorlike-heart .flavor_like_general_class {
+  box-shadow: 0 0 0 1px #bdbdbd inset;
+  border-radius: 0.25em;
+  padding: 5px;
+}
+.flavorlike-heart .flavor_like_put_text {
+  padding: 0 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #757575;
+}
+.flavorlike-heart button.flavor_like_btn {
+  background: transparent;
+  padding: 15px;
+}
+.flavorlike-heart button.flavor_like_btn:hover, .flavorlike-heart button.flavor_like_btn:focus {
+  color: #757575;
+  background-color: transparent;
+  text-decoration: none;
+}
+.flavorlike-heart .flavor_like_put_image {
+  background: none;
+  padding: 15px;
+}
+.flavorlike-heart .flavor_like_put_image[disabled=disabled]:hover, .flavorlike-heart .flavor_like_put_image[disabled=disabled]:active, .flavorlike-heart .flavor_like_put_image[disabled=disabled]:focus, .flavorlike-heart .flavor_like_put_image:disabled:hover, .flavorlike-heart .flavor_like_put_image:disabled:active, .flavorlike-heart .flavor_like_put_image:disabled:focus {
+  padding: 15px;
+}
+.flavorlike-heart .flavor_like_put_image:after {
+  content: "";
+  display: block;
+  background: url(../img/svg/love.svg) no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.flavorlike-heart .flavor_like_put_image.flavor_like_btn_is_active:after {
+  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+}
+.flavorlike-heart .count-box {
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 28px;
+  display: inline-block;
+  color: #616161;
+  text-align: center;
+  font-weight: 600;
+  vertical-align: middle;
+  padding: 0 5px;
+}
+
+#buddypress #activity-stream .activity-meta .flavorlike-heart button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-heart button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-heart button.flavor_like_btn {
+  background-color: transparent;
+  border: 0;
+  font-size: initial;
+  padding: 1em;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_put_image,
+#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_put_image,
+#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_put_image {
+  padding: 10px 15px;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_put_image:after,
+#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_put_image:after,
+#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_put_image:after {
+  width: 17px;
+  height: 17px;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_general_class,
+#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_general_class,
+#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_general_class {
+  border-radius: 0;
+  padding: 0.1em 0.3em;
+  margin-bottom: 0;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn {
+  background-image: url(../img/svg/loader.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/**
+ * Robeen template
+ */
+.flavorlike-robeen .count-box {
+  font-weight: 600;
+  padding: 0 14px;
+  font-size: 16px;
+  color: inherit;
+}
+.flavorlike-robeen .flavor_like_is_loading button.flavor_like_btn {
+  background-image: initial;
+  padding: 0;
+}
+.flavorlike-robeen .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image:after {
+  content: "";
+}
+.flavorlike-robeen button.flavor_like_btn {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.flavorlike-robeen button.flavor_like_btn:hover, .flavorlike-robeen button.flavor_like_btn:focus {
+  background-color: transparent;
+}
+.flavorlike-robeen button.flavor_like_btn.flavor_like_btn_is_active {
+  overflow: visible;
+}
+.flavorlike-robeen .flavor_like_put_image:after {
+  content: "";
+  display: block;
+  background: url(../img/icons/twitter-heart.png) no-repeat;
+  background-position: 0 0;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.flavorlike-robeen .flavor_like_put_image.flavor_like_btn_is_active:after {
+  transition-duration: 1s;
+  background-position: -2800px 0;
+}
+
+#buddypress #activity-stream .activity-meta .flavorlike-robeen button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-robeen button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-robeen button.flavor_like_btn {
+  background: transparent;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Animated heart template
+ */
+.flavorlike-animated-heart button.flavor_like_btn {
+  position: relative;
+  border-radius: 50em;
+  background-color: #ffffff;
+  padding: 0;
+  box-shadow: 0px 5px 30px rgba(255, 111, 99, 0.4);
+  border: 0;
+  width: 50px;
+  height: 50px;
+}
+.flavorlike-animated-heart button.flavor_like_btn:hover, .flavorlike-animated-heart button.flavor_like_btn:focus {
+  background-color: #ffffff;
+  background-image: none;
+}
+.flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover, .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active, .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus, .flavorlike-animated-heart button.flavor_like_btn:disabled:hover, .flavorlike-animated-heart button.flavor_like_btn:disabled:active, .flavorlike-animated-heart button.flavor_like_btn:disabled:focus {
+  background-color: #ffffff;
+}
+.flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active {
+  background-color: rgb(255, 111, 99);
+}
+.flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus {
+  background-color: rgb(255, 111, 99);
+}
+.flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-svg-heart {
+  fill: #ffffff;
+}
+.flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-svg-heart-pop {
+  animation-direction: normal;
+}
+.flavorlike-animated-heart button.flavor_like_btn:active {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.flavorlike-animated-heart .flavor_like_is_loading button.flavor_like_btn {
+  background-image: initial;
+  padding: 0;
+}
+.flavorlike-animated-heart .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image:after {
+  content: "";
+}
+.flavorlike-animated-heart .flavorlike-svg-heart {
+  width: 20px;
+  fill: #ff6f63;
+  transition: fill 0.5s, transform 0.5s;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop {
+  position: absolute;
+  width: 30%;
+  fill: #ff6f63;
+  opacity: 0;
+  left: 0;
+  animation: popHearts 1s ease forwards reverse;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.one {
+  left: 1%;
+  transform: rotate(-10deg);
+  animation-delay: 0.45s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.two {
+  left: 15%;
+  transform: rotate(8deg);
+  animation-delay: 0.25s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.three {
+  left: 30%;
+  transform: rotate(-5deg);
+  animation-delay: 0s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.four {
+  left: 50%;
+  transform: rotate(-8deg);
+  animation-delay: 0.3s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.five {
+  left: 60%;
+  transform: rotate(-10deg);
+  animation-delay: 0.9s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.six {
+  left: 70%;
+  transform: rotate(-8deg);
+  animation-delay: 0.2s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.seven {
+  left: 85%;
+  transform: rotate(6deg);
+  animation-delay: 0.35s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.eight {
+  left: 90%;
+  transform: rotate(-4deg);
+  animation-delay: 0.5s;
+}
+.flavorlike-animated-heart .flavorlike-svg-heart-pop.nine {
+  left: 95%;
+  transform: rotate(8deg);
+  animation-delay: 0.2s;
+}
+.flavorlike-animated-heart .count-box {
+  margin: 0 15px;
+  color: #ff6f63;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn {
+  border-radius: 50em;
+  background-color: #ffffff;
+  padding: 0;
+  box-shadow: 0px 5px 30px rgba(255, 111, 99, 0.4);
+  border: 0;
+  width: 50px;
+  height: 50px;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:focus,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:hover,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:focus,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:hover,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:focus {
+  background-color: #ffffff;
+  background-image: none;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:focus,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:disabled:hover,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:disabled:active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:disabled:focus,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:disabled:hover,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:disabled:active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:disabled:focus {
+  background-color: #ffffff;
+}
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active {
+  background-color: rgb(255, 111, 99);
+}
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus {
+  background-color: rgb(255, 111, 99);
+}
+#buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:active,
+#buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:active,
+#buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:active {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+#buddypress #activity-stream .activity-meta .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-comments .flavor_like_is_loading button.flavor_like_btn,
+#buddypress #activity-stream .activity-inner .flavor_like_is_loading button.flavor_like_btn {
+  background-image: initial;
+}
+
+@keyframes popHearts {
+  0% {
+    left: calc(50% - 7px);
+    top: 10px;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    top: -20px;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/**
+ * Widgets & Likers Box
+ */
+.flavor_like_likers_wrapper {
+  margin: 10px 0;
+  flex: 0 0 100%;
+}
+.flavor_like_likers_wrapper:empty {
+  display: none;
+}
+.flavor_like_likers_wrapper .flavor-like-likers-list,
+.flavor_like_likers_wrapper .tiles {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.flavor_like_likers_wrapper .flavor-like-likers-list .flavor-like-liker,
+.flavor_like_likers_wrapper .flavor-like-likers-list li,
+.flavor_like_likers_wrapper .tiles .flavor-like-liker,
+.flavor_like_likers_wrapper .tiles li {
+  padding: 3px;
+  margin: 0;
+  list-style: none;
+  display: block;
+}
+.flavor_like_likers_wrapper .flavor-like-likers-list .flavor-like-liker a > img,
+.flavor_like_likers_wrapper .flavor-like-likers-list li a > img,
+.flavor_like_likers_wrapper .tiles .flavor-like-liker a > img,
+.flavor_like_likers_wrapper .tiles li a > img {
+  border-radius: 5px;
+  display: block;
+  border: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+.ulf-tooltip .flavor_like_likers_wrapper {
+  margin: 0;
+}
+
+.most_liked_users {
+  list-style-type: none !important;
+  position: relative !important;
+  margin: 10px 0 !important;
+  padding: 0 !important;
+}
+.most_liked_users li {
+  display: inline-table !important;
+  cursor: pointer !important;
+  margin: 0 2px !important;
+}
+.most_liked_users li img {
+  display: block !important;
+  float: none !important;
+}
+.most_liked_users li.inactive {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.commentlist .tiles .avatar,
+.commentlist .flavor-like-liker .avatar {
+  left: 0 !important;
+}
+
+.flavor_like_thumbnail {
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+}
+
+.most_liked_comment .avatar {
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+}
+
+.flavor_like_style_simple .wp_counter_span:before {
+  content: "(";
+}
+.flavor_like_style_simple .wp_counter_span:after {
+  content: ")";
+}
+
+.flavor_like_style_love .wp_counter_span {
+  float: right;
+  display: inline-block;
+  background: #f1f1f1 url(../img/icons/heart.png) 5px center no-repeat;
+  color: #333;
+  font-size: 9px;
+  line-height: 17px;
+  font-weight: 400;
+  margin: 2px 0 0 2px;
+  vertical-align: middle;
+  border-radius: 10px;
+  padding: 0 5px 0 23px;
+  z-index: 26;
+}
+
+/**
+ * Notification styles
+ */
+.flavorlike-notification {
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+  right: 20px;
+  bottom: 20px;
+}
+.flavorlike-notification * {
+  box-sizing: border-box;
+}
+.flavorlike-notification .flavorlike-message {
+  position: relative;
+  pointer-events: auto;
+  word-wrap: break-word;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 14px 15px 14px 65px;
+  width: 290px;
+  border-radius: 3px;
+  background-color: #007bc3;
+  color: #FFFFFF;
+  animation: flavorLikeNotifitcationsAnimation 200ms backwards;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+.flavorlike-notification .flavorlike-message:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.flavorlike-notification .flavorlike-message.flavorlike-message-fadeout {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+.flavorlike-notification .flavorlike-message:before {
+  content: "";
+  display: block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(../img/svg/info.svg);
+  background-size: 25px;
+  position: absolute;
+  left: 0;
+  width: 50px;
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.flavorlike-notification .flavorlike-message.flavorlike-success {
+  background-color: #20a779;
+}
+.flavorlike-notification .flavorlike-message.flavorlike-success:before {
+  background-image: url(../img/svg/success.svg);
+}
+.flavorlike-notification .flavorlike-message.flavorlike-error {
+  background-color: #ec4d2c;
+}
+.flavorlike-notification .flavorlike-message.flavorlike-error:before {
+  background-image: url(../img/svg/error.svg);
+}
+.flavorlike-notification .flavorlike-message.flavorlike-warning {
+  background-color: #f0a82f;
+}
+.flavorlike-notification .flavorlike-message.flavorlike-warning:before {
+  background-image: url(../img/svg/warning.svg);
+}
+
+@keyframes flavorLikeNotifitcationsAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .flavorlike-notification .flavorlike-message {
+    padding: 11px 11px 11px 55px;
+    font-size: 13px;
+  }
+  .flavorlike-notification .flavorlike-message:before {
+    background-size: 25px;
+    width: 45px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .flavorlike-notification {
+    left: 10px;
+    right: 10px;
+  }
+  .flavorlike-notification .flavorlike-message {
+    padding: 9px 9px 9px 45px;
+    font-size: 12px;
+    width: 100%;
+  }
+  .flavorlike-notification .flavorlike-message:before {
+    background-size: 15px;
+    width: 35px;
+  }
+}
+/* Flavor Like Tooltip - Modern Social Media Style */
+@keyframes ulf-tooltip-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes ulf-spinner-bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.ulf-tooltip {
+  position: absolute;
+  z-index: 9999;
+  max-width: 320px;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  pointer-events: auto;
+  animation: ulf-tooltip-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ulf-content {
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #262626;
+  word-wrap: break-word;
+  overflow: visible;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 20px;
+}
+
+.ulf-arrow {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border: 1px solid transparent;
+  box-sizing: content-box;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.ulf-tooltip[data-positioned=true] .ulf-arrow {
+  opacity: 1;
+}
+
+.ulf-arrow-bottom {
+  bottom: -4px;
+  left: 50%;
+  margin-left: -3.5px;
+  transform: rotate(45deg);
+  border-bottom-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+
+.ulf-arrow-top {
+  top: -4px;
+  left: 50%;
+  margin-left: -3.5px;
+  transform: rotate(45deg);
+  border-top-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+
+.ulf-arrow-left {
+  left: -4px;
+  top: 50%;
+  margin-top: -3.5px;
+  transform: rotate(45deg);
+  border-bottom-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+
+.ulf-arrow-right {
+  right: -4px;
+  top: 50%;
+  margin-top: -3.5px;
+  transform: rotate(45deg);
+  border-top-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+
+.ulf-white-theme {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25em;
+  overflow: visible;
+}
+.ulf-white-theme .ulf-content {
+  color: #262626;
+  padding: 8px 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.ulf-white-theme .ulf-arrow-bottom {
+  background: #ffffff;
+  border-bottom-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+.ulf-white-theme .ulf-arrow-top {
+  background: #ffffff;
+  border-top-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+.ulf-white-theme .ulf-arrow-left {
+  background: #ffffff;
+  border-bottom-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+.ulf-white-theme .ulf-arrow-right {
+  background: #ffffff;
+  border-top-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+.ulf-white-theme .ulf-spinner-circle {
+  background-color: #8e8e8e;
+}
+
+.ulf-light-theme {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25em;
+  overflow: visible;
+}
+.ulf-light-theme .ulf-content {
+  color: #1a202c;
+  padding: 8px 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.ulf-light-theme .ulf-arrow-bottom {
+  background: #ffffff;
+  border-bottom-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+.ulf-light-theme .ulf-arrow-top {
+  background: #ffffff;
+  border-top-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+.ulf-light-theme .ulf-arrow-left {
+  background: #ffffff;
+  border-bottom-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+}
+.ulf-light-theme .ulf-arrow-right {
+  background: #ffffff;
+  border-top-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+}
+.ulf-light-theme .ulf-spinner-circle {
+  background-color: #8e8e8e;
+}
+
+.ulf-small .ulf-content {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.ulf-tiny {
+  max-width: 280px;
+}
+.ulf-tiny .ulf-content {
+  padding: 3px 5px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ulf-tiny .ulf-arrow {
+  width: 6px;
+  height: 6px;
+}
+.ulf-tiny .ulf-arrow-bottom {
+  bottom: -3.5px;
+}
+.ulf-tiny .ulf-arrow-top {
+  top: -3.5px;
+}
+.ulf-tiny .ulf-arrow-left {
+  left: -3.5px;
+}
+.ulf-tiny .ulf-arrow-right {
+  right: -3.5px;
+}
+
+.ulf-large {
+  max-width: 480px;
+}
+.ulf-large .ulf-content {
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.ulf-loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  gap: 6px;
+  min-height: 20px;
+}
+
+.ulf-spinner-circle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #8e8e8e;
+  animation: ulf-spinner-bounce 1.2s infinite ease-in-out both;
+  flex-shrink: 0;
+}
+.ulf-spinner-circle:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.ulf-spinner-circle:nth-child(2) {
+  animation-delay: -0.16s;
+}
+.ulf-spinner-circle:nth-child(3) {
+  animation-delay: 0;
+}
+
+.ulf-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*!>>>>>>>>>>>>>>>>>>>>>>> #RTL <<<<<<<<<<<<<<<<<<<<<<<<<<< */
+.rtl .flavorlike-default .count-box {
+  margin-right: 8px;
+  margin-left: inherit;
+}
+.rtl .flavorlike-default .count-box:before {
+  right: -1px;
+  left: auto;
+  border-color: #bdbdbd #bdbdbd transparent transparent;
+}
+
+.rtl .commentlist .tiles .avatar {
+  left: inherit !important;
+  right: 0 !important;
+}
+.rtl .flavor_like_thumbnail {
+  margin: 0 0 0 10px;
+}
+.rtl .most_liked_comment .avatar {
+  margin: 0 0 0 10px;
+}
+.rtl .flavor_like_style_love .wp_counter_span {
+  float: left;
+  background: #F1F1F1 url(../img/icons/heart.png) no-repeat scroll 85% center;
+  margin: 2px 2px 0 0;
+  padding: 0 23px 0 5px;
+}
+
+.rtl .flavorlike-notification {
+  left: 20px;
+  right: inherit;
+}
+.rtl .flavorlike-notification .flavorlike-message {
+  padding: 14px 65px 14px 15px;
+}
+.rtl .flavorlike-notification .flavorlike-message:before {
+  left: auto;
+  right: 0;
+}
+@media screen and (max-width: 768px) {
+  .rtl .flavorlike-notification .flavorlike-message {
+    padding: 11px 55px 11px 11px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .rtl .flavorlike-notification {
+    left: 10px;
+    right: 10px;
+  }
+  .rtl .flavorlike-notification .flavorlike-message {
+    padding: 9px 45px 9px 9px;
+  }
+}
+
+.rtl .ulf-tooltip .ulf-arrow-bottom {
+  left: 50%;
+  margin-left: -3.5px;
+}
+.rtl .ulf-tooltip .ulf-arrow-top {
+  left: 50%;
+  margin-left: -3.5px;
+}
+.rtl .ulf-tooltip .ulf-arrow-left {
+  left: auto;
+  right: -4px;
+  border-top-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rtl .ulf-tooltip .ulf-arrow-right {
+  right: auto;
+  left: -4px;
+  border-bottom-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.rtl .ulf-tooltip.ulf-tiny .ulf-arrow-left {
+  right: -3.5px;
+  left: auto;
+}
+.rtl .ulf-tooltip.ulf-tiny .ulf-arrow-right {
+  left: -3.5px;
+  right: auto;
+}
+.rtl .ulf-tooltip .ulf-white-theme .ulf-arrow-left,
+.rtl .ulf-tooltip .ulf-light-theme .ulf-arrow-left {
+  border-top-color: #e2e8f0;
+  border-right-color: #e2e8f0;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rtl .ulf-tooltip .ulf-white-theme .ulf-arrow-right,
+.rtl .ulf-tooltip .ulf-light-theme .ulf-arrow-right {
+  border-bottom-color: #e2e8f0;
+  border-left-color: #e2e8f0;
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.rtl .ulf-centered {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+}
+
+
+/* =============================================
+   新增模板样式
+   ============================================= */
+
+/* 星星拇指模板 */
+.flavorlike-star-thumb button.flavor_like_btn {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  border: none;
+  border-radius: 50px;
+  padding: 8px 18px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 179, 0, 0.3);
+}
+.flavorlike-star-thumb button.flavor_like_btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 179, 0, 0.5);
+}
+.flavorlike-star-thumb button.flavor_like_btn.flavor_like_btn_is_active {
+  background: linear-gradient(135deg, #ff6b00 0%, #ff4500 100%);
+}
+.flavorlike-star-thumb .count-box {
+  background: #fff3cd;
+  color: #856404;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+/* 对勾标记模板 */
+.flavorlike-check-mark button.flavor_like_btn {
+  background: #f0f9f0;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #28a745;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+.flavorlike-check-mark button.flavor_like_btn:hover {
+  background: #28a745;
+  color: #fff;
+}
+.flavorlike-check-mark button.flavor_like_btn.flavor_like_btn_is_active {
+  background: #28a745;
+  color: #fff;
+  border-color: #28a745;
+}
+.flavorlike-check-mark .count-box {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+/* 鼓掌按钮模板 */
+.flavorlike-clapping button.flavor_like_btn {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px;
+  padding: 10px 20px;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+.flavorlike-clapping button.flavor_like_btn:hover {
+  border-color: #4caf50;
+  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+}
+.flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+.flavorlike-clapping .flavorlike-clap-icon {
+  font-size: 20px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.flavorlike-clapping button.flavor_like_btn:hover .flavorlike-clap-icon,
+.flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-clap-icon {
+  transform: scale(1.3) rotate(-10deg);
+}
+.flavorlike-clapping .count-box {
+  background: #f5f5f5;
+  color: #555;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+/* 徽章拇指模板 */
+.flavorlike-badge-thumb button.flavor_like_btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+}
+.flavorlike-badge-thumb button.flavor_like_btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+.flavorlike-badge-thumb button.flavor_like_btn.flavor_like_btn_is_active {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.flavorlike-badge-thumb .count-box {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* 收藏星模板 */
+.flavorlike-fave-star button.flavor_like_btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  color: #ccc;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.flavorlike-fave-star button.flavor_like_btn:hover {
+  color: #ffc107;
+  transform: scale(1.2);
+}
+.flavorlike-fave-star button.flavor_like_btn.flavor_like_btn_is_active {
+  color: #ffc107;
+}
+.flavorlike-fave-star .count-box {
+  color: #666;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+/* 图钉按钮模板 */
+.flavorlike-pin button.flavor_like_btn {
+  background: #fff;
+  border: 2px solid #e53935;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #e53935;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.flavorlike-pin button.flavor_like_btn:hover {
+  background: #e53935;
+  color: #fff;
+  transform: rotate(45deg);
+}
+.flavorlike-pin button.flavor_like_btn.flavor_like_btn_is_active {
+  background: #e53935;
+  color: #fff;
+}
+.flavorlike-pin .count-box {
+  background: #ffebee;
+  color: #c62828;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 8px;
+}

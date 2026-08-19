@@ -4,7 +4,7 @@ $breakpoint-small: 33.75em; // 540px
 $breakpoint-med: 45em; // 720px
 $breakpoint-large: 60em; // 960px
 
-.wp-ulike-container {
+.flavor-like-container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -14,48 +14,48 @@ $breakpoint-large: 60em; // 960px
   }
 }
 
-.wp-ulike-row {
+.flavor-like-row {
   position: relative;
   width: 100%;
 }
 
-.wp-ulike-flex{
+.flavor-like-flex{
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px 0;
 
-  &.wp-ulike-flex-end{
+  &.flavor-like-flex-end{
     justify-content: flex-end;
   }
-  &.wp-ulike-flex-start{
+  &.flavor-like-flex-start{
     justify-content: flex-start;
   }
-  &.wp-ulike-flex-space-between{
+  &.flavor-like-flex-space-between{
     justify-content: space-between;
   }
 }
 
-.wp-ulike-row [class^="col"] {
+.flavor-like-row [class^="col"] {
   float: left;
   margin: 2%;
 }
 
 .rtl{
-	.wp-ulike-row [class^="col"] {
+	.flavor-like-row [class^="col"] {
 	  float: right;
 	}
 }
 
-.wp-ulike-row::after {
+.flavor-like-row::after {
   content: "";
   display: table;
   clear: both;
 }
 
 
-.wp-ulike-row{
+.flavor-like-row{
   .col-1,
   .col-2,
   .col-3,
@@ -88,7 +88,7 @@ $breakpoint-large: 60em; // 960px
 
 
 @media only screen and (min-width: $breakpoint-med) {
-  .wp-ulike-row{
+  .flavor-like-row{
     .col-1 { width:($width / 12) - ($gutter * 11 / 12); }
     .col-2 { width: ($width / 6) - ($gutter * 10 / 12); }
     .col-3 { width: ($width / 4) - ($gutter * 9 / 12); }
@@ -109,7 +109,7 @@ $breakpoint-large: 60em; // 960px
 }
 
 @media only screen and (max-width: $breakpoint-med) {
-  .wp-ulike-flex{
+  .flavor-like-flex{
 	text-align: center;
   }
 }

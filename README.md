@@ -37,7 +37,7 @@
 [flavor_like_likers_box type="post" counter="5"]
 ```
 
-> 兼容旧短代码 `[wp_ulike]`、`[wp_ulike_counter]`、`[wp_ulike_likers_box]`
+> 兼容旧短代码 `[flavor_like]`、`[flavor_like_counter]`、`[flavor_like_likers_box]`
 
 ## 安全与性能设置（1.0.5 新增）
 
@@ -50,10 +50,20 @@
 
 开发者可用的过滤器：
 
-- `wp_ulike_trusted_proxies` — 程序化设置受信代理列表
-- `wp_ulike_lock_name` — 自定义投票互斥锁名称（MySQL GET_LOCK）
+- `flavor_like_trusted_proxies` — 程序化设置受信代理列表
+- `flavor_like_lock_name` — 自定义投票互斥锁名称（MySQL GET_LOCK）
 
 ## 更新日志
+
+### 1.0.6
+
+**品牌重命名**
+
+- 全站标识由 ULike 统一更换为 Flavor Like（数据库表、设置项、Cookie、CSS/JS 资源、翻译文件），命名风格与原版保持一致
+- 自动数据迁移：激活后自动将旧版数据表重命名（RENAME TABLE，瞬间完成）、复制旧设置项、迁移自定义 CSS 上传目录，旧数据零丢失
+- 旧版 Cookie 自动回退读取，游客在升级前后的点赞状态保持连续
+- 点赞按钮默认改为右对齐（顶部、底部及所有模板统一生效），后台"按钮对齐"设置仍可覆盖
+- 移除后台的 Pro 版推广区块与无效的 Pro 残留文件，后台所有设置项均已验证可正常生效
 
 ### 1.0.5
 
@@ -61,7 +71,7 @@
 
 - 投票互斥锁由文件锁（flock + unlink，存在释放竞态）改为 MySQL `GET_LOCK`，消除并发场景下的重复计数风险，同时避免临时目录路径注入与多站点锁文件互相干扰
 - 锁释放改为 `try/finally` 结构，异常路径下也能保证释放
-- `wp_ulike_get_likers` AJAX 端点补上 nonce 校验（与投票端点一致），防止未认证请求枚举点赞用户
+- `flavor_like_get_likers` AJAX 端点补上 nonce 校验（与投票端点一致），防止未认证请求枚举点赞用户
 - 新增受信代理 IP 白名单：配置后仅当请求来自受信代理时才读取代理头，防止伪造 `X-Forwarded-For` 绕过 IP 去重与黑名单
 - Cloudflare IP 列表拉取失败时仅缓存 5 分钟（原先空结果缓存 1 周，导致失败期间 CF 站点 IP 识别失效）
 
@@ -77,7 +87,7 @@
 - 修复前端自动显示不生效
 - 修复统计页面滚动卡住
 - 优化夜间模式显示
-- 基于 WP ULike 5.2.0 修改
+- 基于 Flavor Like 5.2.0 修改
 
 ## 许可证
 

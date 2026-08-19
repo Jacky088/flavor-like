@@ -1,5 +1,5 @@
 /**
- * WP ULike Top Content Block
+ * Flavor Like Top Content Block
  */
 
 import { registerBlockType, getBlockType } from '@wordpress/blocks';
@@ -24,16 +24,16 @@ import './editor.scss';
 /** Build "Top Posts", "Top User(s)", etc. from existing strings. */
 const formatTopTypeLabel = ( type ) => {
 	const suffixes = {
-		post: __( 'Posts', 'wp-ulike' ),
-		comment: __( 'Comments', 'wp-ulike' ),
-		users: __( 'User(s)', 'wp-ulike' ),
-		activity: __( 'Activities', 'wp-ulike' ),
-		topic: __( 'Topics', 'wp-ulike' ),
+		post: __( 'Posts', 'flavor-like' ),
+		comment: __( 'Comments', 'flavor-like' ),
+		users: __( 'User(s)', 'flavor-like' ),
+		activity: __( 'Activities', 'flavor-like' ),
+		topic: __( 'Topics', 'flavor-like' ),
 	};
 	if ( ! suffixes[ type ] ) {
-		return __( 'Top', 'wp-ulike' );
+		return __( 'Top', 'flavor-like' );
 	}
-	return sprintf( '%s %s', __( 'Top', 'wp-ulike' ), suffixes[ type ] );
+	return sprintf( '%s %s', __( 'Top', 'flavor-like' ), suffixes[ type ] );
 };
 
 const FALLBACK_CONTENT_TYPES = [
@@ -43,11 +43,11 @@ const FALLBACK_CONTENT_TYPES = [
 ];
 
 const STATIC_SORT_OPTIONS = [
-	{ value: 'like', label: __( 'Like', 'wp-ulike' ) },
+	{ value: 'like', label: __( 'Like', 'flavor-like' ) },
 ];
 
 const PRO_SORT_OPTIONS = [
-	{ value: 'dislike', label: __( 'Dislike', 'wp-ulike' ) },
+	{ value: 'dislike', label: __( 'Dislike', 'flavor-like' ) },
 ];
 
 const normalizeSortBy = ( value ) => {
@@ -69,31 +69,31 @@ const getSortOptionsList = () => {
 };
 
 const STATIC_SORT_ORDERS = [
-	{ value: 'DESC', label: __( 'Descending', 'wp-ulike' ) },
-	{ value: 'ASC', label: __( 'Ascending', 'wp-ulike' ) },
+	{ value: 'DESC', label: __( 'Descending', 'flavor-like' ) },
+	{ value: 'ASC', label: __( 'Ascending', 'flavor-like' ) },
 ];
 
 const STATIC_PERIOD_PRESETS = [
-	{ value: 'all', label: __( 'All The Times', 'wp-ulike' ) },
-	{ value: 'year', label: __( 'This Year', 'wp-ulike' ) },
-	{ value: 'last_year', label: __( 'Last Year', 'wp-ulike' ) },
-	{ value: 'month', label: __( 'This Month', 'wp-ulike' ) },
-	{ value: 'last_month', label: __( 'Last Month', 'wp-ulike' ) },
-	{ value: 'week', label: __( 'This Week', 'wp-ulike' ) },
-	{ value: 'last_week', label: __( 'Last Week', 'wp-ulike' ) },
-	{ value: 'today', label: __( 'Today', 'wp-ulike' ) },
-	{ value: 'yesterday', label: __( 'Yesterday', 'wp-ulike' ) },
-	{ value: 'day_before_yesterday', label: __( 'Day Before Yesterday', 'wp-ulike' ) },
+	{ value: 'all', label: __( 'All The Times', 'flavor-like' ) },
+	{ value: 'year', label: __( 'This Year', 'flavor-like' ) },
+	{ value: 'last_year', label: __( 'Last Year', 'flavor-like' ) },
+	{ value: 'month', label: __( 'This Month', 'flavor-like' ) },
+	{ value: 'last_month', label: __( 'Last Month', 'flavor-like' ) },
+	{ value: 'week', label: __( 'This Week', 'flavor-like' ) },
+	{ value: 'last_week', label: __( 'Last Week', 'flavor-like' ) },
+	{ value: 'today', label: __( 'Today', 'flavor-like' ) },
+	{ value: 'yesterday', label: __( 'Yesterday', 'flavor-like' ) },
+	{ value: 'day_before_yesterday', label: __( 'Day Before Yesterday', 'flavor-like' ) },
 ];
 
 const STATIC_INTERVAL_UNITS = [
-	{ value: 'DAY', label: __( 'day', 'wp-ulike' ) },
-	{ value: 'WEEK', label: __( 'week', 'wp-ulike' ) },
-	{ value: 'MONTH', label: __( 'month', 'wp-ulike' ) },
-	{ value: 'HOUR', label: __( 'hour', 'wp-ulike' ) },
+	{ value: 'DAY', label: __( 'day', 'flavor-like' ) },
+	{ value: 'WEEK', label: __( 'week', 'flavor-like' ) },
+	{ value: 'MONTH', label: __( 'month', 'flavor-like' ) },
+	{ value: 'HOUR', label: __( 'hour', 'flavor-like' ) },
 ];
 
-const getEditorConfig = () => window.wpUlikeTopContentBlock || {};
+const getEditorConfig = () => window.flavorLikeTopContentBlock || {};
 
 const getContentTypeOptions = () => {
 	const cfg = getEditorConfig();
@@ -116,7 +116,7 @@ const uiLabel = ( text ) => stripLabelColon( text );
 /** "Last {{days}} Days" using the real day count (not a fixed preview number). */
 const formatLastDaysLabel = ( days ) => {
 	const count = Math.max( 1, parseInt( days, 10 ) || 1 );
-	return __( 'Last {{days}} Days', 'wp-ulike' ).replace( /\{\{days\}\}/g, String( count ) );
+	return __( 'Last {{days}} Days', 'flavor-like' ).replace( /\{\{days\}\}/g, String( count ) );
 };
 
 if ( ! getBlockType( metadata.name ) ) {
@@ -124,10 +124,10 @@ if ( ! getBlockType( metadata.name ) ) {
 		...metadata,
 		edit: ( { attributes, setAttributes } ) => {
 			const blockProps = useBlockProps( {
-				className: 'wp-block-wp-ulike-top-content',
+				className: 'wp-block-flavor-like-top-content',
 				// ServerSideRender outputs real links; stop navigation inside the editor canvas.
 				onClickCapture: ( event ) => {
-					if ( event.target.closest( '.wp-ulike-top-content a[href]' ) ) {
+					if ( event.target.closest( '.flavor-like-top-content a[href]' ) ) {
 						event.preventDefault();
 					}
 				},
@@ -235,7 +235,7 @@ if ( ! getBlockType( metadata.name ) ) {
 						value: 'mode:interval',
 					},
 					{
-						label: uiLabel( __( 'Date Range', 'wp-ulike' ) ),
+						label: uiLabel( __( 'Date Range', 'flavor-like' ) ),
 						value: 'mode:range',
 					},
 				];
@@ -367,11 +367,11 @@ if ( ! getBlockType( metadata.name ) ) {
 				<>
 					<InspectorControls>
 						<PanelBody
-							title={ uiLabel( __( 'Top', 'wp-ulike' ) ) }
+							title={ uiLabel( __( 'Top', 'flavor-like' ) ) }
 							initialOpen={ true }
 						>
 							<SelectControl
-								label={ uiLabel( __( 'Type:', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Type:', 'flavor-like' ) ) }
 								value={ contentType }
 								options={ contentTypeOptions }
 								onChange={ onContentTypeChange }
@@ -380,7 +380,7 @@ if ( ! getBlockType( metadata.name ) ) {
 							/>
 
 							<FormTokenField
-								label={ uiLabel( __( 'Status Filter', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Status Filter', 'flavor-like' ) ) }
 								value={ sortByTokens }
 								suggestions={ sortBySuggestions }
 								onChange={ onSortByChange }
@@ -390,7 +390,7 @@ if ( ! getBlockType( metadata.name ) ) {
 
 							{ showSortOrderControl && (
 								<SelectControl
-									label={ uiLabel( __( 'View By', 'wp-ulike' ) ) }
+									label={ uiLabel( __( 'View By', 'flavor-like' ) ) }
 									value={ sortOrder }
 									options={ ( config.sortOrders?.length ? config.sortOrders : STATIC_SORT_ORDERS ).map( ( item ) => ( {
 										label: item.label,
@@ -403,7 +403,7 @@ if ( ! getBlockType( metadata.name ) ) {
 							) }
 
 							<RangeControl
-								label={ uiLabel( __( 'Number of items to show:', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Number of items to show:', 'flavor-like' ) ) }
 								value={ limit }
 								onChange={ ( value ) => setAttributes( { limit: value } ) }
 								min={ 1 }
@@ -413,7 +413,7 @@ if ( ! getBlockType( metadata.name ) ) {
 
 							{ showProfileControl && config.profileUrls?.length > 1 && (
 								<SelectControl
-									label={ uiLabel( __( 'Profile URL:', 'wp-ulike' ) ) }
+									label={ uiLabel( __( 'Profile URL:', 'flavor-like' ) ) }
 									value={ profileUrl }
 									options={ config.profileUrls.map( ( item ) => ( {
 										label: item.label,
@@ -427,11 +427,11 @@ if ( ! getBlockType( metadata.name ) ) {
 						</PanelBody>
 
 						<PanelBody
-							title={ uiLabel( __( 'Period:', 'wp-ulike' ) ) }
+							title={ uiLabel( __( 'Period:', 'flavor-like' ) ) }
 							initialOpen={ false }
 						>
 							<SelectControl
-								label={ uiLabel( __( 'Period:', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Period:', 'flavor-like' ) ) }
 								value={ periodSelectValue }
 								options={ periodSelectOptions }
 								onChange={ onPeriodChange }
@@ -450,7 +450,7 @@ if ( ! getBlockType( metadata.name ) ) {
 										__nextHasNoMarginBottom={ true }
 									/>
 									<SelectControl
-										label={ uiLabel( __( 'day', 'wp-ulike' ) ) }
+										label={ uiLabel( __( 'day', 'flavor-like' ) ) }
 										value={ intervalUnit }
 										options={ intervalUnitOptions }
 										onChange={ ( value ) => setAttributes( { intervalUnit: value } ) }
@@ -463,7 +463,7 @@ if ( ! getBlockType( metadata.name ) ) {
 							{ periodMode === 'range' && (
 								<>
 									<TextControl
-										label={ uiLabel( __( 'Dates', 'wp-ulike' ) ) }
+										label={ uiLabel( __( 'Dates', 'flavor-like' ) ) }
 										type="date"
 										value={ dateStart }
 										onChange={ ( value ) => setAttributes( { dateStart: value } ) }
@@ -471,7 +471,7 @@ if ( ! getBlockType( metadata.name ) ) {
 										__nextHasNoMarginBottom={ true }
 									/>
 									<TextControl
-										label={ uiLabel( __( 'Date Range', 'wp-ulike' ) ) }
+										label={ uiLabel( __( 'Date Range', 'flavor-like' ) ) }
 										type="date"
 										value={ dateEnd }
 										onChange={ ( value ) => setAttributes( { dateEnd: value } ) }
@@ -484,11 +484,11 @@ if ( ! getBlockType( metadata.name ) ) {
 
 						{ showPostFilters && (
 							<PanelBody
-								title={ uiLabel( __( 'Show Filters', 'wp-ulike' ) ) }
+								title={ uiLabel( __( 'Show Filters', 'flavor-like' ) ) }
 								initialOpen={ false }
 							>
 								<FormTokenField
-									label={ uiLabel( __( 'Select post types', 'wp-ulike' ) ) }
+									label={ uiLabel( __( 'Select post types', 'flavor-like' ) ) }
 									value={ postTypeValue }
 									suggestions={ postTypeSuggestions }
 									onChange={ onPostTypesChange }
@@ -498,11 +498,11 @@ if ( ! getBlockType( metadata.name ) ) {
 								{ contentType === 'post' && taxonomyOptions.length > 0 && (
 									<>
 										<SelectControl
-											label={ uiLabel( __( 'Category', 'wp-ulike' ) ) }
+											label={ uiLabel( __( 'Category', 'flavor-like' ) ) }
 											value={ taxonomy }
 											options={ [
 												{
-													label: __( 'Select...', 'wp-ulike' ),
+													label: __( 'Select...', 'flavor-like' ),
 													value: '',
 												},
 												...taxonomyOptions,
@@ -518,7 +518,7 @@ if ( ! getBlockType( metadata.name ) ) {
 										/>
 										{ taxonomy && (
 											<FormTokenField
-												label={ uiLabel( __( 'Select options...', 'wp-ulike' ) ) }
+												label={ uiLabel( __( 'Select options...', 'flavor-like' ) ) }
 												value={ termValues }
 												suggestions={ termSuggestions }
 												onChange={ onTermsChange }
@@ -532,12 +532,12 @@ if ( ! getBlockType( metadata.name ) ) {
 						) }
 
 						<PanelBody
-							title={ uiLabel( __( 'Settings', 'wp-ulike' ) ) }
+							title={ uiLabel( __( 'Settings', 'flavor-like' ) ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ uiLabel( __( 'Title:', 'wp-ulike' ) ) }
-								help={ __( 'Show a heading above the list.', 'wp-ulike' ) }
+								label={ uiLabel( __( 'Title:', 'flavor-like' ) ) }
+								help={ __( 'Show a heading above the list.', 'flavor-like' ) }
 								checked={ showHeading }
 								onChange={ ( value ) => setAttributes( { showHeading: value } ) }
 								__nextHasNoMarginBottom={ true }
@@ -545,7 +545,7 @@ if ( ! getBlockType( metadata.name ) ) {
 
 							{ showHeading && (
 								<TextControl
-									label={ uiLabel( __( 'Customize', 'wp-ulike' ) ) }
+									label={ uiLabel( __( 'Customize', 'flavor-like' ) ) }
 									value={ heading }
 									onChange={ ( value ) => setAttributes( { heading: value } ) }
 									placeholder={ formatTopTypeLabel( contentType ) }
@@ -555,7 +555,7 @@ if ( ! getBlockType( metadata.name ) ) {
 							) }
 
 							<RangeControl
-								label={ uiLabel( __( 'Title Trim (Length):', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Title Trim (Length):', 'flavor-like' ) ) }
 								value={ titleTrim }
 								onChange={ ( value ) => setAttributes( { titleTrim: value } ) }
 								min={ 3 }
@@ -564,14 +564,14 @@ if ( ! getBlockType( metadata.name ) ) {
 							/>
 
 							<ToggleControl
-								label={ uiLabel( __( 'Rank number', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Rank number', 'flavor-like' ) ) }
 								checked={ showRank }
 								onChange={ ( value ) => setAttributes( { showRank: value } ) }
 								__nextHasNoMarginBottom={ true }
 							/>
 
 							<ToggleControl
-								label={ uiLabel( __( 'Activate Like Counter', 'wp-ulike' ) ) }
+								label={ uiLabel( __( 'Activate Like Counter', 'flavor-like' ) ) }
 								checked={ showCount }
 								onChange={ ( value ) => setAttributes( { showCount: value } ) }
 								__nextHasNoMarginBottom={ true }
@@ -580,14 +580,14 @@ if ( ! getBlockType( metadata.name ) ) {
 							{ showThumbnailControl && (
 								<>
 									<ToggleControl
-										label={ uiLabel( __( 'Activate Thumbnail/Avatar', 'wp-ulike' ) ) }
+										label={ uiLabel( __( 'Activate Thumbnail/Avatar', 'flavor-like' ) ) }
 										checked={ showThumbnail }
 										onChange={ ( value ) => setAttributes( { showThumbnail: value } ) }
 										__nextHasNoMarginBottom={ true }
 									/>
 									{ showThumbnail && (
 										<RangeControl
-											label={ uiLabel( __( 'Thumbnail/Avatar size:', 'wp-ulike' ) ) }
+											label={ uiLabel( __( 'Thumbnail/Avatar size:', 'flavor-like' ) ) }
 											value={ thumbnailSize }
 											onChange={ ( value ) =>
 												setAttributes( { thumbnailSize: value } )
@@ -602,7 +602,7 @@ if ( ! getBlockType( metadata.name ) ) {
 
 							{ showEngagementExtras && (
 								<ToggleControl
-									label={ uiLabel( __( 'Engaged Users', 'wp-ulike' ) ) }
+									label={ uiLabel( __( 'Engaged Users', 'flavor-like' ) ) }
 									checked={ showEngagedUsers }
 									onChange={ ( value ) =>
 										setAttributes( { showEngagedUsers: value } )
@@ -615,17 +615,17 @@ if ( ! getBlockType( metadata.name ) ) {
 
 					<div { ...blockProps }>
 						<ServerSideRender
-							block="wp-ulike/top-content"
+							block="flavor-like/top-content"
 							attributes={ attributes }
 							LoadingResponsePlaceholder={ () => (
-								<div className="wp-ulike-top-content-editor-loading">
+								<div className="flavor-like-top-content-editor-loading">
 									<Spinner />
-									<span>{ __( 'Loading...', 'wp-ulike' ) }</span>
+									<span>{ __( 'Loading...', 'flavor-like' ) }</span>
 								</div>
 							) }
 							ErrorResponsePlaceholder={ () => (
-								<p className="wp-ulike-top-content-editor-error">
-									{ __( 'No data to display', 'wp-ulike' ) }
+								<p className="flavor-like-top-content-editor-error">
+									{ __( 'No data to display', 'flavor-like' ) }
 								</p>
 							) }
 						/>

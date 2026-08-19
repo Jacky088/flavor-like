@@ -5,16 +5,16 @@
  * Pulse rows store engagement_key (like|dislike) + status (active|removed).
  * Hooks, meta, and Pro JS still use like|unlike|dislike|undislike.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Vote_Map' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Vote_Map' ) ) {
 
-	final class WP_Ulike_Pulse_Vote_Map {
+	final class Flavor_Like_Pulse_Vote_Map {
 
 		const ROW_ACTIVE  = 'active';
 		const ROW_REMOVED = 'removed';

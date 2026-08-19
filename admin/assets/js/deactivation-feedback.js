@@ -4,7 +4,7 @@
 ( function () {
 	'use strict';
 
-	var cfg = window.wpUlikeDeactivationFeedback;
+	var cfg = window.flavorLikeDeactivationFeedback;
 	if ( ! cfg ) {
 		return;
 	}
@@ -48,7 +48,7 @@
 	}
 
 	function setBodyModalOpen( open ) {
-		document.body.classList.toggle( 'wp-ulike-deactivation-modal-open', open );
+		document.body.classList.toggle( 'flavor-like-deactivation-modal-open', open );
 	}
 
 	function closeModal() {
@@ -73,7 +73,7 @@
 
 	function sendFeedback( reasonKey, details, locations ) {
 		var body = new URLSearchParams( {
-			action: 'wp_ulike_deactivation_feedback',
+			action: 'flavor_like_deactivation_feedback',
 			nonce: cfg.nonce,
 			reason_key: reasonKey,
 			details: details || '',
@@ -103,7 +103,7 @@
 		var checked = form.querySelector( 'input[name="reason_key"]:checked' );
 		var reason = checked ? checked.value : '';
 
-		qsa( '.wp-ulike-deactivate-feedback-details', form ).forEach( function ( wrap ) {
+		qsa( '.flavor-like-deactivate-feedback-details', form ).forEach( function ( wrap ) {
 			var show = wrap.getAttribute( 'data-reason' ) === reason;
 			wrap.hidden = ! show;
 			if ( ! show ) {
@@ -114,7 +114,7 @@
 			}
 		} );
 
-		qsa( '.wp-ulike-deactivate-feedback-chips', form ).forEach( function ( wrap ) {
+		qsa( '.flavor-like-deactivate-feedback-chips', form ).forEach( function ( wrap ) {
 			var show = wrap.getAttribute( 'data-reason' ) === reason;
 			wrap.hidden = ! show;
 			if ( ! show ) {
@@ -124,17 +124,17 @@
 			}
 		} );
 
-		var hint = form.querySelector( '.wp-ulike-deactivate-feedback-context' );
+		var hint = form.querySelector( '.flavor-like-deactivate-feedback-context' );
 		if ( hint ) {
 			hint.hidden = reason !== 'not_working';
 		}
 
-		var reasonError = form.querySelector( '.wp-ulike-deactivate-feedback-reason-error' );
+		var reasonError = form.querySelector( '.flavor-like-deactivate-feedback-reason-error' );
 		if ( reasonError && reason ) {
 			reasonError.hidden = true;
 		}
 
-		var noteError = form.querySelector( '.wp-ulike-deactivate-feedback-note-error' );
+		var noteError = form.querySelector( '.flavor-like-deactivate-feedback-note-error' );
 		if ( noteError ) {
 			noteError.hidden = true;
 		}
@@ -161,7 +161,7 @@
 
 	function collectLocations( form ) {
 		return qsa(
-			'.wp-ulike-deactivate-feedback-chips:not([hidden]) input[type="checkbox"]:checked',
+			'.flavor-like-deactivate-feedback-chips:not([hidden]) input[type="checkbox"]:checked',
 			form
 		).map( function ( box ) {
 			return box.value;
@@ -169,7 +169,7 @@
 	}
 
 	function openModal( link ) {
-		var source = qs( '#wp-ulike-deactivate-feedback-dialog-wrapper .wp-ulike-deactivate-feedback' );
+		var source = qs( '#flavor-like-deactivate-feedback-dialog-wrapper .flavor-like-deactivate-feedback' );
 		if ( ! source || ! link ) {
 			return false;
 		}
@@ -183,33 +183,33 @@
 		deactivateUrl = pendingDeactivateUrl;
 
 		overlay = document.createElement( 'div' );
-		overlay.id = 'wp-ulike-deactivate-feedback-modal';
-		overlay.className = 'wp-ulike-deactivate-feedback-modal';
+		overlay.id = 'flavor-like-deactivate-feedback-modal';
+		overlay.className = 'flavor-like-deactivate-feedback-modal';
 		overlay.setAttribute( 'role', 'dialog' );
 		overlay.setAttribute( 'aria-modal', 'true' );
 
 		var dialog = document.createElement( 'div' );
-		dialog.className = 'wp-ulike-deactivate-feedback-modal__dialog';
+		dialog.className = 'flavor-like-deactivate-feedback-modal__dialog';
 
 		var panel = source.cloneNode( true );
-		var title = panel.querySelector( '.wp-ulike-deactivate-feedback__title' );
+		var title = panel.querySelector( '.flavor-like-deactivate-feedback__title' );
 		if ( title ) {
-			title.id = 'wp-ulike-deactivate-feedback-title';
+			title.id = 'flavor-like-deactivate-feedback-title';
 			overlay.setAttribute( 'aria-labelledby', title.id );
 		}
 
 		dialog.appendChild( panel );
 
 		var footer = document.createElement( 'div' );
-		footer.className = 'wp-ulike-deactivate-feedback-modal__footer';
+		footer.className = 'flavor-like-deactivate-feedback-modal__footer';
 		footer.innerHTML =
-			'<div class="wp-ulike-deactivate-feedback-modal__primary">' +
-				'<button type="button" class="button button-primary wp-ulike-deactivate-feedback-submit">' +
+			'<div class="flavor-like-deactivate-feedback-modal__primary">' +
+				'<button type="button" class="button button-primary flavor-like-deactivate-feedback-submit">' +
 					cfg.i18n.submit +
 				'</button>' +
 			'</div>' +
-			'<div class="wp-ulike-deactivate-feedback-modal__secondary">' +
-				'<button type="button" class="button-link wp-ulike-deactivate-feedback-skip">' +
+			'<div class="flavor-like-deactivate-feedback-modal__secondary">' +
+				'<button type="button" class="button-link flavor-like-deactivate-feedback-skip">' +
 					cfg.i18n.skip +
 				'</button>' +
 			'</div>';
@@ -219,10 +219,10 @@
 		document.body.appendChild( overlay );
 		setBodyModalOpen( true );
 
-		var form = overlay.querySelector( '#wp-ulike-deactivate-feedback-dialog-form' );
+		var form = overlay.querySelector( '#flavor-like-deactivate-feedback-dialog-form' );
 		var radios = qsa( 'input[name="reason_key"]', form );
-		var submitBtn = overlay.querySelector( '.wp-ulike-deactivate-feedback-submit' );
-		var skipBtn = overlay.querySelector( '.wp-ulike-deactivate-feedback-skip' );
+		var submitBtn = overlay.querySelector( '.flavor-like-deactivate-feedback-submit' );
+		var skipBtn = overlay.querySelector( '.flavor-like-deactivate-feedback-skip' );
 
 		syncDetailsFields( form );
 
@@ -234,8 +234,8 @@
 
 		submitBtn.addEventListener( 'click', function () {
 			var checked = form.querySelector( 'input[name="reason_key"]:checked' );
-			var reasonError = form.querySelector( '.wp-ulike-deactivate-feedback-reason-error' );
-			var noteError = form.querySelector( '.wp-ulike-deactivate-feedback-note-error' );
+			var reasonError = form.querySelector( '.flavor-like-deactivate-feedback-reason-error' );
+			var noteError = form.querySelector( '.flavor-like-deactivate-feedback-note-error' );
 
 			if ( ! checked ) {
 				if ( reasonError ) {
@@ -246,7 +246,7 @@
 
 			var reason = checked.value;
 			var detailsInput = form.querySelector(
-				'.wp-ulike-deactivate-feedback-details:not([hidden]) input'
+				'.flavor-like-deactivate-feedback-details:not([hidden]) input'
 			);
 			var details = detailsInput ? detailsInput.value.trim() : '';
 			var locations = collectLocations( form );

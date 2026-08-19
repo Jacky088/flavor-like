@@ -1,5 +1,5 @@
 /**
- * WP ULike — customizer iframe preview helpers (not loaded on the public site).
+ * Flavor Like — customizer iframe preview helpers (not loaded on the public site).
  */
 
 .ulp-customizer-preview-root {
@@ -44,7 +44,7 @@
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.ulp-customizer-button-preview .wpulike {
+.ulp-customizer-button-preview .flavorlike {
 	padding: 0;
 	margin: 0;
 	display: flex;
@@ -52,16 +52,16 @@
 	justify-content: center;
 }
 
-.ulp-customizer-button-preview .wp_ulike_general_class {
+.ulp-customizer-button-preview .flavor_like_general_class {
 	display: inline-flex;
 	align-items: center;
 }
 
-.ulp-customizer-button-preview .wp_ulike_likers_wrapper {
+.ulp-customizer-button-preview .flavor_like_likers_wrapper {
 	display: none !important;
 }
 
-.ulp-customizer-button-preview .wp_ulike_btn.wp_ulike_put_image {
+.ulp-customizer-button-preview .flavor_like_btn.flavor_like_put_image {
 	flex-shrink: 0;
 	position: relative;
 }
@@ -75,7 +75,7 @@
 	min-height: 22rem;
 }
 
-.ulp-customizer-toast-preview .wpulike-notification {
+.ulp-customizer-toast-preview .flavorlike-notification {
 	position: relative;
 	right: auto;
 	bottom: auto;
@@ -85,7 +85,7 @@
 	gap: 0.625rem;
 }
 
-.ulp-customizer-toast-preview .wpulike-message {
+.ulp-customizer-toast-preview .flavorlike-message {
 	width: 100%;
 	margin: 0;
 }

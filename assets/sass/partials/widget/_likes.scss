@@ -3,7 +3,7 @@
  */
 
 
-.wp_ulike_likers_wrapper {
+.flavor_like_likers_wrapper {
     margin: 10px 0;
     flex: 0 0 100%;
 
@@ -11,7 +11,7 @@
         display: none;
     }
 
-    .wp-ulike-likers-list,
+    .flavor-like-likers-list,
     .tiles {
         display: flex;
         align-items: center;
@@ -19,7 +19,7 @@
         margin: 0;
         padding: 0;
 
-        .wp-ulike-liker,
+        .flavor-like-liker,
         li {
             padding: 3px;
             margin: 0;
@@ -42,7 +42,7 @@
 }
 
 .ulf-tooltip {
-    .wp_ulike_likers_wrapper {
+    .flavor_like_likers_wrapper {
         margin: 0;
     }
 }
@@ -73,14 +73,14 @@
 .commentlist {
 
     .tiles,
-    .wp-ulike-liker {
+    .flavor-like-liker {
         .avatar {
             left: 0 !important;
         }
     }
 }
 
-.wp_ulike_thumbnail {
+.flavor_like_thumbnail {
     vertical-align: middle;
     margin: 0 10px 0 0;
 }
@@ -92,7 +92,7 @@
     }
 }
 
-.wp_ulike_style_simple {
+.flavor_like_style_simple {
     .wp_counter_span {
         &:before {
             content: "(";
@@ -104,12 +104,12 @@
     }
 }
 
-.wp_ulike_style_love {
+.flavor_like_style_love {
     .wp_counter_span {
         float: right;
         display: inline-block;
         background: #f1f1f1 url(../img/icons/heart.png) 5px center no-repeat;
-        color: $wp-ulike-color-dark-90;
+        color: $flavor-like-color-dark-90;
         font-size: 9px;
         line-height: 17px;
         font-weight: 400;

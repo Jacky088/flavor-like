@@ -2,27 +2,27 @@
 /**
  * Pulse Ledger — optional legacy table removal after migration.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Legacy_Cleanup' ) ) {
 
-	final class WP_Ulike_Pulse_Legacy_Cleanup {
+	final class Flavor_Like_Pulse_Legacy_Cleanup {
 
-		const OPTION_DROPPED_AT = 'wp_ulike_pulse_legacy_dropped_at';
-		const VERIFY_CACHE_TRANSIENT = 'wp_ulike_pulse_can_drop_legacy';
+		const OPTION_DROPPED_AT = 'flavor_like_pulse_legacy_dropped_at';
+		const VERIFY_CACHE_TRANSIENT = 'flavor_like_pulse_can_drop_legacy';
 		const VERIFY_CACHE_TTL       = 60;
 
 		/**
 		 * @return bool
 		 */
 		public static function legacy_tables_exist() {
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
-				if ( WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
+				if ( Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 					return true;
 				}
 			}
@@ -36,8 +36,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 		public static function existing_legacy_tables() {
 			$tables = array();
 
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
-				if ( WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
+				if ( Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 					$tables[] = $source['table'];
 				}
 			}
@@ -54,7 +54,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 		 * @return bool
 		 */
 		public static function can_offer_drop() {
-			if ( WP_Ulike_Pulse_Config::MODE_PULSE !== WP_Ulike_Pulse_Config::mode() ) {
+			if ( Flavor_Like_Pulse_Config::MODE_PULSE !== Flavor_Like_Pulse_Config::mode() ) {
 				return false;
 			}
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 				return false;
 			}
 
-			$verify = WP_Ulike_Pulse_Sync::verify( false );
+			$verify = Flavor_Like_Pulse_Sync::verify( false );
 
 			return ! empty( $verify['ok'] );
 		}
@@ -79,7 +79,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 		 * @return bool
 		 */
 		public static function can_drop_legacy( $bypass_cache = false ) {
-			if ( WP_Ulike_Pulse_Config::MODE_PULSE !== WP_Ulike_Pulse_Config::mode() ) {
+			if ( Flavor_Like_Pulse_Config::MODE_PULSE !== Flavor_Like_Pulse_Config::mode() ) {
 				return false;
 			}
 
@@ -94,7 +94,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 				}
 			}
 
-			$verify = WP_Ulike_Pulse_Sync::verify( true );
+			$verify = Flavor_Like_Pulse_Sync::verify( true );
 			$ok     = ! empty( $verify['ok'] );
 
 			set_transient( self::VERIFY_CACHE_TRANSIENT, $ok, self::VERIFY_CACHE_TTL );
@@ -121,8 +121,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 
 			$dropped = array();
 
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
-				if ( ! WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
+				if ( ! Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ) {
 					continue;
 				}
 
@@ -142,7 +142,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Legacy_Cleanup' ) ) {
 			}
 
 			update_option( self::OPTION_DROPPED_AT, current_time( 'mysql' ), false );
-			WP_Ulike_Pulse_Config::mark_admin_dismissed();
+			Flavor_Like_Pulse_Config::mark_admin_dismissed();
 
 			return array(
 				'ok'      => true,

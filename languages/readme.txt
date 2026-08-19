@@ -1,5 +1,5 @@
 Translations are managed on GlotPress:
-https://translate.wordpress.org/projects/wp-plugins/wp-ulike
+https://translate.wordpress.org/projects/wp-plugins/flavor-like
 
 Block editor (JavaScript) strings
 ---------------------------------
@@ -15,6 +15,6 @@ Or, if language packs live in wp-content/languages/plugins/ (typical on a local 
 
    wp i18n make-json ../../../languages/plugins --no-purge
 
-JSON files are named wp-ulike-{locale}-{hash}.json. WordPress.org language packs
+JSON files are named flavor-like-{locale}-{hash}.json. WordPress.org language packs
 include them automatically. For local development, run make-json after npm run build
 so references point at includes/blocks/*/build/index.js.

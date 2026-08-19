@@ -1,19 +1,19 @@
 <?php
 /**
- * Pulse Ledger — ulike_pulse table schema only.
+ * Pulse Ledger — flavor_like_pulse table schema only.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Schema' ) ) {
 
-	final class WP_Ulike_Pulse_Schema {
+	final class Flavor_Like_Pulse_Schema {
 
-		const TABLE_SUFFIX = 'ulike_pulse';
+		const TABLE_SUFFIX = 'flavor_like_pulse';
 
 		const BATCH_SIZE_DEFAULT = 500;
 		const BATCH_SIZE_MIN     = 50;
@@ -31,7 +31,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 		 * @return bool
 		 */
 		public static function table_exists() {
-			return WP_Ulike_Pulse_Registry::table_exists( self::table() );
+			return Flavor_Like_Pulse_Registry::table_exists( self::table() );
 		}
 
 		/**
@@ -77,7 +77,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 		}
 
 		/**
-		 * Create ulike_pulse when missing.
+		 * Create flavor_like_pulse when missing.
 		 *
 		 * @return bool
 		 */
@@ -96,7 +96,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 
 		// The table-existence cache was populated above; flush so the
 		// post-creation check reflects the new schema state.
-		WP_Ulike_Pulse_Registry::flush_table_exists_cache();
+		Flavor_Like_Pulse_Registry::flush_table_exists_cache();
 
 		// Align dedupe_token on existing tables (no-op for fresh installs).
 		self::ensure_dedupe_token_column();
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 		if ( ! self::table_exists() ) {
 				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 					global $wpdb;
-					error_log( 'WP ULike Pulse: failed to create table ' . self::table() . ' — ' . $wpdb->last_error );
+					error_log( 'Flavor Like Pulse: failed to create table ' . self::table() . ' — ' . $wpdb->last_error );
 				}
 				return false;
 			}
@@ -126,7 +126,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 		public static function ensure_dedupe_token_column() {
 			global $wpdb;
 
-			$marker = 'wp_ulike_pulse_dedupe_col_v1';
+			$marker = 'flavor_like_pulse_dedupe_col_v1';
 			if ( get_option( $marker ) ) {
 				return;
 			}
@@ -134,7 +134,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 			$table = self::table();
 
 			// Check existence directly instead of relying on the memoized
-			// WP_Ulike_Pulse_Registry::table_exists() — its static cache does
+			// Flavor_Like_Pulse_Registry::table_exists() — its static cache does
 			// not account for per-blog table names on multisite, so it can
 			// return a stale true when switching to a blog where the pulse
 			// table does not yet exist, which would make the SHOW COLUMNS
@@ -165,7 +165,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 			$wpdb->query( "ALTER TABLE `{$table}` MODIFY `dedupe_token` binary(32) DEFAULT NULL" );
 
 			if ( defined( 'WP_DEBUG' ) && WP_DEBUG && $wpdb->last_error ) {
-				error_log( 'WP ULike Pulse: dedupe_token column align failed — ' . $wpdb->last_error );
+				error_log( 'Flavor Like Pulse: dedupe_token column align failed — ' . $wpdb->last_error );
 			}
 
 			update_option( $marker, 1 );
@@ -174,7 +174,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 	/**
 	 * Bootstrap storage mode after pulse table exists.
 		 *
-		 * @param bool $is_fresh_install No prior wp_ulike_dbVersion.
+		 * @param bool $is_fresh_install No prior flavor_like_dbVersion.
 		 * @return void
 		 */
 		public static function bootstrap_mode( $is_fresh_install ) {
@@ -182,17 +182,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 				return;
 			}
 
-			$config = WP_Ulike_Pulse_Config::get();
+			$config = Flavor_Like_Pulse_Config::get();
 			if ( self::MODE_ALREADY_SET === self::detect_existing_mode( $config ) ) {
 				return;
 			}
 
-			if ( $is_fresh_install || ! WP_Ulike_Pulse_Registry::site_has_legacy_rows() ) {
-				WP_Ulike_Pulse_Config::init_fresh();
+			if ( $is_fresh_install || ! Flavor_Like_Pulse_Registry::site_has_legacy_rows() ) {
+				Flavor_Like_Pulse_Config::init_fresh();
 				return;
 			}
 
-			WP_Ulike_Pulse_Config::init_dual();
+			Flavor_Like_Pulse_Config::init_dual();
 		}
 
 		const MODE_ALREADY_SET = 'set';
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 		 * @return string
 		 */
 		private static function detect_existing_mode( $config ) {
-			if ( ! empty( $config['mode'] ) && WP_Ulike_Pulse_Config::MODE_LEGACY !== $config['mode'] ) {
+			if ( ! empty( $config['mode'] ) && Flavor_Like_Pulse_Config::MODE_LEGACY !== $config['mode'] ) {
 				return self::MODE_ALREADY_SET;
 			}
 
@@ -234,7 +234,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Schema' ) ) {
 	 */
 	public static function dedupe_token( $item_id, $item_type, $user_id, $kind = 'vote', $key = 'like', $fingerprint = '' ) {
 		$item_id   = absint( $item_id );
-		$item_type = WP_Ulike_Pulse_Registry::normalize_item_type( $item_type );
+		$item_type = Flavor_Like_Pulse_Registry::normalize_item_type( $item_type );
 		$user_id   = (string) $user_id;
 		$kind      = sanitize_key( $kind );
 		unset( $key ); // Key must not be part of the token (like↔dislike / emoji switch).

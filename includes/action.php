@@ -1,6 +1,6 @@
 <?php
 /**
- * WP ULIKE Register Hook CLASS
+ * FLAVOR LIKE Register Hook CLASS
  *
  * // @echo HEADER
  */
@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'wp_ulike_register_action_hook' ) ) :
+if ( ! class_exists( 'flavor_like_register_action_hook' ) ) :
 
-  class wp_ulike_register_action_hook {
+  class flavor_like_register_action_hook {
 
     /**
      * Instance of this class.
@@ -88,26 +88,26 @@ if ( ! class_exists( 'wp_ulike_register_action_hook' ) ) :
      * Fired for each blog when the plugin is activated.
      */
     private static function single_activate() {
-      wp_ulike_activator::get_instance()->activate();
+      flavor_like_activator::get_instance()->activate();
 
-      if ( ! get_option( 'wp_ulike_first_activated_at', false ) ) {
-        update_option( 'wp_ulike_first_activated_at', time(), false );
+      if ( ! get_option( 'flavor_like_first_activated_at', false ) ) {
+        update_option( 'flavor_like_first_activated_at', time(), false );
       }
 
-      WP_Ulike_Activation_Pointer::flag_for_current_user();
+      Flavor_Like_Activation_Pointer::flag_for_current_user();
 
       // Fire action
-      do_action( 'wp_ulike_activated', get_current_blog_id() );
+      do_action( 'flavor_like_activated', get_current_blog_id() );
     }
 
     /**
      * Fired for each blog when the plugin is deactivated.
      */
     private static function single_deactivate() {
-      wp_ulike_deactivator::deactivate();
+      flavor_like_deactivator::deactivate();
 
       // Fire action
-      do_action( 'wp_ulike_deactivated' );
+      do_action( 'flavor_like_deactivated' );
     }
 
     /**
@@ -162,4 +162,4 @@ if ( ! class_exists( 'wp_ulike_register_action_hook' ) ) :
 
 endif;
 
-wp_ulike_register_action_hook::get_instance();
+flavor_like_register_action_hook::get_instance();

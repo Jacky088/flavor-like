@@ -1,8 +1,8 @@
 <?php
 /**
- * Privacy (personal data export / erase) for WP ULike log tables.
+ * Privacy (personal data export / erase) for Flavor Like log tables.
  *
- * @package WP_ULike
+ * @package WP_Flavor Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,18 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array<string, string> table_suffix => human label
  */
-function wp_ulike_privacy_log_tables() {
+function flavor_like_privacy_log_tables() {
 	$labels = array(
-		'ulike'            => __( 'Posts', 'wp-ulike' ),
-		'ulike_comments'   => __( 'Comments', 'wp-ulike' ),
-		'ulike_activities' => __( 'Activities', 'wp-ulike' ),
-		'ulike_forums'     => __( 'Topics', 'wp-ulike' ),
+		'flavor_like'            => __( 'Posts', 'flavor-like' ),
+		'flavor_like_comments'   => __( 'Comments', 'flavor-like' ),
+		'flavor_like_activities' => __( 'Activities', 'flavor-like' ),
+		'flavor_like_forums'     => __( 'Topics', 'flavor-like' ),
 	);
 
 	global $wpdb;
 	$tables = array();
 
-	foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
+	foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
 		$suffix            = str_replace( $wpdb->prefix, '', $source['table'] );
 		$tables[ $suffix ] = isset( $labels[ $suffix ] ) ? $labels[ $suffix ] : $suffix;
 	}
@@ -38,7 +38,7 @@ function wp_ulike_privacy_log_tables() {
  * @param int    $page          Page number (1-based).
  * @return array{data: array<int, array>, done: bool}
  */
-function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
+function flavor_like_privacy_exporter( $email_address, $page = 1 ) {
 	$email_address = trim( $email_address );
 	$page          = max( 1, (int) $page );
 
@@ -53,10 +53,10 @@ function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
 	$uid    = (string) (int) $user->ID;
 	$per_page = 100;
 	$data     = array();
-	$labels   = wp_ulike_privacy_log_tables();
+	$labels   = flavor_like_privacy_log_tables();
 
-	if ( wp_ulike_use_pulse_queries() ) {
-		$rows = WP_Ulike_Pulse_Log_Bridge::get_privacy_rows( $uid, $page, $per_page );
+	if ( flavor_like_use_pulse_queries() ) {
+		$rows = Flavor_Like_Pulse_Log_Bridge::get_privacy_rows( $uid, $page, $per_page );
 	} else {
 		global $wpdb;
 
@@ -64,10 +64,10 @@ function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
 		$union_parts  = array();
 		$prepare_args = array();
 
-		foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $source ) {
+		foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $source ) {
 			$suffix        = str_replace( $wpdb->prefix, '', $source['table'] );
 			$table         = esc_sql( $source['table'] );
-			$geo_cols      = WP_Ulike_Pulse_Log_Bridge::legacy_personal_columns_sql( $source['table'] );
+			$geo_cols      = Flavor_Like_Pulse_Log_Bridge::legacy_personal_columns_sql( $source['table'] );
 			$union_parts[] = "(SELECT '{$suffix}' AS src, id, date_time, status, ip, {$geo_cols} FROM `{$table}` WHERE user_id = %s)";
 			$prepare_args[] = $uid;
 		}
@@ -84,27 +84,27 @@ function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
 	}
 
 	if ( ! empty( $rows ) ) {
-		$anonymise_ip = wp_ulike_setting_repo::isAnonymiseIpOn();
+		$anonymise_ip = flavor_like_setting_repo::isAnonymiseIpOn();
 		foreach ( $rows as $row ) {
 			$src   = isset( $row['src'] ) ? $row['src'] : '';
-			$label = isset( $labels[ $src ] ) ? $labels[ $src ] : __( 'Logs', 'wp-ulike' );
+			$label = isset( $labels[ $src ] ) ? $labels[ $src ] : __( 'Logs', 'flavor-like' );
 			$ip    = isset( $row['ip'] ) ? $row['ip'] : '';
 			if ( $anonymise_ip && '' !== $ip ) {
 				$ip = wp_privacy_anonymize_data( 'ip_address', $ip );
 			}
 
 			$pairs = array(
-				__( 'Date', 'wp-ulike' )   => isset( $row['date_time'] ) ? $row['date_time'] : '',
-				__( 'Status', 'wp-ulike' ) => isset( $row['status'] ) ? $row['status'] : '',
-				__( 'IP', 'wp-ulike' )     => $ip,
+				__( 'Date', 'flavor-like' )   => isset( $row['date_time'] ) ? $row['date_time'] : '',
+				__( 'Status', 'flavor-like' ) => isset( $row['status'] ) ? $row['status'] : '',
+				__( 'IP', 'flavor-like' )     => $ip,
 			);
 
 			foreach ( array(
-				'fingerprint'  => __( 'Fingerprint', 'wp-ulike' ),
-				'country_code' => __( 'Country', 'wp-ulike' ),
-				'device'       => __( 'Device', 'wp-ulike' ),
-				'os'           => __( 'OS', 'wp-ulike' ),
-				'browser'      => __( 'Browser', 'wp-ulike' ),
+				'fingerprint'  => __( 'Fingerprint', 'flavor-like' ),
+				'country_code' => __( 'Country', 'flavor-like' ),
+				'device'       => __( 'Device', 'flavor-like' ),
+				'os'           => __( 'OS', 'flavor-like' ),
+				'browser'      => __( 'Browser', 'flavor-like' ),
 			) as $key => $name ) {
 				$value = isset( $row[ $key ] ) ? $row[ $key ] : '';
 				if ( null !== $value && '' !== $value ) {
@@ -113,8 +113,8 @@ function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
 			}
 
 			$data[] = array(
-				'group_id'    => 'wp-ulike',
-				'group_label' => __( 'WP ULike', 'wp-ulike' ),
+				'group_id'    => 'flavor-like',
+				'group_label' => __( 'Flavor Like', 'flavor-like' ),
 				'item_id'     => $src . '-' . (int) $row['id'],
 				'data'        => array(
 					array(
@@ -145,7 +145,7 @@ function wp_ulike_privacy_exporter( $email_address, $page = 1 ) {
  * @param int    $page          Page (unused; single pass).
  * @return array{items_removed: bool, items_retained: bool, messages: string[], done: bool}
  */
-function wp_ulike_privacy_eraser( $email_address, $page = 1 ) {
+function flavor_like_privacy_eraser( $email_address, $page = 1 ) {
 	$email_address = trim( $email_address );
 	$user          = get_user_by( 'email', $email_address );
 
@@ -161,12 +161,12 @@ function wp_ulike_privacy_eraser( $email_address, $page = 1 ) {
 	$uid    = (string) (int) $user->ID;
 	$total  = 0;
 
-	if ( wp_ulike_use_pulse_queries() ) {
-		$total = WP_Ulike_Pulse_Log_Bridge::erase_user_logs( $uid );
+	if ( flavor_like_use_pulse_queries() ) {
+		$total = Flavor_Like_Pulse_Log_Bridge::erase_user_logs( $uid );
 	} else {
 		global $wpdb;
 
-		foreach ( array_keys( wp_ulike_privacy_log_tables() ) as $suffix ) {
+		foreach ( array_keys( flavor_like_privacy_log_tables() ) as $suffix ) {
 			$table = $wpdb->prefix . $suffix;
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name from fixed list.
 			$result = $wpdb->query( $wpdb->prepare( "DELETE FROM `{$table}` WHERE user_id = %s", $uid ) );
@@ -180,7 +180,7 @@ function wp_ulike_privacy_eraser( $email_address, $page = 1 ) {
 	if ( $total > 0 ) {
 		$messages[] = sprintf(
 			/* translators: %d: number of rows removed */
-			__( 'Removed %d WP ULike log row(s) for this user.', 'wp-ulike' ),
+			__( 'Removed %d Flavor Like log row(s) for this user.', 'flavor-like' ),
 			$total
 		);
 	}
@@ -197,10 +197,10 @@ function wp_ulike_privacy_eraser( $email_address, $page = 1 ) {
  * @param array<string, array> $exporters Registered exporters.
  * @return array<string, array>
  */
-function wp_ulike_privacy_register_exporters( $exporters ) {
-	$exporters['wp-ulike'] = array(
-		'exporter_friendly_name' => __( 'WP ULike', 'wp-ulike' ),
-		'callback'               => 'wp_ulike_privacy_exporter',
+function flavor_like_privacy_register_exporters( $exporters ) {
+	$exporters['flavor-like'] = array(
+		'exporter_friendly_name' => __( 'Flavor Like', 'flavor-like' ),
+		'callback'               => 'flavor_like_privacy_exporter',
 	);
 	return $exporters;
 }
@@ -209,13 +209,13 @@ function wp_ulike_privacy_register_exporters( $exporters ) {
  * @param array<string, array> $erasers Registered erasers.
  * @return array<string, array>
  */
-function wp_ulike_privacy_register_erasers( $erasers ) {
-	$erasers['wp-ulike'] = array(
-		'eraser_friendly_name' => __( 'WP ULike vote logs', 'wp-ulike' ),
-		'callback'             => 'wp_ulike_privacy_eraser',
+function flavor_like_privacy_register_erasers( $erasers ) {
+	$erasers['flavor-like'] = array(
+		'eraser_friendly_name' => __( 'Flavor Like vote logs', 'flavor-like' ),
+		'callback'             => 'flavor_like_privacy_eraser',
 	);
 	return $erasers;
 }
 
-add_filter( 'wp_privacy_personal_data_exporters', 'wp_ulike_privacy_register_exporters' );
-add_filter( 'wp_privacy_personal_data_erasers', 'wp_ulike_privacy_register_erasers' );
+add_filter( 'wp_privacy_personal_data_exporters', 'flavor_like_privacy_register_exporters' );
+add_filter( 'wp_privacy_personal_data_erasers', 'flavor_like_privacy_register_erasers' );

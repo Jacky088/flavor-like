@@ -2,16 +2,16 @@
 /**
  * Pulse Ledger — WP-CLI commands.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_CLI' ) ) {
 
-	final class WP_Ulike_Pulse_CLI {
+	final class Flavor_Like_Pulse_CLI {
 
 		/**
 		 * @return void
@@ -22,7 +22,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 			}
 
 			WP_CLI::add_command(
-				'ulike pulse',
+				'flavor_like pulse',
 				array( __CLASS__, 'handle' )
 			);
 		}
@@ -50,24 +50,24 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 
 			switch ( $sub ) {
 				case 'start':
-					WP_Ulike_Pulse_Sync::start();
+					Flavor_Like_Pulse_Sync::start();
 					WP_CLI::success( 'Pulse sync started.' );
 					break;
 
 				case 'pause':
-					WP_Ulike_Pulse_Sync::pause();
+					Flavor_Like_Pulse_Sync::pause();
 					WP_CLI::success( 'Pulse sync paused.' );
 					break;
 
 				case 'sync':
 					$size   = isset( $assoc_args['batch-size'] ) ? absint( $assoc_args['batch-size'] ) : 0;
-					$result = WP_Ulike_Pulse_Sync::run_batch( $size );
+					$result = Flavor_Like_Pulse_Sync::run_batch( $size );
 					WP_CLI::log( wp_json_encode( $result ) );
 					break;
 
 				case 'verify':
 					$deep   = isset( $assoc_args['deep'] );
-					$result = WP_Ulike_Pulse_Sync::verify( $deep );
+					$result = Flavor_Like_Pulse_Sync::verify( $deep );
 					if ( $result['ok'] ) {
 						WP_CLI::success( 'Verification passed.' );
 					} else {
@@ -84,20 +84,20 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 					break;
 
 				case 'enable':
-					if ( ! WP_Ulike_Pulse_Sync::is_sync_complete() ) {
-						WP_CLI::error( 'Sync is not complete yet. Run `wp ulike pulse status` and wait until all sources finish.' );
+					if ( ! Flavor_Like_Pulse_Sync::is_sync_complete() ) {
+						WP_CLI::error( 'Sync is not complete yet. Run `wp flavor_like pulse status` and wait until all sources finish.' );
 					}
-					$verify = WP_Ulike_Pulse_Sync::verify();
+					$verify = Flavor_Like_Pulse_Sync::verify();
 					if ( ! $verify['ok'] ) {
 						WP_CLI::warning( wp_json_encode( $verify['issues'] ) );
 						WP_CLI::error( 'Verification failed. Fix issues before enabling Pulse reads.' );
 					}
-					WP_Ulike_Pulse_Config::switch_to_pulse();
+					Flavor_Like_Pulse_Config::switch_to_pulse();
 					WP_CLI::success( 'Pulse mode enabled (reads + writes on pulse table).' );
 					break;
 
 				case 'drop-legacy':
-					$result = WP_Ulike_Pulse_Legacy_Cleanup::drop_legacy_tables();
+					$result = Flavor_Like_Pulse_Legacy_Cleanup::drop_legacy_tables();
 					if ( empty( $result['ok'] ) ) {
 						WP_CLI::error( 'Could not drop legacy tables: ' . ( $result['message'] ?? 'unknown' ) );
 					}
@@ -105,18 +105,18 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 					break;
 
 				case 'dismiss':
-					WP_Ulike_Pulse_Config::mark_admin_dismissed();
+					Flavor_Like_Pulse_Config::mark_admin_dismissed();
 					WP_CLI::success( 'Storage upgrade admin UI hidden.' );
 					break;
 
 				case 'status':
 				default:
-					$config   = WP_Ulike_Pulse_Config::get();
-					$progress = WP_Ulike_Pulse_Sync::get_progress();
-					WP_CLI::log( 'Mode: ' . WP_Ulike_Pulse_Config::mode() );
-					WP_CLI::log( 'Read: ' . WP_Ulike_Pulse_Config::read_mode() );
+					$config   = Flavor_Like_Pulse_Config::get();
+					$progress = Flavor_Like_Pulse_Sync::get_progress();
+					WP_CLI::log( 'Mode: ' . Flavor_Like_Pulse_Config::mode() );
+					WP_CLI::log( 'Read: ' . Flavor_Like_Pulse_Config::read_mode() );
 					WP_CLI::log( 'Migration: ' . ( $config['migration']['status'] ?? 'idle' ) );
-					WP_CLI::log( 'Progress: ' . WP_Ulike_Pulse_Sync::progress_label( $progress ) );
+					WP_CLI::log( 'Progress: ' . Flavor_Like_Pulse_Sync::progress_label( $progress ) );
 					WP_CLI::log( wp_json_encode( $progress, JSON_PRETTY_PRINT ) );
 					break;
 			}
@@ -237,29 +237,29 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 		 */
 		private static function collect_smoke_results( $deep = false ) {
 			$failed = 0;
-			$mode   = WP_Ulike_Pulse_Config::mode();
-			$read   = WP_Ulike_Pulse_Config::read_mode();
+			$mode   = Flavor_Like_Pulse_Config::mode();
+			$read   = Flavor_Like_Pulse_Config::read_mode();
 
 			$checks = array(
 				self::smoke_check(
 					'Storage mode is valid',
-					in_array( $mode, array( WP_Ulike_Pulse_Config::MODE_LEGACY, WP_Ulike_Pulse_Config::MODE_DUAL, WP_Ulike_Pulse_Config::MODE_PULSE ), true ),
+					in_array( $mode, array( Flavor_Like_Pulse_Config::MODE_LEGACY, Flavor_Like_Pulse_Config::MODE_DUAL, Flavor_Like_Pulse_Config::MODE_PULSE ), true ),
 					$mode
 				),
 				self::smoke_check(
 					'Read mode is valid',
-					in_array( $read, array( WP_Ulike_Pulse_Config::READ_LEGACY, WP_Ulike_Pulse_Config::READ_MERGED, WP_Ulike_Pulse_Config::READ_PULSE ), true ),
+					in_array( $read, array( Flavor_Like_Pulse_Config::READ_LEGACY, Flavor_Like_Pulse_Config::READ_MERGED, Flavor_Like_Pulse_Config::READ_PULSE ), true ),
 					$read
 				),
 				self::smoke_check(
 					'Pulse query router available',
-					WP_Ulike_Pulse_Query::available(),
-					WP_Ulike_Pulse_Query::available() ? 'yes' : 'no'
+					Flavor_Like_Pulse_Query::available(),
+					Flavor_Like_Pulse_Query::available() ? 'yes' : 'no'
 				),
 			);
 
-			if ( WP_Ulike_Pulse_Config::MODE_DUAL === $mode ) {
-				$since = WP_Ulike_Pulse_Config::dual_since();
+			if ( Flavor_Like_Pulse_Config::MODE_DUAL === $mode ) {
+				$since = Flavor_Like_Pulse_Config::dual_since();
 				$checks[] = self::smoke_check(
 					'Dual mode has dual_since cutoff',
 					! empty( $since ),
@@ -267,26 +267,26 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				);
 				$checks[] = self::smoke_check(
 					'Dual mode reads merged legacy + pulse',
-					WP_Ulike_Pulse_Config::READ_MERGED === $read,
+					Flavor_Like_Pulse_Config::READ_MERGED === $read,
 					$read
 				);
 			}
 
-			if ( in_array( $mode, array( WP_Ulike_Pulse_Config::MODE_DUAL, WP_Ulike_Pulse_Config::MODE_PULSE ), true ) ) {
+			if ( in_array( $mode, array( Flavor_Like_Pulse_Config::MODE_DUAL, Flavor_Like_Pulse_Config::MODE_PULSE ), true ) ) {
 				$checks[] = self::smoke_check(
 					'Pulse table exists',
-					WP_Ulike_Pulse_Schema::table_exists(),
-					WP_Ulike_Pulse_Schema::table()
+					Flavor_Like_Pulse_Schema::table_exists(),
+					Flavor_Like_Pulse_Schema::table()
 				);
 				$checks[] = self::smoke_check(
 					'Writes route to pulse',
-					wp_ulike_writes_pulse(),
-					wp_ulike_writes_pulse() ? 'yes' : 'no'
+					flavor_like_writes_pulse(),
+					flavor_like_writes_pulse() ? 'yes' : 'no'
 				);
 			}
 
 			foreach ( array( 'post', 'comment' ) as $item_type ) {
-				$profile = WP_Ulike_Pulse_Registry::setting_profile( $item_type );
+				$profile = Flavor_Like_Pulse_Registry::setting_profile( $item_type );
 				$checks[] = self::smoke_check(
 					sprintf( 'Setting profile: %s', $item_type ),
 					! empty( $profile['slug'] ) && ! empty( $profile['column'] ),
@@ -294,7 +294,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				);
 			}
 
-			$cache_key = WP_Ulike_Query_Cache::key( 'smoke_test' );
+			$cache_key = Flavor_Like_Query_Cache::key( 'smoke_test' );
 			$checks[]  = self::smoke_check(
 				'Cache key is versioned and mode-scoped',
 				0 === strpos( $cache_key, 'pv' ) && false !== strpos( $cache_key, $mode . '_' . $read ),
@@ -304,7 +304,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 			$total_logs = null;
 
 			try {
-				$total_logs = WP_Ulike_Pulse_Query::count_logs_for_mode( 'all' );
+				$total_logs = Flavor_Like_Pulse_Query::count_logs_for_mode( 'all' );
 				$checks[]   = self::smoke_check(
 					'count_logs_for_mode(all)',
 					is_numeric( $total_logs ),
@@ -314,8 +314,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				$checks[] = self::smoke_check( 'count_logs_for_mode(all)', false, $e->getMessage() );
 			}
 
-			foreach ( WP_Ulike_Pulse_Registry::stats_table_map() as $item_type ) {
-				$count    = WP_Ulike_Pulse_Query::count_logs_for_type( $item_type, 'all' );
+			foreach ( Flavor_Like_Pulse_Registry::stats_table_map() as $item_type ) {
+				$count    = Flavor_Like_Pulse_Query::count_logs_for_type( $item_type, 'all' );
 				$checks[] = self::smoke_check(
 					sprintf( 'count_logs_for_type(%s, all)', $item_type ),
 					is_numeric( $count ),
@@ -323,7 +323,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				);
 			}
 
-			$meta_total = WP_Ulike_Query_Cache::get_statistics_meta( 'count_logs_period_all' );
+			$meta_total = Flavor_Like_Query_Cache::get_statistics_meta( 'count_logs_period_all' );
 			$checks[]   = self::smoke_check(
 				'Statistics meta readable',
 				is_numeric( $meta_total ) || false === $meta_total || '' === $meta_total,
@@ -340,7 +340,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 
 			// Query path sanity (must not fatally error; results may be empty).
 			try {
-				$user_rows = WP_Ulike_Pulse_Query::get_user_data(
+				$user_rows = Flavor_Like_Pulse_Query::get_user_data(
 					1,
 					array(
 						'type'     => 'post',
@@ -358,7 +358,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 			}
 
 			try {
-				$users = WP_Ulike_Pulse_Query::get_users(
+				$users = Flavor_Like_Pulse_Query::get_users(
 					array(
 						'type'     => 'post',
 						'per_page' => 5,
@@ -375,7 +375,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 			}
 
 			try {
-				$likers = WP_Ulike_Pulse_Query::get_best_likers( 5, 'all', 1 );
+				$likers = Flavor_Like_Pulse_Query::get_best_likers( 5, 'all', 1 );
 				$checks[] = self::smoke_check(
 					'get_best_likers runs',
 					is_array( $likers ) || null === $likers,
@@ -385,17 +385,17 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				$checks[] = self::smoke_check( 'get_best_likers runs', false, $e->getMessage() );
 			}
 
-			if ( class_exists( 'WP_Ulike_Pulse_Log_Bridge' ) ) {
+			if ( class_exists( 'Flavor_Like_Pulse_Log_Bridge' ) ) {
 				try {
-					$logs = WP_Ulike_Pulse_Log_Bridge::get_log_rows( 'ulike', 1, 5 );
+					$logs = Flavor_Like_Pulse_Log_Bridge::get_log_rows( 'flavor_like', 1, 5 );
 					$checks[] = self::smoke_check(
-						'log bridge get_log_rows(ulike) paginates',
+						'log bridge get_log_rows(flavor_like) paginates',
 						is_array( $logs ),
 						is_array( $logs ) ? count( $logs ) . ' row(s)' : 'fail'
 					);
-					$count = WP_Ulike_Pulse_Log_Bridge::count_log_rows( 'ulike' );
+					$count = Flavor_Like_Pulse_Log_Bridge::count_log_rows( 'flavor_like' );
 					$checks[] = self::smoke_check(
-						'log bridge count_log_rows(ulike)',
+						'log bridge count_log_rows(flavor_like)',
 						is_numeric( $count ),
 						(string) $count
 					);
@@ -404,9 +404,9 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				}
 			}
 
-			if ( WP_Ulike_Pulse_Config::MODE_DUAL === $mode ) {
+			if ( Flavor_Like_Pulse_Config::MODE_DUAL === $mode ) {
 				try {
-					$posts = WP_Ulike_Pulse_Query::count_logs_for_type( 'post', 'all' );
+					$posts = Flavor_Like_Pulse_Query::count_logs_for_type( 'post', 'all' );
 					$checks[] = self::smoke_check(
 						'Dual count_logs_for_type(post) is numeric',
 						is_numeric( $posts ),
@@ -444,10 +444,10 @@ if ( ! class_exists( 'WP_Ulike_Pulse_CLI' ) ) {
 				}
 			}
 
-			if ( WP_Ulike_Pulse_Config::MODE_DUAL === $result['mode'] ) {
+			if ( Flavor_Like_Pulse_Config::MODE_DUAL === $result['mode'] ) {
 				WP_CLI::log( 'Dual-mode legacy tables:' );
-				foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $slug => $source ) {
-					$exists = WP_Ulike_Pulse_Registry::table_exists( $source['table'] ) ? 'present' : 'absent';
+				foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $slug => $source ) {
+					$exists = Flavor_Like_Pulse_Registry::table_exists( $source['table'] ) ? 'present' : 'absent';
 					WP_CLI::log( sprintf( '  - %s (%s): %s', $source['table'], $slug, $exists ) );
 				}
 			}

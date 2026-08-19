@@ -4,12 +4,12 @@
  */
 
 .rtl {
-	form.wp-ulike {
+	form.flavor-like {
 		p.submit {
 			margin-right: inherit;
 			margin-left: 20px;
 		}
-		.wp-ulike-settings-tabs {
+		.flavor-like-settings-tabs {
 			h2 {
 				float: right;
 				border-right: 1px solid #e0e0e0;
@@ -18,7 +18,7 @@
 		}
 	}
 	form.wrap {
-		.wp-ulike-settings-tabs {
+		.flavor-like-settings-tabs {
 			h2 {
 				&:last-child {
 					border-left: 1px solid #ddd;
@@ -32,13 +32,13 @@
 			padding-left: inherit !important;
 		}
 	}
-	.wp-ulike-about-page {
-		.ulike-badge {
+	.flavor-like-about-page {
+		.flavor-like-badge {
 			right: inherit;
 			left: 0px;
 		}
 	}
-	.wp-ulike-notice {
+	.flavor-like-notice {
 
 		.links {
 			a {
@@ -48,12 +48,12 @@
 		}
 
 	}
-	.wp-ulike-notice-image {
+	.flavor-like-notice-image {
 		margin-left: 25px;
 		margin-right: 0;
 	}
 
-	#adminmenu #toplevel_page_wp-ulike-settings a[href*="page=wp-ulike-go-pro"] {
+	#adminmenu #toplevel_page_flavor-like-settings a[href*="page=flavor-like-go-pro"] {
 		margin: 3px 10px 0;
 	}
 

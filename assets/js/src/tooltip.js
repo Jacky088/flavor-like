@@ -1,10 +1,10 @@
 /**
- * WP ULike Tooltip Plugin
+ * Flavor Like Tooltip Plugin
  * 
  * @fileoverview Lightweight tooltip solution with dynamic content loading
  * @requires ES7 (ES2016) compatible browser
- * @author WP ULike Team
- * @see https://github.com/alimir/wp-ulike
+ * @author Flavor Like Team
+ * @see https://github.com/Jacky088/flavor-like
  */
 (function (window, document, undefined) {
   "use strict";
@@ -125,11 +125,11 @@
   const arrayFrom = Array.from || ((arr) => Array.prototype.slice.call(arr));
 
   // Main plugin
-  function WordpressUlikeTooltipPlugin(element, options) {
+  function FlavorLikeTooltipPlugin(element, options) {
     // Handle multiple elements
     if (element.length !== undefined && element.length > 1) {
       arrayFrom(element).forEach((el) => {
-        new WordpressUlikeTooltipPlugin(el, options);
+        new FlavorLikeTooltipPlugin(el, options);
       });
       return element;
     }
@@ -572,8 +572,8 @@
   }
 
   // Expose
-  window.WordpressUlikeTooltipPlugin = WordpressUlikeTooltipPlugin;
-  window.WordpressUlikeTooltip = {
+  window.FlavorLikeTooltipPlugin = FlavorLikeTooltipPlugin;
+  window.FlavorLikeTooltip = {
     visible: activeTooltips,
     defaults,
     getInstanceById: (id) => tooltipInstancesById[id],
@@ -582,11 +582,11 @@
 
   // Expose as jQuery plugin for backward compatibility (if jQuery is available)
   // This allows users' existing jQuery code to continue working
-  // Example: $('.element').WordpressUlikeTooltip({...})
+  // Example: $('.element').FlavorLikeTooltip({...})
   if (typeof jQuery !== 'undefined' && jQuery && jQuery.fn) {
-    jQuery.fn.WordpressUlikeTooltip = function (options) {
+    jQuery.fn.FlavorLikeTooltip = function (options) {
       return this.each(function () {
-        new WordpressUlikeTooltipPlugin(this, options);
+        new FlavorLikeTooltipPlugin(this, options);
       });
     };
   }

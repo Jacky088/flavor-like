@@ -2,19 +2,19 @@
 /**
  * Pulse Ledger — resumable legacy → pulse migration.
  *
- * @package WP_Ulike
+ * @package Flavor_Like
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
+if ( ! class_exists( 'Flavor_Like_Pulse_Sync' ) ) {
 
-	final class WP_Ulike_Pulse_Sync {
+	final class Flavor_Like_Pulse_Sync {
 
-	const OPTION_PROGRESS = 'wp_ulike_pulse_sync_progress';
-	const LOCK_TRANSIENT  = 'wp_ulike_pulse_sync_lock';
+	const OPTION_PROGRESS = 'flavor_like_pulse_sync_progress';
+	const LOCK_TRANSIENT  = 'flavor_like_pulse_sync_lock';
 	const TIME_LIMIT      = 20;
 
 	/**
@@ -24,7 +24,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 	 */
 	private static function lock_name() {
 		global $wpdb;
-		return 'wp_ulike_pulse_sync_' . md5( (string) $wpdb->prefix );
+		return 'flavor_like_pulse_sync_' . md5( (string) $wpdb->prefix );
 	}
 
 	/**
@@ -76,7 +76,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 				'sources'           => array(),
 			);
 
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $slug => $config ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $slug => $config ) {
 				$progress['sources'][ $slug ] = array(
 					'cursor'   => 0,
 					'max_id'   => 0,
@@ -134,7 +134,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		 * @return bool
 		 */
 		public static function is_sync_complete( $progress = null ) {
-			if ( 'done' === ( WP_Ulike_Pulse_Config::get()['migration']['status'] ?? '' ) ) {
+			if ( 'done' === ( Flavor_Like_Pulse_Config::get()['migration']['status'] ?? '' ) ) {
 				return true;
 			}
 
@@ -165,16 +165,16 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 			$progress['complete']          = true;
 			$progress['percent_estimate']    = 100;
 
-			if ( WP_Ulike_Pulse_Config::migration_running() ) {
-				WP_Ulike_Pulse_Config::update(
+			if ( Flavor_Like_Pulse_Config::migration_running() ) {
+				Flavor_Like_Pulse_Config::update(
 					array(
 						'migration' => array(
 							'status' => 'done',
 						),
 					)
 				);
-				WP_Ulike_Pulse_Sync_Scheduler::unschedule();
-				wp_ulike_pulse_flush_cache();
+				Flavor_Like_Pulse_Sync_Scheduler::unschedule();
+				flavor_like_pulse_flush_cache();
 			}
 
 			self::save_progress( $progress );
@@ -192,8 +192,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 			$progress['started_at'] = current_time( 'mysql' );
 
 			foreach ( $progress['sources'] as $slug => &$source ) {
-				$config = WP_Ulike_Pulse_Registry::legacy_sources()[ $slug ];
-				if ( WP_Ulike_Pulse_Registry::table_exists( $config['table'] ) ) {
+				$config = Flavor_Like_Pulse_Registry::legacy_sources()[ $slug ];
+				if ( Flavor_Like_Pulse_Registry::table_exists( $config['table'] ) ) {
 					$source['max_id'] = self::max_source_id( $config['table'] );
 					if ( 0 === (int) $source['max_id'] ) {
 						$source['complete'] = true;
@@ -229,28 +229,28 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 				self::save_progress( $progress );
 			}
 
-			WP_Ulike_Pulse_Config::update(
+			Flavor_Like_Pulse_Config::update(
 				array(
 					'migration' => array(
 						'status' => 'running',
 					),
 				)
 			);
-			WP_Ulike_Pulse_Sync_Scheduler::schedule();
+			Flavor_Like_Pulse_Sync_Scheduler::schedule();
 		}
 
 		/**
 		 * @return void
 		 */
 		public static function pause() {
-			WP_Ulike_Pulse_Config::update(
+			Flavor_Like_Pulse_Config::update(
 				array(
 					'migration' => array(
 						'status' => 'paused',
 					),
 				)
 			);
-			WP_Ulike_Pulse_Sync_Scheduler::unschedule();
+			Flavor_Like_Pulse_Sync_Scheduler::unschedule();
 		}
 
 		/**
@@ -260,7 +260,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		public static function run_batch( $batch_size = 0 ) {
 			global $wpdb;
 
-			if ( ! WP_Ulike_Pulse_Config::migration_running() ) {
+			if ( ! Flavor_Like_Pulse_Config::migration_running() ) {
 				return array( 'processed' => 0, 'done' => true, 'message' => 'inactive' );
 			}
 
@@ -273,13 +273,13 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 			return array( 'processed' => 0, 'done' => false, 'message' => 'locked' );
 		}
 
-			$batch_size = $batch_size > 0 ? absint( $batch_size ) : WP_Ulike_Pulse_Schema::BATCH_SIZE_DEFAULT;
+			$batch_size = $batch_size > 0 ? absint( $batch_size ) : Flavor_Like_Pulse_Schema::BATCH_SIZE_DEFAULT;
 			$deadline   = microtime( true ) + self::TIME_LIMIT;
 			$progress   = self::get_progress();
 			$processed  = 0;
 
 			try {
-				foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $slug => $config ) {
+				foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $slug => $config ) {
 					if ( microtime( true ) >= $deadline ) {
 						break;
 					}
@@ -288,7 +288,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 						continue;
 					}
 
-					if ( ! WP_Ulike_Pulse_Registry::table_exists( $config['table'] ) ) {
+					if ( ! Flavor_Like_Pulse_Registry::table_exists( $config['table'] ) ) {
 						$progress['sources'][ $slug ]['complete'] = true;
 						continue;
 					}
@@ -312,7 +312,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 					// retrying it on the next scheduled batch.
 					if ( null === $rows ) {
 						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-							error_log( sprintf( 'WP ULike Pulse: batch query failed for source %s — %s', $slug, $wpdb->last_error ) );
+							error_log( sprintf( 'Flavor Like Pulse: batch query failed for source %s — %s', $slug, $wpdb->last_error ) );
 						}
 						continue;
 					}
@@ -322,11 +322,11 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 						continue;
 					}
 
-				$is_distinct = wp_ulike_setting_repo::isDistinct( $config['item_type'] );
+				$is_distinct = flavor_like_setting_repo::isDistinct( $config['item_type'] );
 				$row_index   = 0;
 
 				foreach ( $rows as $row ) {
-					$result = WP_Ulike_Pulse_Writer::import_legacy_row( $config, $row, $is_distinct );
+					$result = Flavor_Like_Pulse_Writer::import_legacy_row( $config, $row, $is_distinct );
 					if ( 'skipped' === $result ) {
 						++$progress['sources'][ $slug ]['skipped'];
 					} elseif ( false !== $result ) {
@@ -353,15 +353,15 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 
 				if ( $progress['complete'] ) {
 					$progress['percent_estimate'] = 100;
-					WP_Ulike_Pulse_Config::update(
+					Flavor_Like_Pulse_Config::update(
 						array(
 							'migration' => array(
 								'status' => 'done',
 							),
 						)
 					);
-					WP_Ulike_Pulse_Sync_Scheduler::unschedule();
-					wp_ulike_pulse_flush_cache();
+					Flavor_Like_Pulse_Sync_Scheduler::unschedule();
+					flavor_like_pulse_flush_cache();
 				}
 
 			self::save_progress( $progress );
@@ -373,7 +373,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 				'processed'        => $processed,
 				'done'             => ! empty( $progress['complete'] ),
 				'progress'         => $progress,
-				'migration_status' => WP_Ulike_Pulse_Config::get()['migration']['status'] ?? 'idle',
+				'migration_status' => Flavor_Like_Pulse_Config::get()['migration']['status'] ?? 'idle',
 			);
 		}
 
@@ -384,7 +384,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		 * @return array<string,mixed>
 		 */
 		public static function verify( $deep = false ) {
-			$deep = $deep || (bool) apply_filters( 'wp_ulike_pulse_verify_deep_counts', false );
+			$deep = $deep || (bool) apply_filters( 'flavor_like_pulse_verify_deep_counts', false );
 
 			$progress = self::get_progress();
 
@@ -415,8 +415,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		private static function verify_progress_only( array $progress ) {
 			$issues = array();
 
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $slug => $config ) {
-				if ( ! WP_Ulike_Pulse_Registry::table_exists( $config['table'] ) ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $slug => $config ) {
+				if ( ! Flavor_Like_Pulse_Registry::table_exists( $config['table'] ) ) {
 					continue;
 				}
 
@@ -444,8 +444,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		private static function verify_with_counts( array $progress ) {
 			$issues = array();
 
-			foreach ( WP_Ulike_Pulse_Registry::legacy_sources() as $slug => $config ) {
-				if ( ! WP_Ulike_Pulse_Registry::table_exists( $config['table'] ) ) {
+			foreach ( Flavor_Like_Pulse_Registry::legacy_sources() as $slug => $config ) {
+				if ( ! Flavor_Like_Pulse_Registry::table_exists( $config['table'] ) ) {
 					continue;
 				}
 
@@ -472,7 +472,7 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 					continue;
 				}
 
-			if ( wp_ulike_setting_repo::isDistinct( $config['item_type'] ) ) {
+			if ( flavor_like_setting_repo::isDistinct( $config['item_type'] ) ) {
 				// Distinct migration collapses legacy append-history into one
 				// pulse row per (user, item). Compare the distinct pair count
 				// against pulse rows instead of the weak "imported + skipped >= 1"
@@ -632,8 +632,8 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 					continue;
 				}
 
-				$config = WP_Ulike_Pulse_Registry::legacy_sources()[ $slug ] ?? null;
-				if ( ! $config || ! WP_Ulike_Pulse_Registry::table_exists( $config['table'] ) ) {
+				$config = Flavor_Like_Pulse_Registry::legacy_sources()[ $slug ] ?? null;
+				if ( ! $config || ! Flavor_Like_Pulse_Registry::table_exists( $config['table'] ) ) {
 					$source['max_id']   = 0;
 					$source['complete'] = true;
 					continue;
@@ -740,12 +740,12 @@ if ( ! class_exists( 'WP_Ulike_Pulse_Sync' ) ) {
 		 */
 		private static function count_pulse_rows( $item_type ) {
 			global $wpdb;
-			$table = esc_sql( WP_Ulike_Pulse_Schema::table() );
+			$table = esc_sql( Flavor_Like_Pulse_Schema::table() );
 			return (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM `{$table}` WHERE item_type = %s AND engagement_kind = %s",
-					WP_Ulike_Pulse_Registry::normalize_item_type( $item_type ),
-					WP_Ulike_Pulse_Registry::KIND_VOTE
+					Flavor_Like_Pulse_Registry::normalize_item_type( $item_type ),
+					Flavor_Like_Pulse_Registry::KIND_VOTE
 				)
 			);
 		}

@@ -9,7 +9,7 @@ if ( ! defined( 'WPINC' ) ) {
     die('No Naughty Business Please !');
 }
 
-if( ! function_exists( 'wp_ulike_set_transient' ) ) {
+if( ! function_exists( 'flavor_like_set_transient' ) ) {
 	/**
 	 * Set/update the value of a transient.
 	 *
@@ -24,7 +24,7 @@ if( ! function_exists( 'wp_ulike_set_transient' ) ) {
 	 * @param int    $expiration Optional. Time until expiration in seconds. Default 0 (no expiration).
 	 * @return bool False if value was not set and true if value was set.
 	 */
-	function wp_ulike_set_transient( $transient, $value, $expiration = 0 ) {
+	function flavor_like_set_transient( $transient, $value, $expiration = 0 ) {
 		global $_wp_using_ext_object_cache;
 
 		$current_using_cache = $_wp_using_ext_object_cache;
@@ -38,7 +38,7 @@ if( ! function_exists( 'wp_ulike_set_transient' ) ) {
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_transient' ) ) {
+if( ! function_exists( 'flavor_like_get_transient' ) ) {
 	/**
 	 * Get the value of a transient.
 	 *
@@ -48,7 +48,7 @@ if( ! function_exists( 'wp_ulike_get_transient' ) ) {
 	 * @param string $transient Transient name. Expected to not be SQL-escaped.
 	 * @return mixed Value of transient.
 	 */
-	function wp_ulike_get_transient( $transient ) {
+	function flavor_like_get_transient( $transient ) {
 		global $_wp_using_ext_object_cache;
 
 		$current_using_cache = $_wp_using_ext_object_cache;
@@ -62,14 +62,14 @@ if( ! function_exists( 'wp_ulike_get_transient' ) ) {
 	}
 }
 
-if( ! function_exists( 'wp_ulike_delete_transient' ) ) {
+if( ! function_exists( 'flavor_like_delete_transient' ) ) {
 	/**
 	 * Delete a transient.
 	 *
 	 * @param string $transient Transient name. Expected to not be SQL-escaped.
 	 * @return bool true if successful, false otherwise
 	 */
-	function wp_ulike_delete_transient( $transient ) {
+	function flavor_like_delete_transient( $transient ) {
 		global $_wp_using_ext_object_cache;
 
 		$current_using_cache = $_wp_using_ext_object_cache;
@@ -83,13 +83,13 @@ if( ! function_exists( 'wp_ulike_delete_transient' ) ) {
 	}
 }
 
-if( ! function_exists('wp_ulike_is_true') ){
+if( ! function_exists('flavor_like_is_true') ){
 	/**
 	 * Check variable status
 	 *
 	 * @return void
 	 */
-    function wp_ulike_is_true( $var ) {
+    function flavor_like_is_true( $var ) {
         if ( is_bool( $var ) ) {
             return $var;
         }
@@ -106,19 +106,19 @@ if( ! function_exists('wp_ulike_is_true') ){
     }
 }
 
-if( ! function_exists('wp_ulike_is_cache_exist') ){
+if( ! function_exists('flavor_like_is_cache_exist') ){
 	/**
 	 * Check cache existence
 	 *
 	 * @return void
 	 */
-	function wp_ulike_is_cache_exist(){
-		$cache_exist = wp_ulike_get_option( 'cache_exist', false );
+	function flavor_like_is_cache_exist(){
+		$cache_exist = flavor_like_get_option( 'cache_exist', false );
 		return $cache_exist || ( defined( 'WP_CACHE' ) && WP_CACHE === true );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_date_i18n' ) ){
+if( ! function_exists( 'flavor_like_date_i18n' ) ){
 	/**
 	 * Date in localized format
 	 *
@@ -127,7 +127,7 @@ if( ! function_exists( 'wp_ulike_date_i18n' ) ){
 	 * @since           2.3
 	 * @return          String
 	 */
-	function wp_ulike_date_i18n($date){
+	function flavor_like_date_i18n($date){
 		return date_i18n(
 			get_option( 'date_format' ) . ' ' . get_option( 'time_format' ),
 			strtotime($date)
@@ -135,7 +135,7 @@ if( ! function_exists( 'wp_ulike_date_i18n' ) ){
 	}
 }
 
-if( ! function_exists( 'wp_ulike_ip_in_range' ) ){
+if( ! function_exists( 'flavor_like_ip_in_range' ) ){
 	/**
 	 * Check if an IP address is within a CIDR range
 	 *
@@ -143,50 +143,50 @@ if( ! function_exists( 'wp_ulike_ip_in_range' ) ){
 	 * @param string $range CIDR range (e.g., '192.168.1.0/24' or '2001:db8::/32')
 	 * @return bool
 	 */
-	function wp_ulike_ip_in_range( $ip, $range ) {
-		return WP_Ulike_Ip_Detector::ip_in_range( $ip, $range );
+	function flavor_like_ip_in_range( $ip, $range ) {
+		return Flavor_Like_Ip_Detector::ip_in_range( $ip, $range );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_is_cloudflare_ip' ) ){
+if( ! function_exists( 'flavor_like_is_cloudflare_ip' ) ){
 	/**
 	 * Check if the current request is from Cloudflare
 	 *
 	 * @param string|null $ip IP address to check (optional, defaults to REMOTE_ADDR)
 	 * @return bool
 	 */
-	function wp_ulike_is_cloudflare_ip( $ip = null ) {
-		return WP_Ulike_Ip_Detector::is_cloudflare_ip( $ip );
+	function flavor_like_is_cloudflare_ip( $ip = null ) {
+		return Flavor_Like_Ip_Detector::is_cloudflare_ip( $ip );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_user_ip' ) ){
+if( ! function_exists( 'flavor_like_get_user_ip' ) ){
 	/**
 	 * Get user IP address
 	 *
 	 * Handles Cloudflare, proxy headers, and direct connections.
-	 * Uses WP_Ulike_Ip_Detector class for IP detection.
+	 * Uses Flavor_Like_Ip_Detector class for IP detection.
 	 *
 	 * @return string
 	 */
-	function wp_ulike_get_user_ip(){
-		return WP_Ulike_Ip_Detector::get_ip();
+	function flavor_like_get_user_ip(){
+		return Flavor_Like_Ip_Detector::get_ip();
 	}
 }
 
-if( ! function_exists( 'wp_ulike_validate_ip' ) ){
+if( ! function_exists( 'flavor_like_validate_ip' ) ){
 	/**
 	 * Ensures an ip address is both a valid IP and does not fall within a private network range.
 	 *
 	 * @param string $ip
 	 * @return boolean
 	 */
-	function wp_ulike_validate_ip( $ip ) {
-		return WP_Ulike_Ip_Detector::validate_ip( $ip );
+	function flavor_like_validate_ip( $ip ) {
+		return Flavor_Like_Ip_Detector::validate_ip( $ip );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_generate_user_id' ) ){
+if( ! function_exists( 'flavor_like_generate_user_id' ) ){
 	/**
 	 * Convert IP to a integer value
 	 *
@@ -195,12 +195,12 @@ if( ! function_exists( 'wp_ulike_generate_user_id' ) ){
 	 * @since           3.4
 	 * @return          String
 	 */
-	function wp_ulike_generate_user_id( $user_ip ) {
+	function flavor_like_generate_user_id( $user_ip ) {
 
 		// set client identifier based on user ip
 		$client_identifier = $user_ip;
 
-		if ( wp_ulike_validate_ip( $user_ip ) ) {
+		if ( flavor_like_validate_ip( $user_ip ) ) {
 			if ( filter_var( $user_ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) !== false ) {
 				// Convert IPv6 address to a standardized format
 				$standardized_ipv6 = inet_ntop( inet_pton( $user_ip ) );
@@ -211,11 +211,11 @@ if( ! function_exists( 'wp_ulike_generate_user_id' ) ){
 			}
 		}
 
-		return apply_filters( 'wp_ulike_generate_client_identifier', $client_identifier, $user_ip );
+		return apply_filters( 'flavor_like_generate_client_identifier', $client_identifier, $user_ip );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_template_between' ) ){
+if( ! function_exists( 'flavor_like_get_template_between' ) ){
 	/**
 	 * Get template between
 	 *
@@ -226,7 +226,7 @@ if( ! function_exists( 'wp_ulike_get_template_between' ) ){
 	 * @since           2.0
 	 * @return			String
 	 */
-	function wp_ulike_get_template_between( $string, $start, $end ){
+	function flavor_like_get_template_between( $string, $start, $end ){
 		$string 	= " ".$string;
 		$ini 		= strpos($string,$start);
 		if ( $ini == 0 ){
@@ -239,7 +239,7 @@ if( ! function_exists( 'wp_ulike_get_template_between' ) ){
 	}
 }
 
-if( ! function_exists( 'wp_ulike_put_template_between' ) ){
+if( ! function_exists( 'flavor_like_put_template_between' ) ){
 	/**
 	 * Put template between
 	 *
@@ -251,7 +251,7 @@ if( ! function_exists( 'wp_ulike_put_template_between' ) ){
 	 * @since           2.0
 	 * @return			String
 	 */
-	function wp_ulike_put_template_between( $string, $inner_string, $start, $end ){
+	function flavor_like_put_template_between( $string, $inner_string, $start, $end ){
 		$string 	= " ".$string;
 		$ini 		= strpos($string,$start);
 		if ($ini == 0){
@@ -270,14 +270,14 @@ if( ! function_exists( 'wp_ulike_put_template_between' ) ){
 	}
 }
 
-if( ! function_exists('wp_ulike_get_period_limit_sql') ){
+if( ! function_exists('flavor_like_get_period_limit_sql') ){
     /**
      * Get period limit as a sql string
      *
      * @param string|array $date_range
      * @return string
      */
-    function wp_ulike_get_period_limit_sql( $date_range ){
+    function flavor_like_get_period_limit_sql( $date_range ){
 		global $wpdb;
         $period_limit = '';
 
@@ -321,7 +321,7 @@ if( ! function_exists('wp_ulike_get_period_limit_sql') ){
                 );
             }
 
-            return apply_filters( 'wp_ulike_period_limit_sql', $period_limit, $date_range );
+            return apply_filters( 'flavor_like_period_limit_sql', $period_limit, $date_range );
         }
 
         // Handle string-based date ranges (pre-calculated for index optimization)
@@ -408,34 +408,34 @@ if( ! function_exists('wp_ulike_get_period_limit_sql') ){
                 break;
         }
 
-        return apply_filters( 'wp_ulike_period_limit_sql', $period_limit, $date_range );
+        return apply_filters( 'flavor_like_period_limit_sql', $period_limit, $date_range );
     }
 }
 
 
-if( ! function_exists('wp_ulike_get_cloudflare_ips') ){
+if( ! function_exists('flavor_like_get_cloudflare_ips') ){
 	/**
 	 * Get Cloudflare IP ranges
 	 *
 	 * @return array Array with 'v4' and 'v6' keys containing IP ranges
 	 */
-	function wp_ulike_get_cloudflare_ips(){
-		return WP_Ulike_Ip_Detector::get_cloudflare_ips();
+	function flavor_like_get_cloudflare_ips(){
+		return Flavor_Like_Ip_Detector::get_cloudflare_ips();
 	}
 }
 
-if( ! function_exists('wp_ulike_site_is_https') ){
+if( ! function_exists('flavor_like_site_is_https') ){
 	/**
 	 * Check if the home URL is https. If it is, we don't need to do things such as 'force ssl'.
 	 *
 	 * @return bool
 	 */
-	function wp_ulike_site_is_https() {
+	function flavor_like_site_is_https() {
 		return false !== strstr( get_option( 'home' ), 'https:' );
 	}
 }
 
-if( ! function_exists('wp_ulike_setcookie') ){
+if( ! function_exists('flavor_like_setcookie') ){
 	/**
 	 * Set a cookie - wrapper for setcookie using WP constants.
 	 *
@@ -445,19 +445,19 @@ if( ! function_exists('wp_ulike_setcookie') ){
 	 * @param  bool    $secure Whether the cookie should be served only over https.
 	 * @param  bool    $httponly Whether the cookie is only accessible over HTTP, not scripting languages like JavaScript. @since 3.6.0.
 	 */
-	function wp_ulike_setcookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
-		if ( ! apply_filters( 'wp_ulike_set_cookie_enabled', true, $name ,$value, $expire, $secure ) ) {
+	function flavor_like_setcookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
+		if ( ! apply_filters( 'flavor_like_set_cookie_enabled', true, $name ,$value, $expire, $secure ) ) {
 			return;
 		}
 		if ( ! headers_sent() ) {
 			$options = apply_filters(
-				'wp_ulike_set_cookie_options',
+				'flavor_like_set_cookie_options',
 				array(
 					'expires'  => $expire,
 					'secure'   => $secure,
 					'path'     => '/',
 					'domain'   => COOKIE_DOMAIN,
-					'httponly' => apply_filters( 'wp_ulike_cookie_httponly', $httponly, $name, $value, $expire, $secure ),
+					'httponly' => apply_filters( 'flavor_like_cookie_httponly', $httponly, $name, $value, $expire, $secure ),
 				),
 				$name,
 				$value
@@ -475,7 +475,7 @@ if( ! function_exists('wp_ulike_setcookie') ){
 	}
 }
 
-if( ! function_exists('wp_ulike_maybe_define_constant') ){
+if( ! function_exists('flavor_like_maybe_define_constant') ){
 	/**
 	 * Define a constant if it is not already defined.
 	 *
@@ -483,14 +483,14 @@ if( ! function_exists('wp_ulike_maybe_define_constant') ){
 	 * @param string $name  Constant name.
 	 * @param mixed  $value Value.
 	 */
-	function wp_ulike_maybe_define_constant( $name, $value ) {
+	function flavor_like_maybe_define_constant( $name, $value ) {
 		if ( ! defined( $name ) ) {
 			define( $name, $value );
 		}
 	}
 }
 
-if( ! function_exists('wp_ulike_is_valid_nonce') ){
+if( ! function_exists('flavor_like_is_valid_nonce') ){
 	/**
      * Check Field Nonce
      *
@@ -501,7 +501,7 @@ if( ! function_exists('wp_ulike_is_valid_nonce') ){
 	 * @param string $query_arg
 	 * @return bool|int
 	 */
-    function wp_ulike_is_valid_nonce( $action = '', $query_arg = false ) {
+    function flavor_like_is_valid_nonce( $action = '', $query_arg = false ) {
         $nonce = '';
 
         if ( $query_arg && isset( $_REQUEST[ $query_arg ] ) ) {
@@ -521,20 +521,20 @@ if( ! function_exists('wp_ulike_is_valid_nonce') ){
 
 }
 
-if( ! function_exists('wp_ulike_is_bot_request') ){
+if( ! function_exists('flavor_like_is_bot_request') ){
 	/**
 	 * Check if current request is a bot
 	 *
 	 * @return bool
 	 */
-	function wp_ulike_is_bot_request(){
-		$parser = new WP_Ulike_User_Agent_Parser();
+	function flavor_like_is_bot_request(){
+		$parser = new Flavor_Like_User_Agent_Parser();
 		$parser->parse();
 		return $parser->is_bot();
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_add_inline_script_data' ) ) {
+if ( ! function_exists( 'flavor_like_add_inline_script_data' ) ) {
 	/**
 	 * Attach a global JS object to a registered script handle.
 	 *
@@ -543,7 +543,7 @@ if ( ! function_exists( 'wp_ulike_add_inline_script_data' ) ) {
 	 * @param mixed  $data        Data to encode as JSON.
 	 * @return void
 	 */
-	function wp_ulike_add_inline_script_data( $handle, $object_name, $data ) {
+	function flavor_like_add_inline_script_data( $handle, $object_name, $data ) {
 		if ( ! wp_script_is( $handle, 'registered' ) && ! wp_script_is( $handle, 'enqueued' ) ) {
 			return;
 		}
@@ -556,7 +556,7 @@ if ( ! function_exists( 'wp_ulike_add_inline_script_data' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_enqueue_script_with_defer' ) ) {
+if ( ! function_exists( 'flavor_like_enqueue_script_with_defer' ) ) {
 	/**
 	 * Enqueue a frontend script with defer strategy when supported.
 	 *
@@ -566,7 +566,7 @@ if ( ! function_exists( 'wp_ulike_enqueue_script_with_defer' ) ) {
 	 * @param string $ver    Version.
 	 * @return void
 	 */
-	function wp_ulike_enqueue_script_with_defer( $handle, $src, $deps = array(), $ver = false ) {
+	function flavor_like_enqueue_script_with_defer( $handle, $src, $deps = array(), $ver = false ) {
 		if ( function_exists( 'wp_enqueue_script' ) && version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
 			wp_enqueue_script(
 				$handle,
@@ -585,26 +585,26 @@ if ( ! function_exists( 'wp_ulike_enqueue_script_with_defer' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_get_earliest_log_timestamp' ) ) {
+if ( ! function_exists( 'flavor_like_get_earliest_log_timestamp' ) ) {
 	/**
-	 * Earliest vote timestamp across WP ULike log tables (for legacy backfill).
+	 * Earliest vote timestamp across Flavor Like log tables (for legacy backfill).
 	 *
 	 * @return int|null Unix timestamp or null when unknown.
 	 */
-	function wp_ulike_get_earliest_log_timestamp() {
-		if ( wp_ulike_use_pulse_queries() ) {
-			return WP_Ulike_Pulse_Log_Bridge::get_earliest_log_timestamp();
+	function flavor_like_get_earliest_log_timestamp() {
+		if ( flavor_like_use_pulse_queries() ) {
+			return Flavor_Like_Pulse_Log_Bridge::get_earliest_log_timestamp();
 		}
 
 		global $wpdb;
 
-		if ( ! class_exists( 'WP_Ulike_Overview' ) ) {
+		if ( ! class_exists( 'Flavor_Like_Overview' ) ) {
 			return null;
 		}
 
 		$selects = array();
 
-		foreach ( WP_Ulike_Overview::get_required_tables() as $label => $table_name ) {
+		foreach ( Flavor_Like_Overview::get_required_tables() as $label => $table_name ) {
 			if ( 'meta' === $label || 'pulse' === $label ) {
 				continue;
 			}
@@ -619,7 +619,7 @@ if ( ! function_exists( 'wp_ulike_get_earliest_log_timestamp' ) ) {
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- subqueries use registered table names only.
 		$value = $wpdb->get_var(
-			'SELECT MIN(dt) FROM (' . implode( ' UNION ALL ', $selects ) . ') AS ulike_earliest WHERE dt IS NOT NULL'
+			'SELECT MIN(dt) FROM (' . implode( ' UNION ALL ', $selects ) . ') AS flavor_like_earliest WHERE dt IS NOT NULL'
 		);
 
 		if ( empty( $value ) ) {
@@ -632,31 +632,31 @@ if ( ! function_exists( 'wp_ulike_get_earliest_log_timestamp' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_maybe_backfill_first_activated_at' ) ) {
+if ( ! function_exists( 'flavor_like_maybe_backfill_first_activated_at' ) ) {
 	/**
 	 * Backfill first-activation timestamp for existing installs (runs once).
 	 *
 	 * @return void
 	 */
-	function wp_ulike_maybe_backfill_first_activated_at() {
-		if ( false !== get_option( 'wp_ulike_first_activated_at', false ) ) {
+	function flavor_like_maybe_backfill_first_activated_at() {
+		if ( false !== get_option( 'flavor_like_first_activated_at', false ) ) {
 			return;
 		}
 
-		$timestamp = wp_ulike_get_earliest_log_timestamp();
+		$timestamp = flavor_like_get_earliest_log_timestamp();
 
-		update_option( 'wp_ulike_first_activated_at', $timestamp ? (int) $timestamp : 0, false );
+		update_option( 'flavor_like_first_activated_at', $timestamp ? (int) $timestamp : 0, false );
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_get_days_since_activation' ) ) {
+if ( ! function_exists( 'flavor_like_get_days_since_activation' ) ) {
 	/**
 	 * Whole days since the plugin was first activated on this site.
 	 *
 	 * @return int|null Null when activation date is unknown.
 	 */
-	function wp_ulike_get_days_since_activation() {
-		$activated_at = get_option( 'wp_ulike_first_activated_at', false );
+	function flavor_like_get_days_since_activation() {
+		$activated_at = get_option( 'flavor_like_first_activated_at', false );
 
 		if ( ! $activated_at || ! is_numeric( $activated_at ) ) {
 			return null;
@@ -666,7 +666,7 @@ if ( ! function_exists( 'wp_ulike_get_days_since_activation' ) ) {
 	}
 }
 
-if( ! function_exists('wp_ulike_generate_fingerprint') ){
+if( ! function_exists('flavor_like_generate_fingerprint') ){
 	/**
 	 * Generate a secure fingerprint hash for the current user/device session.
 	 *
@@ -676,7 +676,7 @@ if( ! function_exists('wp_ulike_generate_fingerprint') ){
 	 *
 	 * @return string The hashed fingerprint string
 	 */
-	function wp_ulike_generate_fingerprint() {
+	function flavor_like_generate_fingerprint() {
 		$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
 		$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 		$accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
@@ -685,7 +685,7 @@ if( ! function_exists('wp_ulike_generate_fingerprint') ){
 			$accept_language = 'unknown-lang';
 		}
 
-		$parser = new WP_Ulike_User_Agent_Parser( $user_agent );
+		$parser = new Flavor_Like_User_Agent_Parser( $user_agent );
 		$parser->parse();
 
 		$client_info = $parser->get_client();
@@ -711,14 +711,14 @@ if( ! function_exists('wp_ulike_generate_fingerprint') ){
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_read_php_input_capped' ) ) {
+if ( ! function_exists( 'flavor_like_read_php_input_capped' ) ) {
 	/**
 	 * Read php://input up to a maximum size (avoids loading huge bodies into memory).
 	 *
 	 * @param int $max_bytes Maximum allowed body length in bytes.
 	 * @return string|\WP_Error Body string, or WP_Error if unreadable or over limit.
 	 */
-	function wp_ulike_read_php_input_capped( $max_bytes ) {
+	function flavor_like_read_php_input_capped( $max_bytes ) {
 		$max_bytes = (int) $max_bytes;
 		if ( $max_bytes <= 0 ) {
 			return '';
@@ -726,17 +726,17 @@ if ( ! function_exists( 'wp_ulike_read_php_input_capped' ) ) {
 
 		$chunk = file_get_contents( 'php://input', false, null, 0, $max_bytes + 1 );
 		if ( false === $chunk ) {
-			return new WP_Error( 'wp_ulike_read_body', esc_html__( 'Could not read request body.', 'wp-ulike' ) );
+			return new WP_Error( 'flavor_like_read_body', esc_html__( 'Could not read request body.', 'flavor-like' ) );
 		}
 		if ( strlen( $chunk ) > $max_bytes ) {
-			return new WP_Error( 'wp_ulike_body_too_large', esc_html__( 'Request body is too large.', 'wp-ulike' ) );
+			return new WP_Error( 'flavor_like_body_too_large', esc_html__( 'Request body is too large.', 'flavor-like' ) );
 		}
 
 		return $chunk;
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_array_insert_after' ) ) {
+if ( ! function_exists( 'flavor_like_array_insert_after' ) ) {
 	/**
 	 * Insert items after a key or field id in a panel fields array.
 	 *
@@ -748,7 +748,7 @@ if ( ! function_exists( 'wp_ulike_array_insert_after' ) ) {
 	 * @param array  $new    Items to insert (preserve their keys when associative).
 	 * @return array
 	 */
-	function wp_ulike_array_insert_after( array $array, $needle, array $new ) {
+	function flavor_like_array_insert_after( array $array, $needle, array $new ) {
 		if ( empty( $new ) ) {
 			return $array;
 		}
@@ -765,7 +765,7 @@ if ( ! function_exists( 'wp_ulike_array_insert_after' ) ) {
 			);
 		}
 
-		$is_list = wp_ulike_array_is_list( $array );
+		$is_list = flavor_like_array_is_list( $array );
 
 		if ( $is_list ) {
 			$result   = array();
@@ -801,14 +801,14 @@ if ( ! function_exists( 'wp_ulike_array_insert_after' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wp_ulike_array_is_list' ) ) {
+if ( ! function_exists( 'flavor_like_array_is_list' ) ) {
 	/**
 	 * Whether an array is a sequential list (0..n-1 keys).
 	 *
 	 * @param array $array Array to inspect.
 	 * @return bool
 	 */
-	function wp_ulike_array_is_list( array $array ) {
+	function flavor_like_array_is_list( array $array ) {
 		if ( array() === $array ) {
 			return true;
 		}

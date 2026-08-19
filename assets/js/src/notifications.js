@@ -1,23 +1,23 @@
 /**
- * WP ULike Notifications Plugin
+ * Flavor Like Notifications Plugin
  * 
  * @fileoverview Toast notification system for user feedback
  * @requires ES7 (ES2016) compatible browser
- * @author WP ULike Team
- * @see https://github.com/alimir/wp-ulike
+ * @author Flavor Like Team
+ * @see https://github.com/Jacky088/flavor-like
  */
 (function (window, document, undefined) {
   "use strict";
 
   // Create the defaults once
-  const pluginName = "WordpressUlikeNotifications";
+  const pluginName = "FlavorLikeNotifications";
   const defaults = {
     messageType: "success",
     messageText: "Hello World!",
     timeout: 8000,
-    messageElement: "wpulike-message",
-    notifContainer: "wpulike-notification",
-    fadeOutClass: "wpulike-message-fadeout"
+    messageElement: "flavorlike-message",
+    notifContainer: "flavorlike-notification",
+    fadeOutClass: "flavorlike-message-fadeout"
   };
 
   // Constants
@@ -90,7 +90,7 @@
   // The actual plugin constructor
   function Plugin(element, options) {
     if (!element) {
-      console.warn("WordpressUlikeNotifications: element is required");
+      console.warn("FlavorLikeNotifications: element is required");
       return;
     }
 
@@ -129,7 +129,7 @@
 
       // Cache className to avoid template literal recreation
       if (!this._messageClassName) {
-        this._messageClassName = `${this.settings.messageElement} wpulike-${this.settings.messageType}`;
+        this._messageClassName = `${this.settings.messageElement} flavorlike-${this.settings.messageType}`;
       }
       this.messageElement.className = this._messageClassName;
 
@@ -160,7 +160,7 @@
 
       // Trigger event after DOM update
       requestAnimationFrame(() => {
-        triggerEvent(this.notifContainer, "WordpressUlikeNotificationAppend", {
+        triggerEvent(this.notifContainer, "FlavorLikeNotificationAppend", {
           messageElement: this.messageElement
         });
       });
@@ -235,7 +235,7 @@
       }
 
       // Trigger removal event
-      triggerEvent(this.element, "WordpressUlikeRemoveNotification", {
+      triggerEvent(this.element, "FlavorLikeRemoveNotification", {
         messageElement: messageEl
       });
 
@@ -252,7 +252,7 @@
 
   // Expose as jQuery plugin for backward compatibility (if jQuery is available)
   // This allows users' existing jQuery code to continue working
-  // Example: $(document.body).WordpressUlikeNotifications({...})
+  // Example: $(document.body).FlavorLikeNotifications({...})
   if (typeof jQuery !== 'undefined' && jQuery && jQuery.fn) {
     jQuery.fn[pluginName] = function (options) {
       return this.each(function () {

@@ -9,7 +9,7 @@ if ( ! defined( 'WPINC' ) ) {
     die('No Naughty Business Please !');
 }
 
-if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
+if( ! function_exists( 'flavor_like_add_meta_data' ) ){
 	/**
 	 * Adds metadata for the specified object.
 	 *
@@ -24,7 +24,7 @@ if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
 	 *                           no change will be made. Default false.
 	 * @return int|false The meta ID on success, false on failure.
 	 */
-	function wp_ulike_add_meta_data( $object_id, $meta_group, $meta_key, $meta_value, $unique = false ) {
+	function flavor_like_add_meta_data( $object_id, $meta_group, $meta_key, $meta_value, $unique = false ) {
 		global $wpdb;
 
 		if ( ! $meta_group || ! $meta_key || ! is_numeric( $object_id ) ) {
@@ -36,7 +36,7 @@ if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
 			return false;
 		}
 
-		$table     = $wpdb->prefix . 'ulike_meta';
+		$table     = $wpdb->prefix . 'flavor_like_meta';
 		$column    = 'item_id';
 		$id_column = 'meta_id';
 
@@ -45,7 +45,7 @@ if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
 		$meta_key   = wp_unslash( $meta_key );
 		$meta_value = wp_unslash( $meta_value );
 
-		$check = apply_filters( "wp_ulike_add_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $unique  );
+		$check = apply_filters( "flavor_like_add_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $unique  );
 		if ( null !== $check ) {
 			return $check;
 		}
@@ -64,7 +64,7 @@ if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
 		$_meta_value = $meta_value;
 		$meta_value  = maybe_serialize( $meta_value );
 
-		do_action( "wp_ulike_add_{$meta_group}_meta", $object_id, $meta_key, $_meta_value );
+		do_action( "flavor_like_add_{$meta_group}_meta", $object_id, $meta_key, $_meta_value );
 
 		$result = $wpdb->insert(
 			$table,
@@ -82,15 +82,15 @@ if( ! function_exists( 'wp_ulike_add_meta_data' ) ){
 
 		$mid = (int) $wpdb->insert_id;
 
-		wp_cache_delete( $object_id, sprintf( 'wp_ulike_%s_meta', $meta_group ) );
+		wp_cache_delete( $object_id, sprintf( 'flavor_like_%s_meta', $meta_group ) );
 
-		do_action( "wp_ulike_added_{$meta_group}_meta", $mid, $object_id, $meta_key, $_meta_value );
+		do_action( "flavor_like_added_{$meta_group}_meta", $mid, $object_id, $meta_key, $_meta_value );
 
 		return $mid;
 	}
 }
 
-if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
+if( ! function_exists( 'flavor_like_update_meta_data' ) ){
 	/**
 	 * Updates metadata for the specified object. If no value already exists for the specified object
 	 * ID and metadata key, the metadata will be added.
@@ -106,7 +106,7 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 	 * @return int|bool The new meta field ID if a field with the given key didn't exist and was
 	 *                  therefore added, true on successful update, false on failure.
 	 */
-	function wp_ulike_update_meta_data( $object_id, $meta_group, $meta_key, $meta_value, $prev_value = '' ) {
+	function flavor_like_update_meta_data( $object_id, $meta_group, $meta_key, $meta_value, $prev_value = '' ) {
 		global $wpdb;
 
 		if ( ! $meta_group || ! $meta_key || ! is_numeric( $object_id ) ) {
@@ -118,7 +118,7 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 			return false;
 		}
 
-		$table     = $wpdb->prefix . 'ulike_meta';
+		$table     = $wpdb->prefix . 'flavor_like_meta';
 		$column    = 'item_id';
 		$id_column = 'meta_id';
 
@@ -130,14 +130,14 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 		$passed_value   = $meta_value;
 		$meta_value     = wp_unslash( $meta_value );
 
-		$check = apply_filters( "wp_ulike_update_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $prev_value );
+		$check = apply_filters( "flavor_like_update_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $prev_value );
 		if ( null !== $check ) {
 			return (bool) $check;
 		}
 
 		// Compare existing value to new value if no prev value given and the key exists only once.
 		if ( empty( $prev_value ) ) {
-			$old_value = wp_ulike_get_meta_data_raw( $object_id, $meta_group, $meta_key );
+			$old_value = flavor_like_get_meta_data_raw( $object_id, $meta_group, $meta_key );
 			if ( is_countable( $old_value ) && count( $old_value ) == 1 ) {
 				if ( $old_value[0] === $meta_value ) {
 					return false;
@@ -147,7 +147,7 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 
 		$meta_ids = $wpdb->get_col( $wpdb->prepare( "SELECT $id_column FROM $table WHERE meta_group = %s AND meta_key = %s AND $column = %d", $meta_group, $meta_key, $object_id ) );
 		if ( empty( $meta_ids ) ) {
-			return wp_ulike_add_meta_data( $object_id, $raw_meta_group, $raw_meta_key, $passed_value );
+			return flavor_like_add_meta_data( $object_id, $raw_meta_group, $raw_meta_key, $passed_value );
 		}
 
 		$_meta_value = $meta_value;
@@ -166,7 +166,7 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 		}
 
 		foreach ( $meta_ids as $meta_id ) {
-			do_action( "wp_ulike_update_{$meta_group}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
+			do_action( "flavor_like_update_{$meta_group}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
 		}
 
 		$result = $wpdb->update( $table, $data, $where );
@@ -174,17 +174,17 @@ if( ! function_exists( 'wp_ulike_update_meta_data' ) ){
 			return false;
 		}
 
-		wp_cache_delete( $object_id, sprintf( 'wp_ulike_%s_meta', $meta_group ) );
+		wp_cache_delete( $object_id, sprintf( 'flavor_like_%s_meta', $meta_group ) );
 
 		foreach ( $meta_ids as $meta_id ) {
-			do_action( "wp_ulike_updated_{$meta_group}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
+			do_action( "flavor_like_updated_{$meta_group}_meta", $meta_id, $object_id, $meta_key, $_meta_value );
 		}
 
 		return true;
 	}
 }
 
-if( ! function_exists( 'wp_ulike_update_meta_cache' ) ){
+if( ! function_exists( 'flavor_like_update_meta_cache' ) ){
 	/**
 	 * Updates the metadata cache for the specified objects.
 	 *
@@ -193,14 +193,14 @@ if( ! function_exists( 'wp_ulike_update_meta_cache' ) ){
 	 * @param string|int[] $object_ids Array or comma delimited list of object IDs to update cache for.
 	 * @return array|false Metadata cache for the specified objects, or false on failure.
 	 */
-	function wp_ulike_update_meta_cache( $object_ids, $meta_group ) {
+	function flavor_like_update_meta_cache( $object_ids, $meta_group ) {
 		global $wpdb;
 
 		if ( ! $object_ids || ! $meta_group ) {
 			return false;
 		}
 
-		$table     = $wpdb->prefix . 'ulike_meta';
+		$table     = $wpdb->prefix . 'flavor_like_meta';
 		$column    = 'item_id';
 
 		if ( ! is_array( $object_ids ) ) {
@@ -210,12 +210,12 @@ if( ! function_exists( 'wp_ulike_update_meta_cache' ) ){
 
 		$object_ids = array_map( 'intval', $object_ids );
 
-		$check = apply_filters( "wp_ulike_update_{$meta_group}_metadata_cache", null, $object_ids );
+		$check = apply_filters( "flavor_like_update_{$meta_group}_metadata_cache", null, $object_ids );
 		if ( null !== $check ) {
 			return (bool) $check;
 		}
 
-		$cache_key      = sprintf( 'wp_ulike_%s_meta', $meta_group );
+		$cache_key      = sprintf( 'flavor_like_%s_meta', $meta_group );
 		$non_cached_ids = array();
 		$cache          = array();
 
@@ -283,7 +283,7 @@ if( ! function_exists( 'wp_ulike_update_meta_cache' ) ){
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_meta_data_raw' ) ){
+if( ! function_exists( 'flavor_like_get_meta_data_raw' ) ){
 	/**
 	 * Retrieves raw metadata value for the specified object.
 	 *
@@ -297,7 +297,7 @@ if( ! function_exists( 'wp_ulike_get_meta_data_raw' ) ){
 	 * @return mixed Single metadata value, or array of values. Null if the value does not exist.
 	 *               False if there's a problem with the parameters passed to the function.
 	 */
-	function wp_ulike_get_meta_data_raw( $object_id, $meta_group, $meta_key = '', $single = false ) {
+	function flavor_like_get_meta_data_raw( $object_id, $meta_group, $meta_key = '', $single = false ) {
 		if ( ! is_numeric( $object_id ) ) {
 			return false;
 		}
@@ -307,10 +307,10 @@ if( ! function_exists( 'wp_ulike_get_meta_data_raw' ) ){
 			return false;
 		}
 
-		$meta_cache = wp_cache_get( $object_id, sprintf( 'wp_ulike_%s_meta', $meta_group ) );
+		$meta_cache = wp_cache_get( $object_id, sprintf( 'flavor_like_%s_meta', $meta_group ) );
 
 		if ( false === $meta_cache ) {
-			$meta_cache = wp_ulike_update_meta_cache( array( $object_id ), $meta_group );
+			$meta_cache = flavor_like_update_meta_cache( array( $object_id ), $meta_group );
 			if ( isset( $meta_cache[ $object_id ] ) ) {
 				$meta_cache = $meta_cache[ $object_id ];
 			} else {
@@ -338,7 +338,7 @@ if( ! function_exists( 'wp_ulike_get_meta_data_raw' ) ){
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_meta_data' ) ){
+if( ! function_exists( 'flavor_like_get_meta_data' ) ){
 	/**
 	 * Retrieves the value of a metadata field for the specified object type and ID.
 	 *
@@ -360,17 +360,17 @@ if( ! function_exists( 'wp_ulike_get_meta_data' ) ){
 	 * @return mixed Single metadata value, or array of values.
 	 *               False if there's a problem with the parameters passed to the function.
 	 */
-	function wp_ulike_get_meta_data( $object_id, $meta_group, $meta_key = '', $single = false ) {
-		$value = wp_ulike_get_meta_data_raw( $object_id, $meta_group, $meta_key, $single );
+	function flavor_like_get_meta_data( $object_id, $meta_group, $meta_key = '', $single = false ) {
+		$value = flavor_like_get_meta_data_raw( $object_id, $meta_group, $meta_key, $single );
 		if ( ! is_null( $value ) ) {
 			return $value;
 		}
 
-		return wp_ulike_get_meta_data_default( $object_id, $meta_group, $meta_key, $single );
+		return flavor_like_get_meta_data_default( $object_id, $meta_group, $meta_key, $single );
 	}
 }
 
-if( ! function_exists( 'wp_ulike_get_meta_data_default' ) ){
+if( ! function_exists( 'flavor_like_get_meta_data_default' ) ){
 	/**
 	 * Retrieves default metadata value for the specified meta key and object.
 	 *
@@ -385,14 +385,14 @@ if( ! function_exists( 'wp_ulike_get_meta_data_default' ) ){
 	 *                          This parameter has no effect if meta_key is not specified. Default false.
 	 * @return mixed Single metadata value, or array of values.
 	 */
-	function wp_ulike_get_meta_data_default( $object_id, $meta_group, $meta_key, $single = false ) {
+	function flavor_like_get_meta_data_default( $object_id, $meta_group, $meta_key, $single = false ) {
 		if ( $single ) {
 			$value = '';
 		} else {
 			$value = array();
 		}
 
-		$value = apply_filters( "wp_ulike_default_{$meta_group}_metadata", $value, $object_id, $meta_key, $single, $meta_group );
+		$value = apply_filters( "flavor_like_default_{$meta_group}_metadata", $value, $object_id, $meta_key, $single, $meta_group );
 
 		if ( ! $single && ! wp_is_numeric_array( $value ) ) {
 			$value = array( $value );
@@ -402,7 +402,7 @@ if( ! function_exists( 'wp_ulike_get_meta_data_default' ) ){
 	}
 }
 
-if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
+if( ! function_exists( 'flavor_like_delete_meta_data' ) ){
 	/**
 	 * Deletes metadata for the specified object.
 	 *
@@ -424,7 +424,7 @@ if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
 	 *                           matching metadata entries for the specified object_id. Default false.
 	 * @return bool True on successful delete, false on failure.
 	 */
-	function wp_ulike_delete_meta_data( $meta_group, $object_id, $meta_key, $meta_value = '', $delete_all = false ) {
+	function flavor_like_delete_meta_data( $meta_group, $object_id, $meta_key, $meta_value = '', $delete_all = false ) {
 		global $wpdb;
 
 		if ( ! $meta_group || ! $meta_key || ! is_numeric( $object_id ) && ! $delete_all ) {
@@ -436,7 +436,7 @@ if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
 			return false;
 		}
 
-		$table       = $wpdb->prefix . 'ulike_meta';
+		$table       = $wpdb->prefix . 'flavor_like_meta';
 		$type_column = 'item_id';
 		$id_column   = 'meta_id';
 
@@ -445,7 +445,7 @@ if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
 		$meta_key   = wp_unslash( $meta_key );
 		$meta_value = wp_unslash( $meta_value );
 
-		$check = apply_filters( "wp_ulike_delete_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $delete_all );
+		$check = apply_filters( "flavor_like_delete_{$meta_group}_metadata", null, $object_id, $meta_key, $meta_value, $delete_all );
 		if ( null !== $check ) {
 			return (bool) $check;
 		}
@@ -476,7 +476,7 @@ if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
 			}
 		}
 
-		do_action( "wp_ulike_delete_{$meta_group}_meta", $meta_ids, $object_id, $meta_key, $_meta_value );
+		do_action( "flavor_like_delete_{$meta_group}_meta", $meta_ids, $object_id, $meta_key, $_meta_value );
 
 		if ( ! empty( $meta_ids ) ) {
 			$meta_ids = array_map( 'absint', $meta_ids );
@@ -493,19 +493,19 @@ if( ! function_exists( 'wp_ulike_delete_meta_data' ) ){
 
 		if ( $delete_all ) {
 			foreach ( (array) $object_ids as $o_id ) {
-				wp_cache_delete( $o_id, sprintf( 'wp_ulike_%s_meta', $meta_group ) );
+				wp_cache_delete( $o_id, sprintf( 'flavor_like_%s_meta', $meta_group ) );
 			}
 		} else {
-			wp_cache_delete( $object_id, sprintf( 'wp_ulike_%s_meta', $meta_group ) );
+			wp_cache_delete( $object_id, sprintf( 'flavor_like_%s_meta', $meta_group ) );
 		}
 
-		do_action( "wp_ulike_deleted_{$meta_group}_meta", $meta_ids, $object_id, $meta_key, $_meta_value );
+		do_action( "flavor_like_deleted_{$meta_group}_meta", $meta_ids, $object_id, $meta_key, $_meta_value );
 
 		return true;
 	}
 }
 
-if( ! function_exists('wp_ulike_delete_vote_data') ){
+if( ! function_exists('flavor_like_delete_vote_data') ){
 	/**
 	 * Delete single vote data
 	 *
@@ -513,19 +513,19 @@ if( ! function_exists('wp_ulike_delete_vote_data') ){
 	 * @param string $type
 	 * @return void
 	 */
-	function wp_ulike_delete_vote_data( $ID, $type ){
+	function flavor_like_delete_vote_data( $ID, $type ){
 		// delete meta values
-		wp_ulike_delete_meta_data( $type, $ID, 'count_distinct_dislike' );
-		wp_ulike_delete_meta_data( $type, $ID, 'count_distinct_like' );
-		wp_ulike_delete_meta_data( $type, $ID, 'count_total_dislike' );
-		wp_ulike_delete_meta_data( $type, $ID, 'count_total_like' );
-		wp_ulike_delete_meta_data( $type, $ID, 'likers_list' );
+		flavor_like_delete_meta_data( $type, $ID, 'count_distinct_dislike' );
+		flavor_like_delete_meta_data( $type, $ID, 'count_distinct_like' );
+		flavor_like_delete_meta_data( $type, $ID, 'count_total_dislike' );
+		flavor_like_delete_meta_data( $type, $ID, 'count_total_like' );
+		flavor_like_delete_meta_data( $type, $ID, 'likers_list' );
 
 		// Content deletion: remove votes and Pro emoji/star rows so nothing is orphaned.
-		$settings      = wp_ulike_setting_type::get_instance( $type );
-		$deleted_count = WP_Ulike_Pulse_Writer::delete_item_all( $ID, $type );
+		$settings      = flavor_like_setting_type::get_instance( $type );
+		$deleted_count = Flavor_Like_Pulse_Writer::delete_item_all( $ID, $type );
 
 		// Fires after the post item has been deleted.
-		do_action( 'wp_ulike_delete_vote_data', $ID, $type, $settings, $deleted_count );
+		do_action( 'flavor_like_delete_vote_data', $ID, $type, $settings, $deleted_count );
 	}
 }

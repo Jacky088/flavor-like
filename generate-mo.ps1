@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.Text.Encoding
 
-$poFile = "C:\Users\littl\Desktop\wp-ulike-master\languages\wp-ulike-zh_CN.po"
-$moFile = "C:\Users\littl\Desktop\wp-ulike-master\languages\wp-ulike-zh_CN.mo"
+$poFile = "C:\Users\littl\Desktop\flavor-like-master\languages\flavor-like-zh_CN.po"
+$moFile = "C:\Users\littl\Desktop\flavor-like-master\languages\flavor-like-zh_CN.mo"
 
 $poContent = [System.IO.File]::ReadAllText($poFile, [System.Text.Encoding]::UTF8)
 $entries = @{}

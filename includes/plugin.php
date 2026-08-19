@@ -1,6 +1,6 @@
 <?php
 /**
- * WP ULIKE BASE CLASS
+ * FLAVOR LIKE BASE CLASS
  *
  * // @echo HEADER
  */
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-class WpUlikeInit {
+class FlavorLikeInit {
 
   /**
     * Instance of this class.
@@ -44,64 +44,161 @@ class WpUlikeInit {
    * @return void
    */
   public function plugins_loaded(){
-    wp_ulike_maybe_backfill_first_activated_at();
+    flavor_like_maybe_backfill_first_activated_at();
+
+    // Migrate pre-rename (WP ULike) tables/options/uploads to the new
+    // flavor_like_* names before any read happens on this request.
+    $this->maybe_migrate_legacy_storage();
 
     // Only run upgrade check when plugin version changes to avoid
     // unnecessary queries on every admin page load
     $this->maybe_upgrade_database();
   }
 
+  /**
+   * One-time migration from the pre-1.0.6 "wp_ulike_*" namespace.
+   *
+   * Renames legacy tables, copies wp_ulike_* options and moves the
+   * uploads/wp-ulike custom CSS directory to their flavor_like_* /
+   * flavor-like counterparts. Runs once per site and is a no-op on
+   * fresh installs.
+   *
+   * @return void
+   */
+  private function maybe_migrate_legacy_storage(){
+    if ( get_option( 'flavor_like_storage_migrated' ) ) {
+      return;
+    }
+
+    global $wpdb;
+
+    $did_migrate = false;
+
+    // 1) Rename legacy tables (only when the new table does not exist yet).
+    $legacy_tables = array(
+      'ulike'            => 'flavor_like',
+      'ulike_comments'   => 'flavor_like_comments',
+      'ulike_activities' => 'flavor_like_activities',
+      'ulike_forums'     => 'flavor_like_forums',
+      'ulike_meta'       => 'flavor_like_meta',
+      'ulike_pulse'      => 'flavor_like_pulse',
+    );
+
+    foreach ( $legacy_tables as $old_suffix => $new_suffix ) {
+      $old_table = $wpdb->prefix . $old_suffix;
+      $new_table = $wpdb->prefix . $new_suffix;
+
+      $old_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $old_table ) ) === $old_table;
+      if ( ! $old_exists ) {
+        continue;
+      }
+
+      $new_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $new_table ) ) === $new_table;
+      if ( $new_exists ) {
+        continue;
+      }
+
+      // RENAME TABLE is atomic and instant (metadata-only) in MySQL/MariaDB.
+      $wpdb->query( "RENAME TABLE `{$old_table}` TO `{$new_table}`" );
+      $did_migrate = true;
+    }
+
+    // 2) Copy wp_ulike_* options (settings, versions, customizer, pulse state...).
+    $like_pattern = $wpdb->esc_like( 'wp_ulike_' ) . '%';
+    $legacy_options = $wpdb->get_results(
+      $wpdb->prepare( "SELECT option_name, option_value, autoload FROM {$wpdb->options} WHERE option_name LIKE %s", $like_pattern )
+    );
+
+    if ( ! empty( $legacy_options ) ) {
+      foreach ( $legacy_options as $legacy_option ) {
+        $new_name = 'flavor_like_' . substr( $legacy_option->option_name, strlen( 'wp_ulike_' ) );
+        if ( false === get_option( $new_name, false ) ) {
+          $autoload = in_array( $legacy_option->autoload, array( 'on', 'off', 'auto' ), true ) ? $legacy_option->autoload : 'yes';
+          add_option( $new_name, maybe_unserialize( $legacy_option->option_value ), '', $autoload );
+        }
+      }
+      $did_migrate = true;
+    }
+
+    // 3) Move uploads/wp-ulike (custom CSS) to uploads/flavor-like.
+    $uploads = wp_get_upload_dir();
+    $legacy_custom_dir = trailingslashit( $uploads['basedir'] ) . 'wp-ulike';
+    if ( is_dir( $legacy_custom_dir ) ) {
+      $new_custom_dir = trailingslashit( $uploads['basedir'] ) . FLAVOR_LIKE_SLUG;
+      if ( ! is_dir( $new_custom_dir ) ) {
+        wp_mkdir_p( $new_custom_dir );
+      }
+      foreach ( (array) glob( $legacy_custom_dir . '/*' ) as $legacy_file ) {
+        if ( is_file( $legacy_file ) ) {
+          $target = $new_custom_dir . '/' . basename( $legacy_file );
+          if ( ! file_exists( $target ) ) {
+            copy( $legacy_file, $target );
+          }
+        }
+      }
+      $did_migrate = true;
+    }
+
+    if ( $did_migrate ) {
+      // Invalidate cached counters stored in legacy meta? Not needed — meta
+        // values live in renamed tables and stay intact.
+      wp_cache_flush();
+    }
+
+    update_option( 'flavor_like_storage_migrated', 1 );
+  }
+
   private function maybe_upgrade_database(){
     // Check if plugin version has changed
-    $current_plugin_version = get_option( 'wp_ulike_plugin_version', '0' );
+    $current_plugin_version = get_option( 'flavor_like_plugin_version', '0' );
 
     // Only proceed with database checks if plugin version changed
-    if ( version_compare( $current_plugin_version, WP_ULIKE_VERSION, '>=' ) ) {
+    if ( version_compare( $current_plugin_version, FLAVOR_LIKE_VERSION, '>=' ) ) {
       return;
     }
 
-    $stored = get_option( 'wp_ulike_dbVersion', false );
+    $stored = get_option( 'flavor_like_dbVersion', false );
 
-    // Fresh installs set wp_ulike_dbVersion during activation.
+    // Fresh installs set flavor_like_dbVersion during activation.
     if ( false === $stored ) {
       // Update plugin version for fresh installs
-      update_option( 'wp_ulike_plugin_version', WP_ULIKE_VERSION );
+      update_option( 'flavor_like_plugin_version', FLAVOR_LIKE_VERSION );
       return;
     }
 
-    $target = WP_ULIKE_DB_VERSION;
+    $target = FLAVOR_LIKE_DB_VERSION;
 
     if ( version_compare( $stored, '2.4', '<' ) ) {
-      if ( false === WP_Ulike_Legacy_Upgrade::run() ) {
+      if ( false === Flavor_Like_Legacy_Upgrade::run() ) {
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-          error_log( sprintf( 'WP ULike: Legacy database upgrade failed. Current version: %s', $stored ) );
+          error_log( sprintf( 'Flavor Like: Legacy database upgrade failed. Current version: %s', $stored ) );
         }
         return;
       }
 
       $stored = '2.4';
-      update_option( 'wp_ulike_dbVersion', $stored );
+      update_option( 'flavor_like_dbVersion', $stored );
     }
 
     if ( version_compare( $stored, $target, '<' ) ) {
-      $activator = wp_ulike_activator::get_instance();
+      $activator = flavor_like_activator::get_instance();
 
       if ( false === $activator->install_tables( false, false ) ) {
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-          error_log( sprintf( 'WP ULike: Storage upgrade to %s failed. Current version: %s', $target, $stored ) );
+          error_log( sprintf( 'Flavor Like: Storage upgrade to %s failed. Current version: %s', $target, $stored ) );
         }
         return;
       }
 
-      update_option( 'wp_ulike_dbVersion', $target );
+      update_option( 'flavor_like_dbVersion', $target );
     }
 
-    if ( ! WP_Ulike_Meta_Schema::table_exists() || ! WP_Ulike_Pulse_Schema::table_exists() ) {
-      wp_ulike_activator::get_instance()->install_tables( false, false );
+    if ( ! Flavor_Like_Meta_Schema::table_exists() || ! Flavor_Like_Pulse_Schema::table_exists() ) {
+      flavor_like_activator::get_instance()->install_tables( false, false );
     }
 
     // Update plugin version after successful upgrade
-    update_option( 'wp_ulike_plugin_version', WP_ULIKE_VERSION );
+    update_option( 'flavor_like_plugin_version', FLAVOR_LIKE_VERSION );
   }
 
   /**
@@ -120,7 +217,7 @@ class WpUlikeInit {
     $this->includes();
 
     // Loaded action
-    do_action( 'wp_ulike_loaded' );
+    do_action( 'flavor_like_loaded' );
   }
 
   /**
@@ -129,10 +226,10 @@ class WpUlikeInit {
    * @return void
    */
   private function define_constants(){
-    // a custom directory in uploads directory for storing custom files. Default uploads/{WP_ULIKE_SLUG}
+    // a custom directory in uploads directory for storing custom files. Default uploads/{FLAVOR_LIKE_SLUG}
     $uploads = wp_get_upload_dir();
-    define( 'WP_ULIKE_CUSTOM_DIR' , $uploads['basedir'] . '/' . WP_ULIKE_SLUG );
-    define( 'WP_ULIKE_CUSTOM_URL' , $uploads['baseurl'] . '/' . WP_ULIKE_SLUG );
+    define( 'FLAVOR_LIKE_CUSTOM_DIR' , $uploads['basedir'] . '/' . FLAVOR_LIKE_SLUG );
+    define( 'FLAVOR_LIKE_CUSTOM_URL' , $uploads['baseurl'] . '/' . FLAVOR_LIKE_SLUG );
   }
 
   /**
@@ -144,10 +241,10 @@ class WpUlikeInit {
    */
   public function add_links( $actions, $plugin_file ) {
 
-    if (  $plugin_file === WP_ULIKE_BASENAME ) {
-      $settings = array('settings'  => '<a href="admin.php?page=wp-ulike-settings">' . esc_html__('Settings', 'wp-ulike') . '</a>');
-      $stats    = array('stats'     => '<a href="admin.php?page=wp-ulike-statistics">' . esc_html__('Statistics', 'wp-ulike') . '</a>');
-      $about    = array('overview'  => '<a href="admin.php?page=wp-ulike-about">' . esc_html__( 'Overview', 'wp-ulike' ) . '</a>');
+    if (  $plugin_file === FLAVOR_LIKE_BASENAME ) {
+      $settings = array('settings'  => '<a href="admin.php?page=flavor-like-settings">' . esc_html__('Settings', 'flavor-like') . '</a>');
+      $stats    = array('stats'     => '<a href="admin.php?page=flavor-like-statistics">' . esc_html__('Statistics', 'flavor-like') . '</a>');
+      $about    = array('overview'  => '<a href="admin.php?page=flavor-like-about">' . esc_html__( 'Overview', 'flavor-like' ) . '</a>');
       // Merge on actions array
       $actions  = array_merge( $about, $actions );
       $actions  = array_merge( $stats, $actions );
@@ -165,7 +262,7 @@ class WpUlikeInit {
    * @return array
    */
   public function add_row_meta( $links, $plugin_file ) {
-    if ( WP_ULIKE_BASENAME !== $plugin_file ) {
+    if ( FLAVOR_LIKE_BASENAME !== $plugin_file ) {
       return $links;
     }
 
@@ -186,8 +283,8 @@ class WpUlikeInit {
 
     // the possible pathes containing classes
     $possible_pathes = array(
-        WP_ULIKE_INC_DIR   . '/classes/',
-        WP_ULIKE_ADMIN_DIR . '/classes/'
+        FLAVOR_LIKE_INC_DIR   . '/classes/',
+        FLAVOR_LIKE_ADMIN_DIR . '/classes/'
     );
 
     foreach ( $possible_pathes as $path ) {
@@ -208,23 +305,23 @@ class WpUlikeInit {
     spl_autoload_register( array( $this, 'autoload' ) );
 
     // load common functionalities
-    include_once( WP_ULIKE_INC_DIR . '/index.php' );
+    include_once( FLAVOR_LIKE_INC_DIR . '/index.php' );
 
     // Dashboard and Administrative Functionality
     if ( self::is_admin_backend() ) {
       // Load admin specific codes
-      include( WP_ULIKE_ADMIN_DIR . '/index.php' );
+      include( FLAVOR_LIKE_ADMIN_DIR . '/index.php' );
 
       // Load AJAX specific codes on demand
       if ( self::is_ajax() ){
-        include( WP_ULIKE_INC_DIR . '/hooks/frontend-ajax.php' );
-        include( WP_ULIKE_ADMIN_DIR . '/admin-ajax.php'  );
+        include( FLAVOR_LIKE_INC_DIR . '/hooks/frontend-ajax.php' );
+        include( FLAVOR_LIKE_ADMIN_DIR . '/admin-ajax.php'  );
       }
     }
 
     // Load Frontend Functionality
     if( self::is_frontend() ){
-      include( WP_ULIKE_INC_DIR . '/public/index.php' );
+      include( FLAVOR_LIKE_INC_DIR . '/public/index.php' );
     }
   }
 
@@ -279,9 +376,9 @@ class WpUlikeInit {
    * @return   String
   */
   public function get_ip() {
-    _deprecated_function( 'get_ip', '4.2.7', 'wp_ulike_get_user_ip' );
+    _deprecated_function( 'get_ip', '4.2.7', 'flavor_like_get_user_ip' );
     // Get user IP
-    return wp_ulike_get_user_ip();
+    return flavor_like_get_user_ip();
   }
 
   /**
@@ -291,21 +388,21 @@ class WpUlikeInit {
    */
   public function load_plugin_textdomain() {
     // Set filter for language directory
-		$lang_dir = WP_ULIKE_SLUG . '/languages';
-    $lang_dir = apply_filters( 'wp_ulike_languages_directory', $lang_dir );
+		$lang_dir = FLAVOR_LIKE_SLUG . '/languages';
+    $lang_dir = apply_filters( 'flavor_like_languages_directory', $lang_dir );
 
     // Get locale from WordPress settings instead of hardcoding
-    $locale = apply_filters( 'plugin_locale', get_locale(), WP_ULIKE_SLUG );
+    $locale = apply_filters( 'plugin_locale', get_locale(), FLAVOR_LIKE_SLUG );
 
     // Try to load specific locale file first
-    $mo_file = WP_ULIKE_DIR . 'languages/' . WP_ULIKE_SLUG . '-' . $locale . '.mo';
+    $mo_file = FLAVOR_LIKE_DIR . 'languages/' . FLAVOR_LIKE_SLUG . '-' . $locale . '.mo';
 
     if ( file_exists( $mo_file ) ) {
-      load_textdomain( WP_ULIKE_SLUG, $mo_file );
+      load_textdomain( FLAVOR_LIKE_SLUG, $mo_file );
     }
 
     // Load plugin textdomain (will use WordPress language packs if available)
-    load_plugin_textdomain( WP_ULIKE_SLUG, false, basename( WP_ULIKE_DIR ) . '/languages' );
+    load_plugin_textdomain( FLAVOR_LIKE_SLUG, false, basename( FLAVOR_LIKE_DIR ) . '/languages' );
   }
 
 
@@ -328,11 +425,11 @@ class WpUlikeInit {
 }
 
 /**
- * Start WP ULike service
+ * Start Flavor Like service
  *
  * @return void
  */
-function RUN_WPULIKE(){
-  WpUlikeInit::get_instance();
+function RUN_FLAVOR_LIKE(){
+  FlavorLikeInit::get_instance();
 }
-RUN_WPULIKE();
+RUN_FLAVOR_LIKE();

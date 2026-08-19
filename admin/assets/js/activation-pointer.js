@@ -1,10 +1,10 @@
 /**
- * Welcome pointer on the WP ULike admin menu (vanilla JS).
+ * Welcome pointer on the Flavor Like admin menu (vanilla JS).
  */
 ( function () {
 	'use strict';
 
-	var cfg = window.wpUlikeActivationPointer;
+	var cfg = window.flavorLikeActivationPointer;
 	if ( ! cfg || ! cfg.menuSelector ) {
 		return;
 	}
@@ -39,7 +39,7 @@
 			popover = null;
 		}
 
-		document.body.classList.remove( 'wp-ulike-activation-pointer-open' );
+		document.body.classList.remove( 'flavor-like-activation-pointer-open' );
 		document.removeEventListener( 'keydown', onKeydown );
 		window.removeEventListener( 'resize', positionPointer );
 	}
@@ -62,7 +62,7 @@
 		}
 
 		var rect = menu.getBoundingClientRect();
-		var panel = qs( '.wp-ulike-activation-pointer__panel', popover );
+		var panel = qs( '.flavor-like-activation-pointer__panel', popover );
 		var rtl = document.documentElement.dir === 'rtl';
 		var gap = 12;
 		var top = rect.top + ( rect.height / 2 );
@@ -86,7 +86,7 @@
 	}
 
 	function bindDismiss( root ) {
-		var dismissButtons = root.querySelectorAll( '.wp-ulike-activation-pointer__dismiss, .wp-ulike-activation-pointer__close' );
+		var dismissButtons = root.querySelectorAll( '.flavor-like-activation-pointer__dismiss, .flavor-like-activation-pointer__close' );
 
 		dismissButtons.forEach( function ( button ) {
 			button.addEventListener( 'click', function ( event ) {
@@ -99,7 +99,7 @@
 
 	function openPointer() {
 		var menu = qs( cfg.menuSelector );
-		var source = qs( '#wp-ulike-activation-pointer-template .wp-ulike-activation-pointer__panel' );
+		var source = qs( '#flavor-like-activation-pointer-template .flavor-like-activation-pointer__panel' );
 
 		if ( ! menu || ! source ) {
 			return;
@@ -108,21 +108,21 @@
 		closePointer();
 
 		popover = document.createElement( 'div' );
-		popover.className = 'wp-ulike-activation-pointer';
+		popover.className = 'flavor-like-activation-pointer';
 		popover.setAttribute( 'role', 'dialog' );
 		popover.setAttribute( 'aria-modal', 'false' );
 
 		var panel = source.cloneNode( true );
-		var title = panel.querySelector( '.wp-ulike-activation-pointer__title' );
+		var title = panel.querySelector( '.flavor-like-activation-pointer__title' );
 
 		if ( title ) {
-			title.id = 'wp-ulike-activation-pointer-title';
+			title.id = 'flavor-like-activation-pointer-title';
 			popover.setAttribute( 'aria-labelledby', title.id );
 		}
 
 		popover.appendChild( panel );
 		document.body.appendChild( popover );
-		document.body.classList.add( 'wp-ulike-activation-pointer-open' );
+		document.body.classList.add( 'flavor-like-activation-pointer-open' );
 
 		bindDismiss( popover );
 		positionPointer();
