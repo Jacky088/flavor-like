@@ -643,13 +643,14 @@ if( ! function_exists('flavor_like_acquire_lock') ){
 	 * @param integer $item_id
 	 * @return string|false Lock name on success, false when already held.
 	 */
-	function flavor_like_acquire_lock( $item_type, $item_id ) {
+	function flavor_like_acquire_lock( $item_type, $item_id, $timeout = 3 ) {
 		global $wpdb;
 
 		$lock_name = flavor_like_lock_name( $item_type, $item_id );
-		// Timeout 0 = non-blocking, matching the previous flock( LOCK_NB ) semantics.
+		// Allow a short wait (default 3s) so concurrent votes on the same item queue briefly instead of failing immediately.
+		$timeout  = max( 0, (int) apply_filters( 'flavor_like_lock_timeout', $timeout, $item_type, $item_id ) );
 		$acquired = $wpdb->get_var(
-			$wpdb->prepare( 'SELECT GET_LOCK( %s, 0 )', $lock_name )
+			$wpdb->prepare( 'SELECT GET_LOCK( %s, %d )', $lock_name, $timeout )
 		);
 
 		return ( '1' === (string) $acquired ) ? $lock_name : false;
@@ -896,12 +897,12 @@ if( ! function_exists('flavor_like_put_contents') ){
 		}
 
 		// Write the content, if possible
-		if ( wp_mkdir_p( dirname( $file_location ) ) && ! $wp_filesystem->put_contents( $file_location, $content, $chmode ) ) {
-			// If writing the content in the file was not successful
+		if ( ! wp_mkdir_p( dirname( $file_location ) ) || ! $wp_filesystem->put_contents( $file_location, $content, $chmode ) ) {
+			// If creating directory or writing file was not successful
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 
 	}
 }

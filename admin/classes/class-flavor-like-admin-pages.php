@@ -52,6 +52,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 */
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'menus' ) );
+			add_action( 'admin_head', array( $this, 'admin_menu_icon_styles' ) );
 		}
 
 		/**
@@ -333,6 +334,43 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 			if ( ! empty( $template_path ) && file_exists( $template_path ) ) {
 				load_template( $template_path );
 			}
+		}
+
+		/**
+		 * Inject admin menu icon CSS mask styles globally across all wp-admin screens.
+		 *
+		 * Ensures the menu icon displays on Dashboard, Plugins, and all admin pages,
+		 * strictly as pure lines inheriting the admin menu color scheme via currentColor.
+		 *
+		 * @since 1.1.0
+		 * @return void
+		 */
+		public function admin_menu_icon_styles() {
+			$icon_url = FLAVOR_LIKE_ASSETS_URL . '/img/menu-icon.svg?ver=' . FLAVOR_LIKE_VERSION;
+			?>
+			<style id="flavor-like-admin-menu-icon-css">
+				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image {
+					background: none !important;
+				}
+				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image::before {
+					content: '' !important;
+					display: inline-block !important;
+					width: 20px !important;
+					height: 20px !important;
+					padding: 7px 0 !important;
+					background-color: currentColor !important;
+					speak: never !important;
+					-webkit-mask: url('<?php echo esc_url( $icon_url ); ?>') no-repeat center / 20px 20px !important;
+					mask: url('<?php echo esc_url( $icon_url ); ?>') no-repeat center / 20px 20px !important;
+					transition: all 0.1s ease-in-out !important;
+				}
+				#adminmenu #toplevel_page_flavor-like-settings:hover .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-settings.wp-has-current-submenu .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-settings.current .wp-menu-image::before {
+					background-color: currentColor !important;
+				}
+			</style>
+			<?php
 		}
 
 	}

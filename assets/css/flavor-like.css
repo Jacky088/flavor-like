@@ -5,13 +5,17 @@
 ===============================================================
 */
 .flavorlike {
-  display: block;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   position: relative;
   line-height: normal;
-  margin: 0;
+  margin: 36px auto 24px auto !important;
   padding: 10px 0;
   box-sizing: border-box;
-  text-align: right;
+  text-align: center !important;
+  clear: both !important;
+  width: 100% !important;
 }
 .flavorlike *,
 .flavorlike *::before,
@@ -19,32 +23,113 @@
   box-sizing: inherit;
 }
 .flavorlike .flavor_like_general_class {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 100% !important;
 }
-.flavorlike button.flavor_like_btn {
-  margin: 0;
+
+/* Scoped theme compatibility for JustNews and modern WordPress post containers */
+.entry-content .flavorlike,
+.post-content .flavorlike,
+.article-content .flavorlike,
+.single-post .flavorlike,
+.entry .flavorlike,
+.content-area .flavorlike,
+.b2-single-content .flavorlike,
+.entry-wrapper .flavorlike {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  clear: both !important;
+  margin: 36px auto 24px auto !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+.entry-content .flavorlike .flavor_like_general_class,
+.post-content .flavorlike .flavor_like_general_class,
+.article-content .flavorlike .flavor_like_general_class,
+.single-post .flavorlike .flavor_like_general_class,
+.entry .flavorlike .flavor_like_general_class,
+.content-area .flavorlike .flavor_like_general_class,
+.b2-single-content .flavorlike .flavor_like_general_class,
+.entry-wrapper .flavorlike .flavor_like_general_class {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+}
+
+/* Base button and element resets */
+.flavorlike button.flavor_like_btn,
+.entry-content .flavorlike button.flavor_like_btn,
+.post-content .flavorlike button.flavor_like_btn,
+.article-content .flavorlike button.flavor_like_btn,
+.single-post .flavorlike button.flavor_like_btn,
+.flavorlike button.flavor_like_btn.flavor_like_btn_is_active,
+.entry-content .flavorlike button.flavor_like_btn.flavor_like_btn_is_active {
+  margin: 0 !important;
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 0.25em;
-  box-shadow: none;
-  padding: 1em;
-  font-size: 15px;
-  border: none;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  border-radius: 9999px;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
   text-align: center;
-  transition: none;
-  cursor: pointer;
-  font-family: inherit;
-  line-height: inherit;
-  appearance: none;
-  -webkit-appearance: none;
+  cursor: pointer !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  line-height: 1 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
   width: auto;
   max-width: none;
   text-transform: none;
   letter-spacing: normal;
-  font-weight: inherit;
+  font-weight: 600;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+}
+
+/* Helper elements for modern pill designs */
+.flavorlike .flavor-like-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  margin-right: 6px !important;
+  margin-left: 0 !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.flavorlike .flavor-like-icon svg {
+  display: block !important;
+}
+.flavorlike .flavor-like-label {
+  display: inline-block !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  font-weight: 600 !important;
+  vertical-align: middle !important;
+}
+.rtl .flavorlike .flavor-like-icon {
+  margin-right: 0 !important;
+  margin-left: 6px !important;
 }
 .flavorlike button.flavor_like_btn:hover, .flavorlike button.flavor_like_btn:active, .flavorlike button.flavor_like_btn:focus {
   outline: none;
@@ -52,28 +137,31 @@
 .flavorlike button.flavor_like_btn::-moz-focus-inner {
   border: 0;
 }
-.flavorlike button.flavor_like_btn[disabled=disabled], .flavorlike button.flavor_like_btn:disabled {
-  cursor: not-allowed;
+.flavorlike button.flavor_like_btn[disabled=disabled],
+.flavorlike button.flavor_like_btn:disabled,
+.flavorlike button.flavor_like_btn.flavor-like-busy {
+  cursor: default;
+  pointer-events: none;
 }
 .flavorlike button.flavor_like_btn[disabled=disabled]:hover, .flavorlike button.flavor_like_btn[disabled=disabled]:active, .flavorlike button.flavor_like_btn[disabled=disabled]:focus, .flavorlike button.flavor_like_btn:disabled:hover, .flavorlike button.flavor_like_btn:disabled:active, .flavorlike button.flavor_like_btn:disabled:focus {
   outline: none;
   background-color: initial;
 }
 .flavorlike button.flavor_like_btn.flavor_like_put_text {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 28px;
-  padding: 0 10px;
-  min-width: 50px;
+  line-height: 1;
+  padding: 0;
+  min-width: 0;
 }
 .flavorlike .flavor_like_is_loading button.flavor_like_btn {
-  background-image: url(../img/svg/loader.svg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: auto;
+  background-image: none !important;
 }
-.flavorlike .flavor_like_is_loading button.flavor_like_btn span {
-  visibility: hidden;
+.flavorlike .flavor_like_is_loading button.flavor_like_btn span,
+.flavorlike .flavor_like_is_loading .flavor-like-icon,
+.flavorlike .flavor_like_is_loading .flavor-like-label {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 .flavorlike .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image::after {
   content: none;
@@ -147,239 +235,345 @@
 }
 
 /**
- * Default template
+ * Default template (简约拇指 - Modern Indigo Pill)
  */
+.flavorlike-default .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(79, 70, 229, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: visible !important;
+  height: 38px !important;
+}
+.flavorlike-default .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(79, 70, 229, 0.45) !important;
+}
+.flavorlike-default .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
+}
 .flavorlike-default button.flavor_like_btn {
-  color: #616161;
-  background-color: #e0e0e0;
-  min-height: 30px;
-  min-width: 50px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
-.flavorlike-default button.flavor_like_btn:hover, .flavorlike-default button.flavor_like_btn:focus {
-  color: #616161;
-  background-color: #e0e0e0;
-  text-decoration: none;
+.flavorlike-default button.flavor_like_btn:hover,
+.flavorlike-default button.flavor_like_btn:focus {
+  outline: none !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
 }
-.flavorlike-default button.flavor_like_btn[disabled=disabled]:hover, .flavorlike-default button.flavor_like_btn[disabled=disabled]:active, .flavorlike-default button.flavor_like_btn[disabled=disabled]:focus, .flavorlike-default button.flavor_like_btn:disabled:hover, .flavorlike-default button.flavor_like_btn:disabled:active, .flavorlike-default button.flavor_like_btn:disabled:focus {
-  background-color: #e0e0e0;
+.flavorlike-default .flavor-like-icon {
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-.flavorlike-default .flavor_like_is_liked .flavor_like_btn {
-  color: #757575;
+.flavorlike-default .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #ffffff !important;
 }
-.flavorlike-default .flavor_like_put_image:after {
-  content: "";
-  display: block;
-  background: url(../img/svg/like.svg) no-repeat;
-  background-size: contain;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.flavorlike-default .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
 }
-.flavorlike-default .flavor_like_put_image.flavor_like_btn_is_active:after {
-  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+.flavorlike-default .flavor_like_put_image:after,
+.flavorlike-default button.flavor_like_btn:after {
+  display: none !important;
+  content: none !important;
 }
 .flavorlike-default .count-box {
-  position: relative;
-  border-radius: 0.25em;
-  font-size: 13px;
-  text-decoration: none;
-  background-color: #FFFFFF;
-  margin-left: 8px;
-  line-height: 30px;
-  display: inline-block;
-  padding: 0 10px;
-  box-shadow: 0 0 0 1px #bdbdbd inset;
-  color: #616161;
-  vertical-align: middle;
-  text-align: center;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  margin-left: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  position: relative !important;
 }
-.flavorlike-default .count-box:before {
-  content: "";
-  display: block;
-  position: absolute;
-  border: 1px solid transparent;
-  background: #FFFFFF;
-  border-bottom-color: #bdbdbd;
-  left: -5px;
-  top: 50%;
-  border-left-color: #bdbdbd;
-  transform: rotate(45deg) translateY(-50%);
-  width: 5px;
-  height: 5px;
-  margin: 0;
-  box-sizing: content-box;
+.flavorlike-default .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
 }
-
-#buddypress #activity-stream .activity-meta .flavorlike-default button.flavor_like_btn,
-#buddypress #activity-stream .activity-comments .flavorlike-default button.flavor_like_btn,
-#buddypress #activity-stream .activity-inner .flavorlike-default button.flavor_like_btn {
-  border-radius: 0;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 1px #bdbdbd inset;
-  font-size: initial;
-  padding: 1em;
+.flavorlike-default .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #4338CA 0%, #4F46E5 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(67, 56, 202, 0.45) !important;
 }
-#buddypress #activity-stream .activity-meta .flavorlike-default .flavor_like_is_loading button.flavor_like_btn,
-#buddypress #activity-stream .activity-comments .flavorlike-default .flavor_like_is_loading button.flavor_like_btn,
-#buddypress #activity-stream .activity-inner .flavorlike-default .flavor_like_is_loading button.flavor_like_btn {
-  background-image: url(../img/svg/loader.svg);
-  background-repeat: no-repeat;
-  background-position: center center;
+.flavorlike-default button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.flavorlike-default .flavor_like_btn_is_active .flavor-like-icon,
+.flavorlike-default .flavor_like_is_liked .flavor-like-icon {
+  animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /**
- * Heart template
+ * Heart template (简约爱心 - Modern Coral-Rose Pill)
  */
 .flavorlike-heart .flavor_like_general_class {
-  box-shadow: 0 0 0 1px #bdbdbd inset;
-  border-radius: 0.25em;
-  padding: 5px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #F43F5E 0%, #FB7185 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(244, 63, 94, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: visible !important;
+  height: 38px !important;
 }
-.flavorlike-heart .flavor_like_put_text {
-  padding: 0 5px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #757575;
+.flavorlike-heart .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(244, 63, 94, 0.45) !important;
+}
+.flavorlike-heart .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
 }
 .flavorlike-heart button.flavor_like_btn {
-  background: transparent;
-  padding: 15px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
-.flavorlike-heart button.flavor_like_btn:hover, .flavorlike-heart button.flavor_like_btn:focus {
-  color: #757575;
-  background-color: transparent;
-  text-decoration: none;
+.flavorlike-heart button.flavor_like_btn:hover,
+.flavorlike-heart button.flavor_like_btn:focus {
+  outline: none !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
 }
-.flavorlike-heart .flavor_like_put_image {
-  background: none;
-  padding: 15px;
+.flavorlike-heart .flavor-like-icon {
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-.flavorlike-heart .flavor_like_put_image[disabled=disabled]:hover, .flavorlike-heart .flavor_like_put_image[disabled=disabled]:active, .flavorlike-heart .flavor_like_put_image[disabled=disabled]:focus, .flavorlike-heart .flavor_like_put_image:disabled:hover, .flavorlike-heart .flavor_like_put_image:disabled:active, .flavorlike-heart .flavor_like_put_image:disabled:focus {
-  padding: 15px;
+.flavorlike-heart .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #ffffff !important;
 }
-.flavorlike-heart .flavor_like_put_image:after {
-  content: "";
-  display: block;
-  background: url(../img/svg/love.svg) no-repeat;
-  background-position: center center;
-  background-size: contain;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.flavorlike-heart .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
 }
-.flavorlike-heart .flavor_like_put_image.flavor_like_btn_is_active:after {
-  filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+.flavorlike-heart .flavor_like_put_image:after,
+.flavorlike-heart button.flavor_like_btn:after {
+  display: none !important;
+  content: none !important;
 }
 .flavorlike-heart .count-box {
-  font-size: 14px;
-  text-decoration: none;
-  line-height: 28px;
-  display: inline-block;
-  color: #616161;
-  text-align: center;
-  font-weight: 600;
-  vertical-align: middle;
-  padding: 0 5px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  margin-left: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  position: relative !important;
 }
-
-#buddypress #activity-stream .activity-meta .flavorlike-heart button.flavor_like_btn,
-#buddypress #activity-stream .activity-comments .flavorlike-heart button.flavor_like_btn,
-#buddypress #activity-stream .activity-inner .flavorlike-heart button.flavor_like_btn {
-  background-color: transparent;
-  border: 0;
-  font-size: initial;
-  padding: 1em;
+.flavorlike-heart .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
 }
-#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_put_image,
-#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_put_image,
-#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_put_image {
-  padding: 10px 15px;
+.flavorlike-heart .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #E11D48 0%, #F43F5E 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(225, 29, 72, 0.45) !important;
 }
-#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_put_image:after,
-#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_put_image:after,
-#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_put_image:after {
-  width: 17px;
-  height: 17px;
+.flavorlike-heart button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
-#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_general_class,
-#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_general_class,
-#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_general_class {
-  border-radius: 0;
-  padding: 0.1em 0.3em;
-  margin-bottom: 0;
-}
-#buddypress #activity-stream .activity-meta .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn,
-#buddypress #activity-stream .activity-comments .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn,
-#buddypress #activity-stream .activity-inner .flavorlike-heart .flavor_like_is_loading button.flavor_like_btn {
-  background-image: url(../img/svg/loader.svg);
-  background-repeat: no-repeat;
-  background-position: center center;
+.flavorlike-heart .flavor_like_btn_is_active .flavor-like-icon,
+.flavorlike-heart .flavor_like_is_liked .flavor-like-icon {
+  animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /**
- * Robeen template
+ * Robeen template (Twitter 爱心 - Modern Violet/Pink Pill)
  */
-.flavorlike-robeen .count-box {
-  font-weight: 600;
-  padding: 0 14px;
-  font-size: 16px;
-  color: inherit;
+.flavorlike-robeen .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #EC4899 0%, #F43F5E 50%, #D946EF 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(236, 72, 153, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: visible !important;
+  height: 38px !important;
 }
-.flavorlike-robeen .flavor_like_is_loading button.flavor_like_btn {
-  background-image: initial;
-  padding: 0;
+.flavorlike-robeen .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(236, 72, 153, 0.45) !important;
 }
-.flavorlike-robeen .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image:after {
-  content: "";
+.flavorlike-robeen .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
 }
 .flavorlike-robeen button.flavor_like_btn {
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
-.flavorlike-robeen button.flavor_like_btn:hover, .flavorlike-robeen button.flavor_like_btn:focus {
-  background-color: transparent;
+.flavorlike-robeen button.flavor_like_btn:hover,
+.flavorlike-robeen button.flavor_like_btn:focus {
+  outline: none !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+.flavorlike-robeen .flavor-like-icon {
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.flavorlike-robeen .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #ffffff !important;
+}
+.flavorlike-robeen .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+}
+.flavorlike-robeen .flavor_like_put_image:after,
+.flavorlike-robeen button.flavor_like_btn:after {
+  display: none !important;
+  content: none !important;
+}
+.flavorlike-robeen .count-box {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  margin-left: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  position: relative !important;
+}
+.flavorlike-robeen .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+.flavorlike-robeen .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #BE185D 0%, #E11D48 50%, #C026D3 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(190, 24, 93, 0.45) !important;
 }
 .flavorlike-robeen button.flavor_like_btn.flavor_like_btn_is_active {
-  overflow: visible;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
-.flavorlike-robeen .flavor_like_put_image:after {
-  content: "";
-  display: block;
-  background: url(../img/icons/twitter-heart.png) no-repeat;
-  background-position: 0 0;
-  transition: background-position 1s steps(28);
-  transition-duration: 0s;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
-.flavorlike-robeen .flavor_like_put_image.flavor_like_btn_is_active:after {
-  transition-duration: 1s;
-  background-position: -2800px 0;
-}
-
-#buddypress #activity-stream .activity-meta .flavorlike-robeen button.flavor_like_btn,
-#buddypress #activity-stream .activity-comments .flavorlike-robeen button.flavor_like_btn,
-#buddypress #activity-stream .activity-inner .flavorlike-robeen button.flavor_like_btn {
-  background: transparent;
-  border: 0;
-  width: 30px;
-  height: 30px;
-  border: 0;
-  padding: 0;
+.flavorlike-robeen .flavor_like_btn_is_active .flavor-like-icon,
+.flavorlike-robeen .flavor_like_is_liked .flavor-like-icon {
+  animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /**
@@ -1135,189 +1329,780 @@
 
 
 /* =============================================
-   新增模板样式
+   现代统一胶囊风格模板样式 (Modern Unified Pill Templates)
    ============================================= */
 
-/* 星星拇指模板 */
+/* 星星拇指模板 (Modern Star Thumb / Up-Vote Pill) */
+.flavorlike-star-thumb .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #ffffff !important;
+  border-radius: 9999px !important;
+  padding: 4px 6px 4px 14px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  border: 1.2px solid #e2e8f0 !important;
+  transition: all 0.25s ease !important;
+  height: 38px !important;
+  cursor: pointer !important;
+}
+.flavorlike-star-thumb .flavor_like_general_class:hover {
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15) !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1px) !important;
+}
 .flavorlike-star-thumb button.flavor_like_btn {
-  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
-  border: none;
-  border-radius: 50px;
-  padding: 8px 18px;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(255, 179, 0, 0.3);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #4f46e5 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
-.flavorlike-star-thumb button.flavor_like_btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 179, 0, 0.5);
+.flavorlike-star-thumb .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #4f46e5 !important;
 }
-.flavorlike-star-thumb button.flavor_like_btn.flavor_like_btn_is_active {
-  background: linear-gradient(135deg, #ff6b00 0%, #ff4500 100%);
+.flavorlike-star-thumb .flavor-like-label {
+  color: #4f46e5 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
 }
 .flavorlike-star-thumb .count-box {
-  background: #fff3cd;
-  color: #856404;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin-left: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 34px !important;
+  height: 24px !important;
+  padding: 0 8px !important;
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 9999px !important;
+  color: #475569 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-left: 8px !important;
+}
+.flavorlike-star-thumb .flavor_like_general_class.flavor_like_is_liked {
+  background: #eef2ff !important;
+  border-color: #818cf8 !important;
+}
+.flavorlike-star-thumb button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 对勾标记模板 */
+/* 对勾标记模板 (Modern Emerald Check Mark Pill) */
+.flavorlike-check-mark .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(16, 185, 129, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  height: 38px !important;
+}
+.flavorlike-check-mark .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.45) !important;
+}
+.flavorlike-check-mark .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
+}
 .flavorlike-check-mark button.flavor_like_btn {
-  background: #f0f9f0;
-  border: 2px solid #28a745;
-  border-radius: 8px;
-  padding: 8px 16px;
-  color: #28a745;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
-.flavorlike-check-mark button.flavor_like_btn:hover {
-  background: #28a745;
-  color: #fff;
+.flavorlike-check-mark .flavor-like-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: #ffffff !important;
 }
-.flavorlike-check-mark button.flavor_like_btn.flavor_like_btn_is_active {
-  background: #28a745;
-  color: #fff;
-  border-color: #28a745;
+.flavorlike-check-mark .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 .flavorlike-check-mark .count-box {
-  background: #e8f5e9;
-  color: #2e7d32;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin-left: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  position: relative !important;
+}
+.flavorlike-check-mark .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+.flavorlike-check-mark .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #047857 0%, #10B981 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(4, 120, 87, 0.45) !important;
+}
+.flavorlike-check-mark button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 鼓掌按钮模板 */
+/* 鼓掌按钮模板 (Modern Amber Clapping Pill) */
+.flavorlike-clapping .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(245, 158, 11, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  height: 38px !important;
+}
+.flavorlike-clapping .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.45) !important;
+}
+.flavorlike-clapping .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
+}
 .flavorlike-clapping button.flavor_like_btn {
-  background: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 50px;
-  padding: 10px 20px;
-  color: #333;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  font-size: 15px;
-}
-.flavorlike-clapping button.flavor_like_btn:hover {
-  border-color: #4caf50;
-  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
-}
-.flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active {
-  border-color: #4caf50;
-  background: #e8f5e9;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 .flavorlike-clapping .flavorlike-clap-icon {
-  font-size: 20px;
-  display: inline-block;
-  transition: transform 0.3s ease;
+  font-size: 16px !important;
+  display: inline-block !important;
+  transition: transform 0.25s ease !important;
 }
-.flavorlike-clapping button.flavor_like_btn:hover .flavorlike-clap-icon,
-.flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-clap-icon {
-  transform: scale(1.3) rotate(-10deg);
+.flavorlike-clapping .flavor_like_general_class:hover .flavorlike-clap-icon,
+.flavorlike-clapping .flavor_like_btn_is_active .flavorlike-clap-icon {
+  transform: scale(1.25) rotate(-10deg) !important;
+}
+.flavorlike-clapping .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 .flavorlike-clapping .count-box {
-  background: #f5f5f5;
-  color: #555;
-  padding: 3px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-left: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  position: relative !important;
+}
+.flavorlike-clapping .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+.flavorlike-clapping .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #B45309 0%, #F59E0B 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(180, 83, 9, 0.45) !important;
+}
+.flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 徽章拇指模板 */
+/* 徽章拇指模板 (Modern Purple Badge Pill) */
+.flavorlike-badge-thumb .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(139, 92, 246, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  height: 38px !important;
+}
+.flavorlike-badge-thumb .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(139, 92, 246, 0.45) !important;
+}
+.flavorlike-badge-thumb .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
+}
 .flavorlike-badge-thumb button.flavor_like_btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 12px;
-  padding: 10px 18px;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
-.flavorlike-badge-thumb button.flavor_like_btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+.flavorlike-badge-thumb .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #ffffff !important;
 }
-.flavorlike-badge-thumb button.flavor_like_btn.flavor_like_btn_is_active {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+.flavorlike-badge-thumb .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 .flavorlike-badge-thumb .count-box {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin-left: 8px;
-  backdrop-filter: blur(4px);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  position: relative !important;
+}
+.flavorlike-badge-thumb .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+.flavorlike-badge-thumb .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(124, 58, 237, 0.45) !important;
+}
+.flavorlike-badge-thumb button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 收藏星模板 */
+/* 收藏星模板 (Modern Golden Star Pill) */
+.flavorlike-fave-star .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #F59E0B 0%, #EAB308 100%) !important;
+  border-radius: 9999px !important;
+  padding: 5px 6px 5px 16px !important;
+  box-shadow: 0 4px 14px -1px rgba(245, 158, 11, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  cursor: pointer !important;
+  height: 38px !important;
+}
+.flavorlike-fave-star .flavor_like_general_class:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.45) !important;
+}
+.flavorlike-fave-star .flavor_like_general_class:active {
+  transform: scale(0.97) !important;
+}
 .flavorlike-fave-star button.flavor_like_btn {
-  background: transparent;
-  border: none;
-  padding: 8px;
-  color: #ccc;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
-.flavorlike-fave-star button.flavor_like_btn:hover {
-  color: #ffc107;
-  transform: scale(1.2);
+.flavorlike-fave-star .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #ffffff !important;
 }
-.flavorlike-fave-star button.flavor_like_btn.flavor_like_btn_is_active {
-  color: #ffc107;
+.flavorlike-fave-star .flavor-like-label {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 .flavorlike-fave-star .count-box {
-  color: #666;
-  font-size: 14px;
-  margin-left: 4px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 38px !important;
+  height: 24px !important;
+  padding: 0 9px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-left: 8px !important;
+  position: relative !important;
+}
+.flavorlike-fave-star .count-box::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 4px !important;
+  bottom: 4px !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+.flavorlike-fave-star .flavor_like_general_class.flavor_like_is_liked {
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%) !important;
+  box-shadow: 0 6px 20px -2px rgba(217, 119, 6, 0.45) !important;
+}
+.flavorlike-fave-star button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
-/* 图钉按钮模板 */
+/* 图钉按钮模板 (Modern Pin Pill) */
+.flavorlike-pin .flavor_like_general_class {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #eff6ff !important;
+  border: 1.2px solid #bfdbfe !important;
+  border-radius: 9999px !important;
+  padding: 4px 6px 4px 14px !important;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.12) !important;
+  transition: all 0.25s ease !important;
+  height: 38px !important;
+  cursor: pointer !important;
+}
+.flavorlike-pin .flavor_like_general_class:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2) !important;
+}
 .flavorlike-pin button.flavor_like_btn {
-  background: #fff;
-  border: 2px solid #e53935;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  color: #e53935;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #1d4ed8 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
-.flavorlike-pin button.flavor_like_btn:hover {
-  background: #e53935;
-  color: #fff;
-  transform: rotate(45deg);
+.flavorlike-pin .flavor-like-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #1d4ed8 !important;
 }
-.flavorlike-pin button.flavor_like_btn.flavor_like_btn_is_active {
-  background: #e53935;
-  color: #fff;
+.flavorlike-pin .flavor-like-label {
+  color: #1d4ed8 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
 .flavorlike-pin .count-box {
-  background: #ffebee;
-  color: #c62828;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin-left: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 32px !important;
+  height: 24px !important;
+  padding: 0 8px !important;
+  background: #dbeafe !important;
+  border: 1px solid #bfdbfe !important;
+  border-radius: 9999px !important;
+  color: #1d4ed8 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-left: 8px !important;
 }
+.flavorlike-pin .flavor_like_general_class.flavor_like_is_liked {
+  background: #dbeafe !important;
+  border-color: #3b82f6 !important;
+}
+.flavorlike-pin button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Base button animations */
+button.flavor_like_btn.flavor_like_btn_is_active {
+  animation: flavorLikePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes flavorLikePop {
+  0% { transform: scale(0.92); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes flavorLikeIconBounce {
+  0% { transform: scale(0.7); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   Bilibili-Style High-Impact Dynamic Like Animation (B站风格强劲动效)
+   ========================================================================== */
+
+/* 1. Icon Energetic Kick & Tilt (弹性倾斜放大动画) */
+@keyframes bilibiliIconKick {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  15% {
+    transform: scale(0.7) rotate(-10deg);
+  }
+  40% {
+    transform: scale(1.48) rotate(-22deg);
+  }
+  65% {
+    transform: scale(1.12) rotate(8deg);
+  }
+  80% {
+    transform: scale(1.22) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* 2. Whole Pill Elastic Rebound (药丸本体弹性共振) */
+@keyframes bilibiliPillRebound {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.92);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  75% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 3. Luminous Shockwave Ripple (光环冲击波扩散) */
+@keyframes bilibiliRingBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.95;
+    border-width: 4px;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+/* 4. Radial Sparkle Particles (星芒粒子炸开) */
+@keyframes bilibiliSparkle {
+  0% {
+    transform: translate(0, 0) scale(0.3);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(var(--sx) * 0.7), calc(var(--sy) * 0.7)) scale(1.2);
+  }
+  100% {
+    transform: translate(var(--sx), var(--sy)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* 5. Floating +1 Bubble (向上漂浮的 "+1" 徽章气泡) */
+@keyframes bilibiliFloatPlus {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -16px) scale(1.2);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(-50%, -26px) scale(1.05);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -40px) scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -54px) scale(0.8);
+  }
+}
+
+/* Applying Bilibili animations */
+.flavor-like-animating,
+.flavor_like_general_class.flavor-like-animating {
+  animation: bilibiliPillRebound 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.flavor-like-animating .flavor-like-icon,
+.flavor-like-animating .flavorlike-clap-icon,
+.flavor-like-animating .flavorlike-svg-heart,
+.flavor_like_btn_is_active .flavor-like-icon {
+  animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Burst Container */
+.flavor-like-burst-effect {
+  position: absolute !important;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+  z-index: 99 !important;
+}
+
+.flavor-like-burst-effect .burst-ring {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  border: 3px solid rgba(255, 255, 255, 0.95) !important;
+  box-sizing: border-box !important;
+  animation: bilibiliRingBurst 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards !important;
+  pointer-events: none !important;
+}
+
+.flavor-like-burst-effect .burst-spark {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 6px !important;
+  height: 6px !important;
+  margin-left: -3px !important;
+  margin-top: -3px !important;
+  border-radius: 50% !important;
+  animation: bilibiliSparkle 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards !important;
+  pointer-events: none !important;
+}
+
+.flavor-like-burst-effect .burst-spark.s1 { --sx: 0px; --sy: -26px; background: #fbbf24; }
+.flavor-like-burst-effect .burst-spark.s2 { --sx: 23px; --sy: -13px; background: #f43f5e; }
+.flavor-like-burst-effect .burst-spark.s3 { --sx: 23px; --sy: 13px; background: #38bdf8; }
+.flavor-like-burst-effect .burst-spark.s4 { --sx: 0px; --sy: 26px; background: #fbbf24; }
+.flavor-like-burst-effect .burst-spark.s5 { --sx: -23px; --sy: 13px; background: #a855f7; }
+.flavor-like-burst-effect .burst-spark.s6 { --sx: -23px; --sy: -13px; background: #34d399; }
+
+/* Floating +1 Bubble */
+.flavor-like-float-bubble {
+  position: absolute !important;
+  left: 50% !important;
+  top: -8px !important;
+  transform: translate(-50%, 0) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 3px 10px !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  line-height: 1 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.45) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+  animation: bilibiliFloatPlus 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+  white-space: nowrap !important;
+}
+
+/* Template-specific Floating Bubble Gradients */
+.flavorlike-heart .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%) !important;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.45) !important;
+}
+
+.flavorlike-robeen .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%) !important;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.45) !important;
+}
+
+.flavorlike-check-mark .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45) !important;
+}
+
+.flavorlike-clapping .flavor-like-float-bubble,
+.flavorlike-fave-star .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45) !important;
+}
+
+.flavorlike-badge-thumb .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.45) !important;
+}
+
+.flavorlike-pin .flavor-like-float-bubble {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45) !important;
+}
+
+/* Strict Global Scoped Reset: Prevents any theme button background bleed-in */
+.flavorlike button.flavor_like_btn,
+.flavorlike button.flavor_like_btn.flavor_like_btn_is_active,
+.flavorlike button.flavor_like_btn:hover,
+.flavorlike button.flavor_like_btn:focus,
+.flavorlike button.flavor_like_btn:active,
+.entry-content .flavorlike button.flavor_like_btn,
+.entry-content .flavorlike button.flavor_like_btn.flavor_like_btn_is_active,
+.post-content .flavorlike button.flavor_like_btn,
+.post-content .flavorlike button.flavor_like_btn.flavor_like_btn_is_active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.flavorlike-animated-heart button.flavor_like_btn {
+  background-color: #ffffff !important;
+  box-shadow: 0px 5px 30px rgba(255, 111, 99, 0.4) !important;
+}
+
+.flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active {
+  background-color: rgb(255, 111, 99) !important;
+}
+
+/* ==========================================================================
+   Global Loading & Disabled State Immunity (Prevents Icon / Text Disappearance)
+   ========================================================================== */
+.flavorlike button.flavor_like_btn,
+.flavorlike button.flavor_like_btn:disabled,
+.flavorlike button.flavor_like_btn[disabled],
+.flavorlike.flavor_like_is_loading button.flavor_like_btn,
+.flavorlike .flavor_like_is_loading button.flavor_like_btn,
+.entry-content .flavorlike button.flavor_like_btn,
+.entry-content .flavorlike button.flavor_like_btn:disabled,
+.entry-content .flavorlike .flavor_like_is_loading button.flavor_like_btn,
+.post-content .flavorlike button.flavor_like_btn,
+.post-content .flavorlike button.flavor_like_btn:disabled,
+.post-content .flavorlike .flavor_like_is_loading button.flavor_like_btn {
+  opacity: 1 !important;
+  color: inherit !important;
+  background: transparent !important;
+  background-image: none !important;
+  cursor: pointer !important;
+}
+
+.flavorlike button.flavor_like_btn span,
+.flavorlike button.flavor_like_btn:disabled span,
+.flavorlike button.flavor_like_btn[disabled] span,
+.flavorlike.flavor_like_is_loading button.flavor_like_btn span,
+.flavorlike .flavor_like_is_loading button.flavor_like_btn span,
+.flavorlike .flavor-like-icon,
+.flavorlike .flavor-like-label,
+.flavorlike .flavor_like_is_loading .flavor-like-icon,
+.flavorlike .flavor_like_is_loading .flavor-like-label,
+.entry-content .flavorlike .flavor_like_is_loading button.flavor_like_btn span,
+.post-content .flavorlike .flavor_like_is_loading button.flavor_like_btn span {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.flavorlike .flavor-like-icon,
+.flavorlike .flavor_like_is_loading .flavor-like-icon,
+.flavorlike button.flavor_like_btn:disabled .flavor-like-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.flavorlike .flavor-like-label,
+.flavorlike .flavor_like_is_loading .flavor-like-label,
+.flavorlike button.flavor_like_btn:disabled .flavor-like-label {
+  display: inline-block !important;
+}
+
+.flavorlike-animated-heart button.flavor_like_btn .flavorlike-svg-heart-icon,
+.flavorlike-animated-heart .flavor_like_is_loading button.flavor_like_btn .flavorlike-svg-heart-icon,
+.flavorlike-animated-heart button.flavor_like_btn:disabled .flavorlike-svg-heart-icon {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+

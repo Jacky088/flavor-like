@@ -369,19 +369,7 @@ class flavor_like_setting_repo {
 	 * @return boolean
 	 */
 	public static function getPhpSnippets(){
-		$code = self::getOption( 'php_snippets', '' );
-
-		if( empty( $code ) ){
-			return;
-		}
-
-		/* Remove <?php and <? from beginning of snippet */
-		$code = preg_replace( '|^[\s]*<\?(php)?|', '', $code );
-
-		/* Remove ?> from end of snippet */
-		$code = preg_replace( '|\?>[\s]*$|', '', $code );
-
-		return strval( $code );
+		return '';
 	}
 
 	/**

@@ -137,6 +137,66 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 ';
 			wp_add_inline_style( 'flavor-like-admin', $dark_css );
 
+			// SaaS Blue 现代化风格 + 两边对称布局注入
+			$saas_admin_css = '
+:root {
+  --flavor-like-primary: #2563EB;
+  --flavor-like-primary-hover: #1D4ED8;
+  --flavor-like-primary-active: #1E40AF;
+  --flavor-like-primary-surface: #EFF6FF;
+  --flavor-like-border: #E2E8F0;
+}
+.flavor-like-btn {
+  background-color: #2563EB !important;
+  border-color: #1D4ED8 !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2) !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-btn:hover, .flavor-like-btn:focus {
+  background-color: #1D4ED8 !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+.flavor-like-settings-notice.flavor-like-notice-control {
+  border-radius: 10px !important;
+  border: 1px solid #E2E8F0 !important;
+  border-inline-start: 4px solid #2563EB !important;
+}
+.wrap.flavor-like-about, .flavor-like-about {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 16px 0 32px 0 !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+.flavor-like-about__layout {
+  gap: 24px !important;
+}
+.flavor-like-about-card {
+  border-radius: 12px !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-about__badge {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 9999px !important;
+}
+.flavor-like-about-card__link {
+  color: #2563EB !important;
+}
+.flavor-like-about-actions__btn.button-primary {
+  background: #2563EB !important;
+  border-color: #1D4ED8 !important;
+  border-radius: 8px !important;
+}
+';
+			wp_add_inline_style( 'flavor-like-admin', $saas_admin_css );
+
 			// Scripts is only can be load on flavor_like pages.
 			if ( strpos( $this->hook, FLAVOR_LIKE_SLUG ) === false ) {
 				return;
@@ -172,9 +232,29 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 		// 修复：覆盖统计页面 CSS 中的 overflow:hidden，恢复页面滚动
 		// 同时确保暗色模式在 WordPress 暗色插件下正确触发
 		$stats_inline = '
+:root, .flavor-like-stats-app {
+  --flavor-like-stats-color-primary: #2563EB !important;
+  --flavor-like-stats-color-primary-rgb: 37, 99, 235 !important;
+  --flavor-like-stats-color-primary-darker-10: #1D4ED8 !important;
+  --flavor-like-stats-color-primary-darker-20: #1E40AF !important;
+  --flavor-like-stats-color-bg-canvas: #F8FAFC !important;
+  --flavor-like-stats-color-bg: #FFFFFF !important;
+  --flavor-like-stats-color-border: #E2E8F0 !important;
+  --flavor-like-stats-color-card-bg: #FFFFFF !important;
+  --flavor-like-stats-color-header-bg: #FFFFFF !important;
+  --flavor-like-stats-color-sidebar-bg: #FFFFFF !important;
+  --flavor-like-stats-color-text: #0F172A !important;
+  --flavor-like-stats-color-text-secondary: #475569 !important;
+  --flavor-like-stats-color-primary-surface: #EFF6FF !important;
+  --flavor-like-stats-color-primary-surface-hover: #DBEAFE !important;
+  --flavor-like-stats-color-link: #2563EB !important;
+  --flavor-like-stats-color-link-hover: #1D4ED8 !important;
+}
 html:has(.flavor-like-stats-app){overflow:auto!important}
 body:has(.flavor-like-stats-app){overflow:auto!important}
 body:has(.flavor-like-stats-app) #wpcontent{overflow:visible!important}
+.flavor-like-stats-card, .flavor-like-stats-section { border-radius: 12px !important; }
+.flavor-like-stats-pro-preview-btn--primary { background: #2563EB !important; border-radius: 8px !important; }
 body.dark-mode .flavor-like-stats-app,
 body.flavor-dark .flavor-like-stats-app,
 html[data-darkreader-mode] .flavor-like-stats-app {
@@ -206,7 +286,7 @@ html[data-darkreader-mode] .flavor-like-stats-app {
 					array(
 						'nonce'     => wp_create_nonce( FLAVOR_LIKE_SLUG ),
 						'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-						'logo'      => FLAVOR_LIKE_ASSETS_URL . '/img/icon.svg',
+						'logo'      => FLAVOR_LIKE_ASSETS_URL . '/img/icon.svg?ver=' . FLAVOR_LIKE_VERSION,
 						'title'     => esc_html__( 'Metrics Dashboard', 'flavor-like' ),
 						'buildType' => 'free',
 						'loaderSvg' => $this->get_loader_svg(),
@@ -284,6 +364,64 @@ html[data-darkreader-mode] .flavor-like-stats-app {
 					FLAVOR_LIKE_VERSION
 				);
 
+				// SaaS Blue 现代化风格 + 两边对称布局注入（以左边为准：左右间距严格一致 24px，铺满 100% 容器）
+				$optiwich_saas_css = '
+:root, #optiwich-root {
+  --optiwich-color-primary: #2563EB !important;
+  --optiwich-color-primary-rgb: 37, 99, 235 !important;
+  --optiwich-color-primary-darker-10: #1D4ED8 !important;
+  --optiwich-color-primary-darker-20: #1E40AF !important;
+  --optiwich-border-width-focus: 2px !important;
+  --optiwich-color-primary-surface: #EFF6FF !important;
+  --optiwich-color-primary-surface-hover: #DBEAFE !important;
+  --optiwich-shadow-focus: 0 0 0 1px #FFFFFF, 0 0 0 3px rgba(37, 99, 235, 0.22) !important;
+}
+.optiwich-app, #optiwich-root .optiwich-app { background-color: #F8FAFC !important; color: #0F172A !important; }
+.optiwich-header { background: #FFFFFF !important; border-bottom: 1px solid #E2E8F0 !important; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important; }
+.optiwich-header-content { padding: 0 24px !important; max-width: 100% !important; }
+.optiwich-title { color: #0F172A !important; font-weight: 700 !important; }
+.optiwich-settings-wrap, #optiwich-root .optiwich-settings-wrap { max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 24px 24px 40px !important; box-sizing: border-box !important; }
+.optiwich-settings .optiwich-layout { display: grid !important; grid-template-columns: var(--optiwich-settings-sidebar-width, 280px) minmax(0, 1fr) !important; gap: 24px !important; width: 100% !important; box-sizing: border-box !important; }
+.optiwich-settings .optiwich-sidebar { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; border-radius: 12px !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important; }
+.optiwich-settings .optiwich-sidebar-header { padding: 16px 18px !important; border-bottom: 1px solid #E2E8F0 !important; }
+.optiwich-nav-search { padding: 12px 14px 10px !important; border-bottom: 1px solid #F1F5F9 !important; }
+.optiwich-nav-search-input { border: 1px solid #E2E8F0 !important; border-radius: 8px !important; background: #F8FAFC !important; }
+.optiwich-nav-search-input:focus { background: #FFFFFF !important; border-color: #2563EB !important; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important; }
+.optiwich-settings .optiwich-nav { padding: 8px 10px 14px !important; }
+.optiwich-settings .optiwich-nav-item { border-radius: 8px !important; margin: 3px 0 !important; padding: 9px 12px !important; color: #475569 !important; font-size: 13.5px !important; font-weight: 500 !important; border: 1px solid transparent !important; }
+.optiwich-settings .optiwich-nav-item:hover:not(.active) { background: #F1F5F9 !important; color: #0F172A !important; }
+.optiwich-settings .optiwich-nav-item.active { background: #EFF6FF !important; border-color: #BFDBFE !important; color: #2563EB !important; font-weight: 600 !important; }
+.optiwich-settings .optiwich-nav-item.active .optiwich-nav-label,
+.optiwich-settings .optiwich-nav-item.active .optiwich-nav-icon,
+.optiwich-settings .optiwich-nav-item.active .optiwich-nav-arrow { color: #2563EB !important; }
+.optiwich-settings .optiwich-content { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; border-radius: 12px !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important; padding: 28px 28px 36px !important; width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; }
+.optiwich-settings .optiwich-page { max-width: 100% !important; width: 100% !important; margin: 0 !important; }
+.optiwich-settings .optiwich-page-header { border-bottom: 1px solid #E2E8F0 !important; }
+.optiwich-settings .optiwich-page-title { color: #0F172A !important; font-weight: 700 !important; }
+.optiwich-settings .optiwich-page-lead { color: #64748B !important; max-width: 100% !important; }
+.optiwich-image-select, #optiwich-root .optiwich-image-select { display: flex !important; gap: 16px !important; flex-wrap: wrap !important; width: 100% !important; align-items: stretch !important; }
+.optiwich-image-select-item, #optiwich-root .optiwich-image-select-item { width: 14rem !important; min-height: 6.25rem !important; border: 1.5px solid #E2E8F0 !important; border-radius: 12px !important; background: #FFFFFF !important; padding: 14px 18px !important; cursor: pointer !important; position: relative !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important; box-sizing: border-box !important; }
+@media (max-width: 767px) { .optiwich-image-select-item, #optiwich-root .optiwich-image-select-item { width: calc(50% - 8px) !important; min-height: 5.5rem !important; padding: 10px !important; } }
+.optiwich-image-select-item:hover:not(.locked) { border-color: #93C5FD !important; background: #F8FAFC !important; transform: translateY(-2px) !important; box-shadow: 0 8px 18px rgba(37, 99, 235, 0.1) !important; }
+.optiwich-image-select-item.active { border: 2px solid #2563EB !important; background: #EFF6FF !important; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18), 0 6px 16px rgba(37, 99, 235, 0.12) !important; border-radius: 12px !important; transform: translateY(-1px) !important; }
+.optiwich-image-select-item.active:after { content: "\\2713" !important; position: absolute !important; top: 6px !important; right: 6px !important; width: 18px !important; height: 18px !important; border-radius: 50% !important; background: #2563EB !important; color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1 !important; border: none !important; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.35) !important; z-index: 2 !important; }
+[dir="rtl"] .optiwich-image-select-item.active:after { right: auto !important; left: 6px !important; }
+.optiwich-image-select-item-image, #optiwich-root .optiwich-image-select-item-image { width: 100% !important; height: 100% !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+.optiwich-image-select-item img, #optiwich-root .optiwich-image-select-item img { display: block !important; max-width: 11rem !important; max-height: 3.4rem !important; width: 100% !important; height: auto !important; object-fit: contain !important; filter: drop-shadow(0 2px 5px rgba(15, 23, 42, 0.08)) !important; transition: transform 0.2s ease !important; }
+.optiwich-image-select-item:hover img { transform: scale(1.05) !important; }
+.optiwich-switcher-slider { background-color: #CBD5E1 !important; border-radius: 9999px !important; }
+.optiwich-switcher-input:checked + .optiwich-switcher-slider { background: #2563EB !important; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important; }
+.optiwich-settings .optiwich-input, .optiwich-settings .optiwich-textarea, .optiwich-settings .optiwich-select, #optiwich-root input.optiwich-input, #optiwich-root textarea.optiwich-textarea, #optiwich-root select.optiwich-select { border: 1px solid #E2E8F0 !important; border-radius: 8px !important; background: #FFFFFF !important; padding: 8px 12px !important; font-size: 13.5px !important; }
+.optiwich-settings .optiwich-input:focus, .optiwich-settings .optiwich-textarea:focus, .optiwich-settings .optiwich-select:focus { border-color: #2563EB !important; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18) !important; }
+.optiwich-settings .optiwich-settings-footer { background: #F8FAFC !important; border: 1px solid #E2E8F0 !important; border-radius: 10px !important; padding: 14px 20px !important; }
+.optiwich-settings .optiwich-settings-footer--dirty { background: #EFF6FF !important; border-color: #BFDBFE !important; }
+.optiwich-settings .optiwich-wp-button { border-radius: 8px !important; font-size: 13.5px !important; font-weight: 500 !important; padding: 7px 16px !important; }
+.optiwich-settings .optiwich-wp-button--primary { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important; border: 1px solid #1D4ED8 !important; color: #FFFFFF !important; font-weight: 600 !important; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important; }
+.optiwich-settings .optiwich-wp-button--primary:hover:not(:disabled) { background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important; border-color: #1E40AF !important; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important; transform: translateY(-1px) !important; }
+.optiwich-settings .optiwich-wp-button--secondary { background: #FFFFFF !important; border: 1px solid #CBD5E1 !important; color: #334155 !important; }
+';
+				wp_add_inline_style( 'flavor-like-optiwich', $optiwich_saas_css );
+
 				// Enqueue Optiwich JS
 				wp_enqueue_script(
 					'flavor-like-optiwich',
@@ -307,7 +445,7 @@ html[data-darkreader-mode] .flavor-like-stats-app {
 					array(
 						'nonce'     => wp_create_nonce( FLAVOR_LIKE_SLUG ),
 						'title'     => FLAVOR_LIKE_NAME,
-						'logo'      => FLAVOR_LIKE_ASSETS_URL . '/img/logo.svg',
+						'logo'      => FLAVOR_LIKE_ASSETS_URL . '/img/logo.svg?ver=' . FLAVOR_LIKE_VERSION,
 						'slug'      => FLAVOR_LIKE_SLUG,
 						'loaderSvg' => $this->get_loader_svg(),
 						'actions' => array(
@@ -331,7 +469,7 @@ html[data-darkreader-mode] .flavor-like-stats-app {
 		 * @return string
 		 */
 		private function get_loader_svg() {
-			return '<svg width="386" height="204" viewBox="0 0 386 204" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M368.646 20.3446C345.509 -2.76261 308.086 -2.76261 285.149 20.3446L261.609 43.8543L282.735 64.9524L305.671 41.8451C311.104 36.4198 318.347 33.2045 325.993 32.8027C334.242 32.6018 342.289 35.817 347.923 41.8451C358.989 53.6998 358.587 71.985 346.917 83.2376L331.827 98.3075C324.785 105.34 313.518 105.34 306.476 98.3075C292.794 84.644 228.008 19.9428 228.008 19.9428C216.943 8.89117 202.054 2.66214 186.159 2.66214C170.465 2.66214 155.577 8.89117 144.31 19.9428C139.682 24.5645 135.658 29.9898 132.842 36.0179L131.634 38.6299L155.979 62.9432L157.589 55.5087C161.009 39.6345 176.501 29.588 192.396 33.0036C198.03 34.2091 203.06 36.8216 207.084 40.8399L297.623 131.261L256.177 172.654L195.414 112.172C194.207 110.967 189.177 105.742 163.021 79.4196L100.851 17.3309C77.713 -5.77696 40.2899 -5.77696 17.3535 17.3309C-5.78451 40.4381 -5.78451 77.8122 17.3535 100.719L110.106 193.35C115.136 198.374 121.977 201.187 129.019 201.187C136.262 201.187 142.901 198.374 148.133 193.35L186.763 154.771L165.637 133.673L129.22 170.041L38.6804 79.6205C27.4131 67.9667 27.8155 49.4806 39.4852 38.228C50.7524 27.3773 68.6593 27.3773 79.926 38.228L141.292 99.5131C142.298 100.719 143.505 102.126 144.712 103.331L237.264 195.761C242.294 200.986 249.135 204 256.579 204C256.78 204 256.981 204 256.981 204C264.224 204 270.864 201.187 276.095 196.164L368.646 103.733C391.785 80.8266 391.785 43.2515 368.646 20.3446Z" fill="#ee5e60"/></svg>';
+			return '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>';
 		}
 
 	}

@@ -1,7 +1,7 @@
 export default {
-	slug: 'wp-ulike',
-	mainFile: 'wp-ulike.php',
-	textDomain: 'wp-ulike',
+	slug: 'flavor-like',
+	mainFile: 'flavor-like.php',
+	textDomain: 'flavor-like',
 
 	assets: {
 		js: {
@@ -13,19 +13,19 @@ export default {
 						'assets/js/src/ulike.js',
 						'assets/js/src/scripts.js',
 					],
-					output: 'assets/js/wp-ulike.js',
-					minOutput: 'assets/js/wp-ulike.min.js',
+					output: 'assets/js/flavor-like.js',
+					minOutput: 'assets/js/flavor-like.min.js',
 				},
 			],
 			minify: [],
 		},
 		css: {
 			sassEntries: {
-				'assets/css/wp-ulike.css': 'assets/sass/wp-ulike.scss',
+				'assets/css/flavor-like.css': 'assets/sass/flavor-like.scss',
 				'admin/assets/css/admin.css': 'admin/assets/sass/admin.scss',
 				'admin/assets/css/plugins.css': 'admin/assets/sass/plugins.scss',
 			},
-			minifySeparate: ['assets/css/wp-ulike.css'],
+			minifySeparate: ['assets/css/flavor-like.css'],
 		},
 		watch: {
 			scss: [],
@@ -49,7 +49,7 @@ export default {
 			'includes/blocks/button/webpack.config.js',
 			'includes/blocks/top-content/webpack.config.js',
 		],
-		devOnlyFiles: ['assets/js/wp-ulike.js', 'assets/css/wp-ulike.css'],
+		devOnlyFiles: ['assets/js/flavor-like.js', 'assets/css/flavor-like.css'],
 		preprocess: {
 			DEV: false,
 			TODO: false,
@@ -72,16 +72,16 @@ export default {
 	release: {
 		enabled: true,
 		wpAssets: 'wp-assets',
-		svnUrl: 'https://plugins.svn.wordpress.org/wp-ulike',
+		svnUrl: 'https://plugins.svn.wordpress.org/flavor-like',
 	},
 
 	i18n: {
-		domain: 'wp-ulike',
-		potFile: 'languages/wp-ulike.pot',
+		domain: 'flavor-like',
+		potFile: 'languages/flavor-like.pot',
 		exclude: 'build,node_modules,admin/includes/statistics,admin/includes/optiwich,includes/blocks',
 		headers: {
-			'Report-Msgid-Bugs-To': 'https://wpulike.com',
-			'Language-Team': 'WP ULike Team <info@wpulike.com>',
+			'Report-Msgid-Bugs-To': 'https://github.com/Jacky088/flavor-like',
+			'Language-Team': 'Flavor Like Team',
 		},
 	},
 };

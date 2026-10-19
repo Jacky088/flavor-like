@@ -1,7 +1,7 @@
 {
   "name": "flavor-like",
   "title": "Flavor Like",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "为 WordPress 网站添加投票按钮，提升用户互动。支持自定义设置和详细分析，追踪用户参与度，优化内容，建立忠实用户群。",
   "homepage": "https://github.com/Jacky088/flavor-like",
   "repository": {

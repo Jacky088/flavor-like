@@ -3,7 +3,7 @@
  * Plugin Name:       Flavor Like
  * Plugin URI:        https://github.com/Jacky088/flavor-like
  * Description:       为 WordPress 添加一键点赞按钮。内置统计仪表盘、热门内容排行和隐私工具，几分钟即可完成设置。
- * Version:           1.0.6
+ * Version:           1.1.0
  * Author:            木木
  * Author URI:        https://github.com/Jacky088
  * Requires PHP:      7.2.5
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Do not change these values
 define( 'FLAVOR_LIKE_PLUGIN_URI'   , 'https://github.com/Jacky088/flavor-like' 	);
-define( 'FLAVOR_LIKE_VERSION'      , '1.0.6' 					 		    	);
+define( 'FLAVOR_LIKE_VERSION'      , '1.1.0' 					 		    	);
 define( 'FLAVOR_LIKE_DB_VERSION'   , '2.5' 					 	 			);
 define( 'FLAVOR_LIKE_SLUG'         , 'flavor-like' 					 			);
 define( 'FLAVOR_LIKE_NAME'         , 'Flavor Like'	    						);
@@ -89,7 +89,7 @@ function flavor_like_custom_plugin_info( $result, $action, $args ) {
 	$plugin_info->requires_php  = '7.2.5';
 	$plugin_info->sections      = array(
 		'description' => '为 WordPress 添加一键点赞按钮。内置统计仪表盘、热门内容排行和隐私工具，几分钟即可完成设置。',
-		'changelog'   => '<h4>1.0.0</h4><p>初始版本 - 基于 Flavor Like 修改，全面汉化，移除 Pro 功能。</p>',
+		'changelog'   => '<h4>1.1.0</h4><p>视觉与交互体验大版本升级：全新 SaaS 蓝色系后台视觉、严格对称左右边距、模板卡片尺寸放大自适应、内置全新「脉冲心动 (Pulse Heart)」矢量 Logo 及插件目录纯线条图标、前台点赞微交互动画与代码加固。</p><h4>1.0.0</h4><p>初始版本 - 基于 Flavor Like 修改，全面汉化，移除 Pro 功能。</p>',
 	);
 	return $plugin_info;
 }

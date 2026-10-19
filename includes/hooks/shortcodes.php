@@ -78,7 +78,6 @@ if( ! function_exists( 'flavor_like_shortcode' ) ){
 		return $result;
 	}
 	add_shortcode( 'flavor_like', 'flavor_like_shortcode' );
-	add_shortcode( 'flavor_like', 'flavor_like_shortcode' );
 }
 
 if( ! function_exists( 'flavor_like_counter_shortcode' ) ){
@@ -148,7 +147,6 @@ if( ! function_exists( 'flavor_like_counter_shortcode' ) ){
         return flavor_like_get_counter_value( $attributes['id'], $attributes['type'], $attributes['status'], $is_distinct, $attributes['date_range'] );
     }
     add_shortcode( 'flavor_like_counter', 'flavor_like_counter_shortcode' );
-    add_shortcode( 'flavor_like_counter', 'flavor_like_counter_shortcode' );
 }
 
 if( ! function_exists( 'flavor_like_likers_box_shortcode' ) ){
@@ -213,6 +211,5 @@ if( ! function_exists( 'flavor_like_likers_box_shortcode' ) ){
 
         return apply_filters( 'flavor_like_likers_box_shortcode', $output, $args['id'], $args['type'] );
     }
-    add_shortcode( 'flavor_like_likers_box', 'flavor_like_likers_box_shortcode' );
     add_shortcode( 'flavor_like_likers_box', 'flavor_like_likers_box_shortcode' );
 }

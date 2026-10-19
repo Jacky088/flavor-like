@@ -41,7 +41,7 @@ if( ! function_exists( 'flavor_like_generate_templates_list' ) ){
 				'name'            => 'Twitter 爱心',
 				'callback'        => 'flavor_like_set_robeen_template',
 				'symbol'          => FLAVOR_LIKE_ASSETS_URL . '/img/templates/twitter.svg',
-				'is_text_support' => false
+				'is_text_support' => true
 			),
 			'flavorlike-animated-heart' => array(
 				'name'            => '动态爱心',
@@ -77,13 +77,13 @@ if( ! function_exists( 'flavor_like_generate_templates_list' ) ){
 				'name'            => '收藏星',
 				'callback'        => 'flavor_like_set_fave_star_template',
 				'symbol'          => FLAVOR_LIKE_ASSETS_URL . '/img/templates/faveStar.svg',
-				'is_text_support' => false
+				'is_text_support' => true
 			),
 			'flavorlike-pin' => array(
 				'name'            => '图钉按钮',
 				'callback'        => 'flavor_like_set_pin_template',
 				'symbol'          => FLAVOR_LIKE_ASSETS_URL . '/img/templates/pin.svg',
-				'is_text_support' => false
+				'is_text_support' => true
 			),
 		);
 
@@ -95,18 +95,18 @@ if( ! function_exists( 'flavor_like_generate_templates_list' ) ){
 
 if( ! function_exists( 'flavor_like_set_default_template' ) ){
 	/**
-	 * Create simple default template
+	 * Create simple default template (简约拇指)
 	 *
 	 * @author       	Alimir
 	 * @since           2.8
 	 * @return			Void
 	 */
 	function flavor_like_set_default_template( array $flavor_like_template ){
-		//This function will turn output buffering on
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
-		// Extract input array
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '点赞';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-default <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -119,16 +119,17 @@ if( ! function_exists( 'flavor_like_set_default_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
 						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if($button_type == 'text'){
-							echo '<span>' . $button_text . '</span>';
-						}
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -138,24 +139,24 @@ if( ! function_exists( 'flavor_like_set_default_template' ) ){
 		</div>
 	<?php
 		do_action( 'flavor_like_after_template', $flavor_like_template );
-		return ob_get_clean(); // data is now in here
+		return ob_get_clean();
 	}
 }
 
 if( ! function_exists( 'flavor_like_set_simple_heart_template' ) ){
 	/**
-	 * Create simple heart template
+	 * Create simple heart template (简约爱心)
 	 *
 	 * @author       	Alimir
 	 * @since           2.8
 	 * @return			Void
 	 */
 	function flavor_like_set_simple_heart_template( array $flavor_like_template ){
-		//This function will turn output buffering on
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
-		// Extract input array
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '喜欢';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-heart <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -168,16 +169,17 @@ if( ! function_exists( 'flavor_like_set_simple_heart_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
 						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if( $button_type == 'text' ){
-							echo '<span>' . $button_text . '</span>';
-						}
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -187,24 +189,24 @@ if( ! function_exists( 'flavor_like_set_simple_heart_template' ) ){
 		</div>
 	<?php
 		do_action( 'flavor_like_after_template', $flavor_like_template );
-		return ob_get_clean(); // data is now in here
+		return ob_get_clean();
 	}
 }
 
 if( ! function_exists( 'flavor_like_set_robeen_template' ) ){
 	/**
-	 * Create Robeen (Animated Heart) template
+	 * Create Robeen (Twitter 爱心) template
 	 *
 	 * @author       	Alimir
 	 * @since           2.8
 	 * @return			Void
 	 */
 	function flavor_like_set_robeen_template( array $flavor_like_template ){
-		//This function will turn output buffering on
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
-		// Extract input array
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '心动';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-robeen <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -217,13 +219,17 @@ if( ! function_exists( 'flavor_like_set_robeen_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
 						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -233,25 +239,23 @@ if( ! function_exists( 'flavor_like_set_robeen_template' ) ){
 		</div>
 	<?php
 		do_action( 'flavor_like_after_template', $flavor_like_template );
-		return ob_get_clean(); // data is now in here
+		return ob_get_clean();
 	}
 }
 
-
 if( ! function_exists( 'flavor_like_set_animated_heart_template' ) ){
 	/**
-	 * Create Animated Heart template
+	 * Create Animated Heart template (动态爱心)
 	 *
 	 * @author       	Alimir
 	 * @since           3.6.2
 	 * @return			Void
 	 */
 	function flavor_like_set_animated_heart_template( array $flavor_like_template ){
-		//This function will turn output buffering on
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
-		// Extract input array
 		extract( $flavor_like_template );
+		$count_val = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-animated-heart <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -275,7 +279,7 @@ if( ! function_exists( 'flavor_like_set_animated_heart_template' ) ){
 					</svg>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -285,10 +289,9 @@ if( ! function_exists( 'flavor_like_set_animated_heart_template' ) ){
 		</div>
 	<?php
 		do_action( 'flavor_like_after_template', $flavor_like_template );
-		return ob_get_clean(); // data is now in here
+		return ob_get_clean();
 	}
 }
-
 
 /**
  * 星星拇指模板
@@ -298,6 +301,8 @@ if( ! function_exists( 'flavor_like_set_star_thumb_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '点赞';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-star-thumb <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -310,15 +315,17 @@ if( ! function_exists( 'flavor_like_set_star_thumb_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
+						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if($button_type == 'text'){ echo '<span>' . $button_text . '</span>'; }
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -338,6 +345,8 @@ if( ! function_exists( 'flavor_like_set_check_mark_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '已认可';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-check-mark <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -350,15 +359,17 @@ if( ! function_exists( 'flavor_like_set_check_mark_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 9 10.5 14.5 8 12"></polyline></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
+						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if($button_type == 'text'){ echo '<span>' . $button_text . '</span>'; }
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -378,6 +389,8 @@ if( ! function_exists( 'flavor_like_set_clapping_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '鼓掌';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-clapping <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -390,15 +403,15 @@ if( ! function_exists( 'flavor_like_set_clapping_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<span class="flavorlike-clap-icon">👏</span>
+					<span class="flavor-like-icon flavorlike-clap-icon">👏</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
+						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if($button_type == 'text'){ echo '<span>' . $button_text . '</span>'; }
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -418,6 +431,8 @@ if( ! function_exists( 'flavor_like_set_badge_thumb_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '荣誉';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-badge-thumb <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -430,15 +445,17 @@ if( ! function_exists( 'flavor_like_set_badge_thumb_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/></svg>
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 5.5l2 4 4.5.7-3.3 3.2.8 4.6-4-2.1-4 2.1.8-4.6L5.5 10.2l4.5-.7z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
 					<?php
+						echo $up_vote_inner_text;
 						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
-						if($button_type == 'text'){ echo '<span>' . $button_text . '</span>'; }
 					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -458,6 +475,8 @@ if( ! function_exists( 'flavor_like_set_fave_star_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '收藏';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-fave-star <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -470,12 +489,17 @@ if( ! function_exists( 'flavor_like_set_fave_star_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-					<?php do_action( 'flavor_like_inside_like_button', $flavor_like_template ); ?>
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
+					<?php
+						echo $up_vote_inner_text;
+						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
+					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>
@@ -495,6 +519,8 @@ if( ! function_exists( 'flavor_like_set_pin_template' ) ){
 		ob_start();
 		do_action( 'flavor_like_before_template', $flavor_like_template );
 		extract( $flavor_like_template );
+		$label_text = ! empty( $button_text ) ? $button_text : '喜欢';
+		$count_val  = ( $formatted_total_likes !== '' && $formatted_total_likes !== null ) ? $formatted_total_likes : '0';
 	?>
 		<div class="flavorlike flavorlike-pin <?php echo $wrapper_class; ?>" <?php echo $attributes; ?>>
 			<div class="<?php echo $general_class; ?>">
@@ -507,12 +533,17 @@ if( ! function_exists( 'flavor_like_set_pin_template' ) ){
 					data-flavor-like-display-likers="<?php echo $display_likers; ?>"
 					data-flavor-like-likers-style="<?php echo $likers_style; ?>"
 					class="<?php echo $button_class; ?>">
-					<?php echo $up_vote_inner_text; ?>
-					<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17 4v7l2 3v2h-6v5l-1 1-1-1v-5H5v-2l2-3V4c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2z"/></svg>
-					<?php do_action( 'flavor_like_inside_like_button', $flavor_like_template ); ?>
+					<span class="flavor-like-icon">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+					</span>
+					<span class="flavor-like-label"><?php echo esc_html( $label_text ); ?></span>
+					<?php
+						echo $up_vote_inner_text;
+						do_action( 'flavor_like_inside_like_button', $flavor_like_template );
+					?>
 				</button>
 				<?php
-					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s"></span>', $formatted_total_likes ) : '';
+					echo $display_counters ? sprintf( '<span class="count-box flavor_like_counter_up" data-flavor-like-counter-value="%s">%s</span>', esc_attr( $count_val ), esc_html( $count_val ) ) : '';
 					do_action( 'flavor_like_after_up_vote_button', $flavor_like_template );
 				?>
 			</div>

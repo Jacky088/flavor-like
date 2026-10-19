@@ -38,14 +38,31 @@ class flavor_like_blacklist_validator {
         if (empty($blacklist = self::blacklist())) {
             return true;
         }
+        $target = trim( (string) $target );
+        $is_target_ip = class_exists( 'Flavor_Like_Ip_Detector' ) ? Flavor_Like_Ip_Detector::validate_ip( $target ) : filter_var( $target, FILTER_VALIDATE_IP );
+
         $lines = explode("\n", $blacklist);
         foreach ((array) $lines as $line) {
             $line = trim($line);
             if (empty($line) || 256 < strlen($line)) {
                 continue;
             }
-            $pattern = sprintf('#%s#i', preg_quote($line, '#'));
-            if (preg_match($pattern, $target)) {
+
+            // Handle IP & CIDR matching if target is an IP
+            if ( $is_target_ip ) {
+                if ( strpos( $line, '/' ) !== false && class_exists( 'Flavor_Like_Ip_Detector' ) ) {
+                    if ( Flavor_Like_Ip_Detector::ip_in_range( $target, $line ) ) {
+                        return false;
+                    }
+                    continue;
+                } elseif ( strcasecmp( $line, $target ) === 0 ) {
+                    return false;
+                }
+            }
+
+            // Word-boundary match for words/keys to prevent substring false positives
+            $pattern = sprintf( '#(?<![0-9a-zA-Z._-])%s(?![0-9a-zA-Z._-])#i', preg_quote( $line, '#' ) );
+            if ( preg_match( $pattern, $target ) ) {
                 return false;
             }
         }

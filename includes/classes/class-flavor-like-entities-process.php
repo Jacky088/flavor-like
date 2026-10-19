@@ -412,8 +412,8 @@ if ( ! class_exists( 'flavor_like_entities_process' ) ) {
 					'setting_type'  => $this->typeSettings->getType(),
 					'legacy_status' => $this->currentStatus,
 					'ip'            => $this->maybeAnonymiseIp( $this->currentIP ),
-					'user_id'       => $this->currentUser,
-					'fingerprint'   => $this->currentFingerPrint,
+					'user_id'       => $this->isUserLoggedIn ? $this->currentUser : 0,
+					'fingerprint'   => $this->getCurrentFingerPrint(),
 					'is_distinct'   => $this->isDistinct(),
 				);
 
@@ -432,7 +432,7 @@ if ( ! class_exists( 'flavor_like_entities_process' ) ) {
 				'date_time'                          => current_time( 'mysql', true ),
 				'ip'                                 => $this->maybeAnonymiseIp( $this->currentIP ),
 				'user_id'                            => $this->currentUser,
-				'fingerprint'                        => $this->currentFingerPrint,
+				'fingerprint'                        => $this->getCurrentFingerPrint(),
 				'status'                             => $this->currentStatus
 			);
 			$format = array( '%d', '%s', '%s', '%s', '%s', '%s'  ); // Adjust format specifiers
@@ -495,8 +495,8 @@ if ( ! class_exists( 'flavor_like_entities_process' ) ) {
 						'setting_type'  => $this->typeSettings->getType(),
 						'legacy_status' => $this->currentStatus,
 						'ip'            => $this->maybeAnonymiseIp( $this->currentIP ),
-						'user_id'       => $this->currentUser,
-						'fingerprint'   => $this->currentFingerPrint,
+						'user_id'       => $this->isUserLoggedIn ? $this->currentUser : 0,
+						'fingerprint'   => $this->getCurrentFingerPrint(),
 						'is_distinct'   => true,
 					)
 				);

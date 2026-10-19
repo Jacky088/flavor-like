@@ -100,16 +100,18 @@ if ( ! class_exists( 'Flavor_Like_Ip_Detector' ) ) {
 			// are only honoured if the request actually arrives from a listed
 			// proxy IP. This prevents clients from spoofing X-Forwarded-For to
 			// bypass IP-based vote dedupe / blacklists.
+			$remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 			$trusted_proxies = self::get_trusted_proxies();
 			$is_from_trusted_proxy = false;
-			if ( empty( $trusted_proxies ) ) {
-				// No whitelist configured — legacy behaviour (trust headers).
-				$is_from_trusted_proxy = true;
-			} else {
-				$remote_addr = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+
+			if ( ! empty( $trusted_proxies ) ) {
+				// Whitelist explicitly configured: only trust listed proxies
 				if ( ! empty( $remote_addr ) && self::ip_matches_list( $remote_addr, $trusted_proxies ) ) {
 					$is_from_trusted_proxy = true;
 				}
+			} elseif ( ! empty( $remote_addr ) && self::is_private_ip( $remote_addr ) ) {
+				// Default safe fallback: trust proxy headers only if request arrived from a local/private reverse proxy (localhost, Docker, LAN)
+				$is_from_trusted_proxy = true;
 			}
 
 			if ( $is_from_trusted_proxy ) {

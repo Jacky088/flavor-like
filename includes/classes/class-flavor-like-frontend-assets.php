@@ -55,25 +55,40 @@ if ( ! class_exists( 'flavor_like_frontend_assets' ) ) {
 		public function register() {
 			$this->register_styles();
 			$this->register_scripts();
+
+			// For global loading strategy: enqueue styles in <head> to prevent FOUC and layout shifts
+			$strategy = flavor_like_get_option( 'assets_load_strategy', 'global' );
+			if ( 'global' === $strategy && is_flavor_like( flavor_like_get_option( 'disable_plugin_files' ), array(), true ) ) {
+				wp_enqueue_style( FLAVOR_LIKE_SLUG );
+				if ( wp_style_is( FLAVOR_LIKE_SLUG . '-custom', 'registered' ) ) {
+					wp_enqueue_style( FLAVOR_LIKE_SLUG . '-custom' );
+				}
+				if ( ! defined( 'FLAVOR_LIKE_PRO_VERSION' ) || version_compare( FLAVOR_LIKE_PRO_VERSION, '1.5.3', '<' ) ) {
+					wp_enqueue_script( 'flavor_like' );
+				}
+			}
 		}
 
 		/**
 		 * Enqueue assets depending on strategy.
 		 *
-		 * global   — legacy behaviour, enqueue everywhere (except pages
-		 *            excluded via "Disable Assets On").
-		 * on_demand — enqueue only when flavor_like_display_button() rendered
+		 * global   — legacy behaviour, enqueued early in wp_enqueue_scripts (<head>).
+		 * on_demand — enqueue late only when flavor_like_display_button() rendered
 		 *            at least one button on this request.
 		 *
 		 * @return void
 		 */
 		public function maybe_enqueue() {
+			$strategy = flavor_like_get_option( 'assets_load_strategy', 'global' );
+			if ( 'global' === $strategy ) {
+				return;
+			}
+
 			// If user has been disabled this page in options, then return.
 			if( ! is_flavor_like( flavor_like_get_option( 'disable_plugin_files' ), array(), true ) ) {
 				return;
 			}
 
-			$strategy = flavor_like_get_option( 'assets_load_strategy', 'global' );
 			if ( 'on_demand' === $strategy && ! self::$assets_needed ) {
 				return;
 			}
@@ -94,17 +109,17 @@ if ( ! class_exists( 'flavor_like_frontend_assets' ) ) {
 	   	 * @return void
 	   	 */
 	  	public function register_styles() {
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			$css_rel_path = '/css/flavor-like' . $min . '.css';
+			$css_abs_path = FLAVOR_LIKE_DIR . 'assets' . $css_rel_path;
+			if ( ! file_exists( $css_abs_path ) ) {
+				$min = '';
+				$css_rel_path = '/css/flavor-like.css';
+				$css_abs_path = FLAVOR_LIKE_DIR . 'assets' . $css_rel_path;
+			}
+			$ver = FLAVOR_LIKE_VERSION . '.' . ( file_exists( $css_abs_path ) ? filemtime( $css_abs_path ) : time() );
 
-	        // @if DEV
-	        /*
-	        // @endif
-	        wp_register_style( FLAVOR_LIKE_SLUG, FLAVOR_LIKE_ASSETS_URL . '/css/flavor-like.min.css', array(), FLAVOR_LIKE_VERSION );
-	        // @if DEV
-	        */
-	        // @endif
-	        // @if DEV
-			wp_register_style( FLAVOR_LIKE_SLUG, FLAVOR_LIKE_ASSETS_URL . '/css/flavor-like.css', array(), FLAVOR_LIKE_VERSION );
-			// @endif
+			wp_register_style( FLAVOR_LIKE_SLUG, FLAVOR_LIKE_ASSETS_URL . $css_rel_path, array(), $ver );
 
 			// Check user preference for CSS delivery method
 			$user_prefers_inline = flavor_like_is_true( flavor_like_get_option( 'enable_inline_custom_css', false ) );
@@ -115,7 +130,9 @@ if ( ! class_exists( 'flavor_like_frontend_assets' ) ) {
 				//add your custom style from setting panel (now includes customizer CSS).
 				wp_add_inline_style( FLAVOR_LIKE_SLUG, flavor_like_get_custom_style() );
 			} else {
-				wp_register_style( FLAVOR_LIKE_SLUG . '-custom', FLAVOR_LIKE_CUSTOM_URL . '/custom.css', array( FLAVOR_LIKE_SLUG ), FLAVOR_LIKE_VERSION );
+				$custom_abs_path = FLAVOR_LIKE_CUSTOM_DIR . 'custom.css';
+				$custom_ver = FLAVOR_LIKE_VERSION . '.' . ( file_exists( $custom_abs_path ) ? filemtime( $custom_abs_path ) : time() );
+				wp_register_style( FLAVOR_LIKE_SLUG . '-custom', FLAVOR_LIKE_CUSTOM_URL . '/custom.css', array( FLAVOR_LIKE_SLUG ), $custom_ver );
 			}
 
 	  	}
@@ -131,17 +148,17 @@ if ( ! class_exists( 'flavor_like_frontend_assets' ) ) {
 				return;
 			}
 
-			// @if DEV
-			/*
-			// @endif
-			//Add flavor_like script file with special functions.
-			$this->register_script_with_defer( 'flavor_like', FLAVOR_LIKE_ASSETS_URL . '/js/flavor-like.min.js', array(), FLAVOR_LIKE_VERSION );
-			// @if DEV
-			*/
-			// @endif
-			// @if DEV
-			$this->register_script_with_defer( 'flavor_like', FLAVOR_LIKE_ASSETS_URL . '/js/flavor-like.js', array(), FLAVOR_LIKE_VERSION );
-			// @endif
+			$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+			$js_rel_path = '/js/flavor-like' . $min . '.js';
+			$js_abs_path = FLAVOR_LIKE_DIR . 'assets' . $js_rel_path;
+			if ( ! file_exists( $js_abs_path ) ) {
+				$min = '';
+				$js_rel_path = '/js/flavor-like.js';
+				$js_abs_path = FLAVOR_LIKE_DIR . 'assets' . $js_rel_path;
+			}
+			$ver = FLAVOR_LIKE_VERSION . '.' . ( file_exists( $js_abs_path ) ? filemtime( $js_abs_path ) : time() );
+
+			$this->register_script_with_defer( 'flavor_like', FLAVOR_LIKE_ASSETS_URL . $js_rel_path, array(), $ver );
 
 			flavor_like_add_inline_script_data( 'flavor_like', 'flavor_like_params', $this->get_frontend_script_params() );
 	  	}

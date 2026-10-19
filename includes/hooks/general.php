@@ -311,37 +311,7 @@ if( ! function_exists( 'flavor_like_load_deprecated_classes' ) ){
 }
 
 
-if( ! function_exists( 'flavor_like_run_php_snippets' ) ){
-	/**
-	 * Run php snippets
-	 *
-	 * @return void
-	 */
-	function flavor_like_run_php_snippets(){
-		if( flavor_like_setting_repo::isCodeSnippetsDisabled() ){
-			return;
-		}
-
-		$php_snippets = flavor_like_setting_repo::getPhpSnippets();
-
-		if( empty( $php_snippets ) ){
-			return;
-		}
-
-		if ( class_exists( '\\ParseError' ) ) {
-			try {
-				eval( $php_snippets ); // phpcs:ignore
-			} catch( \ParseError $e ) { // phpcs:ignore
-				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-					error_log( 'Flavor Like PHP Snippet Error: ' . $e->getMessage() );
-				}
-			}
-		} else {
-			eval( $php_snippets ); // phpcs:ignore
-		}
-	}
-	add_action( 'flavor_like_loaded', 'flavor_like_run_php_snippets' );
-}
+// PHP snippets execution via eval() removed for security compliance (WordPress VIP & Plugin Security Guidelines).
 
 if( ! function_exists( 'flavor_like_run_javascript_snippets' ) ){
 	/**

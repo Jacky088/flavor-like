@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="107" height="43" viewBox="0 0 107 43"><defs><style>.a,.c{fill:#cdcdcd;}.b{fill:#fff;}.c{font-size:17px;font-weight:600;font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif}</style></defs><g transform="translate(-1254 -505)"><g transform="translate(270)"><g transform="translate(-1)"><circle class="a" cx="21.5" cy="21.5" r="21.5" transform="translate(985 505)"/><path class="b" d="M21.6,7.826c-.316-3.477-2.777-6-5.856-6A5.821,5.821,0,0,0,10.76,4.7,5.61,5.61,0,0,0,5.892,1.826c-3.079,0-5.541,2.522-5.856,6A6.186,6.186,0,0,0,.22,10.1a9.779,9.779,0,0,0,3,5l7.539,6.841L18.424,15.1a9.78,9.78,0,0,0,3-5A6.2,6.2,0,0,0,21.6,7.826Z" transform="translate(996 516.174)"/></g></g><text class="c" transform="translate(1310 536)"><tspan x="0" y="0">321+</tspan></text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="44" viewBox="0 0 144 44" fill="none">
+  <defs>
+    <linearGradient id="bubbleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF4B72" />
+      <stop offset="100%" stop-color="#FF758C" />
+    </linearGradient>
+    <filter id="bubbleShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#FF4B72" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <!-- Circle Action Button -->
+  <circle cx="27" cy="22" r="17" fill="url(#bubbleGrad)" filter="url(#bubbleShadow)" />
+  <circle cx="27" cy="22" r="16.5" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+  <g transform="translate(19, 14.5)">
+    <path d="M8 14.5l-1.05-.95C3.2 10.1 1 8.05 1 5.5 1 3.5 2.5 2 4.5 2c1.15 0 2.25.55 3.5 1.55C9.25 2.55 10.35 2 11.5 2 13.5 2 15 3.5 15 5.5c0 2.55-2.2 4.6-5.95 8.05L8 14.5z" fill="#FFFFFF"/>
+  </g>
+  <!-- Counter Box -->
+  <rect x="54" y="10" width="82" height="24" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2" />
+  <text x="70" y="26" fill="#1E293B" font-size="12" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-weight="700">892</text>
+  <text x="100" y="26" fill="#94A3B8" font-size="10" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-weight="600">LIKES</text>
+</svg>

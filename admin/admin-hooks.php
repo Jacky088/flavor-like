@@ -47,16 +47,7 @@ function flavor_like_copyright( $text ) {
 add_filter( 'admin_footer_text', 'flavor_like_copyright' );
 
 
- /**
-  * The Filter is used at the very end of the get_avatar() function
-  *
-  * @param string $avatar Image tag for the user's avatar.
-  * @return string $avatar
-  */
-function flavor_like_remove_photo_class($avatar) {
-	return str_replace(' photo', ' gravatar', $avatar);
-}
-add_filter('get_avatar', 'flavor_like_remove_photo_class');
+// Note: Global get_avatar filter removed to avoid third-party theme and plugin conflicts.
 
 /**
  * On user logged out
@@ -367,17 +358,7 @@ function flavor_like_panel_customization_section( $options ) {
 		return $options;
 	}
 
-	$options[] = array(
-		'id'    => 'php_snippets',
-		'type'  => 'code_editor',
-		'settings' => array(
-			'theme'  => 'mbo',
-			'mode'   => 'php',
-		),
-		'title'    => esc_html__('PHP Snippets','flavor-like'),
-		'sanitize' => 'flavor_like_html_entity_decode',
-		'desc'     => esc_html__('Add PHP snippets without opening and closing tags (&lt;?php and ?&gt;). If you have lots of snippets, you may want to consider using Code Snippets plugin.', 'flavor-like')
-	);
+	// PHP Snippets field removed for security reasons.
 	$options[] = array(
 		'id'    => 'js_snippets',
 		'type'  => 'code_editor',

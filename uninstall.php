@@ -40,21 +40,13 @@ class flavor_like_uninstall {
 
 		global $wpdb;
 
-		// Save current blog ID.
-		$current  = $wpdb->blogid;
 		$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
 
-		// Create tables for each blog ID.
-		foreach ( $blog_ids as $blog_id ) {
-
+		foreach ( (array) $blog_ids as $blog_id ) {
 			switch_to_blog( $blog_id );
 			$this->uninstall_site();
-
+			restore_current_blog();
 		}
-
-		// Go back to current blog.
-		switch_to_blog( $current );
-
 	}
 
 	/**

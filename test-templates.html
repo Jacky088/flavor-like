@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flavor Like v1.1.0 - 全模板点击动画交互测试页面</title>
+  <!-- Tailwind CSS -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* ==========================================================
+       Flavor Like 核心动画关键帧定义 (与插件 CSS 保持 100% 一致)
+       ========================================================== */
+    @keyframes flavorLikePop {
+      0% { transform: scale(0.92); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes flavorLikeIconBounce {
+      0% { transform: scale(0.6); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* 动态爱心喷泉上升关键帧 */
+    @keyframes popHeartsAnim {
+      0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-55px) scale(1) rotate(var(--pop-rot, 0deg));
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-75px) scale(0.6) rotate(calc(var(--pop-rot, 0deg) * 1.6));
+        opacity: 0;
+      }
+    }
+
+    /* Twitter 爱心火花环关键帧 */
+    @keyframes twitterRing {
+      0% {
+        transform: scale(0.2);
+        opacity: 0.8;
+      }
+      60% {
+        transform: scale(1.4);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    @keyframes twitterSparkle {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* 漂浮 +1 提示气泡 */
+    @keyframes floatPlusBubble {
+      0% {
+        transform: translateY(0) scale(0.7);
+        opacity: 0;
+      }
+      20% {
+        transform: translateY(-8px) scale(1.1);
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-28px) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-42px) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    /* 慢动作模式 */
+    body.slow-mo * {
+      animation-duration: 1.2s !important;
+      transition-duration: 0.8s !important;
+    }
+
+    /* 数字滚动微动效 */
+    .counter-number {
+      display: inline-block;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .counter-bump {
+      animation: numberBump 0.35s ease;
+    }
+    @keyframes numberBump {
+      0% { transform: translateY(0); }
+      40% { transform: translateY(-3px) scale(1.18); color: #2563eb; }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* 主题模式适配 */
+    body.theme-light {
+      --page-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+    }
+    body.theme-dark {
+      --page-bg: #0b1120;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+    }
+    body.theme-blue {
+      --page-bg: #0f172a;
+      --card-bg: #1e2538;
+      --card-border: #2563eb40;
+      --text-main: #f8fafc;
+      --text-sub: #93c5fd;
+    }
+  </style>
+</head>
+<body class="theme-light transition-colors duration-300 min-h-screen text-slate-800 font-sans p-4 md:p-8" style="background-color: var(--page-bg); color: var(--text-main);">
+
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <header class="mb-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 shadow-sm border border-slate-200/80 dark:border-slate-800">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/25">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              <polyline points="3 12 7 12 10 9 14 15 17 12 21 12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2.5">
+              <h1 class="text-2xl font-bold tracking-tight">Flavor Like 动效与交互实验室</h1>
+              <span class="px-2 py-0.5 text-xs font-bold rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">v1.1.0</span>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">测试全部 10 款内置点赞模板的真实物理点击、Q 弹缩放、粒子爆发与数字联动效果</p>
+          </div>
+        </div>
+
+        <!-- 实时统计面板 -->
+        <div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/60 px-4 py-2.5 rounded-xl border border-slate-200/60 dark:border-slate-700/60 text-xs">
+          <div class="text-center">
+            <div class="text-slate-400 font-medium">累计交互</div>
+            <div id="statClicks" class="text-base font-bold text-blue-600">0</div>
+          </div>
+          <div class="w-px h-7 bg-slate-200 dark:bg-slate-700"></div>
+          <div class="text-center">
+            <div class="text-slate-400 font-medium">已激活</div>
+            <div id="statActive" class="text-base font-bold text-emerald-600">0 / 12</div>
+          </div>
+          <div class="w-px h-7 bg-slate-200 dark:bg-slate-700"></div>
+          <div class="text-center">
+            <div class="text-slate-400 font-medium">总票数</div>
+            <div id="statTotalVotes" class="text-base font-bold text-purple-600">2,480</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制工具栏 -->
+      <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- 慢动作开关 -->
+          <button id="btnSlowMo" class="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 hover:border-blue-500 transition-all flex items-center gap-1.5">
+            <span>⏱️ 慢动作回放</span>
+            <span id="badgeSlowMo" class="px-1.5 py-0.2 rounded text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500">关</span>
+          </button>
+
+          <!-- 音效开关 -->
+          <button id="btnSound" class="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 hover:border-blue-500 transition-all flex items-center gap-1.5">
+            <span>🔊 动效音效</span>
+            <span id="badgeSound" class="px-1.5 py-0.2 rounded text-[10px] bg-emerald-100 text-emerald-700">开</span>
+          </button>
+
+          <!-- 粒子光效开关 -->
+          <button id="btnParticles" class="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 font-medium text-slate-700 dark:text-slate-200 hover:border-blue-500 transition-all flex items-center gap-1.5">
+            <span>✨ 漂浮粒子</span>
+            <span id="badgeParticles" class="px-1.5 py-0.2 rounded text-[10px] bg-emerald-100 text-emerald-700">开</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- 背景风格切换 -->
+          <div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+            <button onclick="setTheme('theme-light')" class="px-2.5 py-1 rounded-md text-xs font-medium hover:bg-white dark:hover:bg-slate-700 transition-all">☀️ 亮色</button>
+            <button onclick="setTheme('theme-dark')" class="px-2.5 py-1 rounded-md text-xs font-medium hover:bg-white dark:hover:bg-slate-700 transition-all">🌙 暗色</button>
+            <button onclick="setTheme('theme-blue')" class="px-2.5 py-1 rounded-md text-xs font-medium hover:bg-white dark:hover:bg-slate-700 transition-all">💎 SaaS 蓝</button>
+          </div>
+
+          <!-- 全局操作 -->
+          <button onclick="toggleAllVotes(true)" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm transition-all">全部点赞</button>
+          <button onclick="toggleAllVotes(false)" class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 transition-all">全部重置</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 提示条 -->
+    <div class="mb-6 p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/60 dark:border-blue-800/60 text-xs text-blue-700 dark:text-blue-300 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-base">💡</span>
+        <span><b>操作提示：</b>直接点击下方任意点赞按钮，体验微动效、状态流转与计数值变化。开启<b>“慢动作回放”</b>可逐帧观察 Q 弹曲线。</span>
+      </div>
+      <div class="text-[11px] opacity-75">全矢量 SVG · 原生 CSS 物理动效</div>
+    </div>
+
+    <!-- 模板展示网格 (10 款内置 + 2 款进阶款) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="templateGrid">
+      
+      <!-- 1. 简约拇指 (flavorlike-default) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="simple-thumb">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <h3 class="font-bold text-sm">简约拇指</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-default</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">SaaS 经典靛蓝胶囊 · Q弹物理抖动</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <!-- 按钮实体 -->
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-xs shadow-sm flex items-center gap-2 transition-all cursor-pointer select-none active:scale-95"
+                    data-template="default"
+                    data-initial="128">
+              <svg class="like-icon w-4 h-4 transition-transform text-slate-600 dark:text-slate-300" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/>
+              </svg>
+              <span>赞同</span>
+            </button>
+            <span class="count-box ml-2 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
+              <span class="counter-number">128</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：flavorLikePop + IconBounce</span>
+          <span class="action-hint text-blue-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 2. 简约爱心 (flavorlike-heart) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="simple-heart">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+              <h3 class="font-bold text-sm">简约爱心</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-heart</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">柔粉珊瑚色 · 浮动胶囊环绕</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full px-3 py-1 shadow-sm transition-all">
+            <button class="like-btn p-1 text-slate-400 hover:text-rose-500 transition-all cursor-pointer flex items-center justify-center"
+                    data-template="heart"
+                    data-initial="342">
+              <svg class="like-icon w-5 h-5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <span class="count-box ml-1.5 px-2 py-0.5 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-300 border border-rose-100 dark:border-rose-900/50">
+              <span class="counter-number">342</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：柔性充盈 + 1.25x 律动</span>
+          <span class="action-hint text-rose-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 3. Twitter 爱心 (flavorlike-robeen) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="twitter-heart">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-pink-600"></span>
+              <h3 class="font-bold text-sm">Twitter 爱心</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-robeen</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">光晕炸裂 · 粒子火花环绽放</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center gap-2 relative">
+            <button class="like-btn w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-pink-600 transition-all cursor-pointer relative"
+                    data-template="twitter"
+                    data-initial="1024">
+              <svg class="like-icon w-6 h-6 transition-transform relative z-10" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <!-- 爆裂火花环插槽 -->
+              <div class="sparkle-container absolute inset-0 pointer-events-none"></div>
+            </button>
+            <span class="count-box text-sm font-bold text-slate-600 dark:text-slate-300">
+              <span class="counter-number">1,024</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：扩散火花 + 环形冲击波</span>
+          <span class="action-hint text-pink-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 4. 动态爱心 (flavorlike-animated-heart) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="animated-heart">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+              <h3 class="font-bold text-sm">动态爱心 (喷泉微心)</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-animated-heart</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">9 颗立体微心螺旋上升腾空消散</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center gap-3 relative">
+            <button class="like-btn w-12 h-12 rounded-full bg-white dark:bg-slate-800 shadow-md shadow-red-500/10 border border-slate-100 dark:border-slate-700 flex items-center justify-center text-[#ff6f63] transition-all cursor-pointer relative"
+                    data-template="animated-heart"
+                    data-initial="560">
+              <svg class="like-icon w-6 h-6 transition-all" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <!-- 飞行微心容器 -->
+              <div class="hearts-fountain absolute inset-0 pointer-events-none"></div>
+            </button>
+            <span class="count-box text-sm font-bold text-[#ff6f63]">
+              <span class="counter-number">560</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：popHearts 9重多角度喷泉</span>
+          <span class="action-hint text-red-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 5. 星星拇指 (flavorlike-star-thumb) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="star-thumb">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+              <h3 class="font-bold text-sm">星星拇指</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-star-thumb</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">暖金琥珀渐变 · 炽热烈焰切换</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-2 rounded-full text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all cursor-pointer"
+                    style="background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);"
+                    data-template="star-thumb"
+                    data-initial="89">
+              <svg class="like-icon w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>超赞</span>
+              <span class="count-box ml-1 px-2 py-0.5 rounded-full text-xs font-bold bg-[#fff3cd] text-[#856404]">
+                <span class="counter-number">89</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：琥珀金 $\rightarrow$ 橙红烈焰变换</span>
+          <span class="action-hint text-amber-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 6. 对勾标记 (flavorlike-check-mark) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="check-mark">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <h3 class="font-bold text-sm">对勾标记</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-check-mark</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">清爽薄荷绿 · 精准达成感反馈</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-1.5 rounded-full border border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-300 font-semibold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    data-template="check-mark"
+                    data-initial="215">
+              <svg class="like-icon w-4 h-4 transition-transform stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>已认可</span>
+              <span class="count-box ml-1 px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200">
+                <span class="counter-number">215</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：描边充盈 + 弹性微震</span>
+          <span class="action-hint text-emerald-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 7. 鼓掌按钮 (flavorlike-clapping) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="clapping">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <h3 class="font-bold text-sm">鼓掌按钮</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-clapping</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Medium 风格连击手感 · 拍手翻转</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-1.5 rounded-full border border-amber-300 dark:border-amber-600 bg-white dark:bg-slate-800 text-amber-900 dark:text-amber-200 font-bold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-sm"
+                    data-template="clapping"
+                    data-initial="730">
+              <span class="like-icon text-lg transition-transform inline-block">👏</span>
+              <span class="clapping-text font-bold">鼓掌致敬</span>
+              <span class="count-box px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200 border border-amber-200/60 dark:border-amber-700/60">
+                <span class="counter-number">730</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：1.25x 放大 + -10° 拍击摆动</span>
+          <span class="action-hint text-amber-600 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 8. 徽章拇指 (flavorlike-badge-thumb) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="badge-thumb">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-violet-500"></span>
+              <h3 class="font-bold text-sm">徽章拇指</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-badge-thumb</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">紫粉霓虹光影 · 毛玻璃半透计数</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-2 rounded-full text-white font-semibold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-indigo-500/30"
+                    style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);"
+                    data-template="badge-thumb"
+                    data-initial="412">
+              <svg class="like-icon w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/>
+              </svg>
+              <span>精选</span>
+              <span class="count-box px-2 py-0.5 rounded-full text-xs font-bold bg-white/25 backdrop-blur-sm text-white">
+                <span class="counter-number">412</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：紫罗兰 $\rightarrow$ 热粉色极光</span>
+          <span class="action-hint text-violet-500 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 9. 收藏星 (flavorlike-fave-star) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="fave-star">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+              <h3 class="font-bold text-sm">收藏星</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-fave-star</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">金黄星芒 · 3D 自旋转微弹跳</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-1.5 rounded-full border border-amber-200 dark:border-amber-700/60 bg-amber-50/80 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 font-semibold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    data-template="fave-star"
+                    data-initial="95">
+              <svg class="like-icon w-4 h-4 transition-transform text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+              <span>加入收藏</span>
+              <span class="count-box ml-1 px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-900 dark:text-amber-100">
+                <span class="counter-number">95</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：星芒旋转 + 金色充盈</span>
+          <span class="action-hint text-yellow-600 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 10. 图钉按钮 (flavorlike-pin) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="pin">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
+              <h3 class="font-bold text-sm">图钉按钮</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 font-mono">flavorlike-pin</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">钉住精选 · 45° 倾斜扎入动效</p>
+          </div>
+          <span class="status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <div class="like-button-wrapper inline-flex items-center">
+            <button class="like-btn px-4 py-1.5 rounded-full border border-rose-200 dark:border-rose-700/60 bg-rose-50/80 dark:bg-rose-950/40 text-rose-600 dark:text-rose-300 font-semibold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    data-template="pin"
+                    data-initial="67">
+              <svg class="like-icon w-4 h-4 transition-transform text-rose-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 4v7l2 3v2h-6v5l-1 1-1-1v-5H5v-2l2-3V4c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2z"/>
+              </svg>
+              <span>置顶钉住</span>
+              <span class="count-box ml-1 px-2 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200">
+                <span class="counter-number">67</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：图钉刺入倾角 + 鲜红激凸</span>
+          <span class="action-hint text-rose-600 font-medium">点击触发 ↗</span>
+        </div>
+      </div>
+
+      <!-- 11. 特别进阶款：分段双向药丸 (Segmented Up / Down Pill) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="segmented-pill">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+              <h3 class="font-bold text-sm">双向组合药丸 (赞 / 踩)</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-100 text-cyan-800 dark:bg-cyan-900/60 dark:text-cyan-200 font-mono">Segmented Pill</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">一体化双向互斥 · 独立醒目背景与下沉触觉</p>
+          </div>
+          <span id="badgeSegmented" class="px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未表态</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <!-- 一体化组合胶囊轨道 (带有内阴影与清晰导轨对比度) -->
+          <div class="inline-flex items-center bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/80 rounded-full p-1 shadow-inner gap-0.5">
+            <!-- 赞同 -->
+            <button id="btnSegUp" onclick="handleSegmentedVote('up')" class="px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 hover:bg-white/80 dark:hover:bg-slate-800/80 flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+              </svg>
+              <span>赞同</span>
+              <span id="segUpCount" class="counter-number">846</span>
+            </button>
+
+            <!-- 垂直分割线 -->
+            <div id="segDivider" class="w-px h-4 bg-slate-300 dark:bg-slate-700 mx-0.5 transition-opacity"></div>
+
+            <!-- 不赞同 (踩) -->
+            <button id="btnSegDown" onclick="handleSegmentedVote('down')" class="px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-rose-600 hover:bg-white/80 dark:hover:bg-slate-800/80 flex items-center gap-1.5 transition-all cursor-pointer">
+              <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path>
+              </svg>
+              <span>踩</span>
+              <span id="segDownCount" class="counter-number">13</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：互斥平滑滑块 + 醒目高亮背景</span>
+          <span class="action-hint text-cyan-600 font-medium">双向测试 ↗</span>
+        </div>
+      </div>
+
+      <!-- 12. 特别进阶款：极光流光霓虹爱心 (Aurora Neon Heart) -->
+      <div class="template-card rounded-2xl p-5 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-id="aurora-heart">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-pink-500"></span>
+              <h3 class="font-bold text-sm">极光流光爱心</h3>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-200 font-mono">Aurora Glow</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">弥散光晕 · 梦幻渐变外发光</p>
+          </div>
+          <span id="badgeAurora" class="px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400">未点赞</span>
+        </div>
+
+        <div class="py-6 flex items-center justify-center bg-slate-50/70 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/60 relative">
+          <button id="btnAurora" onclick="toggleAurora()" class="px-5 py-2.5 rounded-full font-bold text-xs flex items-center gap-2 transition-all cursor-pointer border border-transparent shadow-md active:scale-95 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+            <svg id="auroraIcon" class="w-5 h-5 transition-all text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>心动共鸣</span>
+            <span id="auroraCount" class="ml-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+              <span class="counter-number">999</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="mt-3.5 flex items-center justify-between text-[11px] text-slate-400">
+          <span>动效：渐变旋转光晕 + 柔光漫射</span>
+          <span class="action-hint text-purple-600 font-medium">点击共鸣 ↗</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 动效监控控制台 -->
+    <div class="mt-8 bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">动效执行控制台 (Live Keyframe Inspector)</h4>
+        </div>
+        <button onclick="clearLogs()" class="text-[11px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">清空日志</button>
+      </div>
+      <div id="logConsole" class="h-28 overflow-y-auto font-mono text-[11px] bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-100 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 space-y-1">
+        <div class="text-blue-500">⚡ [系统就绪] 全部 12 款模板动效渲染引擎已加载完成，等待用户点击...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 交互逻辑脚本 -->
+  <script>
+    // 全局状态管理
+    const state = {
+      clicks: 0,
+      soundEnabled: true,
+      particlesEnabled: true,
+      slowMo: false,
+      templateStates: {}
+    };
+
+    // Web Audio 合成音效生成器 (纯代码生成，无外链，高保真)
+    function playAudioFeedback(isLiked) {
+      if (!state.soundEnabled) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (isLiked) {
+          // 清脆升调水泡 pop 音效
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(480, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(960, ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.12);
+        } else {
+          // 柔和降调取消音效
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(620, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.18, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.1);
+        }
+      } catch (e) {}
+    }
+
+    // 记录控制台日志
+    function logAction(msg, type = 'info') {
+      const consoleBox = document.getElementById('logConsole');
+      const time = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      let colorClass = 'text-slate-600 dark:text-slate-400';
+      if (type === 'vote') colorClass = 'text-blue-600 dark:text-blue-400 font-semibold';
+      if (type === 'unvote') colorClass = 'text-slate-500';
+      if (type === 'special') colorClass = 'text-purple-600 dark:text-purple-400';
+      div.className = colorClass;
+      div.innerHTML = `<span class="opacity-40">[${time}]</span> ${msg}`;
+      consoleBox.appendChild(div);
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+
+    function clearLogs() {
+      document.getElementById('logConsole').innerHTML = '';
+    }
+
+    // 漂浮 +1 气泡动画
+    function spawnFloatBubble(targetEl, text = "+1", color = "#2563eb") {
+      if (!state.particlesEnabled) return;
+      const rect = targetEl.getBoundingClientRect();
+      const bubble = document.createElement('div');
+      bubble.textContent = text;
+      bubble.style.position = 'fixed';
+      bubble.style.left = (rect.left + rect.width / 2 - 12) + 'px';
+      bubble.style.top = (rect.top - 10) + 'px';
+      bubble.style.color = color;
+      bubble.style.fontWeight = 'bold';
+      bubble.style.fontSize = '14px';
+      bubble.style.pointerEvents = 'none';
+      bubble.style.zIndex = '9999';
+      bubble.style.animation = 'floatPlusBubble 0.8s ease-out forwards';
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 850);
+    }
+
+    // 动态爱心喷泉发射器 (生成 9 颗多角度上升微心)
+    function launchPopHeartsFountain(container) {
+      if (!state.particlesEnabled) return;
+      container.innerHTML = '';
+      const angles = [-16, 12, -8, -12, 18, -10, 14, -6, 10];
+      const lefts = [5, 18, 30, 48, 62, 72, 85, 92, 50];
+      const delays = [0.1, 0.25, 0, 0.3, 0.15, 0.2, 0.35, 0.45, 0.05];
+
+      angles.forEach((rot, i) => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 32 29.6');
+        svg.style.position = 'absolute';
+        svg.style.width = '14px';
+        svg.style.height = '14px';
+        svg.style.fill = '#ff6f63';
+        svg.style.left = lefts[i] + '%';
+        svg.style.bottom = '10px';
+        svg.style.setProperty('--pop-rot', rot + 'deg');
+        svg.style.animation = `popHeartsAnim 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) ${delays[i]}s forwards`;
+        svg.innerHTML = '<path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>';
+        container.appendChild(svg);
+      });
+
+      setTimeout(() => { container.innerHTML = ''; }, 1200);
+    }
+
+    // Twitter 爱心光环炸裂
+    function launchTwitterSparkles(container) {
+      if (!state.particlesEnabled) return;
+      container.innerHTML = '';
+
+      // 冲击波环
+      const ring = document.createElement('div');
+      ring.style.position = 'absolute';
+      ring.style.inset = '-4px';
+      ring.style.borderRadius = '9999px';
+      ring.style.border = '2px solid #e0245e';
+      ring.style.animation = 'twitterRing 0.55s ease-out forwards';
+      ring.style.pointerEvents = 'none';
+      container.appendChild(ring);
+
+      // 6 颗发散火花粒子
+      const sparkCount = 8;
+      for (let i = 0; i < sparkCount; i++) {
+        const dot = document.createElement('div');
+        const angle = (i * (360 / sparkCount)) * (Math.PI / 180);
+        const dist = 24;
+        const tx = Math.cos(angle) * dist + 'px';
+        const ty = Math.sin(angle) * dist + 'px';
+        dot.style.position = 'absolute';
+        dot.style.left = '50%';
+        dot.style.top = '50%';
+        dot.style.width = '5px';
+        dot.style.height = '5px';
+        dot.style.borderRadius = '50%';
+        dot.style.backgroundColor = (i % 2 === 0) ? '#e0245e' : '#a855f7';
+        dot.style.setProperty('--tx', tx);
+        dot.style.setProperty('--ty', ty);
+        dot.style.animation = 'twitterSparkle 0.5s ease-out forwards';
+        container.appendChild(dot);
+      }
+
+      setTimeout(() => { container.innerHTML = ''; }, 650);
+    }
+
+    // 绑定内置 10 款模板卡片点击事件
+    document.querySelectorAll('.template-card[data-id]').forEach(card => {
+      const btn = card.querySelector('.like-btn');
+      if (!btn) return;
+
+      const template = btn.dataset.template;
+      const initial = parseInt(btn.dataset.initial || '100', 10);
+      const id = card.dataset.id;
+      state.templateStates[id] = { liked: false, count: initial, btn, card };
+
+      btn.addEventListener('click', () => {
+        toggleVote(id);
+      });
+    });
+
+    // 核心切换点赞处理函数
+    function toggleVote(id, forceState = null) {
+      const item = state.templateStates[id];
+      if (!item) return;
+
+      const isLiked = forceState !== null ? forceState : !item.liked;
+      if (item.liked === isLiked) return; // 无状态变化
+
+      item.liked = isLiked;
+      state.clicks++;
+      document.getElementById('statClicks').textContent = state.clicks;
+
+      const card = item.card;
+      const btn = item.btn;
+      const badge = card.querySelector('.status-badge');
+      const counterEl = card.querySelector('.counter-number');
+      const countBox = card.querySelector('.count-box');
+      const icon = btn.querySelector('.like-icon');
+
+      // 更新计数
+      if (isLiked) {
+        item.count += 1;
+        spawnFloatBubble(btn, "+1", getThemeColor(id));
+      } else {
+        item.count -= 1;
+      }
+      counterEl.textContent = item.count.toLocaleString();
+      counterEl.classList.remove('counter-bump');
+      void counterEl.offsetWidth; // 触发 reflow 重置动画
+      counterEl.classList.add('counter-bump');
+
+      // 音效触发
+      playAudioFeedback(isLiked);
+
+      // 触发物理关键帧抖动动效
+      btn.style.animation = 'none';
+      void btn.offsetWidth;
+      btn.style.animation = 'flavorLikePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+      if (icon) {
+        icon.style.animation = 'none';
+        void icon.offsetWidth;
+        icon.style.animation = 'flavorLikeIconBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      }
+
+      // 针对各模板应用专属样式过渡
+      applyTemplateStyles(id, isLiked, btn, countBox, icon, card);
+
+      // 更新徽章状态
+      if (isLiked) {
+        badge.textContent = '已点赞';
+        badge.className = 'status-badge px-2 py-0.5 text-[11px] rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300';
+        logAction(`[${card.querySelector('h3').textContent}] 触发点赞动效 -> 票数 +1 (${item.count})`, 'vote');
+      } else {
+        badge.textContent = '未点赞';
+        badge.className = 'status-badge px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400';
+        logAction(`[${card.querySelector('h3').textContent}] 取消点赞 -> 票数 -1 (${item.count})`, 'unvote');
+      }
+
+      updateActiveCount();
+    }
+
+    // 针对各模板应用视觉变化
+    function applyTemplateStyles(id, isLiked, btn, countBox, icon, card) {
+      switch (id) {
+        case 'simple-thumb':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)';
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = 'transparent';
+            if (icon) icon.style.color = '#ffffff';
+            if (countBox) {
+              countBox.style.background = '#eef2ff';
+              countBox.style.color = '#4f46e5';
+              countBox.style.borderColor = '#c7d2fe';
+            }
+          } else {
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+            if (icon) icon.style.color = '';
+            if (countBox) {
+              countBox.style.background = '';
+              countBox.style.color = '';
+              countBox.style.borderColor = '';
+            }
+          }
+          break;
+
+        case 'simple-heart':
+          if (isLiked) {
+            btn.style.color = '#f43f5e';
+            if (icon) {
+              icon.setAttribute('fill', 'currentColor');
+              icon.style.transform = 'scale(1.2)';
+            }
+          } else {
+            btn.style.color = '';
+            if (icon) {
+              icon.setAttribute('fill', 'none');
+              icon.style.transform = 'scale(1)';
+            }
+          }
+          break;
+
+        case 'twitter-heart':
+          if (isLiked) {
+            btn.style.color = '#e0245e';
+            const container = btn.querySelector('.sparkle-container');
+            if (container) launchTwitterSparkles(container);
+          } else {
+            btn.style.color = '';
+          }
+          break;
+
+        case 'animated-heart':
+          if (isLiked) {
+            btn.style.backgroundColor = '#ff6f63';
+            btn.style.color = '#ffffff';
+            const fountain = btn.querySelector('.hearts-fountain');
+            if (fountain) launchPopHeartsFountain(fountain);
+          } else {
+            btn.style.backgroundColor = '';
+            btn.style.color = '#ff6f63';
+          }
+          break;
+
+        case 'star-thumb':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #ff6b00 0%, #ff4500 100%)';
+          } else {
+            btn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffb300 100%)';
+          }
+          break;
+
+        case 'check-mark':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = 'transparent';
+          } else {
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+          }
+          break;
+
+        case 'clapping':
+          const clappingText = btn.querySelector('.clapping-text') || btn.querySelector('span:not(.like-icon):not(.count-box)');
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+            btn.style.borderColor = 'transparent';
+            btn.style.color = '#ffffff';
+            btn.style.boxShadow = '0 6px 18px -2px rgba(245, 158, 11, 0.35)';
+            if (clappingText) {
+              clappingText.style.color = '#ffffff';
+              clappingText.style.fontWeight = '700';
+            }
+            if (countBox) {
+              countBox.style.background = 'rgba(255, 255, 255, 0.25)';
+              countBox.style.color = '#ffffff';
+              countBox.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            }
+            if (icon) icon.style.transform = 'scale(1.25) rotate(-12deg)';
+          } else {
+            btn.style.background = '';
+            btn.style.borderColor = '';
+            btn.style.color = '';
+            btn.style.boxShadow = '';
+            if (clappingText) {
+              clappingText.style.color = '';
+              clappingText.style.fontWeight = '';
+            }
+            if (countBox) {
+              countBox.style.background = '';
+              countBox.style.color = '';
+              countBox.style.borderColor = '';
+            }
+            if (icon) icon.style.transform = 'scale(1) rotate(0deg)';
+          }
+          break;
+
+        case 'badge-thumb':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)';
+          } else {
+            btn.style.background = 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)';
+          }
+          break;
+
+        case 'fave-star':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #f59e0b 0%, #eab308 100%)';
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = 'transparent';
+            if (icon) {
+              icon.style.color = '#ffffff';
+              icon.style.transform = 'rotate(72deg) scale(1.15)';
+            }
+          } else {
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+            if (icon) {
+              icon.style.color = '';
+              icon.style.transform = 'rotate(0deg) scale(1)';
+            }
+          }
+          break;
+
+        case 'pin':
+          if (isLiked) {
+            btn.style.background = 'linear-gradient(135deg, #e11d48 0%, #f43f5e 100%)';
+            btn.style.color = '#ffffff';
+            btn.style.borderColor = 'transparent';
+            if (icon) {
+              icon.style.color = '#ffffff';
+              icon.style.transform = 'rotate(-45deg) scale(1.15)';
+            }
+          } else {
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+            if (icon) {
+              icon.style.color = '';
+              icon.style.transform = 'rotate(0deg) scale(1)';
+            }
+          }
+          break;
+      }
+    }
+
+    function getThemeColor(id) {
+      const map = {
+        'simple-thumb': '#4f46e5',
+        'simple-heart': '#f43f5e',
+        'twitter-heart': '#e0245e',
+        'animated-heart': '#ff6f63',
+        'star-thumb': '#ff6b00',
+        'check-mark': '#10b981',
+        'clapping': '#f59e0b',
+        'badge-thumb': '#8b5cf6',
+        'fave-star': '#eab308',
+        'pin': '#e11d48'
+      };
+      return map[id] || '#2563eb';
+    }
+
+    // 更新激活数量统计
+    function updateActiveCount() {
+      let active = 0;
+      let total = 0;
+      Object.values(state.templateStates).forEach(item => {
+        if (item.liked) active++;
+        total += item.count;
+      });
+      // 加上分段药丸与极光流光
+      if (segmentedState !== 'none') active++;
+      if (auroraState) active++;
+      total += segUpVal + segDownVal + auroraVal;
+
+      document.getElementById('statActive').textContent = `${active} / 12`;
+      document.getElementById('statTotalVotes').textContent = total.toLocaleString();
+    }
+
+    // 分段双向药丸交互逻辑
+    let segmentedState = 'none'; // 'none' | 'up' | 'down'
+    let segUpVal = 846;
+    let segDownVal = 13;
+
+    function handleSegmentedVote(type) {
+      state.clicks++;
+      document.getElementById('statClicks').textContent = state.clicks;
+
+      const btnUp = document.getElementById('btnSegUp');
+      const btnDown = document.getElementById('btnSegDown');
+      const divider = document.getElementById('segDivider');
+      const badge = document.getElementById('badgeSegmented');
+      const upEl = document.getElementById('segUpCount');
+      const downEl = document.getElementById('segDownCount');
+
+      const idleUpClass = "px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 hover:bg-white/80 dark:hover:bg-slate-800/80 flex items-center gap-1.5 transition-all cursor-pointer";
+      const idleDownClass = "px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-rose-600 hover:bg-white/80 dark:hover:bg-slate-800/80 flex items-center gap-1.5 transition-all cursor-pointer";
+
+      if (segmentedState === type) {
+        // 取消当前表态
+        if (type === 'up') segUpVal--;
+        if (type === 'down') segDownVal--;
+        segmentedState = 'none';
+        btnUp.className = idleUpClass;
+        btnDown.className = idleDownClass;
+        if (divider) divider.style.opacity = '1';
+        badge.textContent = '未表态';
+        badge.className = 'px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400';
+        playAudioFeedback(false);
+        logAction('[双向组合药丸] 取消表态', 'unvote');
+      } else {
+        // 转换或首次表态
+        if (segmentedState === 'up') segUpVal--;
+        if (segmentedState === 'down') segDownVal--;
+
+        if (type === 'up') {
+          segUpVal++;
+          segmentedState = 'up';
+          btnUp.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white flex items-center gap-1.5 shadow-md shadow-blue-500/30 transition-all cursor-pointer animate-[flavorLikePop_0.4s]";
+          btnDown.className = "px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-rose-600 hover:bg-white/60 dark:hover:bg-slate-800/60 flex items-center gap-1.5 transition-all cursor-pointer";
+          if (divider) divider.style.opacity = '0.3';
+          badge.textContent = '已赞同';
+          badge.className = 'px-2 py-0.5 text-[11px] rounded-full font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300';
+          spawnFloatBubble(btnUp, "+1", "#2563eb");
+          playAudioFeedback(true);
+          logAction('[双向组合药丸] 赞同票数 +1 (激活 SaaS 蓝高亮背景)', 'vote');
+        } else {
+          segDownVal++;
+          segmentedState = 'down';
+          // 醒目珊瑚红高光背景，彻底解决暗色/亮色下无背景问题
+          btnDown.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-rose-600 text-white flex items-center gap-1.5 shadow-md shadow-rose-500/30 transition-all cursor-pointer animate-[flavorLikePop_0.4s]";
+          btnUp.className = "px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-white/60 dark:hover:bg-slate-800/60 flex items-center gap-1.5 transition-all cursor-pointer";
+          if (divider) divider.style.opacity = '0.3';
+          badge.textContent = '已反对';
+          badge.className = 'px-2 py-0.5 text-[11px] rounded-full font-bold bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300';
+          spawnFloatBubble(btnDown, "-1", "#e11d48");
+          playAudioFeedback(false);
+          logAction('[双向组合药丸] 反对票数 +1 (激活醒目珊瑚红背景)', 'special');
+        }
+      }
+
+      upEl.textContent = segUpVal;
+      downEl.textContent = segDownVal;
+      updateActiveCount();
+    }
+
+    // 极光霓虹爱心交互
+    let auroraState = false;
+    let auroraVal = 999;
+
+    function toggleAurora() {
+      state.clicks++;
+      document.getElementById('statClicks').textContent = state.clicks;
+
+      auroraState = !auroraState;
+      const btn = document.getElementById('btnAurora');
+      const icon = document.getElementById('auroraIcon');
+      const badge = document.getElementById('badgeAurora');
+      const countEl = document.getElementById('auroraCount');
+
+      if (auroraState) {
+        auroraVal++;
+        btn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #ec4899 50%, #8b5cf6 100%)';
+        btn.style.color = '#ffffff';
+        btn.style.boxShadow = '0 8px 25px -4px rgba(236, 72, 153, 0.5)';
+        icon.setAttribute('fill', 'currentColor');
+        icon.style.color = '#ffffff';
+        badge.textContent = '已共鸣';
+        badge.className = 'px-2 py-0.5 text-[11px] rounded-full font-bold bg-pink-100 text-pink-700 dark:bg-pink-900/60 dark:text-pink-300';
+        spawnFloatBubble(btn, "💖 +1", "#ec4899");
+        playAudioFeedback(true);
+        logAction('[极光流光爱心] 激活动态极光光晕 票数 +1', 'special');
+      } else {
+        auroraVal--;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.boxShadow = '';
+        icon.setAttribute('fill', 'none');
+        icon.style.color = '';
+        badge.textContent = '未点赞';
+        badge.className = 'px-2 py-0.5 text-[11px] rounded-full font-medium bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400';
+        playAudioFeedback(false);
+        logAction('[极光流光爱心] 取消共鸣', 'unvote');
+      }
+
+      countEl.querySelector('.counter-number').textContent = auroraVal;
+      updateActiveCount();
+    }
+
+    // 全局一键操作
+    function toggleAllVotes(likeAll) {
+      Object.keys(state.templateStates).forEach(id => {
+        toggleVote(id, likeAll);
+      });
+      if (likeAll) {
+        if (segmentedState !== 'up') handleSegmentedVote('up');
+        if (!auroraState) toggleAurora();
+      } else {
+        if (segmentedState !== 'none') handleSegmentedVote(segmentedState);
+        if (auroraState) toggleAurora();
+      }
+    }
+
+    // 控制栏按钮事件
+    document.getElementById('btnSlowMo').addEventListener('click', function() {
+      state.slowMo = !state.slowMo;
+      document.body.classList.toggle('slow-mo', state.slowMo);
+      const badge = document.getElementById('badgeSlowMo');
+      badge.textContent = state.slowMo ? '开启 (0.3x)' : '关';
+      badge.className = state.slowMo 
+        ? 'px-1.5 py-0.2 rounded text-[10px] bg-amber-100 text-amber-700 font-bold' 
+        : 'px-1.5 py-0.2 rounded text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500';
+      logAction(`[慢动作模式] ${state.slowMo ? '已开启 (动画延展至 1.2s 以便肉眼观察曲线)' : '已恢复常规速度'}`, 'info');
+    });
+
+    document.getElementById('btnSound').addEventListener('click', function() {
+      state.soundEnabled = !state.soundEnabled;
+      const badge = document.getElementById('badgeSound');
+      badge.textContent = state.soundEnabled ? '开' : '关';
+      badge.className = state.soundEnabled 
+        ? 'px-1.5 py-0.2 rounded text-[10px] bg-emerald-100 text-emerald-700' 
+        : 'px-1.5 py-0.2 rounded text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500';
+    });
+
+    document.getElementById('btnParticles').addEventListener('click', function() {
+      state.particlesEnabled = !state.particlesEnabled;
+      const badge = document.getElementById('badgeParticles');
+      badge.textContent = state.particlesEnabled ? '开' : '关';
+      badge.className = state.particlesEnabled 
+        ? 'px-1.5 py-0.2 rounded text-[10px] bg-emerald-100 text-emerald-700' 
+        : 'px-1.5 py-0.2 rounded text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500';
+    });
+
+    function setTheme(theme) {
+      document.body.className = `${theme} transition-colors duration-300 min-h-screen text-slate-800 font-sans p-4 md:p-8`;
+      if (state.slowMo) document.body.classList.add('slow-mo');
+      logAction(`[背景主题] 切换至：${theme === 'theme-light' ? '亮色极简' : theme === 'theme-dark' ? '暗黑科技' : 'SaaS 蓝系'}`, 'info');
+    }
+
+    // 页面初次加载统计更新
+    updateActiveCount();
+  </script>
+</body>
+</html>

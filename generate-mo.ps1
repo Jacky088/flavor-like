@@ -1,7 +1,8 @@
 Add-Type -AssemblyName System.Text.Encoding
 
-$poFile = "C:\Users\littl\Desktop\flavor-like-master\languages\flavor-like-zh_CN.po"
-$moFile = "C:\Users\littl\Desktop\flavor-like-master\languages\flavor-like-zh_CN.mo"
+$baseDir = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path }
+$poFile = Join-Path $baseDir "languages\flavor-like-zh_CN.po"
+$moFile = Join-Path $baseDir "languages\flavor-like-zh_CN.mo"
 
 $poContent = [System.IO.File]::ReadAllText($poFile, [System.Text.Encoding]::UTF8)
 $entries = @{}
