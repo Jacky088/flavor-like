@@ -5,7 +5,7 @@
  * Handles registration of admin menus and submenus for Flavor Like plugin.
  *
  * @package WP_Flavor Like
- * @since 4.6.0
+ * @since 1.0.0
  */
 
 // No direct access allowed.
@@ -17,14 +17,14 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 	/**
 	 * Class to register admin menus and submenus.
 	 *
-	 * @since 4.6.0
+	 * @since 1.0.0
 	 */
 	class flavor_like_admin_pages {
 
 		/**
 		 * Menu position constant.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @var int
 		 */
 		const MENU_POSITION = 90;
@@ -32,7 +32,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Submenus array.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @var array
 		 */
 		private $submenus = array();
@@ -40,7 +40,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Views array mapping hook suffixes to template paths.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @var array
 		 */
 		private $views = array();
@@ -48,7 +48,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'menus' ) );
@@ -88,7 +88,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Register admin menus and submenus.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return void
 		 */
 		public function menus() {
@@ -114,7 +114,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Get default submenus configuration.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return array Default submenus array.
 		 */
 		private function get_default_submenus() {
@@ -134,7 +134,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 *
 		 * Points primary menu directly to the Statistics dashboard.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return string|false The resulting page's hook_suffix, or false on failure.
 		 */
 		private function register_parent_menu() {
@@ -167,7 +167,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 *
 		 * Replaces auto-generated first submenu item with 'Statistics'.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @param string|false $parent_hook Parent menu hook suffix.
 		 * @return void
 		 */
@@ -196,7 +196,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Register filtered submenus.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return void
 		 */
 		private function register_submenus() {
@@ -208,7 +208,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Register a single submenu page.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @param array $args Submenu arguments.
 		 * @return string|false The resulting page's hook_suffix, or false on failure.
 		 */
@@ -251,7 +251,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 * Empty string means always visible (no capability check).
 		 * Otherwise uses the capability as-is.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @param array $args Menu arguments.
 		 * @return string Resolved capability.
 		 */
@@ -281,7 +281,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 * Resolves capability based on type using flavor_like_get_user_access_capability.
 		 * Only for recognized custom types like 'stats'.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @param string $capability_type Capability type ('stats', 'logs', etc.).
 		 * @return string Resolved capability string for WordPress menu system.
 		 */
@@ -306,7 +306,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 *
 		 * Finds the menu item by menu slug instead of position number for better reliability.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return void
 		 */
 		public function menu_badge() {
@@ -334,7 +334,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		/**
 		 * Load admin templates.
 		 *
-		 * @since 4.6.0
+		 * @since 1.0.0
 		 * @return void
 		 */
 		public function load_template() {

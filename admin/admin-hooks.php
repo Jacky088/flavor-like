@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @author       	Alimir
  * @param           string $text
- * @since           2.0
+ * @since 1.0.0
  * @return			string
  */
 function flavor_like_copyright( $text ) {
@@ -66,7 +66,7 @@ add_action('wp_logout', 'flavor_like_on_logout_hook');
 /**
  *  Undocumented function
  *
- * @since 3.6.0
+ * @since 1.0.0
  * @param integer $count
  * @return integer $count
  */
@@ -82,7 +82,7 @@ add_filter( 'flavor_like_menu_badge_count', 'flavor_like_update_menu_badge_count
 /**
  * Update the admin sub menu title
  *
- * @since 3.6.0
+ * @since 1.0.0
  * @param string $title
  * @param string $menu_slug
  * @return string $title

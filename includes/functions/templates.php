@@ -15,7 +15,7 @@ if( ! function_exists( 'flavor_like_generate_templates_list' ) ){
 	 * Performance optimization: Cache result to avoid regenerating for each button
 	 *
 	 * @author       	Alimir
-	 * @since           2.8
+	 * @since 1.0.0
 	 * @return			Array
 	 */
 	function flavor_like_generate_templates_list(){
@@ -98,7 +98,7 @@ if( ! function_exists( 'flavor_like_set_default_template' ) ){
 	 * Create simple default template (简约拇指)
 	 *
 	 * @author       	Alimir
-	 * @since           2.8
+	 * @since 1.0.0
 	 * @return			Void
 	 */
 	function flavor_like_set_default_template( array $flavor_like_template ){
@@ -148,7 +148,7 @@ if( ! function_exists( 'flavor_like_set_simple_heart_template' ) ){
 	 * Create simple heart template (简约爱心)
 	 *
 	 * @author       	Alimir
-	 * @since           2.8
+	 * @since 1.0.0
 	 * @return			Void
 	 */
 	function flavor_like_set_simple_heart_template( array $flavor_like_template ){
@@ -198,7 +198,7 @@ if( ! function_exists( 'flavor_like_set_robeen_template' ) ){
 	 * Create Robeen (Twitter 爱心) template
 	 *
 	 * @author       	Alimir
-	 * @since           2.8
+	 * @since 1.0.0
 	 * @return			Void
 	 */
 	function flavor_like_set_robeen_template( array $flavor_like_template ){
@@ -248,7 +248,7 @@ if( ! function_exists( 'flavor_like_set_animated_heart_template' ) ){
 	 * Create Animated Heart template (动态爱心)
 	 *
 	 * @author       	Alimir
-	 * @since           3.6.2
+	 * @since 1.0.0
 	 * @return			Void
 	 */
 	function flavor_like_set_animated_heart_template( array $flavor_like_template ){

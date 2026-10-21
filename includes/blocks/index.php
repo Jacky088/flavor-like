@@ -318,7 +318,7 @@ function flavor_like_block_editor_assets() {
 		$editor_css = $block_dir . '/build/index.css';
 		if ( file_exists( $editor_css ) && ! wp_style_is( $editor_style_handle, 'registered' ) ) {
 			wp_enqueue_style(
-				$script_handle,
+				$editor_style_handle,
 				$block_url . '/build/index.css',
 				array(),
 				! empty( $asset['version'] ) ? $asset['version'] : FLAVOR_LIKE_VERSION

@@ -76,7 +76,7 @@ class flavor_like_uninstall {
 	/**
 	 * Unschedule WP-Cron jobs registered by the plugin.
 	 *
-	 * @since 5.2.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -178,7 +178,7 @@ class flavor_like_uninstall {
 	/**
 	 * Delete activation pointer and other plugin user meta.
 	 *
-	 * @since 5.0.6
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -201,7 +201,7 @@ class flavor_like_uninstall {
 	 *
 	 * BuddyPress activity counters live in BP meta tables and are not removed here.
 	 *
-	 * @since 5.2.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -238,7 +238,7 @@ class flavor_like_uninstall {
 	 * On single-site installs the temp dir is site-specific enough to glob safely.
 	 * On multisite, the same temp dir may be shared — skip to avoid touching other sites.
 	 *
-	 * @since 5.0.5
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */

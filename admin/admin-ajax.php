@@ -910,7 +910,6 @@ function flavor_like_localization_api(){
 		'Find your best posting times and top-performing topics' => esc_html__( 'Find your best posting times and top-performing topics', 'flavor-like' ),
 		'Learn which devices and browsers your voters use' => esc_html__( 'Learn which devices and browsers your voters use', 'flavor-like' ),
 		'Sidebar Pro card' => esc_html__( 'Sidebar Pro card', 'flavor-like' ),
-		'Minimized to —淕et Pro—in the sidebar.' => esc_html__( 'Minimized to —淕et Pro—in the sidebar.', 'flavor-like' ),
 		'Full card visible in the sidebar.' => esc_html__( 'Full card visible in the sidebar.', 'flavor-like' ),
 		'Show full card' => esc_html__( 'Show full card', 'flavor-like' ),
 		'Milestone' => esc_html__( 'Milestone', 'flavor-like' ),

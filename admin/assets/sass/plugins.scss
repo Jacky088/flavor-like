@@ -1,2 +1,125 @@
-@import "_stats.scss";
-@import "_about.scss";
+﻿.flavor-like-table{display:table}.flavor-like-table .flavor-like-table-cell{vertical-align:middle;display:table-cell}.flavor-like-empty-stats{text-align:center;height:50em;position:relative}.flavor-like-empty-stats>div{position:relative;top:50%;transform:translateY(-50%)}.flavor-like-empty-stats .flavor-like-icon{color:#8b93a6;font-size:110px}.flavor-like-empty-stats .flavor-like-info{margin-top:50px;font-size:28px;font-weight:300;line-height:42px}.flavor-like-empty-stats .flavor-like-info p{margin:10px 0}.flavor-like-about{max-width:1100px;margin-top:10px}.flavor-like-about>.notice{display:block!important}.flavor-like-about__title{flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 8px;padding:0;font-size:23px;font-weight:400;line-height:1.3;display:flex}.flavor-like-about__lead{color:#646970;max-width:640px;margin:0 0 20px;font-size:14px;line-height:1.6}.flavor-like-about__badge{color:#50575e;vertical-align:middle;background:#f0f0f1;border-radius:2px;padding:2px 8px;font-size:11px;font-weight:600;line-height:1.5;display:inline-block}.flavor-like-about__badge--pro{color:#6e4e00;background:#fcf9e8}.flavor-like-about__layout{grid-template-columns:minmax(0,1fr) 280px;align-items:start;gap:20px;display:grid}@media (width<=960px){.flavor-like-about__layout{grid-template-columns:1fr}}.flavor-like-about__main{flex-direction:column;gap:16px;min-width:0;display:flex}.flavor-like-about__aside{flex-direction:column;gap:16px;display:flex}.flavor-like-about-getting-started{color:#1d2327;margin:0;padding-inline-start:1.25em;font-size:14px;line-height:1.6}.flavor-like-about-getting-started li+li{margin-top:.6em}.flavor-like-about-getting-started a{text-decoration:none}.flavor-like-about-getting-started a:hover{text-decoration:underline}.flavor-like-about-card{background:#fff;border:1px solid #c3c4c7;margin:0;padding:16px 20px;box-shadow:0 1px 1px #0000000a}.flavor-like-about-card__header{justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;display:flex}.flavor-like-about-card__title{color:#1d2327;margin:0 0 12px;padding:0;font-size:14px;font-weight:600;line-height:1.4}.flavor-like-about-card__header .flavor-like-about-card__title{margin-bottom:0}.flavor-like-about-card__links{flex-wrap:wrap;align-items:center;gap:12px;display:flex}.flavor-like-about-card__link{font-size:13px;text-decoration:none}.flavor-like-about-card__hint{color:#646970;margin:12px 0 0;font-size:13px;line-height:1.5}.flavor-like-about-card__hint--warn{color:#8a2424}.flavor-like-about-card__body{margin-top:12px}.flavor-like-about-card--pro{background:#fffdf5;border-color:#dba617}.flavor-like-about-card--upsell{background:linear-gradient(#fff 0%,#f6f7f7 100%);border-color:#c3c4c7}.flavor-like-about-card--task-optional{background:#f0f6fc}.flavor-like-about-card--task-cleanup{background:#f6fff8;border-color:#68de7c}.flavor-like-about-card--muted{box-shadow:none;background:#f6f7f7}.flavor-like-about-card--muted p{color:#646970;margin:0;font-size:13px;line-height:1.55}.flavor-like-about-card--details summary{cursor:pointer;margin-bottom:0;list-style:none}.flavor-like-about-card--details summary::-webkit-details-marker{display:none}.flavor-like-about-card--details summary:before{content:"▸";margin-inline-end:6px;transition:transform .15s;display:inline-block}.flavor-like-about-card--details[open] summary:before{transform:rotate(90deg)}.flavor-like-about-task__header{flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;display:flex}.flavor-like-about-task__header .flavor-like-about-card__title{margin-bottom:0}.flavor-like-about-task__intro{color:#50575e;margin:0 0 12px;font-size:13px;line-height:1.6}.flavor-like-about-task__reassurance{margin:0 0 14px;padding:0;list-style:none}.flavor-like-about-task__reassurance li{color:#50575e;margin:0 0 6px;padding-inline-start:22px;font-size:13px;line-height:1.5;position:relative}.flavor-like-about-task__reassurance li:before{content:"✓";inset-inline-start:0;color:#00a32a;font-weight:700;position:absolute;top:0}.flavor-like-about-task__reassurance li:last-child{margin-bottom:0}.flavor-like-about-task__status{margin-bottom:12px}.flavor-like-about-task__actions{flex-wrap:wrap;gap:8px;margin:0;display:flex}.flavor-like-about-upsell__header{margin-bottom:16px}.flavor-like-about-upsell__header .flavor-like-about-card__title{margin-bottom:6px}.flavor-like-about-upsell__intro{color:#50575e;margin:0;font-size:13px;line-height:1.6}.flavor-like-about-upsell__features{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px;padding:0;list-style:none;display:grid}@media (width<=782px){.flavor-like-about-upsell__features{grid-template-columns:1fr}}.flavor-like-about-upsell__feature{background:#fff;border:1px solid #dcdcde;border-radius:2px;align-items:flex-start;gap:10px;margin:0;padding:12px;display:flex}.flavor-like-about-upsell__feature .dashicons{color:#2271b1;flex-shrink:0;width:20px;height:20px;margin-top:1px;font-size:20px}.flavor-like-about-upsell__feature--highlight{background:#fffdf5;border-color:#dba617}.flavor-like-about-upsell__feature--highlight .dashicons{color:#996800}.flavor-like-about-upsell__feature--highlight .flavor-like-about-upsell__feature-title{color:#1d2327}.flavor-like-about-upsell__feature-body{flex-direction:column;gap:4px;min-width:0;display:flex}.flavor-like-about-upsell__feature-title{color:#1d2327;font-size:13px;line-height:1.4}.flavor-like-about-upsell__feature-desc{color:#646970;font-size:12px;line-height:1.5}.flavor-like-about-upsell__footnote{color:#646970;background:#fff;border-inline-start:3px solid #c3c4c7;margin:0 0 14px;padding:10px 12px;font-size:12px;line-height:1.55}.flavor-like-about-upsell__actions{margin:0}.flavor-like-about-summary{color:#1d2327;background:#f6f7f7;border-inline-start:3px solid #2271b1;margin:0 0 16px;padding:10px 12px;font-size:13px;line-height:1.6}.flavor-like-about-status-group{margin-bottom:16px}.flavor-like-about-status-group:last-child{margin-bottom:0}.flavor-like-about-status-group__title{text-transform:uppercase;letter-spacing:.04em;color:#646970;margin:0 0 8px;padding:0;font-size:12px;font-weight:600}.flavor-like-about-status{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;display:grid}@media (width<=782px){.flavor-like-about-status{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (width<=480px){.flavor-like-about-status{grid-template-columns:1fr}}.flavor-like-about-status__item{background:#f6f7f7;border:1px solid #dcdcde;border-radius:2px;padding:10px 12px}.flavor-like-about-status__item--good{background:#edfaef;border-color:#b8e6bf}.flavor-like-about-status__item--bad{background:#fcf0f1;border-color:#f1aeb5}.flavor-like-about-status__label{text-transform:uppercase;letter-spacing:.03em;color:#646970;margin-bottom:4px;font-size:11px;font-weight:600;display:block}.flavor-like-about-status__value{color:#1d2327;font-size:14px;font-weight:600;display:block}.flavor-like-about-status__hint{color:#646970;margin-top:4px;font-size:11px;font-weight:400;line-height:1.4;display:block}.flavor-like-about-actions{flex-wrap:wrap;align-items:center;gap:8px;display:flex}.flavor-like-about-actions__btn{vertical-align:middle;justify-content:center;gap:6px;min-height:32px;align-items:center!important;padding:4px 12px!important;line-height:1.2!important;display:inline-flex!important}.flavor-like-about-actions__btn .dashicons{flex:0 0 18px;justify-content:center;align-items:center;width:18px;height:18px;margin:0;padding:0;font-size:18px;line-height:1;display:inline-flex}.flavor-like-about-actions__btn .dashicons:before{width:18px;height:18px;font-size:18px;line-height:1}.flavor-like-about-modules{margin:0;padding:0;list-style:none}.flavor-like-about-modules__item{border-bottom:1px solid #dcdcde;align-items:flex-start;gap:12px;padding:12px 0;display:flex}.flavor-like-about-modules__item:last-child{border-bottom:none;padding-bottom:0}.flavor-like-about-modules__item>.dashicons{color:#2271b1;margin-top:2px}.flavor-like-about-modules__item .button{flex-shrink:0;margin-left:auto}.flavor-like-about-modules__body{flex:1;min-width:0}.flavor-like-about-modules__body strong{margin-bottom:4px;font-size:14px;display:block}.flavor-like-about-modules__body p{color:#646970;margin:0;font-size:13px;line-height:1.5}.flavor-like-about-help{margin:0;padding:0;list-style:none}.flavor-like-about-help li{border-bottom:1px solid #f0f0f1;margin:0;padding:0}.flavor-like-about-help li:last-child{border-bottom:none}.flavor-like-about-help a{color:#2271b1;align-items:flex-start;gap:10px;padding:12px 0;text-decoration:none;display:flex}.flavor-like-about-help a:hover,.flavor-like-about-help a:hover strong{color:#135e96}.flavor-like-about-help a .dashicons{color:#646970;margin-top:2px}.flavor-like-about-help__text{flex-direction:column;gap:2px;display:flex}.flavor-like-about-help__text strong{color:#1d2327;font-size:14px}.flavor-like-about-help__text span{color:#646970;font-size:13px}.flavor-like-about-meta{margin:0}.flavor-like-about-meta div{border-bottom:1px solid #f0f0f1;justify-content:space-between;gap:12px;padding:8px 0;font-size:13px;display:flex}.flavor-like-about-meta div:last-child{border-bottom:none}.flavor-like-about-meta dt{color:#646970;margin:0;font-weight:400}.flavor-like-about-meta dd{color:#1d2327;text-align:right;margin:0;font-weight:600}.flavor-like-about-troubleshoot__list{color:#50575e;margin:0 0 4px;padding-inline-start:1.2em;font-size:13px;line-height:1.6}.flavor-like-about-troubleshoot__list li{margin-bottom:8px}.flavor-like-about-troubleshoot__list li:last-child{margin-bottom:0}.flavor-like-about-troubleshoot__list li a{white-space:nowrap}.flavor-like-about-backup .flavor-like-about-card__title{margin-bottom:8px}.flavor-like-about-backup__intro{color:#646970;margin:0;font-size:12px;line-height:1.55}.flavor-like-about-backup__actions{flex-direction:column;gap:10px;display:flex}.flavor-like-about-backup__actions .button{text-align:center;justify-content:center;width:100%}.flavor-like-about-backup__import{border-top:1px solid #dcdcde;margin-top:0;padding-top:12px}.flavor-like-about-backup__import summary{cursor:pointer;color:#2271b1;font-size:13px;font-weight:600;list-style:none}.flavor-like-about-backup__import summary::-webkit-details-marker{display:none}.flavor-like-about-backup__import summary:before{content:"▸";margin-inline-end:6px;transition:transform .15s;display:inline-block}.flavor-like-about-backup__import[open] summary:before{transform:rotate(90deg)}.flavor-like-about-backup__form{border-top:0;flex-direction:column;gap:8px;margin-top:10px;padding-top:0;display:flex}.flavor-like-about-backup__label{color:#50575e;margin:0;font-size:12px;font-weight:600}.flavor-like-about-backup__file{width:100%;max-width:100%;font-size:12px}.flavor-like-about-backup .button{text-align:center;justify-content:center;width:100%}.flavor-like-about-transfer__title{color:#1d2327;margin:0 0 8px;padding:0;font-size:13px;font-weight:600}.flavor-like-about-transfer__intro{color:#50575e;margin:0 0 10px;font-size:13px;line-height:1.6}.flavor-like-about-transfer__form{margin-top:8px}.flavor-like-about-tools{flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 8px;display:flex}.flavor-like-about-tools fieldset{border:0;flex-wrap:wrap;align-items:center;gap:8px;width:100%;margin:0;padding:0;display:flex}.flavor-like-about-tools__label{flex:0 0 100%;margin:0 0 4px;font-size:13px;font-weight:600}hr.flavor-like-about-card__body+hr,.flavor-like-about-card__body hr{border:none;border-top:1px solid #dcdcde;margin:16px 0}[dir=rtl] .flavor-like-about-meta dd,.rtl .flavor-like-about-meta dd{text-align:start}[dir=rtl] .flavor-like-about-troubleshoot__list,.rtl .flavor-like-about-troubleshoot__list{padding-inline:1.2em 0}[dir=rtl] .flavor-like-about-card--details summary:before,.rtl .flavor-like-about-card--details summary:before{margin-inline:0 6px}
+
+/* Flavor Like - Overview Screen SaaS Blue & Symmetrical Spacing (左右间距一致以左边为准) */
+.wrap.flavor-like-about,
+.flavor-like-about {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 16px 0 32px 0 !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+.flavor-like-about__layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 300px !important;
+  gap: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 960px) {
+  .flavor-like-about__layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.flavor-like-about-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  padding: 20px 24px !important;
+}
+
+.flavor-like-about__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  letter-spacing: -0.02em !important;
+}
+
+.flavor-like-about__lead {
+  color: #64748B !important;
+  font-size: 14px !important;
+  max-width: 100% !important;
+}
+
+.flavor-like-about__badge {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 9999px !important;
+  padding: 3px 10px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.flavor-like-about-card__title {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+
+.flavor-like-about-card__link {
+  color: #2563EB !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+.flavor-like-about-card__link:hover {
+  color: #1D4ED8 !important;
+  text-decoration: underline !important;
+}
+
+.flavor-like-about-actions__btn.button-primary {
+  background: #2563EB !important;
+  border-color: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2) !important;
+  transition: all 0.15s ease !important;
+}
+
+.flavor-like-about-actions__btn.button-primary:hover {
+  background: #1D4ED8 !important;
+  border-color: #1E40AF !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3) !important;
+}
+
+.flavor-like-about-actions__btn.button-secondary {
+  border-radius: 8px !important;
+  border: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+}
+
+.flavor-like-about-actions__btn.button-secondary:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.flavor-like-about-status__item {
+  border-radius: 8px !important;
+  border: 1px solid #E2E8F0 !important;
+  border-left-width: 4px !important;
+}
+
+.flavor-like-about-status__item--ok,
+.flavor-like-about-status__item--pulse {
+  border-left-color: #10B981 !important;
+  background: #F0FDF4 !important;
+}
+
+.flavor-like-about-status__item--info {
+  border-left-color: #2563EB !important;
+  background: #EFF6FF !important;
+}
+
+.flavor-like-about-status__item--warn {
+  border-left-color: #F59E0B !important;
+  background: #FFFBEB !important;
+}

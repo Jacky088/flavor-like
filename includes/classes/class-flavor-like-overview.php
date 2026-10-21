@@ -3,7 +3,7 @@
  * Overview screen data, health checks, and settings import/export.
  *
  * @package WP_Flavor Like
- * @since   5.0.5
+ * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

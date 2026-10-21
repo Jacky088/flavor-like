@@ -6,7 +6,7 @@
  * Handles Cloudflare, proxy headers, and direct connections.
  *
  * @package WP_Flavor Like
- * @since 5.0.0
+ * @since 1.0.0
  */
 
 // If this file is called directly, abort.

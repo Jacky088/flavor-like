@@ -214,6 +214,23 @@
           }
         });
       }
+      // Delegate click on general pill container to button
+      if (this.generalElement && this.generalElement.length > 0) {
+        forEachElement(this.generalElement, (general) => {
+          if (general) {
+            const pillClickHandler = (e) => {
+              if (!e.target.closest(this.settings.buttonSelector)) {
+                const btn = general.querySelector(this.settings.buttonSelector);
+                if (btn && !btn.disabled) {
+                  btn.click();
+                }
+              }
+            };
+            this._boundHandlers.push({ element: general, event: 'click', handler: pillClickHandler });
+            general.addEventListener("click", pillClickHandler);
+          }
+        });
+      }
       // Call likers box generator (one-time event)
       const firstGeneralEl = this.generalElement.length > 0 ? this.generalElement[0] : null;
       if (firstGeneralEl) {
@@ -264,6 +281,7 @@
           self._isFetchingLikers = false;
           if (self.buttonElement) {
             forEachElement(self.buttonElement, (btn) => {
+              btn.classList.remove("flavor-like-busy");
               btn.disabled = false;
             });
           }
@@ -283,16 +301,20 @@
      */
     _initLike(event) {
       event.stopPropagation();
+      const currentBtn = event.currentTarget;
+      if (currentBtn && (currentBtn.classList.contains("flavor-like-busy") || currentBtn.classList.contains("flavor_like_click_is_disabled"))) {
+        return;
+      }
       // Update element if there's more than one button
       this._maybeUpdateElements(event);
       // Check for same buttons elements
       this._updateSameButtons();
       // Check for same likers elements
       this._updateSameLikers();
-      // Disable button
+      // Lock button to prevent duplicate clicks without triggering theme :disabled opacity drops
       if (this.buttonElement) {
         forEachElement(this.buttonElement, (btn) => {
-          btn.disabled = true;
+          btn.classList.add("flavor-like-busy");
         });
       }
       // Manipulations
@@ -333,6 +355,7 @@
           // Re-enable button
           if (this.buttonElement) {
             forEachElement(this.buttonElement, (btn) => {
+              btn.classList.remove("flavor-like-busy");
               btn.disabled = false;
             });
           }
@@ -428,6 +451,10 @@
         }
         // Update button status
         this._updateButton(response.data.btnText, response.data.status);
+        // Trigger Bilibili-style energetic animation on like action
+        if (response.data.status === 1 || response.data.status === 3 || response.data.status === 4) {
+          this._triggerBilibiliAnimation();
+        }
       }
       // Display Notifications
       if (response.data.hasToast) {
@@ -806,20 +833,22 @@
       forEachElement(this.buttonElement, (buttonEl) => {
         if (!buttonEl) return;
 
-        if (buttonEl.classList.contains("flavor_like_put_image")) {
-          if (status === 4) {
-            buttonEl.classList.add("image-unlike", "flavor_like_btn_is_active");
-          } else {
-            buttonEl.classList.toggle("image-unlike");
-            buttonEl.classList.toggle("flavor_like_btn_is_active");
-          }
-        } else if (
-          buttonEl.classList.contains("flavor_like_put_text") &&
-          btnText !== null
-        ) {
-          const span = buttonEl.querySelector("span");
-          if (span) {
-            span.innerHTML = btnText;
+        if (status === 4) {
+          buttonEl.classList.add("image-unlike", "flavor_like_btn_is_active");
+        } else {
+          buttonEl.classList.toggle("image-unlike");
+          buttonEl.classList.toggle("flavor_like_btn_is_active");
+        }
+
+        // Safely update text label if btnText is provided and non-empty
+        // Target .flavor-like-label specifically, or non-icon spans as fallback to prevent wiping icon
+        if (btnText !== null && btnText !== "") {
+          const label = buttonEl.querySelector(".flavor-like-label") ||
+            (buttonEl.classList.contains("flavor_like_put_text")
+              ? buttonEl.querySelector("span:not(.flavor-like-icon)")
+              : null);
+          if (label) {
+            label.textContent = btnText;
           }
         }
       });
@@ -838,6 +867,64 @@
           siblingBtn.classList.remove("image-unlike", "flavor_like_btn_is_active");
         });
       }
+    },
+
+    /**
+     * Trigger Bilibili-style energetic like animation (B站风格弹性倾斜、粒子星芒与漂浮+1)
+     */
+    _triggerBilibiliAnimation() {
+      const generalEls = this.generalElement && this.generalElement.length !== undefined
+        ? arrayFrom(this.generalElement)
+        : [getSingleElement(this.generalElement)];
+
+      forEachElement(generalEls, (generalEl) => {
+        if (!generalEl) return;
+
+        // 1. Rebound entire pill & kick icon
+        generalEl.classList.remove("flavor-like-animating");
+        void generalEl.offsetWidth; // Force CSS reflow to re-trigger keyframes
+        generalEl.classList.add("flavor-like-animating");
+
+        // 2. Spawn radial burst shockwave & sparkles centered on the icon
+        const iconEl = generalEl.querySelector(".flavor-like-icon, .flavorlike-clap-icon, .flavorlike-svg-heart");
+        const burstEl = document.createElement("div");
+        burstEl.className = "flavor-like-burst-effect";
+        burstEl.setAttribute("aria-hidden", "true");
+        burstEl.innerHTML = '<span class="burst-ring"></span>' +
+          '<span class="burst-spark s1"></span>' +
+          '<span class="burst-spark s2"></span>' +
+          '<span class="burst-spark s3"></span>' +
+          '<span class="burst-spark s4"></span>' +
+          '<span class="burst-spark s5"></span>' +
+          '<span class="burst-spark s6"></span>';
+
+        if (iconEl) {
+          const iconRect = iconEl.getBoundingClientRect();
+          const genRect = generalEl.getBoundingClientRect();
+          if (iconRect.width > 0 && genRect.width > 0) {
+            const iconLeft = (iconRect.left - genRect.left) + (iconRect.width / 2);
+            const iconTop = (iconRect.top - genRect.top) + (iconRect.height / 2);
+            burstEl.style.left = iconLeft + "px";
+            burstEl.style.top = iconTop + "px";
+          }
+        }
+        generalEl.appendChild(burstEl);
+
+        // 3. Spawn floating +1 bubble
+        const bubble = document.createElement("div");
+        bubble.className = "flavor-like-float-bubble";
+        bubble.setAttribute("aria-hidden", "true");
+        bubble.textContent = "+1";
+        generalEl.appendChild(bubble);
+
+        // 4. Auto-remove burst & bubble after animation completes
+        const cleanupTimeout = setTimeout(() => {
+          if (burstEl.parentNode) burstEl.parentNode.removeChild(burstEl);
+          if (bubble.parentNode) bubble.parentNode.removeChild(bubble);
+          generalEl.classList.remove("flavor-like-animating");
+        }, 850);
+        this._timeouts.push(cleanupTimeout);
+      });
     },
 
     /**

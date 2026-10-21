@@ -45,6 +45,7 @@ class FlavorLikeTestSuite {
 		$this->test_button_image_removal_and_text_streamlining();
 		$this->test_fixed_admin_menu_on_scroll();
 		$this->test_orthogonal_two_dimensional_display_control();
+		$this->test_build_pipeline_and_release_metadata();
 		$this->summary();
 	}
 
@@ -929,6 +930,50 @@ class FlavorLikeTestSuite {
 		$overview_code = file_get_contents( FLAVOR_LIKE_DIR . 'includes/classes/class-flavor-like-overview.php' );
 		$this->assert( strpos( $overview_code, "'启用的文章类型: %s'" ) !== false, 'class-flavor-like-overview.php displays "启用的文章类型"' );
 		$this->assert( strpos( $overview_code, "'exceptions: %s'" ) === false, 'class-flavor-like-overview.php removed old "exceptions"' );
+	}
+
+	// 20. Build Pipeline & Release Metadata Suite
+	private function test_build_pipeline_and_release_metadata() {
+		$this->section( '20. Build Pipeline & Release Metadata Suite' );
+
+		// 1. Gutenberg block build artifacts must be committed (they are gitignored history bugs otherwise)
+		$this->assert( file_exists( FLAVOR_LIKE_DIR . 'includes/blocks/button/build/index.js' ), 'button block build/index.js exists' );
+		$this->assert( file_exists( FLAVOR_LIKE_DIR . 'includes/blocks/button/build/index.css' ), 'button block build/index.css exists' );
+		$this->assert( file_exists( FLAVOR_LIKE_DIR . 'includes/blocks/top-content/build/index.js' ), 'top-content block build/index.js exists' );
+		$this->assert( file_exists( FLAVOR_LIKE_DIR . 'includes/blocks/top-content/build/style-style.css' ), 'top-content block build/style-style.css exists' );
+
+		// 2. JS build sources must exist and point at the real file
+		$toolkit = file_get_contents( FLAVOR_LIKE_DIR . 'wp-toolkit.config.mjs' );
+		$this->assert( strpos( $toolkit, 'assets/js/src/flavor-like.js' ) !== false, 'wp-toolkit.config.mjs builds from flavor-like.js' );
+		$this->assert( strpos( $toolkit, 'ulike.js' ) === false, 'wp-toolkit.config.mjs no longer references missing ulike.js' );
+
+		// 3. License is consistent (GPL everywhere)
+		$pkg = json_decode( file_get_contents( FLAVOR_LIKE_DIR . 'package.json' ), true );
+		$this->assert( isset( $pkg['license'] ) && $pkg['license'] === 'GPL-2.0-or-later', 'package.json license is GPL-2.0-or-later', 'Current: ' . ( $pkg['license'] ?? 'none' ) );
+
+		// 4. Runtime requirements aligned with block apiVersion 3 (WP 6.3+)
+		$main_file = file_get_contents( FLAVOR_LIKE_DIR . 'flavor-like.php' );
+		$this->assert( strpos( $main_file, 'Requires PHP:      7.4' ) !== false, 'flavor-like.php declares Requires PHP 7.4' );
+		$this->assert( strpos( $main_file, 'Requires at least: 6.3' ) !== false, 'flavor-like.php declares Requires at least WP 6.3' );
+		$readme = file_get_contents( FLAVOR_LIKE_DIR . 'README.md' );
+		$this->assert( strpos( $readme, 'WordPress**：6.3+' ) !== false, 'README.md documents WordPress 6.3+' );
+
+		// 5. Version headers no longer carry upstream 5.2.0 leftovers
+		$bundle = file_get_contents( FLAVOR_LIKE_DIR . 'assets/js/flavor-like.js' );
+		$this->assert( strpos( $bundle, 'Flavor Like - v1.1.0' ) !== false, 'JS bundle header reports v1.1.0' );
+		$pot = file_get_contents( FLAVOR_LIKE_DIR . 'languages/flavor-like.pot' );
+		$this->assert( strpos( $pot, 'Project-Id-Version: Flavor Like 1.1.0' ) !== false, 'POT Project-Id-Version is 1.1.0' );
+
+		// 6. Hand-maintained interaction features survive the build
+		$this->assert( strpos( $bundle, 'flavor-like-busy' ) !== false, 'JS bundle keeps busy-state click locking' );
+		$this->assert( strpos( $bundle, '_triggerBilibiliAnimation' ) !== false, 'JS bundle keeps Bilibili-style animation' );
+		$front_css = file_get_contents( FLAVOR_LIKE_DIR . 'assets/css/flavor-like.css' );
+		$this->assert( strpos( $front_css, 'flavor-like-burst-effect' ) !== false, 'flavor-like.css keeps burst effect styles' );
+
+		// 7. Release zip must not ship development sources
+		$zip_script = file_get_contents( FLAVOR_LIKE_DIR . 'build-zip.ps1' );
+		$this->assert( strpos( $zip_script, '\assets\js\src' ) !== false, 'build-zip.ps1 excludes assets/js/src' );
+		$this->assert( strpos( $zip_script, 'npm run build:blocks' ) !== false, 'build-zip.ps1 builds blocks before packaging' );
 	}
 
 	// Summary

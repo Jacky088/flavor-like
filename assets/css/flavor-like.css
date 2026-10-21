@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 ===============================================================
  * Flavor Like
@@ -17,11 +18,13 @@
   clear: both !important;
   width: 100% !important;
 }
+
 .flavorlike *,
 .flavorlike *::before,
 .flavorlike *::after {
   box-sizing: inherit;
 }
+
 .flavorlike .flavor_like_general_class {
   display: inline-flex !important;
   flex-direction: row !important;
@@ -117,9 +120,11 @@
   flex-shrink: 0 !important;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .flavorlike .flavor-like-icon svg {
   display: block !important;
 }
+
 .flavorlike .flavor-like-label {
   display: inline-block !important;
   line-height: 1 !important;
@@ -127,26 +132,32 @@
   font-weight: 600 !important;
   vertical-align: middle !important;
 }
+
 .rtl .flavorlike .flavor-like-icon {
   margin-right: 0 !important;
   margin-left: 6px !important;
 }
+
 .flavorlike button.flavor_like_btn:hover, .flavorlike button.flavor_like_btn:active, .flavorlike button.flavor_like_btn:focus {
   outline: none;
 }
+
 .flavorlike button.flavor_like_btn::-moz-focus-inner {
   border: 0;
 }
+
 .flavorlike button.flavor_like_btn[disabled=disabled],
 .flavorlike button.flavor_like_btn:disabled,
 .flavorlike button.flavor_like_btn.flavor-like-busy {
   cursor: default;
   pointer-events: none;
 }
+
 .flavorlike button.flavor_like_btn[disabled=disabled]:hover, .flavorlike button.flavor_like_btn[disabled=disabled]:active, .flavorlike button.flavor_like_btn[disabled=disabled]:focus, .flavorlike button.flavor_like_btn:disabled:hover, .flavorlike button.flavor_like_btn:disabled:active, .flavorlike button.flavor_like_btn:disabled:focus {
   outline: none;
   background-color: initial;
 }
+
 .flavorlike button.flavor_like_btn.flavor_like_put_text {
   font-size: 13px;
   font-weight: 600;
@@ -154,21 +165,26 @@
   padding: 0;
   min-width: 0;
 }
+
 .flavorlike .flavor_like_is_loading button.flavor_like_btn {
   background-image: none !important;
 }
+
 .flavorlike .flavor_like_is_loading button.flavor_like_btn span,
 .flavorlike .flavor_like_is_loading .flavor-like-icon,
 .flavorlike .flavor_like_is_loading .flavor-like-label {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 .flavorlike .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image::after {
   content: none;
 }
+
 .flavorlike.flavorlike-hide-counter .count-box {
   display: none;
 }
+
 .flavorlike .count-box:empty {
   display: none;
 }
@@ -179,11 +195,13 @@
   display: inline-block;
   vertical-align: middle;
 }
+
 #buddypress #activity-stream .flavor_like_likers_wrapper li,
 #buddypress #activity-stream .flavor_like_likers_wrapper .flavor-like-liker {
   border: none;
   padding: 0;
 }
+
 #buddypress #activity-stream .flavor_like_likers_wrapper li a,
 #buddypress #activity-stream .flavor_like_likers_wrapper li img,
 #buddypress #activity-stream .flavor_like_likers_wrapper .flavor-like-liker a,
@@ -199,6 +217,7 @@
   display: inline-block;
   vertical-align: middle;
 }
+
 #bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li,
 #bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper .flavor-like-liker,
 #bbpress-forums .bbp-topic-content .flavor_like_likers_wrapper li,
@@ -208,6 +227,7 @@
   border: none;
   padding: 0;
 }
+
 #bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li a,
 #bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper li img,
 #bbpress-forums .bbp-reply-content .flavor_like_likers_wrapper .flavor-like-liker a,
@@ -253,13 +273,16 @@
   overflow: visible !important;
   height: 38px !important;
 }
+
 .flavorlike-default .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(79, 70, 229, 0.45) !important;
 }
+
 .flavorlike-default .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-default button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -275,6 +298,7 @@
   border: none !important;
   background: transparent !important;
 }
+
 .flavorlike-default button.flavor_like_btn:hover,
 .flavorlike-default button.flavor_like_btn:focus {
   outline: none !important;
@@ -282,28 +306,33 @@
   color: #ffffff !important;
   text-decoration: none !important;
 }
+
 .flavorlike-default .flavor-like-icon {
   color: #ffffff !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
+
 .flavorlike-default .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #ffffff !important;
 }
+
 .flavorlike-default .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   letter-spacing: 0.02em !important;
 }
+
 .flavorlike-default .flavor_like_put_image:after,
 .flavorlike-default button.flavor_like_btn:after {
   display: none !important;
   content: none !important;
 }
+
 .flavorlike-default .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -324,6 +353,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
   position: relative !important;
 }
+
 .flavorlike-default .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -333,16 +363,19 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-default .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #4338CA 0%, #4F46E5 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(67, 56, 202, 0.45) !important;
 }
+
 .flavorlike-default button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
+
 .flavorlike-default .flavor_like_btn_is_active .flavor-like-icon,
 .flavorlike-default .flavor_like_is_liked .flavor-like-icon {
   animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -367,13 +400,16 @@
   overflow: visible !important;
   height: 38px !important;
 }
+
 .flavorlike-heart .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(244, 63, 94, 0.45) !important;
 }
+
 .flavorlike-heart .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-heart button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -389,6 +425,7 @@
   border: none !important;
   background: transparent !important;
 }
+
 .flavorlike-heart button.flavor_like_btn:hover,
 .flavorlike-heart button.flavor_like_btn:focus {
   outline: none !important;
@@ -396,28 +433,33 @@
   color: #ffffff !important;
   text-decoration: none !important;
 }
+
 .flavorlike-heart .flavor-like-icon {
   color: #ffffff !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
+
 .flavorlike-heart .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #ffffff !important;
 }
+
 .flavorlike-heart .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   letter-spacing: 0.02em !important;
 }
+
 .flavorlike-heart .flavor_like_put_image:after,
 .flavorlike-heart button.flavor_like_btn:after {
   display: none !important;
   content: none !important;
 }
+
 .flavorlike-heart .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -438,6 +480,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
   position: relative !important;
 }
+
 .flavorlike-heart .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -447,16 +490,19 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-heart .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #E11D48 0%, #F43F5E 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(225, 29, 72, 0.45) !important;
 }
+
 .flavorlike-heart button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
+
 .flavorlike-heart .flavor_like_btn_is_active .flavor-like-icon,
 .flavorlike-heart .flavor_like_is_liked .flavor-like-icon {
   animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -481,13 +527,16 @@
   overflow: visible !important;
   height: 38px !important;
 }
+
 .flavorlike-robeen .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(236, 72, 153, 0.45) !important;
 }
+
 .flavorlike-robeen .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-robeen button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -503,6 +552,7 @@
   border: none !important;
   background: transparent !important;
 }
+
 .flavorlike-robeen button.flavor_like_btn:hover,
 .flavorlike-robeen button.flavor_like_btn:focus {
   outline: none !important;
@@ -510,28 +560,33 @@
   color: #ffffff !important;
   text-decoration: none !important;
 }
+
 .flavorlike-robeen .flavor-like-icon {
   color: #ffffff !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
+
 .flavorlike-robeen .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #ffffff !important;
 }
+
 .flavorlike-robeen .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   letter-spacing: 0.02em !important;
 }
+
 .flavorlike-robeen .flavor_like_put_image:after,
 .flavorlike-robeen button.flavor_like_btn:after {
   display: none !important;
   content: none !important;
 }
+
 .flavorlike-robeen .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -552,6 +607,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
   position: relative !important;
 }
+
 .flavorlike-robeen .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -561,16 +617,19 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-robeen .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #BE185D 0%, #E11D48 50%, #C026D3 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(190, 24, 93, 0.45) !important;
 }
+
 .flavorlike-robeen button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
+
 .flavorlike-robeen .flavor_like_btn_is_active .flavor-like-icon,
 .flavorlike-robeen .flavor_like_is_liked .flavor-like-icon {
   animation: bilibiliIconKick 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -589,35 +648,45 @@
   width: 50px;
   height: 50px;
 }
+
 .flavorlike-animated-heart button.flavor_like_btn:hover, .flavorlike-animated-heart button.flavor_like_btn:focus {
   background-color: #ffffff;
   background-image: none;
 }
+
 .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover, .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active, .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus, .flavorlike-animated-heart button.flavor_like_btn:disabled:hover, .flavorlike-animated-heart button.flavor_like_btn:disabled:active, .flavorlike-animated-heart button.flavor_like_btn:disabled:focus {
   background-color: #ffffff;
 }
+
 .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active {
   background-color: rgb(255, 111, 99);
 }
+
 .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active, .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus {
   background-color: rgb(255, 111, 99);
 }
+
 .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-svg-heart {
   fill: #ffffff;
 }
+
 .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active .flavorlike-svg-heart-pop {
   animation-direction: normal;
 }
+
 .flavorlike-animated-heart button.flavor_like_btn:active {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .flavorlike-animated-heart .flavor_like_is_loading button.flavor_like_btn {
   background-image: initial;
   padding: 0;
 }
+
 .flavorlike-animated-heart .flavor_like_is_loading button.flavor_like_btn.flavor_like_put_image:after {
   content: "";
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart {
   width: 20px;
   fill: #ff6f63;
@@ -628,6 +697,7 @@
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop {
   position: absolute;
   width: 30%;
@@ -636,51 +706,61 @@
   left: 0;
   animation: popHearts 1s ease forwards reverse;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.one {
   left: 1%;
   transform: rotate(-10deg);
   animation-delay: 0.45s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.two {
   left: 15%;
   transform: rotate(8deg);
   animation-delay: 0.25s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.three {
   left: 30%;
   transform: rotate(-5deg);
   animation-delay: 0s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.four {
   left: 50%;
   transform: rotate(-8deg);
   animation-delay: 0.3s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.five {
   left: 60%;
   transform: rotate(-10deg);
   animation-delay: 0.9s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.six {
   left: 70%;
   transform: rotate(-8deg);
   animation-delay: 0.2s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.seven {
   left: 85%;
   transform: rotate(6deg);
   animation-delay: 0.35s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.eight {
   left: 90%;
   transform: rotate(-4deg);
   animation-delay: 0.5s;
 }
+
 .flavorlike-animated-heart .flavorlike-svg-heart-pop.nine {
   left: 95%;
   transform: rotate(8deg);
   animation-delay: 0.2s;
 }
+
 .flavorlike-animated-heart .count-box {
   margin: 0 15px;
   color: #ff6f63;
@@ -699,6 +779,7 @@
   width: 50px;
   height: 50px;
 }
+
 #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:focus,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:hover,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:focus,
@@ -707,6 +788,7 @@
   background-color: #ffffff;
   background-image: none;
 }
+
 #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:focus, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:disabled:focus,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:hover,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn[disabled=disabled]:active,
@@ -722,11 +804,13 @@
 #buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:disabled:focus {
   background-color: #ffffff;
 }
+
 #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active,
 #buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active {
   background-color: rgb(255, 111, 99);
 }
+
 #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:focus, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:hover, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:active, #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:hover,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active[disabled=disabled]:active,
@@ -742,11 +826,13 @@
 #buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn.flavor_like_btn_is_active:disabled:focus {
   background-color: rgb(255, 111, 99);
 }
+
 #buddypress #activity-stream .activity-meta .flavorlike-animated-heart button.flavor_like_btn:active,
 #buddypress #activity-stream .activity-comments .flavorlike-animated-heart button.flavor_like_btn:active,
 #buddypress #activity-stream .activity-inner .flavorlike-animated-heart button.flavor_like_btn:active {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 #buddypress #activity-stream .activity-meta .flavor_like_is_loading button.flavor_like_btn,
 #buddypress #activity-stream .activity-comments .flavor_like_is_loading button.flavor_like_btn,
 #buddypress #activity-stream .activity-inner .flavor_like_is_loading button.flavor_like_btn {
@@ -775,9 +861,11 @@
   margin: 10px 0;
   flex: 0 0 100%;
 }
+
 .flavor_like_likers_wrapper:empty {
   display: none;
 }
+
 .flavor_like_likers_wrapper .flavor-like-likers-list,
 .flavor_like_likers_wrapper .tiles {
   display: flex;
@@ -786,6 +874,7 @@
   margin: 0;
   padding: 0;
 }
+
 .flavor_like_likers_wrapper .flavor-like-likers-list .flavor-like-liker,
 .flavor_like_likers_wrapper .flavor-like-likers-list li,
 .flavor_like_likers_wrapper .tiles .flavor-like-liker,
@@ -795,6 +884,7 @@
   list-style: none;
   display: block;
 }
+
 .flavor_like_likers_wrapper .flavor-like-likers-list .flavor-like-liker a > img,
 .flavor_like_likers_wrapper .flavor-like-likers-list li a > img,
 .flavor_like_likers_wrapper .tiles .flavor-like-liker a > img,
@@ -816,15 +906,18 @@
   margin: 10px 0 !important;
   padding: 0 !important;
 }
+
 .most_liked_users li {
   display: inline-table !important;
   cursor: pointer !important;
   margin: 0 2px !important;
 }
+
 .most_liked_users li img {
   display: block !important;
   float: none !important;
 }
+
 .most_liked_users li.inactive {
   visibility: hidden !important;
   opacity: 0 !important;
@@ -848,6 +941,7 @@
 .flavor_like_style_simple .wp_counter_span:before {
   content: "(";
 }
+
 .flavor_like_style_simple .wp_counter_span:after {
   content: ")";
 }
@@ -877,9 +971,11 @@
   right: 20px;
   bottom: 20px;
 }
+
 .flavorlike-notification * {
   box-sizing: border-box;
 }
+
 .flavorlike-notification .flavorlike-message {
   position: relative;
   pointer-events: auto;
@@ -900,15 +996,18 @@
   opacity: 1;
   transform: translateY(0);
 }
+
 .flavorlike-notification .flavorlike-message:hover {
   opacity: 0.9;
   cursor: pointer;
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-message-fadeout {
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
 }
+
 .flavorlike-notification .flavorlike-message:before {
   content: "";
   display: block;
@@ -923,21 +1022,27 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.06);
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-success {
   background-color: #20a779;
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-success:before {
   background-image: url(../img/svg/success.svg);
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-error {
   background-color: #ec4d2c;
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-error:before {
   background-image: url(../img/svg/error.svg);
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-warning {
   background-color: #f0a82f;
 }
+
 .flavorlike-notification .flavorlike-message.flavorlike-warning:before {
   background-image: url(../img/svg/warning.svg);
 }
@@ -1083,32 +1188,38 @@
   border-radius: 0.25em;
   overflow: visible;
 }
+
 .ulf-white-theme .ulf-content {
   color: #262626;
   padding: 8px 12px;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
+
 .ulf-white-theme .ulf-arrow-bottom {
   background: #ffffff;
   border-bottom-color: #e2e8f0;
   border-right-color: #e2e8f0;
 }
+
 .ulf-white-theme .ulf-arrow-top {
   background: #ffffff;
   border-top-color: #e2e8f0;
   border-left-color: #e2e8f0;
 }
+
 .ulf-white-theme .ulf-arrow-left {
   background: #ffffff;
   border-bottom-color: #e2e8f0;
   border-left-color: #e2e8f0;
 }
+
 .ulf-white-theme .ulf-arrow-right {
   background: #ffffff;
   border-top-color: #e2e8f0;
   border-right-color: #e2e8f0;
 }
+
 .ulf-white-theme .ulf-spinner-circle {
   background-color: #8e8e8e;
 }
@@ -1119,32 +1230,38 @@
   border-radius: 0.25em;
   overflow: visible;
 }
+
 .ulf-light-theme .ulf-content {
   color: #1a202c;
   padding: 8px 12px;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
+
 .ulf-light-theme .ulf-arrow-bottom {
   background: #ffffff;
   border-bottom-color: #e2e8f0;
   border-right-color: #e2e8f0;
 }
+
 .ulf-light-theme .ulf-arrow-top {
   background: #ffffff;
   border-top-color: #e2e8f0;
   border-left-color: #e2e8f0;
 }
+
 .ulf-light-theme .ulf-arrow-left {
   background: #ffffff;
   border-bottom-color: #e2e8f0;
   border-left-color: #e2e8f0;
 }
+
 .ulf-light-theme .ulf-arrow-right {
   background: #ffffff;
   border-top-color: #e2e8f0;
   border-right-color: #e2e8f0;
 }
+
 .ulf-light-theme .ulf-spinner-circle {
   background-color: #8e8e8e;
 }
@@ -1157,24 +1274,30 @@
 .ulf-tiny {
   max-width: 280px;
 }
+
 .ulf-tiny .ulf-content {
   padding: 3px 5px;
   font-size: 13px;
   line-height: 1.5;
 }
+
 .ulf-tiny .ulf-arrow {
   width: 6px;
   height: 6px;
 }
+
 .ulf-tiny .ulf-arrow-bottom {
   bottom: -3.5px;
 }
+
 .ulf-tiny .ulf-arrow-top {
   top: -3.5px;
 }
+
 .ulf-tiny .ulf-arrow-left {
   left: -3.5px;
 }
+
 .ulf-tiny .ulf-arrow-right {
   right: -3.5px;
 }
@@ -1182,6 +1305,7 @@
 .ulf-large {
   max-width: 480px;
 }
+
 .ulf-large .ulf-content {
   padding: 12px 16px;
   font-size: 16px;
@@ -1204,12 +1328,15 @@
   animation: ulf-spinner-bounce 1.2s infinite ease-in-out both;
   flex-shrink: 0;
 }
+
 .ulf-spinner-circle:nth-child(1) {
   animation-delay: -0.32s;
 }
+
 .ulf-spinner-circle:nth-child(2) {
   animation-delay: -0.16s;
 }
+
 .ulf-spinner-circle:nth-child(3) {
   animation-delay: 0;
 }
@@ -1226,6 +1353,7 @@
   margin-right: 8px;
   margin-left: inherit;
 }
+
 .rtl .flavorlike-default .count-box:before {
   right: -1px;
   left: auto;
@@ -1236,12 +1364,15 @@
   left: inherit !important;
   right: 0 !important;
 }
+
 .rtl .flavor_like_thumbnail {
   margin: 0 0 0 10px;
 }
+
 .rtl .most_liked_comment .avatar {
   margin: 0 0 0 10px;
 }
+
 .rtl .flavor_like_style_love .wp_counter_span {
   float: left;
   background: #F1F1F1 url(../img/icons/heart.png) no-repeat scroll 85% center;
@@ -1253,13 +1384,16 @@
   left: 20px;
   right: inherit;
 }
+
 .rtl .flavorlike-notification .flavorlike-message {
   padding: 14px 65px 14px 15px;
 }
+
 .rtl .flavorlike-notification .flavorlike-message:before {
   left: auto;
   right: 0;
 }
+
 @media screen and (max-width: 768px) {
   .rtl .flavorlike-notification .flavorlike-message {
     padding: 11px 55px 11px 11px;
@@ -1274,15 +1408,16 @@
     padding: 9px 45px 9px 9px;
   }
 }
-
 .rtl .ulf-tooltip .ulf-arrow-bottom {
   left: 50%;
   margin-left: -3.5px;
 }
+
 .rtl .ulf-tooltip .ulf-arrow-top {
   left: 50%;
   margin-left: -3.5px;
 }
+
 .rtl .ulf-tooltip .ulf-arrow-left {
   left: auto;
   right: -4px;
@@ -1291,6 +1426,7 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
+
 .rtl .ulf-tooltip .ulf-arrow-right {
   right: auto;
   left: -4px;
@@ -1299,14 +1435,17 @@
   border-top-color: transparent;
   border-right-color: transparent;
 }
+
 .rtl .ulf-tooltip.ulf-tiny .ulf-arrow-left {
   right: -3.5px;
   left: auto;
 }
+
 .rtl .ulf-tooltip.ulf-tiny .ulf-arrow-right {
   left: -3.5px;
   right: auto;
 }
+
 .rtl .ulf-tooltip .ulf-white-theme .ulf-arrow-left,
 .rtl .ulf-tooltip .ulf-light-theme .ulf-arrow-left {
   border-top-color: #e2e8f0;
@@ -1314,6 +1453,7 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
+
 .rtl .ulf-tooltip .ulf-white-theme .ulf-arrow-right,
 .rtl .ulf-tooltip .ulf-light-theme .ulf-arrow-right {
   border-bottom-color: #e2e8f0;
@@ -1321,17 +1461,16 @@
   border-top-color: transparent;
   border-right-color: transparent;
 }
+
 .rtl .ulf-centered {
   left: 50%;
   right: auto;
   transform: translate(-50%, -50%);
 }
 
-
 /* =============================================
    现代统一胶囊风格模板样式 (Modern Unified Pill Templates)
    ============================================= */
-
 /* 星星拇指模板 (Modern Star Thumb / Up-Vote Pill) */
 .flavorlike-star-thumb .flavor_like_general_class {
   display: inline-flex !important;
@@ -1346,11 +1485,13 @@
   height: 38px !important;
   cursor: pointer !important;
 }
+
 .flavorlike-star-thumb .flavor_like_general_class:hover {
   box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15) !important;
   border-color: #cbd5e1 !important;
   transform: translateY(-1px) !important;
 }
+
 .flavorlike-star-thumb button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1363,16 +1504,19 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-star-thumb .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #4f46e5 !important;
 }
+
 .flavorlike-star-thumb .flavor-like-label {
   color: #4f46e5 !important;
   font-size: 13px !important;
   font-weight: 700 !important;
 }
+
 .flavorlike-star-thumb .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1388,10 +1532,12 @@
   font-weight: 700 !important;
   margin-left: 8px !important;
 }
+
 .flavorlike-star-thumb .flavor_like_general_class.flavor_like_is_liked {
   background: #eef2ff !important;
   border-color: #818cf8 !important;
 }
+
 .flavorlike-star-thumb button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1413,13 +1559,16 @@
   cursor: pointer !important;
   height: 38px !important;
 }
+
 .flavorlike-check-mark .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.45) !important;
 }
+
 .flavorlike-check-mark .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-check-mark button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1432,16 +1581,19 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-check-mark .flavor-like-icon svg {
   width: 18px !important;
   height: 18px !important;
   stroke: #ffffff !important;
 }
+
 .flavorlike-check-mark .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
 .flavorlike-check-mark .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1459,6 +1611,7 @@
   margin-left: 8px !important;
   position: relative !important;
 }
+
 .flavorlike-check-mark .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -1468,10 +1621,12 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-check-mark .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #047857 0%, #10B981 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(4, 120, 87, 0.45) !important;
 }
+
 .flavorlike-check-mark button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1493,13 +1648,16 @@
   cursor: pointer !important;
   height: 38px !important;
 }
+
 .flavorlike-clapping .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.45) !important;
 }
+
 .flavorlike-clapping .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-clapping button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1512,20 +1670,24 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-clapping .flavorlike-clap-icon {
   font-size: 16px !important;
   display: inline-block !important;
   transition: transform 0.25s ease !important;
 }
+
 .flavorlike-clapping .flavor_like_general_class:hover .flavorlike-clap-icon,
 .flavorlike-clapping .flavor_like_btn_is_active .flavorlike-clap-icon {
   transform: scale(1.25) rotate(-10deg) !important;
 }
+
 .flavorlike-clapping .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
 .flavorlike-clapping .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1543,6 +1705,7 @@
   margin-left: 8px !important;
   position: relative !important;
 }
+
 .flavorlike-clapping .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -1552,10 +1715,12 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-clapping .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #B45309 0%, #F59E0B 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(180, 83, 9, 0.45) !important;
 }
+
 .flavorlike-clapping button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1577,13 +1742,16 @@
   cursor: pointer !important;
   height: 38px !important;
 }
+
 .flavorlike-badge-thumb .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(139, 92, 246, 0.45) !important;
 }
+
 .flavorlike-badge-thumb .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-badge-thumb button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1596,16 +1764,19 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-badge-thumb .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #ffffff !important;
 }
+
 .flavorlike-badge-thumb .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
 .flavorlike-badge-thumb .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1623,6 +1794,7 @@
   margin-left: 8px !important;
   position: relative !important;
 }
+
 .flavorlike-badge-thumb .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -1632,10 +1804,12 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-badge-thumb .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(124, 58, 237, 0.45) !important;
 }
+
 .flavorlike-badge-thumb button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1657,13 +1831,16 @@
   cursor: pointer !important;
   height: 38px !important;
 }
+
 .flavorlike-fave-star .flavor_like_general_class:hover {
   transform: translateY(-2px) scale(1.02) !important;
   box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.45) !important;
 }
+
 .flavorlike-fave-star .flavor_like_general_class:active {
   transform: scale(0.97) !important;
 }
+
 .flavorlike-fave-star button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1676,16 +1853,19 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-fave-star .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #ffffff !important;
 }
+
 .flavorlike-fave-star .flavor-like-label {
   color: #ffffff !important;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
 .flavorlike-fave-star .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1703,6 +1883,7 @@
   margin-left: 8px !important;
   position: relative !important;
 }
+
 .flavorlike-fave-star .count-box::before {
   content: "" !important;
   position: absolute !important;
@@ -1712,10 +1893,12 @@
   width: 1px !important;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+
 .flavorlike-fave-star .flavor_like_general_class.flavor_like_is_liked {
   background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%) !important;
   box-shadow: 0 6px 20px -2px rgba(217, 119, 6, 0.45) !important;
 }
+
 .flavorlike-fave-star button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1737,10 +1920,12 @@
   height: 38px !important;
   cursor: pointer !important;
 }
+
 .flavorlike-pin .flavor_like_general_class:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2) !important;
 }
+
 .flavorlike-pin button.flavor_like_btn {
   display: inline-flex !important;
   align-items: center !important;
@@ -1753,16 +1938,19 @@
   border: none !important;
   padding: 0 !important;
 }
+
 .flavorlike-pin .flavor-like-icon svg {
   width: 16px !important;
   height: 16px !important;
   fill: #1d4ed8 !important;
 }
+
 .flavorlike-pin .flavor-like-label {
   color: #1d4ed8 !important;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
+
 .flavorlike-pin .count-box {
   display: inline-flex !important;
   align-items: center !important;
@@ -1778,10 +1966,12 @@
   font-weight: 700 !important;
   margin-left: 8px !important;
 }
+
 .flavorlike-pin .flavor_like_general_class.flavor_like_is_liked {
   background: #dbeafe !important;
   border-color: #3b82f6 !important;
 }
+
 .flavorlike-pin button.flavor_like_btn.flavor_like_btn_is_active {
   background: transparent !important;
   background-color: transparent !important;
@@ -1795,21 +1985,30 @@ button.flavor_like_btn.flavor_like_btn_is_active {
 }
 
 @keyframes flavorLikePop {
-  0% { transform: scale(0.92); }
-  50% { transform: scale(1.12); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0.92);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
 @keyframes flavorLikeIconBounce {
-  0% { transform: scale(0.7); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
 /* ==========================================================================
    Bilibili-Style High-Impact Dynamic Like Animation (B站风格强劲动效)
    ========================================================================== */
-
 /* 1. Icon Energetic Kick & Tilt (弹性倾斜放大动画) */
 @keyframes bilibiliIconKick {
   0% {
@@ -1831,7 +2030,6 @@ button.flavor_like_btn.flavor_like_btn_is_active {
     transform: scale(1) rotate(0deg);
   }
 }
-
 /* 2. Whole Pill Elastic Rebound (药丸本体弹性共振) */
 @keyframes bilibiliPillRebound {
   0% {
@@ -1850,7 +2048,6 @@ button.flavor_like_btn.flavor_like_btn_is_active {
     transform: scale(1);
   }
 }
-
 /* 3. Luminous Shockwave Ripple (光环冲击波扩散) */
 @keyframes bilibiliRingBurst {
   0% {
@@ -1867,7 +2064,6 @@ button.flavor_like_btn.flavor_like_btn_is_active {
     border-width: 1px;
   }
 }
-
 /* 4. Radial Sparkle Particles (星芒粒子炸开) */
 @keyframes bilibiliSparkle {
   0% {
@@ -1883,7 +2079,6 @@ button.flavor_like_btn.flavor_like_btn_is_active {
     opacity: 0;
   }
 }
-
 /* 5. Floating +1 Bubble (向上漂浮的 "+1" 徽章气泡) */
 @keyframes bilibiliFloatPlus {
   0% {
@@ -1907,7 +2102,6 @@ button.flavor_like_btn.flavor_like_btn_is_active {
     transform: translate(-50%, -54px) scale(0.8);
   }
 }
-
 /* Applying Bilibili animations */
 .flavor-like-animating,
 .flavor_like_general_class.flavor-like-animating {
@@ -1959,12 +2153,41 @@ button.flavor_like_btn.flavor_like_btn_is_active {
   pointer-events: none !important;
 }
 
-.flavor-like-burst-effect .burst-spark.s1 { --sx: 0px; --sy: -26px; background: #fbbf24; }
-.flavor-like-burst-effect .burst-spark.s2 { --sx: 23px; --sy: -13px; background: #f43f5e; }
-.flavor-like-burst-effect .burst-spark.s3 { --sx: 23px; --sy: 13px; background: #38bdf8; }
-.flavor-like-burst-effect .burst-spark.s4 { --sx: 0px; --sy: 26px; background: #fbbf24; }
-.flavor-like-burst-effect .burst-spark.s5 { --sx: -23px; --sy: 13px; background: #a855f7; }
-.flavor-like-burst-effect .burst-spark.s6 { --sx: -23px; --sy: -13px; background: #34d399; }
+.flavor-like-burst-effect .burst-spark.s1 {
+  --sx: 0px;
+  --sy: -26px;
+  background: #fbbf24;
+}
+
+.flavor-like-burst-effect .burst-spark.s2 {
+  --sx: 23px;
+  --sy: -13px;
+  background: #f43f5e;
+}
+
+.flavor-like-burst-effect .burst-spark.s3 {
+  --sx: 23px;
+  --sy: 13px;
+  background: #38bdf8;
+}
+
+.flavor-like-burst-effect .burst-spark.s4 {
+  --sx: 0px;
+  --sy: 26px;
+  background: #fbbf24;
+}
+
+.flavor-like-burst-effect .burst-spark.s5 {
+  --sx: -23px;
+  --sy: 13px;
+  background: #a855f7;
+}
+
+.flavor-like-burst-effect .burst-spark.s6 {
+  --sx: -23px;
+  --sy: -13px;
+  background: #34d399;
+}
 
 /* Floating +1 Bubble */
 .flavor-like-float-bubble {
@@ -2105,4 +2328,3 @@ button.flavor_like_btn.flavor_like_btn_is_active {
   visibility: visible !important;
   opacity: 1 !important;
 }
-

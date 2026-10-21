@@ -596,7 +596,7 @@ if( ! function_exists( 'flavor_like_get_rating_value' ) ){
 	 * @author       	Alimir
 	 * @param           Integer $post_ID
 	 * @param           Boolean $is_decimal
-	 * @since           2.7
+	 * @since 1.0.0
 	 * @return          null
 	 */
 	function flavor_like_get_rating_value( $post_ID, $is_decimal = true ) {

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flavor Like 5.2.0\n"
+"Project-Id-Version: Flavor Like 1.1.0"
 "Report-Msgid-Bugs-To: https://github.com/Jacky088/flavor-like\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Flavor Like Team <Jacky088@users.noreply.github.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-23T12:35:20+00:00\n"
+"POT-Creation-Date: 2026-10-21T02:35:08+00:00"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flavor-like\n"
@@ -4538,4 +4538,484 @@ msgstr ""
 #. translators: %s: WordPress version
 #: flavor-like.php:103
 msgid "Flavor Like requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING."
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+msgid "%1$s — %2$s %3$s"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Active this option to show liked users avatars in the bottom of button like."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Around {{time}} gets the most engagement —schedule content then."
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Assets Load Strategy"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Automatically uses the current post or comment ID. You can optionally add a custom ID below to combine with it."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Average product and review reactions per order —a pre-purchase interest signal."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Choose whether to display an image icon or text label."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Comment buttons work best when placed inside a Comment Template block. They will automatically use the current comment ID."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Custom Item ID"
+msgstr ""
+
+#: includes/blocks/top-content/src/index.js
+msgid "Dates"
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Day Before Yesterday"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Default"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Disable Pophover"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Disable to use a custom item ID instead of the current one."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Enter a specific item ID to use. Leave empty to automatically detect the current item ID. Note: Custom IDs will not appear in statistics/insights."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Enter item ID"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Error loading Flavor Like button preview."
+msgstr ""
+
+#: flavor-like.php
+msgid "Flavor Like 需要 PHP %s+ 版本，插件当前未运行。"
+msgstr ""
+
+#: flavor-like.php
+msgid "Flavor Like 需要 WordPress %s+ 版本。由于您使用的是较早版本，插件当前未运行。"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "High interest, lower sales —optimize merchandising, pricing, or checkout."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Item Type"
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Last Month"
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Last Week"
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Last Year"
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Last {{days}} Days"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Leave empty or enter number to combine"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Load Globally (default)"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Load On Demand"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Look for days when engagement rises before orders —a sign your social proof is working."
+msgstr ""
+
+#: includes/blocks/top-content/src/index.js
+msgid "No data to display"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "No engagements yet today —yesterday had {{count}}."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Only {{rate}}% of viewers engage —improve button placement and CTAs."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Only {{ratio}}% positive this week —check Top content for items getting dislikes."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Optional: Enter a number to combine with the current item ID. Example: If current ID is 42 and you enter 100, the final ID will be 42100. Useful for creating multiple interactive buttons on the same post. Note: Custom combined IDs will not appear in statistics/insights."
+msgstr ""
+
+#: admin/classes/class-flavor-like-settings-api.php
+msgid "Please fix the following errors before saving:\\n%s"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Positive reactions fell to {{ratio}}% —review content getting dislikes."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Publishing schedule and category insights —available in Pro."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Publishing schedule, category insights, and commerce analytics —available in Pro."
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Rank number"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Revenue generated per like or dislike —helps compare campaign ROI."
+msgstr ""
+
+#: admin/classes/class-flavor-like-settings-api.php
+msgid "Security threat detected. The import contains potentially dangerous content:\\n%s\\n\\nImport blocked for security reasons."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "See how product likes and review reactions relate to orders and revenue —available in Pro."
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Select the type of content to add interactive like/dislike buttons to."
+msgstr ""
+
+#: includes/blocks/top-content/src/index.js
+msgid "Show Filters"
+msgstr ""
+
+#: includes/blocks/top-content/src/index.js
+msgid "Show a heading above the list."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "Strong sellers with few likes —surface social proof with like buttons or badges."
+msgstr ""
+
+#: includes/blocks/top-content/class-top-content-renderer.php
+#: includes/blocks/top-content/src/index.js
+msgid "Top"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "Trusted Proxy IPs"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+msgid "Use Current Item ID"
+msgstr ""
+
+#: includes/blocks/button/src/index.js
+#: includes/blocks/index.php
+msgid "Use Settings Default"
+msgstr ""
+
+#: includes/blocks/index.php
+msgid "Use Settings Default (%s)"
+msgstr ""
+
+#: admin/classes/class-flavor-like-settings-api.php
+msgid "Validation failed. The imported data contains invalid values:\\n%s\\n\\nPlease fix these errors and try again."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "You have passed {{count}} total engagements —{{remaining}} to go until {{next}}."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "day_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "hour_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "minute_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "month_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "s engaging most"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "second_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "timeAgo"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "week_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "year_plural"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{category}} drives {{share}}% of engagement —create more on this topic."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} actions this week —reward top engagers to build loyalty."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} actions this week —reward top members to build loyalty."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} actions this week —see which visitors engage most often."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} emoji reactions this week —use Top content to find what resonates."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} engagements so far —unlock audience maps, top fans, and publishing insights."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} engagements so far —{{remaining}} more to reach {{target}}."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} engagements today —keep it going."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{count}} star ratings this week —use Top content to find what resonates."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{day}} around {{time}} gets the most engagement —schedule content then."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{likes}} likes and {{dislikes}} dislikes —use Top content to find what resonates."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{likes}} likes this week —use Top content to find what resonates."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{name}} is your most active user —consider a loyalty perk."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{name}} is your top rater —consider a loyalty perk."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{share}}% engage from desktop —long-form content may perform better."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{share}}% of engagers use mobile —optimize for small screens."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{title}} averages — {{avg}} — replicate this format."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{title}} averages 鈽?{{avg}} —replicate this format."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "{{title}} converts best at {{rate}}% —replicate this format."
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "— {{avg}} site average"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "上传之前导出的 JSON 备份文件以恢复配置。注意：导入将覆盖当前的所有设置与外观选项。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "上传并恢复"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "下载包含当前全部插件选项、外观样式、模板配置与防刷策略的 JSON 备份文件。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "修复与同步数据表"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "修复数据表"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "共 {{total}} 次互动 · 今日 {{today}} 次"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "刷新统计缓存"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "导入将覆盖当前的所有 Flavor Like 设置与自定义参数，是否继续？"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "导入恢复"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "导出 JSON 备份"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "导出全部点赞选项与自定义外观为 JSON 备份文件，或从备份恢复设置。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "导出备份"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "当前活动主题"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "排查点赞计数异常、清理统计缓存瞬态数据以及修复数据库数据表。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "数据库数据表已成功校验与修复！"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "数据库架构"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "无效的 JSON 格式，请检查文件语法。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "未检测到上传文件，请选择 JSON 文件后重试。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "核心运行环境依赖、数据库数据表架构及主题兼容状态。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "清除 Redis / Transient 统计临时缓存，图表与计数将在下次访问时重新构建。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "状态与备份"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "立即刷新缓存"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "站点健康"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "系统与备份"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "系统环境与健康诊断"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "系统维护与修复工具"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "系统运行状态"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "统计数据临时缓存已成功清除，图表与计数将在下次访问时重建！"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "自动校验并在缺失时无损创建点赞日志表及 Pulse 脉冲账本核心存储表。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "设置已成功导入并保存！"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "该文件不是有效的 Flavor Like 配置备份文件。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "运行良好"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "部分数据表创建或修复失败，请检查数据库权限或联系主机服务商。"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "配置备份与迁移"
+msgstr ""
+
+#: admin/classes/class-flavor-like-admin-panel.php
+msgid "配置导入失败，请稍后重试。"
+msgstr ""
+
+#: admin/admin-ajax.php
+msgid "鈽?{{avg}} site average"
 msgstr ""

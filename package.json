@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/Jacky088/flavor-like.git"
   },
-  "license": "MIT",
+  "license": "GPL-2.0-or-later",
   "author": {
     "name": "Jacky088",
     "email": "Jacky088@users.noreply.github.com",
@@ -29,7 +29,8 @@
     "build:blocks:i18n": "npm run build:blocks && npm run i18n:json"
   },
   "devDependencies": {
-    "@alimir/wp-toolkit": "^2.0.1"
+    "@alimir/wp-toolkit": "^2.0.1",
+    "@wordpress/scripts": "^30.27.0"
   },
   "bugs": {
     "url": "https://github.com/Jacky088/flavor-like/issues"

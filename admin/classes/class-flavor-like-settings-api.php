@@ -6,7 +6,7 @@
  * Extracts schema from admin panel without modifying source code
  *
  * @package WP_Flavor Like
- * @since 4.6.0
+ * @since 1.0.0
  */
 
 // no direct access allowed

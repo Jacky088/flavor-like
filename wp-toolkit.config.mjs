@@ -10,7 +10,7 @@ export default {
 					sources: [
 						'assets/js/src/tooltip.js',
 						'assets/js/src/notifications.js',
-						'assets/js/src/ulike.js',
+						'assets/js/src/flavor-like.js',
 						'assets/js/src/scripts.js',
 					],
 					output: 'assets/js/flavor-like.js',
@@ -25,7 +25,11 @@ export default {
 				'admin/assets/css/admin.css': 'admin/assets/sass/admin.scss',
 				'admin/assets/css/plugins.css': 'admin/assets/sass/plugins.scss',
 			},
-			minifySeparate: ['assets/css/flavor-like.css'],
+			minifySeparate: [
+				'assets/css/flavor-like.css',
+				'admin/assets/css/admin.css',
+				'admin/assets/css/plugins.css',
+			],
 		},
 		watch: {
 			scss: [],

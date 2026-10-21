@@ -28,7 +28,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Most Liked Posts Function
 		 *
 		 * @author       	Alimir
-		 * @since           1.1
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         2.4
 		 * @return			String
@@ -96,7 +96,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Most Liked Comments Function
 		 *
 		 * @author       	Alimir
-		 * @since           1.9
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         2.4
 		 * @return			String
@@ -160,7 +160,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Last Posts Liked By Current User
 		 *
 		 * @author       	Alimir
-		 * @since           2.0
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         2.4
 		 * @return			String
@@ -244,7 +244,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Most Liked Topics Function
 		 *
 		 * @author       	Alimir
-		 * @since           2.3
+		 * @since 1.0.0
 		 * @updated         2.4
 		 * @return			String
 		 */
@@ -311,7 +311,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Most Liked Activities Function
 		 *
 		 * @author       	Alimir
-		 * @since           2.0
+		 * @since 1.0.0
 		 * @updated         2.4
 		 * @updated         2.6 //added post counter value
 		 * @return			String
@@ -390,7 +390,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Most Liked Activities Function
 		 *
 		 * @author       	Alimir
-		 * @since           1.2
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         2.4
 		 * @return			String
@@ -450,7 +450,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Get The Post Thumbnail
 		 *
 		 * @author       	Alimir
-		 * @since           2.3
+		 * @since 1.0.0
 		 * @return			String
 		 */
 		public function get_post_thumbnail( $id, $sizeOf ){
@@ -480,7 +480,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Set Period
 		 *
 		 * @author       	Alimir
-		 * @since           2.4
+		 * @since 1.0.0
 		 * @deprecated      4.8.3 Use flavor_like_get_period_limit_sql() instead
 		 * @return			String
 		 */
@@ -498,7 +498,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Display Widget
 		 *
 		 * @author       	Alimir
-		 * @since           1.1
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         2.4
 		 * @return			String
@@ -564,7 +564,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Widget Options
 		 *
 		 * @author       	Alimir
-		 * @since           1.1
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         3.0
 		 * @return			String
@@ -664,7 +664,7 @@ if ( ! class_exists( 'flavor_like_widget' ) ) {
 		 * Widget Options Update
 		 *
 		 * @author       	Alimir
-		 * @since           1.1
+		 * @since 1.0.0
 		 * @updated         2.3
 		 * @updated         3.0
 		 * @return			String

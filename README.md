@@ -1,8 +1,8 @@
 # Flavor Like
 
-[![WordPress](https://img.shields.io/badge/WordPress-6.0+-blue.svg)](https://wordpress.org/)
+[![WordPress](https://img.shields.io/badge/WordPress-6.3+-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4+-777BB4.svg)](https://php.net/)
-[![License](https://img.shields.io/badge/License-GPL--2.0+-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPL--2.0+-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![Version](https://img.shields.io/badge/Version-1.1.0-orange.svg)]()
 
 WordPress 轻量高颜值点赞插件。原生 JS 驱动零依赖，内置 10 款现代化胶囊样式、Bilibili 风格微动效、数据统计看板与并发安全防护。
@@ -28,7 +28,7 @@ WordPress 轻量高颜值点赞插件。原生 JS 驱动零依赖，内置 10 �
 
 ## 📋 系统要求
 
-- **WordPress**：6.0+
+- **WordPress**：6.3+
 - **PHP**：7.4+（兼容 PHP 8.0 - 8.3）
 - **数据库**：MySQL 5.7+ / MariaDB 10.3+
 
@@ -106,10 +106,11 @@ if ( function_exists( 'flavor_like_get_post_likes' ) ) {
 - **架构精简**：精简为“统计”与“设置”两级清晰架构，全后台采用 SaaS 蓝设计。
 - **逻辑重构**：理顺文章类型与展示位置的二维独立控制，解决单页无端显示问题。
 - **体验加固**：全面消灭中文乱码，修复侧边菜单滚动穿透与子菜单悬停闪烁问题。
-- **质量保障**：内置 19 套自动化测试套件（270 项测试 100% 通过）。
+- **质量保障**：内置 20 套自动化测试套件（含构建产物校验，100% 通过）。
+- **构建修复**：补齐 Gutenberg 区块构建产物，统一 npm 构建链，修正发布包与版本元数据。
 
 ---
 
 ## 📄 开源许可证
 
-本项目基于 [GPL-2.0+](LICENSE) 协议开源。
+本项目基于 [GPL-2.0+](https://www.gnu.org/licenses/gpl-2.0.html) 协议开源。

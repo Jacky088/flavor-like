@@ -14,7 +14,7 @@ if( ! function_exists( 'flavor_like_get_setting' ) ){
 	 * Get Settings Value
 	 *
 	 * @author       	Alimir
-	 * @since           1.0
+	 * @since 1.0.0
 	 * @return			Void
 	 */
 	function flavor_like_get_setting( $setting, $option = false, $default = false ) {
@@ -185,7 +185,7 @@ if( ! function_exists( 'is_flavor_like' ) ){
 	 * @author       	Alimir
 	 * @param           Array 	$options
 	 * @param           Array   $args
-	 * @since           1.9
+	 * @since 1.0.0
 	 * @return			boolean
 	 */
 	function is_flavor_like( $options, $args = array(), $force_type = false ){
@@ -252,7 +252,7 @@ if( ! function_exists( 'flavor_like_get_auhtor_id' ) ){
 	 * @author       	Alimir
 	 * @param           Integer $cp_ID (Post/Comment/... ID)
 	 * @param           String 	$type (Get flavor_like Type)
-	 * @since           2.5
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_get_auhtor_id($cp_ID,$type) {
@@ -429,7 +429,7 @@ if( ! function_exists( 'flavor_like_display_button' ) ){
 	 * @author       	Alimir
 	 * @param           Array  		$parsed_args
 	 * @param           Integer 	$deprecated_value
-	 * @since           3.4
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_display_button( array $args, $deprecated_value = null ){

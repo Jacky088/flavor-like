@@ -21,7 +21,7 @@ if( ! function_exists( 'flavor_like_put_posts' ) ){
 	 * the main loop on the frontend, outside of feeds and embeds.
 	 *
 	 * @param string $content
-	 * @since 1.0
+	 * @since 1.0.0
 	 * @return string
 	 */
 	function flavor_like_put_posts( $content ) {
@@ -187,7 +187,7 @@ if( ! function_exists( 'flavor_like_register_widget' ) ){
 	 * Register Flavor Like Widgets
 	 *
 	 * @author Alimir
-	 * @since 1.2
+	 * @since 1.0.0
 	 * @return Void
 	 */
 	function flavor_like_register_widget() {
@@ -236,7 +236,7 @@ if( ! function_exists( 'flavor_like_display_inline_likers_template' ) ){
 	 * Display inline likers box without AJAX request
 	 *
 	 * @param array $args
-	 * @since 3.5.1
+	 * @since 1.0.0
 	 * @return void
 	 */
 	function flavor_like_display_inline_likers_template( $args ){

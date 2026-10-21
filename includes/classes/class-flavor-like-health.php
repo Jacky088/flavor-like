@@ -6,7 +6,7 @@
  * Help keeps repair / migrate / cleanup actions and links here.
  *
  * @package WP_Flavor Like
- * @since   5.2.0
+ * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -56,10 +56,12 @@ if ( ! class_exists( 'flavor_like_admin_assets' ) ) {
 		 * @return void
 		 */
 		public function load_styles() {
+			$css_suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
 			// Enqueue admin styles
 			wp_enqueue_style(
 				'flavor-like-admin',
-				FLAVOR_LIKE_ADMIN_URL . '/assets/css/admin.css',
+				FLAVOR_LIKE_ADMIN_URL . '/assets/css/admin' . $css_suffix . '.css',
 				array(),
 				FLAVOR_LIKE_VERSION
 			);
@@ -565,7 +567,7 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 			// Enqueue third-party styles
 			wp_enqueue_style(
 				'flavor-like-admin-plugins',
-				FLAVOR_LIKE_ADMIN_URL . '/assets/css/plugins.css',
+				FLAVOR_LIKE_ADMIN_URL . '/assets/css/plugins' . $css_suffix . '.css',
 				array(),
 				FLAVOR_LIKE_VERSION
 			);

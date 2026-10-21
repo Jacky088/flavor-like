@@ -1,6 +1,6 @@
-/*! Flavor Like - v5.2.0
+/*! Flavor Like - v1.1.0
  *  https://github.com/Jacky088/flavor-like
- *  TechnoWich 2026;
+ *  Jacky088 2026;
  */
 
 
@@ -868,7 +868,7 @@
   }
 })(window, document);
 
-/* ================== assets/js/src/flavor_like.js =================== */
+/* ================== assets/js/src/flavor-like.js =================== */
 
 
 /**
@@ -1154,6 +1154,7 @@
           self._isFetchingLikers = false;
           if (self.buttonElement) {
             forEachElement(self.buttonElement, (btn) => {
+              btn.classList.remove("flavor-like-busy");
               btn.disabled = false;
             });
           }

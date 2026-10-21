@@ -51,7 +51,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Run Actions
 		 *
-		 * @since		2.3
+		 * @since 1.0.0
 		 */
 		public function run() {
 			// Goto status function
@@ -61,7 +61,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Start functions by status
 		 *
-		 * @since		2.3
+		 * @since 1.0.0
 		 */
 		public function status( $id , $key, $user_id, $status ) {
 			$author_id = $this->get_author_ID( $id, $key );
@@ -76,7 +76,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Add Like
 		 *
-		 * @since		2.3
+		 * @since 1.0.0
 		 */
 		public function like( $id , $key, $user_id, $author_id = 0 ) {
 			// Check for exclusion
@@ -131,7 +131,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Remove Like
 		 *
-		 * @since		2.3
+		 * @since 1.0.0
 		 */
 		public function unlike( $id , $key, $user_id, $author_id = 0 ) {
 
@@ -227,7 +227,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Preference for flavor_like Hook
 		 *
-		 * @since		2.3
+		 * @since 1.0.0
 		 */
 		public function preferences() {
 
@@ -388,7 +388,7 @@ if ( class_exists( 'myCRED_Hook' ) ) :
 		/**
 		 * Sanitise Preferences
 		 *
-		 * @since 		2.3
+		 * @since 1.0.0
 		 */
 		function sanitise_preferences( $data ) {
 

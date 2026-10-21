@@ -36,7 +36,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		 * Return tables which has any data inside
 		 *
 		 * @author       	Alimir
-		 * @since           2.0
+		 * @since 1.0.0
 		 * @return			Array
 		 */
 		public function get_tables(){
@@ -225,7 +225,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		/**
 		 * Get posts dataset
 		 *
-		 * @since 2.0
+		 * @since 1.0.0
 		 * @param string $item_type Canonical item type.
 		 * @return void
 		 */
@@ -249,7 +249,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		 *
 		 * @author Alimir
 		 * @param string $item_type Canonical item type.
-		 * @since 2.0
+		 * @since 1.0.0
 		 * @return String
 		 */
 	public function select_data( $item_type ) {
@@ -267,7 +267,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		/**
 		 * Count all logs from the tables
 		 *
-		 * @since 3.5
+		 * @since 1.0.0
 		 * @param string $date
 		 * @return integer
 		 */
@@ -278,7 +278,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		/**
 		 * Count logs by content type.
 		 *
-		 * @since 3.5
+		 * @since 1.0.0
 		 * @param array $args
 		 * @return void
 		 */
@@ -332,7 +332,7 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		 * Tops Summaries
 		 *
 		 * @param string $type
-		 * @since 3.5
+		 * @since 1.0.0
 		 * @return array
 		 */
 		public function get_top( $type ){

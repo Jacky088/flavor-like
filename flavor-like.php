@@ -6,8 +6,8 @@
  * Version:           1.1.0
  * Author:            木木
  * Author URI:        https://github.com/Jacky088
- * Requires PHP:      7.2.5
- * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Requires at least: 6.3
  * Text Domain:       flavor-like
  * Domain Path:       /languages
  * Tested up to:      7.0
@@ -84,9 +84,9 @@ function flavor_like_custom_plugin_info( $result, $action, $args ) {
 	$plugin_info->version       = FLAVOR_LIKE_VERSION;
 	$plugin_info->author        = '<a href="https://github.com/Jacky088">木木</a>';
 	$plugin_info->homepage      = 'https://github.com/Jacky088/flavor-like';
-	$plugin_info->requires      = '6.0';
+	$plugin_info->requires      = '6.3';
 	$plugin_info->tested        = '7.0';
-	$plugin_info->requires_php  = '7.2.5';
+	$plugin_info->requires_php  = '7.4';
 	$plugin_info->sections      = array(
 		'description' => '为 WordPress 添加一键点赞按钮。内置统计仪表盘、热门内容排行和隐私工具，几分钟即可完成设置。',
 		'changelog'   => '<h4>1.1.0</h4><p>视觉与交互体验大版本升级：全新 SaaS 蓝色系后台视觉、严格对称左右边距、模板卡片尺寸放大自适应、内置全新「脉冲心动 (Pulse Heart)」矢量 Logo 及插件目录纯线条图标、前台点赞微交互动画与代码加固。</p><h4>1.0.0</h4><p>初始版本 - 基于 Flavor Like 修改，全面汉化，移除 Pro 功能。</p>',
@@ -99,9 +99,9 @@ require FLAVOR_LIKE_INC_DIR . '/action.php';
 register_activation_hook  ( __FILE__, array( 'flavor_like_register_action_hook', 'activate'   ) );
 register_deactivation_hook( __FILE__, array( 'flavor_like_register_action_hook', 'deactivate' ) );
 
-if ( ! version_compare( PHP_VERSION, '7.2.5', '>=' ) ) {
+if ( ! version_compare( PHP_VERSION, '7.4', '>=' ) ) {
 	add_action( 'admin_notices', 'flavor_like_fail_php_version' );
-} elseif ( ! version_compare( get_bloginfo( 'version' ), '6.0', '>=' ) ) {
+} elseif ( ! version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
 	add_action( 'admin_notices', 'flavor_like_fail_wp_version' );
 } else {
 	if( ! class_exists( 'FlavorLikeInit' ) ) {
@@ -116,7 +116,7 @@ if ( ! version_compare( PHP_VERSION, '7.2.5', '>=' ) ) {
  */
 function flavor_like_fail_php_version() {
 	/* translators: %s: PHP version */
-	$message = sprintf( esc_html__( 'Flavor Like 需要 PHP %s+ 版本，插件当前未运行。', 'flavor-like' ), '7.2.5' );
+	$message = sprintf( esc_html__( 'Flavor Like 需要 PHP %s+ 版本，插件当前未运行。', 'flavor-like' ), '7.4' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }
@@ -128,7 +128,7 @@ function flavor_like_fail_php_version() {
  */
 function flavor_like_fail_wp_version() {
 	/* translators: %s: WordPress version */
-	$message = sprintf( esc_html__( 'Flavor Like 需要 WordPress %s+ 版本。由于您使用的是较早版本，插件当前未运行。', 'flavor-like' ), '6.0' );
+	$message = sprintf( esc_html__( 'Flavor Like 需要 WordPress %s+ 版本。由于您使用的是较早版本，插件当前未运行。', 'flavor-like' ), '6.3' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }

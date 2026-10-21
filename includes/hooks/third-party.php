@@ -17,7 +17,7 @@ if( ! function_exists( 'flavor_like_put_buddypress' ) ){
 	/**
 	 * Auto insert flavor_like_buddypress in the activities content
 	 *
-	 * @since 1.7
+	 * @since 1.0.0
 	 * @return void
 	 */
 	function flavor_like_put_buddypress() {
@@ -123,7 +123,7 @@ if( ! function_exists( 'flavor_like_register_activity_actions' ) ){
 	/**
 	 * Register "Flavor Like Activity" action
 	 *
-	 * @since 1.7
+	 * @since 1.0.0
 	 * @return void
 	 */
 	function flavor_like_register_activity_actions() {
@@ -141,7 +141,7 @@ if( ! function_exists( 'flavor_like_bp_activity_filter_options' ) ){
 	/**
 	 * Display likes option in BuddyPress activity filter
 	 *
-	 * @since 2.5.1
+	 * @since 1.0.0
 	 * @return void
 	 */
 	function flavor_like_bp_activity_filter_options() {
@@ -197,7 +197,7 @@ if( ! function_exists( 'flavor_like_filter_notifications_get_registered_componen
 	/**
 	 * Register 'flavor_like' to BuddyPress component
 	 *
-	 * @since 2.5
+	 * @since 1.0.0
 	 * @param array $component_names
 	 * @return string
 	 */
@@ -219,7 +219,7 @@ if( ! function_exists( 'flavor_like_add_bp_notifications' ) ){
 	/**
 	 * Add new buddypress activities on each like
 	 *
-	 * @since 1.6
+	 * @since 1.0.0
 	 * @param integer $cp_ID
 	 * @param string $type
 	 * @param integer $user_ID
@@ -466,7 +466,7 @@ if( ! function_exists( 'flavor_like_seen_bp_notifications' ) ){
 	/**
 	 * Mark notifications as read when a user visits an activity permalink.
 	 *
-	 * @since 3.6.0
+	 * @since 1.0.0
 	 */
 	function flavor_like_seen_bp_notifications() {
 		if ( ! is_user_logged_in() || ! defined( 'BP_VERSION' ) ) {
@@ -504,7 +504,7 @@ if( ! function_exists( 'flavor_like_put_bbpress' ) ){
 	 * Auto insert flavor_like_bbpress in the topics content
 	 *
 	 * @author       	Alimir
-	 * @since           2.2
+	 * @since 1.0.0
 	 * @return          filter on bbpPress hooks
 	 */
 	function flavor_like_put_bbpress() {
@@ -639,7 +639,7 @@ if( ! function_exists( 'flavor_like_register_myCRED_hook' ) ){
 	/**
 	 * register flavor_like in mycred setup
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 * @param array $installed
 	 * @return void
 	 */
@@ -657,7 +657,7 @@ if( ! function_exists( 'flavor_like_myCRED_references' ) ){
 	/**
 	 * Add flavor_like references
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 * @param array $list
 	 * @return void
 	 */
@@ -676,7 +676,7 @@ if( ! function_exists( 'flavor_like_add_custom_profile_tab' ) ){
 	/**
 	 * Add custom tabs in the UltimateMember profiles.
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 * @param array $tabs
 	 * @return array $tabs
 	 */
@@ -701,7 +701,7 @@ if( ! function_exists( 'flavor_like_posts_um_profile_content' ) ){
 	/**
 	 * Add content to the flavor-like-posts tab
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 * @param array $args
 	 * @return void
 	 */
@@ -757,7 +757,7 @@ if( ! function_exists( 'flavor_like_comments_um_profile_content' ) ){
 	/**
 	 * Add content to the flavor-like-comments tab
 	 *
-	 * @since 2.3
+	 * @since 1.0.0
 	 * @param array $args
 	 * @return void
 	 */

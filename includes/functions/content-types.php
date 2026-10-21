@@ -20,7 +20,7 @@ if( ! function_exists( 'flavor_like' ) ){
 	 * @author       	Alimir
 	 * @param           String 	$type
 	 * @param           Array 	$args
-	 * @since           1.0
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like( $type = 'get', $args = array() ) {
@@ -132,7 +132,7 @@ if( ! function_exists( 'flavor_like_get_post_likes' ) ){
 	 *
 	 * @author       	Alimir
 	 * @param           Integer $post_ID
-	 * @since           1.7
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_get_post_likes( $post_ID, $status = 'like' ){
@@ -152,7 +152,7 @@ if( ! function_exists( 'flavor_like_comments' ) ){
 	 * @author       	Alimir
 	 * @param           String 	$type
 	 * @param           Array 	$args
-	 * @since           1.6
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like_comments( $type = 'get', $args = array() ) {
@@ -251,7 +251,7 @@ if( ! function_exists( 'flavor_like_get_comment_likes' ) ){
 	 *
 	 * @author          Alimir & Wacław Jacek
 	 * @param           Integer $commentID
-	 * @since           2.5
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_get_comment_likes( $comment_ID, $status = 'like' ){
@@ -271,7 +271,7 @@ if( ! function_exists( 'flavor_like_buddypress' ) ){
 	 * @author       	Alimir
 	 * @param           String 	$type
 	 * @param           Array 	$args
-	 * @since           1.7
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like_buddypress( $type = 'get', $args = array() ) {
@@ -337,7 +337,7 @@ if( ! function_exists( 'flavor_like_bbp_format_buddypress_notifications' ) ) {
 	 * Wrapper for bbp_format_buddypress_notifications function as it is not returning $action
 	 *
 	 * @author       	Alimir
-	 * @since           2.5.1
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_bbp_format_buddypress_notifications( $action, $item_id, $secondary_item_id, $total_items, $format = 'string' ) {
@@ -367,7 +367,7 @@ if( ! function_exists( 'flavor_like_bbp_is_component_exist' ) ) {
 	 * Check the buddypress notification component existence
 	 *
 	 * @author       	Alimir
-	 * @since           2.5.1
+	 * @since 1.0.0
 	 * @return          integer
 	 */
 	function flavor_like_bbp_is_component_exist( $component_name ){
@@ -488,7 +488,7 @@ if( ! function_exists( 'flavor_like_bbpress' ) ){
 	 * @author       	Alimir
 	 * @param           String 	$type
 	 * @param           Array 	$args
-	 * @since           2.2
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like_bbpress( $type = 'get', $args = array() ) {

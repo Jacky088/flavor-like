@@ -124,7 +124,7 @@ if( ! function_exists( 'flavor_like_date_i18n' ) ){
 	 *
 	 * @author       	Alimir
 	 * @param           String (Date)
-	 * @since           2.3
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_date_i18n($date){
@@ -192,7 +192,7 @@ if( ! function_exists( 'flavor_like_generate_user_id' ) ){
 	 *
 	 * @author       	Alimir
 	 * @param           String $user_ip
-	 * @since           3.4
+	 * @since 1.0.0
 	 * @return          String
 	 */
 	function flavor_like_generate_user_id( $user_ip ) {
@@ -223,7 +223,7 @@ if( ! function_exists( 'flavor_like_get_template_between' ) ){
 	 * @param           String $string
 	 * @param           String $start
 	 * @param           String $end
-	 * @since           2.0
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like_get_template_between( $string, $start, $end ){
@@ -248,7 +248,7 @@ if( ! function_exists( 'flavor_like_put_template_between' ) ){
 	 * @param           String $inner_string
 	 * @param           String $start
 	 * @param           String $end
-	 * @since           2.0
+	 * @since 1.0.0
 	 * @return			String
 	 */
 	function flavor_like_put_template_between( $string, $inner_string, $start, $end ){
@@ -443,7 +443,7 @@ if( ! function_exists('flavor_like_setcookie') ){
 	 * @param  string  $value  Value of the cookie.
 	 * @param  integer $expire Expiry of the cookie.
 	 * @param  bool    $secure Whether the cookie should be served only over https.
-	 * @param  bool    $httponly Whether the cookie is only accessible over HTTP, not scripting languages like JavaScript. @since 3.6.0.
+	 * @param  bool    $httponly Whether the cookie is only accessible over HTTP, not scripting languages like JavaScript. @since 1.0.0
 	 */
 	function flavor_like_setcookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
 		if ( ! apply_filters( 'flavor_like_set_cookie_enabled', true, $name ,$value, $expire, $secure ) ) {
@@ -479,7 +479,7 @@ if( ! function_exists('flavor_like_maybe_define_constant') ){
 	/**
 	 * Define a constant if it is not already defined.
 	 *
-	 * @since 3.0.0
+	 * @since 1.0.0
 	 * @param string $name  Constant name.
 	 * @param mixed  $value Value.
 	 */

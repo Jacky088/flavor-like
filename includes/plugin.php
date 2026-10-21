@@ -15,7 +15,7 @@ class FlavorLikeInit {
   /**
     * Instance of this class.
     *
-    * @since    3.1
+    * @since 1.0.0
     *
     * @var      object
     */
@@ -24,7 +24,7 @@ class FlavorLikeInit {
   /**
   * Initialize the plugin
   *
-  * @since     3.1
+  * @since 1.0.0
   */
   private function __construct() {
     // init plugin
@@ -73,6 +73,7 @@ class FlavorLikeInit {
     global $wpdb;
 
     $did_migrate = false;
+    $failed      = false;
 
     // 1) Rename legacy tables (only when the new table does not exist yet).
     $legacy_tables = array(
@@ -99,7 +100,13 @@ class FlavorLikeInit {
       }
 
       // RENAME TABLE is atomic and instant (metadata-only) in MySQL/MariaDB.
-      $wpdb->query( "RENAME TABLE `{$old_table}` TO `{$new_table}`" );
+      if ( false === $wpdb->query( "RENAME TABLE `{$old_table}` TO `{$new_table}`" ) ) {
+        $failed = true;
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+          error_log( sprintf( 'Flavor Like: failed to rename %s to %s — %s', $old_table, $new_table, $wpdb->last_error ) );
+        }
+        continue;
+      }
       $did_migrate = true;
     }
 
@@ -125,18 +132,31 @@ class FlavorLikeInit {
     $legacy_custom_dir = trailingslashit( $uploads['basedir'] ) . 'wp-ulike';
     if ( is_dir( $legacy_custom_dir ) ) {
       $new_custom_dir = trailingslashit( $uploads['basedir'] ) . FLAVOR_LIKE_SLUG;
-      if ( ! is_dir( $new_custom_dir ) ) {
-        wp_mkdir_p( $new_custom_dir );
+      if ( ! is_dir( $new_custom_dir ) && ! wp_mkdir_p( $new_custom_dir ) ) {
+        $failed = true;
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+          error_log( sprintf( 'Flavor Like: failed to create %s for legacy upload migration.', $new_custom_dir ) );
+        }
       }
       foreach ( (array) glob( $legacy_custom_dir . '/*' ) as $legacy_file ) {
         if ( is_file( $legacy_file ) ) {
           $target = $new_custom_dir . '/' . basename( $legacy_file );
-          if ( ! file_exists( $target ) ) {
-            copy( $legacy_file, $target );
+          if ( ! file_exists( $target ) && ! copy( $legacy_file, $target ) ) {
+            $failed = true;
+            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+              error_log( sprintf( 'Flavor Like: failed to copy legacy file %s to %s.', $legacy_file, $target ) );
+            }
           }
         }
       }
       $did_migrate = true;
+    }
+
+    // Never mark the migration as complete when any step failed. The whole
+    // routine is idempotent, so the next request retries only the steps that
+    // are still pending (already-renamed tables/options are skipped).
+    if ( $failed ) {
+      return;
     }
 
     if ( $did_migrate ) {
@@ -407,7 +427,7 @@ class FlavorLikeInit {
   /**
   * Return an instance of this class.
   *
-  * @since     3.1
+  * @since 1.0.0
   *
   * @return    object    A single instance of this class.
   */
