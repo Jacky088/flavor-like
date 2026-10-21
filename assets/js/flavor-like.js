@@ -1705,13 +1705,11 @@
       forEachElement(this.buttonElement, (buttonEl) => {
         if (!buttonEl) return;
 
-        if (buttonEl.classList.contains("flavor_like_put_image")) {
-          if (status === 4) {
-            buttonEl.classList.add("image-unlike", "flavor_like_btn_is_active");
-          } else {
-            buttonEl.classList.toggle("image-unlike");
-            buttonEl.classList.toggle("flavor_like_btn_is_active");
-          }
+        if (status === 4) {
+          buttonEl.classList.add("image-unlike", "flavor_like_btn_is_active");
+        } else {
+          buttonEl.classList.toggle("image-unlike");
+          buttonEl.classList.toggle("flavor_like_btn_is_active");
         }
 
         // Safely update text label if btnText is provided and non-empty

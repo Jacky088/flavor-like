@@ -2,7 +2,7 @@
 
 
 /* Flavor Like - SaaS Blue Theme Overrides for Statistics */
-:root, .flavor-like-stats-app {
+:root, .flavor-like-stats-app, #root .flavor-like-stats-app {
   --flavor-like-stats-color-primary: #2563EB !important;
   --flavor-like-stats-color-primary-rgb: 37, 99, 235 !important;
   --flavor-like-stats-color-primary-darker-10: #1D4ED8 !important;
@@ -20,24 +20,729 @@
   --flavor-like-stats-color-link: #2563EB !important;
   --flavor-like-stats-color-link-hover: #1D4ED8 !important;
 }
-.flavor-like-stats-header {
+.flavor-like-stats-header,
+#root .flavor-like-stats-header {
   border-bottom: 1px solid #E2E8F0 !important;
   background: #FFFFFF !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 14px 24px !important;
+  min-height: 52px !important;
+}
+.flavor-like-stats-header-brand .flavor-like-stats-logo-text {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+.flavor-like-stats-header-context-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+.flavor-like-stats-header-refresh,
+.flavor-like-stats-header-focus-toggle,
+.flavor-like-stats-header-menu-toggle {
+  border-radius: 8px !important;
+  border: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  color: #475569 !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-header-refresh:hover,
+.flavor-like-stats-header-focus-toggle:hover,
+.flavor-like-stats-header-menu-toggle:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+  border-color: #BFDBFE !important;
+}
+.flavor-like-stats-sidebar,
+#root .flavor-like-stats-sidebar {
+  background: #FFFFFF !important;
+  border-inline-end: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-stats-sidebar-mobile-header {
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+.flavor-like-stats-nav {
+  padding: 8px 10px 14px !important;
+}
+.flavor-like-stats-nav-item,
+.flavor-like-stats-nav-child {
+  border-radius: 8px !important;
+  margin: 3px 0 !important;
+  padding: 9px 12px !important;
+  color: #475569 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  border: 1px solid transparent !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-nav-item:hover:not(.active),
+.flavor-like-stats-nav-child:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-nav-item.active,
+.flavor-like-stats-nav-child.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+}
+.flavor-like-stats-nav-item.active .flavor-like-stats-nav-icon,
+.flavor-like-stats-nav-child.active .flavor-like-stats-nav-icon,
+.flavor-like-stats-nav-item.active .flavor-like-stats-nav-arrow {
+  color: #2563EB !important;
+}
+.flavor-like-stats-nav-pro-badge {
+  color: #D97706 !important;
+  background: #FEF3C7 !important;
+  border: 1px solid #FDE68A !important;
+  border-radius: 9999px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 1px 6px !important;
+}
+.flavor-like-stats-sidebar-upgrade {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 10px !important;
+  color: #1E40AF !important;
+}
+.flavor-like-stats-sidebar-upgrade-link {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+  border: none !important;
+}
+.flavor-like-stats-sidebar-footer {
+  border-top: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+}
+.flavor-like-stats-sidebar-footer-link {
+  border-radius: 8px !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-sidebar-footer-link:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
 }
 .flavor-like-stats-card,
-.flavor-like-stats-section {
+.flavor-like-stats-section,
+.flavor-like-stats-stat-card,
+.flavor-like-stats-metric,
+.flavor-like-stats-pro-teaser-card {
   border: 1px solid #E2E8F0 !important;
   border-radius: 12px !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
   background: #FFFFFF !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.flavor-like-stats-stat-card:hover,
+.flavor-like-stats-pro-teaser-card:hover {
+  border-color: #93C5FD !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+.flavor-like-stats-card-header {
+  border-bottom: 1px solid #F1F5F9 !important;
+  padding: 14px 18px !important;
+}
+.flavor-like-stats-card-title,
+.flavor-like-stats-card-title-text {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+}
+.flavor-like-stats-card-subtitle {
+  color: #64748B !important;
+  font-size: 12px !important;
+}
+.flavor-like-stats-card-icon {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+}
+.flavor-like-stats-stat-card-value,
+.flavor-like-stats-metric-value {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+.flavor-like-stats-stat-card-label,
+.flavor-like-stats-metric-label {
+  color: #64748B !important;
+  font-weight: 500 !important;
 }
 .flavor-like-stats-filter-pill {
   border-radius: 8px !important;
-  border-color: #E2E8F0 !important;
+  border: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
 }
+.flavor-like-stats-filter-pill:hover {
+  border-color: #BFDBFE !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+}
+.flavor-like-stats-report-toolbar-select,
+select.flavor-like-stats-select {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-stats-report-toolbar-select:focus,
+select.flavor-like-stats-select:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18) !important;
+  outline: none !important;
+}
+.flavor-like-stats-table-wrap {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  background: #FFFFFF !important;
+}
+.flavor-like-stats-table th {
+  background: #F8FAFC !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 12px 16px !important;
+}
+.flavor-like-stats-table td {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+}
+.flavor-like-stats-table tbody tr:hover {
+  background: #F8FAFC !important;
+}
+.flavor-like-stats-btn--primary,
 .flavor-like-stats-pro-preview-btn--primary {
   background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
   border-radius: 8px !important;
   color: #FFFFFF !important;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
+  font-weight: 600 !important;
+  border: 1px solid #1D4ED8 !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-btn--primary:hover,
+.flavor-like-stats-pro-preview-btn--primary:hover {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-stats-btn--secondary,
+.flavor-like-stats-pro-preview-btn--secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+.flavor-like-stats-btn--secondary:hover,
+.flavor-like-stats-pro-preview-btn--secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-migration-notice {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  border-inline-start: 4px solid #2563EB !important;
+  border-radius: 10px !important;
+}
+.flavor-like-stats-migration-notice-title {
+  color: #1E40AF !important;
+  font-weight: 700 !important;
+}
+.flavor-like-stats-migration-notice-message {
+  color: #1E3A8A !important;
+}
+
+/* 移除统计页面底部左侧设置下方的帮助按钮 */
+.flavor-like-stats-sidebar-footer-links a[href*="about"],
+.flavor-like-stats-sidebar-footer-links a[href*="flavor-like-about"],
+.flavor-like-stats-sidebar-footer-links a:has(svg[data-name="circle-help"]) {
+  display: none !important;
+}
+
+/* 帮助文档弹窗内 SVG 尺寸严格限定（防止意外自适应铺满全屏） */
+.flavor-like-docs-modal svg {
+  max-width: 100% !important;
+  box-sizing: content-box !important;
+}
+.flavor-like-docs-section-icon svg,
+.flavor-like-docs-section-title svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+.flavor-like-docs-icon-badge svg {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+  flex-shrink: 0 !important;
+}
+.flavor-like-docs-tab-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  flex-shrink: 0 !important;
+}
+.flavor-like-docs-callout svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+
+
+/* ==========================================================================
+   Plan A: Modern SaaS Blue Overview & Statistics Dashboard Enhancements
+   ========================================================================== */
+
+/* 1. Four Core Metrics Grid & Cards */
+.flavor-like-stats-grid--metrics {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 16px !important;
+  padding: 18px !important;
+  background: #F8FAFC !important;
+}
+
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 20px 20px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric:hover {
+  border-color: #93C5FD !important;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+.flavor-like-stats-metric-head {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.flavor-like-stats-metric-icon {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* Distinct pastel badge colors for the 4 metrics */
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric:nth-child(1) .flavor-like-stats-metric-icon {
+  background: #FFE4E6 !important;
+  color: #E11D48 !important;
+}
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric:nth-child(2) .flavor-like-stats-metric-icon {
+  background: #E0F2FE !important;
+  color: #0284C7 !important;
+}
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric:nth-child(3) .flavor-like-stats-metric-icon {
+  background: #D1FAE5 !important;
+  color: #059669 !important;
+}
+.flavor-like-stats-grid--metrics .flavor-like-stats-metric:nth-child(4) .flavor-like-stats-metric-icon {
+  background: #EEF2FF !important;
+  color: #4F46E5 !important;
+}
+
+.flavor-like-stats-metric-label {
+  margin: 0 !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+}
+
+.flavor-like-stats-metric-kpi {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 10px !important;
+}
+
+.flavor-like-stats-metric-value {
+  font-size: 2.1rem !important;
+  font-weight: 800 !important;
+  color: #0F172A !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.15 !important;
+}
+
+.flavor-like-stats-metric-period {
+  margin: 0 !important;
+  font-size: 12px !important;
+  color: #94A3B8 !important;
+  font-weight: 500 !important;
+}
+
+/* 2. Top Content Leaderboard Polish */
+.flavor-like-stats-ga-table {
+  width: 100% !important;
+  border-collapse: separate !important;
+}
+
+.flavor-like-stats-ga-table-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 18px !important;
+  border-bottom: 2px solid #F1F5F9 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #64748B !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+.flavor-like-stats-ga-table-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.flavor-like-stats-ga-table-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 13px 18px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  transition: background 0.15s ease !important;
+}
+
+.flavor-like-stats-ga-table-row:hover {
+  background: #F8FAFC !important;
+}
+
+.flavor-like-stats-ga-table-row:last-child {
+  border-bottom: none !important;
+}
+
+.flavor-like-stats-ga-table-cell--content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Top 3 Medals / Rank Badges */
+.flavor-like-stats-ga-rank {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.flavor-like-stats-ga-table-row:nth-child(1) .flavor-like-stats-ga-rank {
+  background: #FEF3C7 !important;
+  color: #B45309 !important;
+  border: 1px solid #FDE68A !important;
+  font-weight: 800 !important;
+}
+
+.flavor-like-stats-ga-table-row:nth-child(2) .flavor-like-stats-ga-rank {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 800 !important;
+}
+
+.flavor-like-stats-ga-table-row:nth-child(3) .flavor-like-stats-ga-rank {
+  background: #FFEDD5 !important;
+  color: #C2410C !important;
+  border: 1px solid #FED7AA !important;
+  font-weight: 800 !important;
+}
+
+.flavor-like-stats-list-title {
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.flavor-like-stats-list-title a {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+}
+
+.flavor-like-stats-list-title a:hover {
+  color: #2563EB !important;
+  text-decoration: underline !important;
+}
+
+.flavor-like-stats-ga-count--likes {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+  padding: 3px 12px !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+/* 3. Trend Chart Section Polish */
+.flavor-like-stats-chart-section {
+  padding: 16px 20px 20px !important;
+}
+
+.flavor-like-stats-chart-panel {
+  background: #FFFFFF !important;
+  border-radius: 8px !important;
+}
+
+/* ==========================================================================
+   INSIGHTS & OVERVIEW ALIGNMENT POLISH
+   Align: 洞察 (Notice Header), 开始使用, 今天 (Notice Items)
+   ========================================================================== */
+
+/* Notice container card */
+.flavor-like-stats-insights-notice {
+  border: 1px solid #DBEAFE !important;
+  border-left: 4px solid #2563EB !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden !important;
+  margin-bottom: 24px !important;
+}
+
+/* Header & Toggle */
+.flavor-like-stats-insights-notice-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 20px !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  box-sizing: border-box !important;
+}
+
+/* Header icon: Exactly 22x22px centered */
+.flavor-like-stats-insights-notice-header > svg,
+.flavor-like-stats-insights-notice-toggle > svg {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  color: #2563EB !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Header Title (洞察) & Subtitle (基于您的数据的可操作建议) */
+.flavor-like-stats-insights-notice-header h2 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+}
+
+.flavor-like-stats-insights-notice-sub {
+  font-size: 13px !important;
+  color: #64748B !important;
+  margin: 2px 0 0 0 !important;
+  line-height: 1.4 !important;
+}
+
+.flavor-like-stats-insights-notice-count {
+  margin-left: auto !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  border: 1px solid #BFDBFE !important;
+}
+
+/* Insight Items List */
+.flavor-like-stats-insights-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  background: #F8FAFC !important;
+}
+
+.flavor-like-stats-insights-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 14px 20px !important;
+  border-bottom: 1px solid #EDF2F7 !important;
+  background: #F8FAFC !important;
+  box-sizing: border-box !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.flavor-like-stats-insights-item:hover {
+  background: #F1F5F9 !important;
+}
+
+.flavor-like-stats-insights-item:last-child {
+  border-bottom: none !important;
+}
+
+/* Item Main: Same gap (14px) and start */
+.flavor-like-stats-insights-item-main {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 14px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Item Icon: Exactly 22x22px centered to match header icon */
+.flavor-like-stats-insights-item-icon {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 1px !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.flavor-like-stats-insights-item-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.flavor-like-stats-insights-item--positive .flavor-like-stats-insights-item-icon svg {
+  color: #10B981 !important;
+}
+
+.flavor-like-stats-insights-item--info .flavor-like-stats-insights-item-icon svg {
+  color: #3B82F6 !important;
+}
+
+.flavor-like-stats-insights-item--warning .flavor-like-stats-insights-item-icon svg {
+  color: #F59E0B !important;
+}
+
+/* Item Titles (开始使用, 今天, etc.) */
+.flavor-like-stats-insights-item-title {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+  line-height: 1.3 !important;
+  margin: 0 0 3px 0 !important;
+}
+
+/* Item Message */
+.flavor-like-stats-insights-item-message {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: #475569 !important;
+  margin: 0 !important;
+}
+
+/* Timing Card Polish */
+.flavor-like-stats-timing-hero {
+  border-radius: 8px !important;
+  border: 1px solid #BFDBFE !important;
+  background: #EFF6FF !important;
+  padding: 16px 20px !important;
+  margin-bottom: 16px !important;
+}
+
+.flavor-like-stats-timing-hero-label {
+  color: #2563EB !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.flavor-like-stats-timing-hero-value {
+  color: #0F172A !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+}
+
+.flavor-like-stats-timing-hero-detail {
+  color: #334155 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  margin-top: 6px !important;
+}
+
+/* ==========================================================================
+   ELIMINATE DARK MODE CONTROLS
+   Always keep clean light SaaS UI
+   ========================================================================== */
+.flavor-like-stats-header-theme-toggle,
+.flavor-like-stats-header-refresh:has(svg.flavor-like-stats-icon-sun),
+.flavor-like-stats-header-refresh:has(svg.flavor-like-stats-icon-moon),
+button[aria-label*="dark mode"],
+button[aria-label*="light mode"],
+button[title*="dark mode"],
+button[title*="light mode"] {
+  display: none !important;
 }

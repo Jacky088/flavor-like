@@ -49,7 +49,19 @@ if( ! function_exists( 'flavor_like_put_posts' ) ){
 		// Stack variable
 		$output = $content;
 
-		// 判断是否应该显示
+		// 1. 严格检查文章类型：当前内容类型必须在"启用的文章类型"列表中
+		$post_id            = get_the_ID();
+		$current_post_type  = $post_id ? get_post_type( $post_id ) : get_post_type();
+		$allowed_post_types = flavor_like_setting_repo::getPostTypesFilterList();
+		if ( empty( $allowed_post_types ) || ! is_array( $allowed_post_types ) ) {
+			$allowed_post_types = array( 'post' );
+		}
+
+		if ( $current_post_type && ! in_array( $current_post_type, $allowed_post_types, true ) ) {
+			return apply_filters( 'flavor_like_the_content', $content, $content );
+		}
+
+		// 2. 检查页面场景：当前页面视图是否在"显示按钮位置"列表中
 		$should_display = false;
 
 		// 获取"显示按钮位置"：DB 存的是 hide-list（用户没勾选的位置）
@@ -64,7 +76,7 @@ if( ! function_exists( 'flavor_like_put_posts' ) ){
 
 		// 把 hide-list 转为 show-on 列表
 		$all_contexts = array( 'home', 'single', 'archive', 'category', 'search', 'tag', 'author' );
-		$show_on = array_values( array_diff( $all_contexts, $hide_list ) );
+		$show_on      = array_values( array_diff( $all_contexts, $hide_list ) );
 
 		// 检查当前页面上下文是否在 show-on 列表中
 		$context_map = array(
@@ -78,17 +90,9 @@ if( ! function_exists( 'flavor_like_put_posts' ) ){
 		);
 
 		foreach ( $show_on as $context ) {
-			if ( isset( $context_map[ $context ] ) && $context_map[ $context ] ) {
+			if ( ! empty( $context_map[ $context ] ) ) {
 				$should_display = true;
 				break;
-			}
-		}
-
-		// 如果是 singular 页面，还要检查"始终在文章类型上显示"
-		if ( ! $should_display && is_singular() ) {
-			$allowed_post_types = flavor_like_setting_repo::getPostTypesFilterList();
-			if ( ! empty( $allowed_post_types ) && in_array( get_post_type(), $allowed_post_types, true ) ) {
-				$should_display = true;
 			}
 		}
 
@@ -264,37 +268,16 @@ if( ! function_exists( 'flavor_like_display_inline_likers_template' ) ){
 
 if( ! function_exists( 'flavor_like_update_button_icon' ) ){
 	/**
-	 * Update button icons
+	 * Update button icons (Deprecated)
 	 *
+	 * @deprecated 3.0.0 Button image customization was removed in favor of vector SVG templates.
 	 * @param array $args
 	 * @return void
 	 */
-	function flavor_like_update_button_icon( $args ){
-		$button_type  = flavor_like_get_option( $args['setting'] . '|button_type' );
-		$image_group  = flavor_like_get_option( $args['setting'] . '|image_group' );
-		$return_style = null;
-
-		// Check value
-		if( $button_type !== 'image' || empty( $image_group ) || ! in_array( $args['style'], array( 'flavorlike-default', 'flavor-like-pro-default', 'flavorlike-heart' ) ) ){
-			return;
-		}
-
-		if( isset( $image_group['like'] ) && ! empty( $image_group['like'] ) ) {
-			$return_style .= '.flavor_like_btn.flavor_like_put_image:after { background-image: url('.esc_url($image_group['like']).') !important; }';
-		}
-		if( isset( $image_group['unlike'] ) && ! empty( $image_group['unlike'] ) ) {
-			$return_style .= '.flavor_like_btn.flavor_like_put_image.flavor_like_btn_is_active:after { background-image: url('.esc_url($image_group['unlike']).') !important; filter:none; }';
-		}
-		if( isset( $image_group['dislike'] ) && ! empty( $image_group['dislike'] ) ) {
-			$return_style .= '.flavorlike_down_vote .flavor_like_btn.flavor_like_put_image:after { background-image: url('.esc_url($image_group['dislike']).') !important; }';
-		}
-		if( isset( $image_group['undislike'] ) && ! empty( $image_group['undislike'] ) ) {
-			$return_style .= '.flavorlike_down_vote .flavor_like_btn.flavor_like_put_image.flavor_like_btn_is_active:after { background-image: url('.esc_url($image_group['undislike']).') !important; filter:none; }';
-		}
-
-		echo !empty( $return_style ) ? sprintf( '<style>%s</style>', wp_strip_all_tags( $return_style ) ) : '';
+	function flavor_like_update_button_icon( $args = null ){
+		// Deprecated no-op: Modern templates use pure vector SVG icons and do not support raster CSS sprites.
+		return;
 	}
-	add_action( 'flavor_like_inside_template', 'flavor_like_update_button_icon', 1 );
 }
 
 

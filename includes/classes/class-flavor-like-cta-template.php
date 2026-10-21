@@ -119,18 +119,22 @@ if ( ! class_exists( 'flavor_like_cta_template' ) ) {
 			$temp_list = call_user_func( 'flavor_like_generate_templates_list' );
 			$func_name = isset( $temp_list[ $this->args['style'] ]['callback'] ) ? $temp_list[ $this->args['style'] ]['callback'] : 'flavor_like_set_default_template';
 
-			if( $this->args['button_type'] == 'image' || ( isset( $temp_list[$this->args['style']]['is_text_support'] ) && ! $temp_list[$this->args['style']]['is_text_support'] ) ){
-				$button_class_name .= ' flavor_like_put_image';
- 				if( in_array( $method_id, array( 2, 4 ) ) ){
-					$button_class_name .= ' image-unlike flavor_like_btn_is_active';
+			$is_text_supported = ! isset( $temp_list[$this->args['style']]['is_text_support'] ) || ! empty( $temp_list[$this->args['style']]['is_text_support'] );
+
+			if( in_array( $method_id, array( 2, 4 ) ) ){
+				$button_class_name .= ' image-unlike flavor_like_btn_is_active';
+			}
+
+			if( $is_text_supported ){
+				$button_class_name .= ' flavor_like_put_text';
+				$type = ! empty( $this->args['type'] ) ? $this->args['type'] : ( ! empty( $this->args['slug'] ) ? $this->args['slug'] : 'post' );
+				if( in_array( $method_id, array( 2, 4 ) ) && strpos( $this->getPrevStatus(), 'dis') !== 0){
+					$button_text = flavor_like_setting_repo::getButtonText( $type, 'unlike' );
+				} else {
+					$button_text = flavor_like_setting_repo::getButtonText( $type, 'like' );
 				}
 			} else {
-				$button_class_name .= ' flavor_like_put_text';
- 				if( in_array( $method_id, array( 2, 4 ) ) && strpos( $this->getPrevStatus(), 'dis') !== 0){
-					$button_text = flavor_like_setting_repo::getButtonText( $this->args['type'], 'unlike' );
-				} else {
-					$button_text = flavor_like_setting_repo::getButtonText( $this->args['type'], 'like' );
-				}
+				$button_class_name .= ' flavor_like_put_image';
 			}
 
 			// Add unique class name for each button
@@ -167,7 +171,7 @@ if ( ! class_exists( 'flavor_like_cta_template' ) ) {
 					"up_vote_inner_text"    => $this->args['up_vote_inner_text'] ? flavor_like_kses( $this->args['up_vote_inner_text'] ) : '',
 					"down_vote_inner_text"  => $this->args['down_vote_inner_text'] ? flavor_like_kses( $this->args['down_vote_inner_text'] ) : '',
 					"style"                 => esc_html( $this->args['style'] ),
-					"button_type"           => esc_html( $this->args['button_type'] ),
+					"button_type"           => esc_html( isset( $this->args['button_type'] ) ? $this->args['button_type'] : 'text' ),
 					"display_likers"        => esc_attr( $this->args['display_likers'] ),
 					"display_counters"      => $this->cached_counter_visible,
 					"disable_pophover"      => esc_attr( $this->args['disable_pophover'] ),

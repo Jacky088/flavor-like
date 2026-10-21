@@ -99,3 +99,451 @@
   background: #2563EB !important;
   border-color: #2563EB !important;
 }
+
+/* ==========================================================================
+   Flavor Like - Overview (概览) SaaS Blue Card Modern Styles
+   ========================================================================== */
+.wrap.flavor-like-about,
+.flavor-like-about {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 16px 0 32px 0 !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+.flavor-like-about__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.flavor-like-about__badge {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 2px 10px !important;
+}
+
+.flavor-like-about__lead {
+  color: #64748B !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 24px !important;
+  max-width: 100% !important;
+}
+
+.flavor-like-about__layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 300px !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+@media (max-width: 960px) {
+  .flavor-like-about__layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+.flavor-like-about-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  padding: 24px 24px !important;
+  box-sizing: border-box !important;
+}
+
+.flavor-like-about-card__header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 18px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+
+.flavor-like-about-card__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+
+.flavor-like-about-card__link {
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-decoration: none !important;
+}
+
+.flavor-like-about-card__link:hover {
+  color: #1D4ED8 !important;
+  text-decoration: underline !important;
+}
+
+.flavor-like-about-summary {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  border-inline-start: 4px solid #2563EB !important;
+  border-radius: 8px !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  padding: 12px 16px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 18px !important;
+}
+
+.flavor-like-about-status-group__title {
+  color: #64748B !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin: 18px 0 10px !important;
+}
+
+.flavor-like-about-status {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.flavor-like-about-status__item {
+  padding: 14px 16px !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.flavor-like-about-status__item:hover {
+  border-color: #BFDBFE !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08) !important;
+}
+
+.flavor-like-about-status__label {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: #64748B !important;
+  margin-bottom: 6px !important;
+}
+
+.flavor-like-about-status__value {
+  display: block !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+
+.flavor-like-about-status__hint {
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 12px !important;
+  color: #64748B !important;
+}
+
+.flavor-like-about-status__item--good {
+  border-color: #86EFAC !important;
+  background: #F0FDF4 !important;
+}
+
+.flavor-like-about-status__item--good .flavor-like-about-status__value {
+  color: #15803D !important;
+}
+
+.flavor-like-about-status__item--bad {
+  border-color: #FECACA !important;
+  background: #FEF2F2 !important;
+}
+
+.flavor-like-about-status__item--bad .flavor-like-about-status__value {
+  color: #B91C1C !important;
+}
+
+.flavor-like-about-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin-top: 14px !important;
+}
+
+.flavor-like-about-actions__btn.button-primary,
+.flavor-like-about-task__actions .button-primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border: 1px solid #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  padding: 8px 18px !important;
+  min-height: 38px !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+
+.flavor-like-about-actions__btn.button-primary:hover,
+.flavor-like-about-task__actions .button-primary:hover {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+
+.flavor-like-about-actions__btn.button-secondary,
+.flavor-like-about-card .button-secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  padding: 7px 16px !important;
+  min-height: 36px !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+
+.flavor-like-about-actions__btn.button-secondary:hover,
+.flavor-like-about-card .button-secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+
+.flavor-like-about-meta div {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  font-size: 13px !important;
+}
+
+.flavor-like-about-meta dt {
+  color: #64748B !important;
+  font-weight: 500 !important;
+}
+
+.flavor-like-about-meta dd {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+}
+
+.flavor-like-about-meta a {
+  color: #2563EB !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+
+.flavor-like-about-backup,
+.flavor-like-about-card--muted {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+.flavor-like-about-backup__intro {
+  color: #64748B !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 14px !important;
+}
+
+.flavor-like-about-backup__import {
+  border-top: 1px solid #F1F5F9 !important;
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+}
+
+.flavor-like-about-backup__import summary {
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  cursor: pointer !important;
+}
+
+.flavor-like-about-backup__label {
+  color: #1E293B !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+}
+
+.flavor-like-about-backup__file {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #F8FAFC !important;
+  padding: 8px 12px !important;
+  font-size: 12.5px !important;
+  color: #1E293B !important;
+}
+
+.flavor-like-about-backup .button {
+  border-radius: 8px !important;
+  min-height: 36px !important;
+  font-weight: 500 !important;
+}
+
+
+/* ==========================================================================
+   WordPress Left Admin Menu Fix - Keep Menu Fixed and Independent from Page Scroll
+   ========================================================================== */
+@media screen and (min-width: 783px) {
+  body.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.toplevel_page_flavor-like-statistics #adminmenuback,
+  body[class*="flavor-like"] #adminmenuback,
+  body:has(#optiwich-root) #adminmenuback {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 1 !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body[class*="flavor-like"] #adminmenuwrap,
+  body:has(#optiwich-root) #adminmenuwrap {
+    position: fixed !important;
+    top: var(--wp-admin--admin-bar--height, 32px) !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 9990 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuback,
+  body.rtl[class*="flavor-like"] #adminmenuback,
+  body.rtl:has(#optiwich-root) #adminmenuback {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body.rtl[class*="flavor-like"] #adminmenuwrap,
+  body.rtl:has(#optiwich-root) #adminmenuwrap {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  /* 1. Only fly out submenus for non-current / closed top-level items when sidebar is expanded */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    position: fixed !important;
+    left: 160px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 2. Lock the current open submenu (Flavor Like -> 统计/设置) strictly inline inside sidebar to prevent hover flicker */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: block !important;
+    z-index: 1 !important;
+    transform: none !important;
+  }
+
+  /* 3. Folded sidebar (collapsed to 36px icon strip) */
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    position: fixed !important;
+    left: 36px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 4. RTL mode */
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    left: auto !important;
+    right: 160px !important;
+  }
+
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    left: auto !important;
+    right: 36px !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-thumb,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-thumb,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-track,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-track,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+}
+

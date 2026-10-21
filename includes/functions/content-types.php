@@ -57,7 +57,7 @@ if( ! function_exists( 'flavor_like' ) ){
 			"disable_pophover"     => isset( $options['disable_likers_pophover'] ) ? $options['disable_likers_pophover'] : 0,
 			"likers_style"         => isset( $options['likers_style'] ) ? $options['likers_style'] : 'popover',
 			"style"                => isset( $options['template'] ) ? $options['template'] : 'flavorlike-default',
-			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'image',
+			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'text',
 			"only_logged_in_users" => isset( $options['enable_only_logged_in_users'] ) ? $options['enable_only_logged_in_users'] : 0,
 			"logged_out_action"    => isset( $options['logged_out_display_type'] ) ? $options['logged_out_display_type'] : 'button',
 		) );
@@ -183,7 +183,7 @@ if( ! function_exists( 'flavor_like_comments' ) ){
 			"disable_pophover"     => isset( $options['disable_likers_pophover'] ) ? $options['disable_likers_pophover'] : 0,
 			"likers_style"         => isset( $options['likers_style'] ) ? $options['likers_style'] : 'popover',
 			"style"                => isset( $options['template'] ) ? $options['template'] : 'flavorlike-default',
-			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'image',
+			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'text',
 			"only_logged_in_users" => isset( $options['enable_only_logged_in_users'] ) ? $options['enable_only_logged_in_users'] : 0,
 			"logged_out_action"    => isset( $options['logged_out_display_type'] ) ? $options['logged_out_display_type'] : 'button',
 		) );
@@ -314,7 +314,7 @@ if( ! function_exists( 'flavor_like_buddypress' ) ){
 			"disable_pophover"     => isset( $options['disable_likers_pophover'] ) ? $options['disable_likers_pophover'] : 0,
 			"likers_style"         => isset( $options['likers_style'] ) ? $options['likers_style'] : 'popover',
 			"style"                => isset( $options['template'] ) ? $options['template'] : 'flavorlike-default',
-			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'image',
+			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'text',
 			"only_logged_in_users" => isset( $options['enable_only_logged_in_users'] ) ? $options['enable_only_logged_in_users'] : 0,
 			"logged_out_action"    => isset( $options['logged_out_display_type'] ) ? $options['logged_out_display_type'] : 'button',
 		) );
@@ -531,7 +531,7 @@ if( ! function_exists( 'flavor_like_bbpress' ) ){
 			"disable_pophover"     => isset( $options['disable_likers_pophover'] ) ? $options['disable_likers_pophover'] : 0,
 			"likers_style"         => isset( $options['likers_style'] ) ? $options['likers_style'] : 'popover',
 			"style"                => isset( $options['template'] ) ? $options['template'] : 'flavorlike-default',
-			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'image',
+			"button_type"          => isset( $options['button_type'] ) ? $options['button_type'] : 'text',
 			"only_logged_in_users" => isset( $options['enable_only_logged_in_users'] ) ? $options['enable_only_logged_in_users'] : 0,
 			"logged_out_action"    => isset( $options['logged_out_display_type'] ) ? $options['logged_out_display_type'] : 'button',
 		) );

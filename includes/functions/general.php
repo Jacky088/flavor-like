@@ -48,6 +48,12 @@ if ( ! function_exists( 'flavor_like_get_option' ) ) {
 		// Static cache for parsed nested options to avoid repeated parsing
 		static $parsed_options_cache = array();
 
+		// Allow programmatic flushing of static cache (e.g. after saving settings or in tests)
+		if ( $option === '__FLUSH__' ) {
+			$parsed_options_cache = array();
+			return null;
+		}
+
 		// Return all settings if no option specified
 		if ( empty( $option ) ) {
 			$settings = get_option( 'flavor_like_settings' );
@@ -97,6 +103,19 @@ if ( ! function_exists( 'flavor_like_get_option' ) ) {
 
 		return $result;
 	}
+}
+
+if( ! function_exists( 'flavor_like_flush_options_cache' ) ){
+	/**
+	 * Flush the parsed options static cache
+	 *
+	 * @return void
+	 */
+	function flavor_like_flush_options_cache() {
+		flavor_like_get_option( '__FLUSH__' );
+	}
+	add_action( 'flavor_like_settings_saved', 'flavor_like_flush_options_cache' );
+	add_action( 'update_option_flavor_like_settings', 'flavor_like_flush_options_cache' );
 }
 
 if( ! function_exists( 'flavor_like_get_table_info' ) ){

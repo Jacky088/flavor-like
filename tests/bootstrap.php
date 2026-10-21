@@ -200,6 +200,7 @@ function wp_get_current_user() {
 	$user = new stdClass();
 	$user->ID = $current_user_id;
 	$user->user_login = $current_user_id > 0 ? 'testuser' : '';
+	$user->roles = array( 'administrator' );
 	return $user;
 }
 
@@ -210,9 +211,48 @@ function _n( $single, $plural, $number, $domain = 'default' ) { return $number =
 function _x( $text, $context, $domain = 'default' ) { return $text; }
 function esc_html( $text ) { return htmlspecialchars( (string)$text, ENT_QUOTES, 'UTF-8' ); }
 function esc_html__( $text, $domain = 'default' ) { return esc_html( $text ); }
+function esc_html_e( $text, $domain = 'default' ) { echo esc_html( $text ); }
+function esc_attr_e( $text, $domain = 'default' ) { echo esc_attr( $text ); }
 function esc_attr( $text ) { return htmlspecialchars( (string)$text, ENT_QUOTES, 'UTF-8' ); }
 function esc_attr__( $text, $domain = 'default' ) { return esc_attr( $text ); }
 function esc_url( $url ) { return filter_var( $url, FILTER_SANITIZE_URL ) ?: ''; }
+function esc_js( $text ) { return addcslashes( (string)$text, "\\'\"&\n\r<>" ); }
+function admin_url( $path = '', $scheme = 'admin' ) { return 'http://example.com/wp-admin/' . ltrim( $path, '/' ); }
+function add_query_arg( ...$args ) {
+	if ( is_array( $args[0] ) ) {
+		$url = isset( $args[1] ) ? $args[1] : '';
+		$sep = strpos( $url, '?' ) !== false ? '&' : '?';
+		return $url . $sep . http_build_query( $args[0] );
+	}
+	$url = isset( $args[2] ) ? $args[2] : '';
+	$sep = strpos( $url, '?' ) !== false ? '&' : '?';
+	return $url . $sep . urlencode( $args[0] ) . '=' . urlencode( $args[1] );
+}
+function wp_safe_redirect( $location, $status = 302 ) { return true; }
+function wp_login_url( $redirect = '', $force_reauth = false ) { return 'http://example.com/wp-login.php'; }
+function current_user_can( $capability, ...$args ) { return true; }
+function wp_get_theme( $stylesheet = null, $theme_root = null ) {
+	return new class {
+		public function get( $header ) {
+			if ( 'Name' === $header ) return 'JustNews';
+			if ( 'Version' === $header ) return '6.0';
+			return '';
+		}
+	};
+}
+global $mock_admin_menus, $mock_admin_submenus;
+$mock_admin_menus = array();
+$mock_admin_submenus = array();
+function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $callback = '', $icon_url = '', $position = null ) {
+	global $mock_admin_menus;
+	$mock_admin_menus[] = array( 'page_title' => $page_title, 'menu_title' => $menu_title, 'capability' => $capability, 'menu_slug' => $menu_slug, 'position' => $position );
+	return 'toplevel_page_' . $menu_slug;
+}
+function add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callback = '', $position = null ) {
+	global $mock_admin_submenus;
+	$mock_admin_submenus[] = array( 'parent_slug' => $parent_slug, 'page_title' => $page_title, 'menu_title' => $menu_title, 'capability' => $capability, 'menu_slug' => $menu_slug, 'position' => $position );
+	return $parent_slug . '_page_' . $menu_slug;
+}
 function esc_sql( $data ) {
 	return is_array( $data ) ? array_map( 'esc_sql', $data ) : addslashes( (string)$data );
 }
@@ -276,6 +316,7 @@ function is_wp_error( $thing ) {
 	return ( $thing instanceof WP_Error );
 }
 
+function wp_date( $format, $timestamp = null, $timezone = null ) { return date( $format, $timestamp ?? time() ); }
 function current_time( $type, $gmt = 0 ) {
 	return 'mysql' === $type ? ( $gmt ? gmdate( 'Y-m-d H:i:s' ) : date( 'Y-m-d H:i:s' ) ) : ( $gmt ? time() : time() );
 }
@@ -299,6 +340,10 @@ function wp_verify_nonce( $nonce, $action = -1 ) {
 
 function check_ajax_referer( $action = -1, $query_arg = false, $die = true ) {
 	return true;
+}
+
+function wp_send_json( $data = null, $status_code = null ) {
+	echo json_encode( $data );
 }
 
 function wp_send_json_success( $data = null, $status_code = null ) {
@@ -470,6 +515,8 @@ function wp_upload_dir() {
 }
 
 // Mock wpdb
+class WP_Widget {}
+
 class MockWPDB {
 	public $prefix = 'wp_';
 	public $insert_id = 1;

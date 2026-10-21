@@ -53,6 +53,36 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		public function __construct() {
 			add_action( 'admin_menu', array( $this, 'menus' ) );
 			add_action( 'admin_head', array( $this, 'admin_menu_icon_styles' ) );
+			add_action( 'admin_init', array( $this, 'handle_legacy_about_redirect' ) );
+		}
+
+		/**
+		 * Redirect legacy Overview screen to Settings System & Backup tab.
+		 *
+		 * @since 1.1.0
+		 * @return void
+		 */
+		public function handle_legacy_about_redirect() {
+			if ( isset( $_GET['page'] ) && 'flavor-like-about' === $_GET['page'] ) {
+				$query = $_GET;
+				unset( $query['page'] );
+				$target = admin_url( 'admin.php?page=flavor-like-settings&settings-page=system_status&settings-section=system_tools' );
+				if ( ! empty( $query ) ) {
+					$target = add_query_arg( $query, $target );
+				}
+				wp_safe_redirect( $target );
+				exit;
+			}
+			if ( isset( $_GET['page'] ) && 'flavor-like-customize' === $_GET['page'] ) {
+				$query = $_GET;
+				unset( $query['page'] );
+				$target = admin_url( 'admin.php?page=flavor-like-settings' );
+				if ( ! empty( $query ) ) {
+					$target = add_query_arg( $query, $target );
+				}
+				wp_safe_redirect( $target );
+				exit;
+			}
 		}
 
 		/**
@@ -68,13 +98,13 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 				$this->get_default_submenus()
 			);
 
-			// Register parent menu.
+			// Register parent menu (Statistics as primary dashboard).
 			$parent_hook = $this->register_parent_menu();
 
-			// Register settings submenu.
-			$this->register_settings_submenu( $parent_hook );
+			// Register statistics submenu (replaces first auto-generated submenu).
+			$this->register_statistics_submenu( $parent_hook );
 
-			// Register filtered submenus.
+			// Register filtered submenus (Customize, Settings).
 			$this->register_submenus();
 
 			// Add menu badge if needed.
@@ -89,32 +119,20 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 		 */
 		private function get_default_submenus() {
 			return array(
-				'customize'  => array(
-					'title'       => esc_html__( 'Customize', 'flavor-like' ),
-					'parent_slug' => 'flavor-like-settings',
+				'settings' => array(
+					'title'       => esc_html__( 'Settings', 'flavor-like' ),
+					'parent_slug' => 'flavor-like-statistics',
 					'capability'  => 'manage_options',
 					'path'        => FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/optiwich.php',
-					'menu_slug'   => 'flavor-like-customize',
-				),
-				'statistics' => array(
-					'title'       => esc_html__( 'Statistics', 'flavor-like' ),
-					'parent_slug' => 'flavor-like-settings',
-					'capability'  => 'stats',
-					'path'        => FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/statistics.php',
-					'menu_slug'   => 'flavor-like-statistics',
-				),
-				'overview'   => array(
-					'title'       => esc_html__( 'Overview', 'flavor-like' ),
-					'parent_slug' => 'flavor-like-settings',
-					'capability'  => 'manage_options',
-					'path'        => FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/about.php',
-					'menu_slug'   => 'flavor-like-about',
+					'menu_slug'   => 'flavor-like-settings',
 				),
 			);
 		}
 
 		/**
 		 * Register parent menu page.
+		 *
+		 * Points primary menu directly to the Statistics dashboard.
 		 *
 		 * @since 4.6.0
 		 * @return string|false The resulting page's hook_suffix, or false on failure.
@@ -130,50 +148,48 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 				$page_title,
 				$menu_title,
 				$capability,
-				'flavor-like-settings',
+				'flavor-like-statistics',
 				array( $this, 'load_template' ),
 				$menu_icon,
 				self::MENU_POSITION
 			);
 
-			// Store parent menu template path.
+			// Store parent menu template path (Statistics).
 			if ( $parent_hook ) {
-				$this->views[ $parent_hook ] = FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/optiwich.php';
+				$this->views[ $parent_hook ] = FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/statistics.php';
 			}
 
 			return $parent_hook;
 		}
 
 		/**
-		 * Register settings submenu page.
+		 * Register statistics submenu page.
 		 *
-		 * Settings panel requires manage_options capability for security.
+		 * Replaces auto-generated first submenu item with 'Statistics'.
 		 *
 		 * @since 4.6.0
 		 * @param string|false $parent_hook Parent menu hook suffix.
 		 * @return void
 		 */
-		private function register_settings_submenu( $parent_hook ) {
+		private function register_statistics_submenu( $parent_hook ) {
 			if ( ! $parent_hook ) {
 				return;
 			}
 
-			// Settings panel requires manage_options capability for security.
-			$capability = 'manage_options';
+			$capability = $this->get_menu_capability( 'stats' );
 
-			// Replace auto-generated first submenu with our own to avoid duplicate.
-			$settings_submenu_hook = add_submenu_page(
-				'flavor-like-settings',
-				esc_html__( 'Flavor Like Settings', 'flavor-like' ),
-				esc_html__( 'Settings', 'flavor-like' ),
+			$stats_submenu_hook = add_submenu_page(
+				'flavor-like-statistics',
+				esc_html__( 'Statistics', 'flavor-like' ),
+				esc_html__( 'Statistics', 'flavor-like' ),
 				$capability,
-				'flavor-like-settings',
+				'flavor-like-statistics',
 				array( $this, 'load_template' )
 			);
 
-			// Store settings submenu template path (same as parent).
-			if ( $settings_submenu_hook ) {
-				$this->views[ $settings_submenu_hook ] = FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/optiwich.php';
+			// Store statistics submenu template path.
+			if ( $stats_submenu_hook ) {
+				$this->views[ $stats_submenu_hook ] = FLAVOR_LIKE_ADMIN_DIR . '/includes/templates/statistics.php';
 			}
 		}
 
@@ -308,7 +324,7 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 
 			// Find menu item by slug instead of position number.
 			foreach ( $menu as $key => $menu_item ) {
-				if ( isset( $menu_item[2] ) && 'flavor-like-settings' === $menu_item[2] ) {
+				if ( isset( $menu_item[2] ) && in_array( $menu_item[2], array( 'flavor-like-statistics', 'flavor-like-settings' ), true ) ) {
 					$menu[ $key ][0] .= flavor_like_badge_count_format( $badge_count );
 					break;
 				}
@@ -349,10 +365,12 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 			$icon_url = FLAVOR_LIKE_ASSETS_URL . '/img/menu-icon.svg?ver=' . FLAVOR_LIKE_VERSION;
 			?>
 			<style id="flavor-like-admin-menu-icon-css">
-				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image {
+				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image,
+				#adminmenu #toplevel_page_flavor-like-statistics .wp-menu-image {
 					background: none !important;
 				}
-				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image::before {
+				#adminmenu #toplevel_page_flavor-like-settings .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-statistics .wp-menu-image::before {
 					content: '' !important;
 					display: inline-block !important;
 					width: 20px !important;
@@ -365,8 +383,11 @@ if ( ! class_exists( 'flavor_like_admin_pages' ) ) {
 					transition: all 0.1s ease-in-out !important;
 				}
 				#adminmenu #toplevel_page_flavor-like-settings:hover .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-statistics:hover .wp-menu-image::before,
 				#adminmenu #toplevel_page_flavor-like-settings.wp-has-current-submenu .wp-menu-image::before,
-				#adminmenu #toplevel_page_flavor-like-settings.current .wp-menu-image::before {
+				#adminmenu #toplevel_page_flavor-like-statistics.wp-has-current-submenu .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-settings.current .wp-menu-image::before,
+				#adminmenu #toplevel_page_flavor-like-statistics.current .wp-menu-image::before {
 					background-color: currentColor !important;
 				}
 			</style>

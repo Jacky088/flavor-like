@@ -244,9 +244,7 @@ class FlavorLikeInit {
     if (  $plugin_file === FLAVOR_LIKE_BASENAME ) {
       $settings = array('settings'  => '<a href="admin.php?page=flavor-like-settings">' . esc_html__('Settings', 'flavor-like') . '</a>');
       $stats    = array('stats'     => '<a href="admin.php?page=flavor-like-statistics">' . esc_html__('Statistics', 'flavor-like') . '</a>');
-      $about    = array('overview'  => '<a href="admin.php?page=flavor-like-about">' . esc_html__( 'Overview', 'flavor-like' ) . '</a>');
       // Merge on actions array
-      $actions  = array_merge( $about, $actions );
       $actions  = array_merge( $stats, $actions );
       $actions  = array_merge( $settings, $actions );
     }

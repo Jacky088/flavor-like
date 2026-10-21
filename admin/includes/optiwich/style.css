@@ -501,3 +501,758 @@
   background: #F8FAFC !important;
   border-bottom: 1px solid #E2E8F0 !important;
 }
+
+/* ==========================================================================
+   Flavor Like - Customize (自定义) SaaS Blue Card Modern Styles
+   ========================================================================== */
+
+/* App & Canvas */
+.optiwich-app.optiwich-customizer-editor,
+#optiwich-root .optiwich-customizer-editor,
+.optiwich-customizer-preview-panel {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Header & Toolbar */
+.optiwich-customizer-header,
+#optiwich-root .optiwich-customizer-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 0 16px !important;
+  min-height: 52px !important;
+}
+
+.optiwich-customizer-header .optiwich-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.optiwich-customizer-toolbar-context {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+}
+
+.optiwich-customizer-toolbar-icon-button {
+  border-radius: 8px !important;
+  color: #475569 !important;
+  border: 1px solid transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-toolbar-icon-button:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+}
+
+.optiwich-customizer-toolbar-icon-button.is-active {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-color: #BFDBFE !important;
+}
+
+/* Header Buttons */
+.optiwich-customizer-header-button.optiwich-customizer-header-button-primary,
+.optiwich-customizer-editor .optiwich-wp-button--primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border: 1px solid #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-header-button.optiwich-customizer-header-button-primary:hover:not(:disabled),
+.optiwich-customizer-editor .optiwich-wp-button--primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+
+.optiwich-customizer-header-button,
+.optiwich-customizer-editor .optiwich-wp-button--secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-header-button:hover:not(:disabled),
+.optiwich-customizer-editor .optiwich-wp-button--secondary:hover:not(:disabled) {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+
+/* Left Sidebar */
+.optiwich-customizer-sidebar,
+#optiwich-root .optiwich-customizer-sidebar {
+  background: #FFFFFF !important;
+  border-inline-end: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+.optiwich-customizer-sidebar-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 14px 18px !important;
+}
+
+.optiwich-customizer-sidebar-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+
+/* Template Selector Buttons in Customizer (Card Style) */
+.optiwich-customizer-template-selector {
+  border-bottom: 1px solid #F1F5F9 !important;
+  padding-bottom: 14px !important;
+}
+
+.optiwich-customizer-template-button {
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  padding: 10px 14px !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.optiwich-customizer-template-button:hover:not(.active) {
+  border-color: #93C5FD !important;
+  background: #F8FAFC !important;
+  transform: translateY(-1px) !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.08) !important;
+}
+
+.optiwich-customizer-template-button.active {
+  border: 2px solid #2563EB !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+
+.optiwich-customizer-template-button.active svg {
+  color: #2563EB !important;
+}
+
+/* Nav items in Customizer */
+.optiwich-customizer-nav-item {
+  border-radius: 8px !important;
+  margin: 3px 0 !important;
+  padding: 9px 12px !important;
+  color: #475569 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  border: 1px solid transparent !important;
+  border-inline-start: none !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-nav-item:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.optiwich-customizer-nav-item.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  border-inline-start: none !important;
+}
+
+.optiwich-customizer-nav-item.active svg {
+  color: #2563EB !important;
+}
+
+.optiwich-customizer-nav-children {
+  border-inline-start: 1.5px solid #E2E8F0 !important;
+  margin-top: 4px !important;
+  padding-inline-start: 8px !important;
+}
+
+.optiwich-customizer-nav-child {
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 7px 12px !important;
+  color: #475569 !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-nav-child:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.optiwich-customizer-nav-child.active {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+}
+
+/* Preview Canvas Header */
+.optiwich-customizer-preview-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 10px 18px !important;
+}
+
+.optiwich-customizer-preview-title {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+}
+
+.optiwich-customizer-preview-devices {
+  border-inline-end: 1px solid #E2E8F0 !important;
+}
+
+.optiwich-customizer-preview-device {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  color: #64748B !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-preview-device:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.optiwich-customizer-preview-device.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+}
+
+.optiwich-customizer-preview-refresh {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  color: #64748B !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-preview-refresh:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+}
+
+/* Preview Card Frames */
+.optiwich-customizer-preview-content.optiwich-customizer-preview-desktop .optiwich-customizer-preview-frame-wrapper {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  background: #FFFFFF !important;
+}
+
+.optiwich-customizer-preview-content.optiwich-customizer-preview-tablet .optiwich-customizer-preview-frame-wrapper {
+  border: 8px solid #1E293B !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+}
+
+.optiwich-customizer-preview-content.optiwich-customizer-preview-mobile .optiwich-customizer-preview-frame-wrapper {
+  border: 8px solid #1E293B !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Right Controls Panel Card */
+.optiwich-customizer-controls-panel,
+#optiwich-root .optiwich-customizer-controls-panel {
+  background: #FFFFFF !important;
+  border-inline-start: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+.optiwich-customizer-controls-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 18px 20px 16px !important;
+}
+
+.optiwich-customizer-controls-tab {
+  color: #2563EB !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+.optiwich-customizer-controls-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+.optiwich-customizer-controls-desc {
+  color: #64748B !important;
+  font-size: 13px !important;
+}
+
+.optiwich-customizer-block-icon {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+}
+
+/* Accordion Field Groups */
+.optiwich-customizer-field-group {
+  border-top: 1px solid #F1F5F9 !important;
+}
+
+.optiwich-customizer-field-group-header {
+  padding: 12px 18px !important;
+  border-radius: 8px !important;
+  margin: 4px 10px !important;
+  font-weight: 600 !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-field-group-header:hover {
+  background: #F8FAFC !important;
+  color: #2563EB !important;
+}
+
+.optiwich-customizer-field-group-header svg {
+  color: #64748B !important;
+}
+
+/* Fields & Controls in Customizer */
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field {
+  padding: 16px 20px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field-label {
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+}
+
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field-desc {
+  color: #64748B !important;
+  font-size: 12.5px !important;
+}
+
+.optiwich-customizer-editor input.optiwich-input,
+.optiwich-customizer-editor textarea.optiwich-textarea,
+.optiwich-customizer-editor select.optiwich-select,
+.optiwich-customizer-editor .optiwich-typography-input,
+.optiwich-customizer-editor .optiwich-typography-number-input,
+.optiwich-customizer-editor .optiwich-spacing-controls,
+.optiwich-customizer-editor .optiwich-dimensions-controls {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  padding: 7px 12px !important;
+  font-size: 13px !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.15s ease !important;
+}
+
+.optiwich-customizer-editor input.optiwich-input:focus,
+.optiwich-customizer-editor textarea.optiwich-textarea:focus,
+.optiwich-customizer-editor select.optiwich-select:focus,
+.optiwich-customizer-editor .optiwich-typography-input:focus,
+.optiwich-customizer-editor .optiwich-typography-number-input:focus,
+.optiwich-customizer-editor .optiwich-spacing-controls:focus-within,
+.optiwich-customizer-editor .optiwich-dimensions-controls:focus-within {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18) !important;
+  outline: none !important;
+}
+
+.optiwich-customizer-editor .optiwich-switcher-slider {
+  background-color: #CBD5E1 !important;
+  border-radius: 9999px !important;
+}
+
+.optiwich-customizer-editor .optiwich-switcher-input:checked + .optiwich-switcher-slider {
+  background: #2563EB !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+}
+
+.optiwich-customizer-editor .optiwich-repeater-item {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+  background: #FFFFFF !important;
+}
+
+.optiwich-color-swatch,
+.optiwich-border-color-swatch {
+  border-radius: 6px !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+}
+
+
+/* ==========================================================================
+   System Status & Backup (Settings Panel Tab) - SaaS Blue Aesthetic
+   ========================================================================== */
+.flavor-like-sys-tools {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+.flavor-like-sys-notice {
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 13.5px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 500 !important;
+}
+.flavor-like-sys-notice.success {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #1E40AF !important;
+}
+.flavor-like-sys-notice.error {
+  background: #FEF2F2 !important;
+  border: 1px solid #FECACA !important;
+  color: #991B1B !important;
+}
+.flavor-like-sys-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-sys-card__header {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+.flavor-like-sys-card__title {
+  margin: 0 0 4px 0 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-card__subtitle {
+  margin: 0 !important;
+  font-size: 12.5px !important;
+  color: #64748B !important;
+}
+.flavor-like-sys-card__ext-link {
+  color: #2563EB !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+.flavor-like-sys-card__ext-link:hover {
+  text-decoration: underline !important;
+}
+.flavor-like-sys-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 12px !important;
+}
+.flavor-like-sys-item {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.flavor-like-sys-item__label {
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  color: #64748B !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+}
+.flavor-like-sys-item__val {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-badge {
+  display: inline-block !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+}
+.flavor-like-sys-badge.primary {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+}
+.flavor-like-sys-badge.success {
+  background: #F0FDF4 !important;
+  color: #16A34A !important;
+  border: 1px solid #BBF7D0 !important;
+}
+.flavor-like-sys-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+.flavor-like-sys-action-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 18px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  gap: 16px !important;
+}
+.flavor-like-sys-action-info strong {
+  display: block !important;
+  font-size: 13.5px !important;
+  color: #0F172A !important;
+  margin-bottom: 2px !important;
+}
+.flavor-like-sys-action-info p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  color: #64748B !important;
+}
+.flavor-like-sys-backup-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 16px !important;
+}
+.flavor-like-sys-backup-box {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  padding: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+.flavor-like-sys-backup-box h4 {
+  margin: 0 0 6px 0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-backup-box p {
+  margin: 0 0 14px 0 !important;
+  font-size: 12.5px !important;
+  color: #475569 !important;
+  line-height: 1.5 !important;
+}
+.flavor-like-sys-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 18px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  border: none !important;
+  white-space: nowrap !important;
+}
+.flavor-like-sys-btn.primary {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-sys-btn.primary:hover {
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-sys-btn.secondary {
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
+}
+.flavor-like-sys-btn.secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-file-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+.flavor-like-sys-file-group input[type="file"] {
+  font-size: 12.5px !important;
+  color: #475569 !important;
+}
+
+
+/* ==========================================================================
+   WordPress Left Admin Menu Fix - Keep Menu Fixed and Independent from Page Scroll
+   ========================================================================== */
+@media screen and (min-width: 783px) {
+  body.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.toplevel_page_flavor-like-statistics #adminmenuback,
+  body[class*="flavor-like"] #adminmenuback,
+  body:has(#optiwich-root) #adminmenuback {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 1 !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body[class*="flavor-like"] #adminmenuwrap,
+  body:has(#optiwich-root) #adminmenuwrap {
+    position: fixed !important;
+    top: var(--wp-admin--admin-bar--height, 32px) !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 9990 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuback,
+  body.rtl[class*="flavor-like"] #adminmenuback,
+  body.rtl:has(#optiwich-root) #adminmenuback {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body.rtl[class*="flavor-like"] #adminmenuwrap,
+  body.rtl:has(#optiwich-root) #adminmenuwrap {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  /* 1. Only fly out submenus for non-current / closed top-level items when sidebar is expanded */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    position: fixed !important;
+    left: 160px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 2. Lock the current open submenu (Flavor Like -> 统计/设置) strictly inline inside sidebar to prevent hover flicker */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: block !important;
+    z-index: 1 !important;
+    transform: none !important;
+  }
+
+  /* 3. Folded sidebar (collapsed to 36px icon strip) */
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    position: fixed !important;
+    left: 36px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 4. RTL mode */
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    left: auto !important;
+    right: 160px !important;
+  }
+
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    left: auto !important;
+    right: 36px !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-thumb,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-thumb,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-track,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-track,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+}
+

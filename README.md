@@ -5,74 +5,108 @@
 [![License](https://img.shields.io/badge/License-GPL--2.0+-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.1.0-orange.svg)]()
 
-WordPress 轻量级高颜值点赞互动插件。原生 JavaScript 驱动，零外部依赖，集成现代化胶囊按钮、Bilibili 风格动效、并发互斥锁与统计仪表盘。
+WordPress 轻量高颜值点赞插件。原生 JS 驱动零依赖，内置 10 款现代化胶囊样式、Bilibili 风格微动效、数据统计看板与并发安全防护。
 
 ---
 
-## ✨ 特性一览
+## 🎨 样式预览
 
-- **10 种现代胶囊模板**：简约拇指、简约爱心、Twitter 爱心、动态爱心、星星拇指、对勾认可、鼓掌致敬、荣誉徽章、收藏星、图钉。
-- **灵动微交互动画**：内置 Bilibili 风格弹性回弹、粒子光环爆彩（Burst Effect）及浮动 `+1` 徽章气泡。
-- **全主题深度兼容**：深度兼容 JustNews、B2、Core 等主流主题容器。
-- **高并发互斥保护**：采用 MySQL `GET_LOCK` 分布式悲观锁，杜绝高并发重复计数与缓存击穿。
-- **资源智能防缓存**：动态注入文件修改时间戳，插件更新后前端资源秒级生效。
-- **轻量高性能**：纯原生 ES6+ JavaScript，支持全站全局加载与页面按需加载。
-- **隐私与安全**：支持 GDPR 匿名化、真实 IP 识别（含 Cloudflare 与反向代理 CIDR 白名单）及防刷黑名单。
-- **SaaS 级设计系统**：全新 SaaS Blue管理后台、自适应响应式布局与极简纯线条图标。
+![Flavor Like 样式预览](assets/img/preview-styles.png)
+
+---
+
+## ✨ 核心特性
+
+- **10 款矢量胶囊模板**：简约拇指、红心、火花环、徽章、收藏星等纯 SVG 模板，全自适应不失真。
+- **灵动微交互动效**：Bilibili 风格弹性微回弹、火花环冲击波与向上浮动的 `+1` 气泡。
+- **互动数据看板**：提供 30 天互动趋势图、热门内容 Top 榜及智能最佳发布时段建议。
+- **灵活展示控制**：严格正交控制“启用的文章类型”与“显示按钮位置”，精准控制何时何处显示。
+- **轻量与高并发保护**：原生 ES6+ 零依赖，支持按需加载；集成 MySQL 悲观锁，杜绝并发刷票。
+- **系统诊断与备份**：内置环境健康检查、一键刷新统计缓存、数据表修复与配置 JSON 导入导出。
 
 ---
 
 ## 📋 系统要求
 
-- WordPress 6.0 或更高版本
-- PHP 7.4 或更高版本
-- MySQL 5.7+ / MariaDB 10.3+
+- **WordPress**：6.0+
+- **PHP**：7.4+（兼容 PHP 8.0 - 8.3）
+- **数据库**：MySQL 5.7+ / MariaDB 10.3+
 
 ---
 
 ## 🚀 快速安装
 
-1. 下载最新发行包 `flavor-like.zip`。
+1. 下载插件包 `flavor-like.zip`。
 2. 进入 WordPress 后台 → **插件** → **安装插件** → **上传插件**。
-3. 选择 zip 文件上传并点击**启用**即可。
+3. 启用插件，在后台 **Flavor Like** 中即可配置与使用。
 
 ---
 
-## 💻 常用短代码
+## 🎨 模板样式
+
+可在后台 **Flavor Like → 设置 → 内容** 中为文章和评论自由选择：
+
+| 模板名称 | Slug | 风格特色 |
+| :--- | :--- | :--- |
+| **简约拇指** | `flavorlike-default` | 经典 SaaS 蓝胶囊，独立计数值 |
+| **简约爱心** | `flavorlike-heart` | 柔粉珊瑚心形，呼吸光圈 |
+| **Twitter 爱心** | `flavorlike-robeen` | 灵动粒子火花环，扩散冲击波 |
+| **动态爱心** | `flavorlike-animated-heart` | 9 颗微心螺旋上升散逸动效 |
+| **星星拇指** | `flavorlike-star-thumb` | 暖金琥珀渐变，高亮计数值 |
+| **对勾标记** | `flavorlike-check-mark` | 清爽薄荷绿胶囊，达成认可感 |
+| **鼓掌按钮** | `flavorlike-clapping` | Medium 连击手感，拍手倾角反馈 |
+| **荣誉徽章** | `flavorlike-badge-thumb` | 紫罗兰极光渐变，毛玻璃徽章 |
+| **收藏星** | `flavorlike-fave-star` | 3D 自旋转微弹跳，金色充盈 |
+| **置顶图钉** | `flavorlike-pin` | 玫瑰红胶囊，45° 倾斜扎入钉住动效 |
+
+---
+
+## 💻 调用方法
+
+### 短代码
 
 ```text
-[flavor_like]                                   # 默认文章点赞按钮
+[flavor_like]                                   # 在当前文章/页面输出点赞按钮
 [flavor_like for="post" id="123"]               # 指定文章 ID
-[flavor_like for="comment" id="456"]            # 评论点赞
-[flavor_like_counter type="post" status="like"] # 仅显示点赞数
-[flavor_like_likers_box type="post" counter="6"]# 显示点赞者头像列表
+[flavor_like for="comment" id="456"]            # 评论点赞按钮
+[flavor_like_counter type="post" status="like"] # 仅输出点赞数值
+[flavor_like_likers_box type="post" counter="6"]# 输出点赞者头像列表框
+```
+
+### PHP 模板标签
+
+```php
+// 输出点赞按钮
+if ( function_exists( 'flavor_like' ) ) {
+    flavor_like( 'for=post' );
+}
+
+// 获取文章点赞总数
+if ( function_exists( 'flavor_like_get_post_likes' ) ) {
+    echo '点赞数：' . esc_html( flavor_like_get_post_likes( get_the_ID() ) );
+}
 ```
 
 ---
 
-## ⚙️ 核心配置说明
+## ⚙️ 后台管理
 
-前往后台 **Flavor Like → 设置**：
-
-- **资源加载策略**：
-  - `Load Globally`（默认）：全站加载，适合所有复杂页面。
-  - `Load On Demand`：仅在实际渲染点赞按钮的页面输出 CSS/JS，优化加载速度。
-- **受信代理 IP**：
-  - 站点部署在 CDN / 反向代理 / 负载均衡后方时填写（每行一个 IP 或 CIDR，如 `10.0.0.0/8`）。仅信任名单内代理转发的 `X-Forwarded-For` 头，防止伪造 IP 绕过频控。Cloudflare 节点自动免配置信任。
+- **统计看板 (`Flavor Like → 统计`)**：核心指标卡（今日/昨日/本周/总计）、30 天趋势折线图、热门内容 Top 8、最佳发布时段。
+- **系统设置 (`Flavor Like → 设置`)**：
+  - **内容**：模板样式、启用的文章类型、显示位置、在摘要中显示、按钮文案。
+  - **基础**：防刷间隔、仅限登录用户、提示文案、点赞者头像。
+  - **资源与备份**：全站/按需加载、运行诊断、一键缓存清理、数据表修复、配置导入导出。
 
 ---
 
 ## 📝 更新日志
 
-### 1.1.0 (2026-10)
-- **视觉体系重构**：全后台升级 SaaS Blue高质感配色。
-- **图标纯线条工艺**：菜单与管理图标严格遵循单色纯线条工艺，完美适配深浅色模式。
-- **Bilibili 风格爆彩动效**：点赞触发图标多级震颤、彩色火花环散射与向上漂浮渐隐的 `+1` 胶囊。
-- **前端抗干扰与防消失加固**：
-  - 点赞请求期采用无感 busy 状态锁，解除原生 `:disabled` 依赖，杜绝主题透明度压制。
-  - 强固胶囊内 flex 布局与图标物理外边距，彻底解决第三方主题下的文字挤压重叠。
-  - 前端资源注册引入 `filemtime` 自动化防缓存版本控制。
-- **工程化构建完善**：新增 Terser / CSS 自动化压缩流水线及全量回归自动化测试套件。
+### 1.1.0
+- **样式与动效**：重构 10 款现代矢量胶囊按钮体系，加入 Bilibili 风格微交互动效。
+- **架构精简**：精简为“统计”与“设置”两级清晰架构，全后台采用 SaaS 蓝设计。
+- **逻辑重构**：理顺文章类型与展示位置的二维独立控制，解决单页无端显示问题。
+- **体验加固**：全面消灭中文乱码，修复侧边菜单滚动穿透与子菜单悬停闪烁问题。
+- **质量保障**：内置 19 套自动化测试套件（270 项测试 100% 通过）。
 
 ---
 

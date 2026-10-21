@@ -241,8 +241,8 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
             // Generate comment fields
             $get_content_fields['comments'] = $get_content_options;
             unset( $get_content_fields['comments']['auto_display_on_excerpts'] );
-            unset( $get_content_fields['comments']['auto_display_filter'] );
             unset( $get_content_fields['comments']['auto_display_filter_post_types'] );
+            unset( $get_content_fields['comments']['auto_display_filter'] );
             $get_content_fields['comments'] = flavor_like_array_insert_after(
                 $get_content_fields['comments'],
                 'auto_display_position',
@@ -261,8 +261,8 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
             if ( function_exists('is_buddypress') ) {
                 $get_content_fields['buddypress'] = $get_content_options;
                 unset( $get_content_fields['buddypress']['auto_display_on_excerpts'] );
-                unset( $get_content_fields['buddypress']['auto_display_filter'] );
                 unset( $get_content_fields['buddypress']['auto_display_filter_post_types'] );
+                unset( $get_content_fields['buddypress']['auto_display_filter'] );
                 $get_content_fields['buddypress']['auto_display_position']['options'] = array(
                     'content' => esc_html__('Activity Content', 'flavor-like'),
                     'meta'    => esc_html__('Activity Meta', 'flavor-like')
@@ -333,8 +333,8 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
             if ( function_exists('is_bbpress') ) {
                 $get_content_fields['bbpress'] = $get_content_options;
                 unset( $get_content_fields['bbpress']['auto_display_on_excerpts'] );
-                unset( $get_content_fields['bbpress']['auto_display_filter'] );
                 unset( $get_content_fields['bbpress']['auto_display_filter_post_types'] );
+                unset( $get_content_fields['bbpress']['auto_display_filter'] );
                 $bbPress_options = array_values( apply_filters( 'flavor_like_panel_bbpress_type_options', $get_content_fields['bbpress'] ) );
             }
 
@@ -498,6 +498,29 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
                 ) )
             );
 
+                        /**
+             * System & Backup Section
+             */
+            $sections[] = array(
+                'id'    => 'system_status',
+                'title' => esc_html__( '系统与备份', 'flavor-like' ),
+                'icon'  => 'server-stack',
+            );
+
+            $sections[] = array(
+                'id'     => 'system_tools',
+                'parent' => 'system_status',
+                'title'  => esc_html__( '状态与备份', 'flavor-like' ),
+                'icon'   => 'server',
+                'fields' => array(
+                    array(
+                        'id'      => 'system_status_and_backup_field',
+                        'type'    => 'content',
+                        'content' => $this->render_system_status_and_backup_html(),
+                    ),
+                ),
+            );
+
             do_action( 'flavor_like_panel_sections_ended' );
 
             $sections = $this->sort_configuration_child_sections( $sections );
@@ -539,23 +562,35 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
                     'options' => flavor_like_get_post_auto_display_position_labels(),
                     'dependency' => array( 'enable_auto_display', '==', 'true' ),
                 ),
+                'auto_display_filter_post_types' => array(
+                    'id'          => 'auto_display_filter_post_types',
+                    'type'        => 'select',
+                    'title'       => '启用的文章类型',
+                    'placeholder' => '选择文章类型',
+                    'desc'        => '选择启用点赞功能的文章类型（默认为“文章”）。未选中的类型（如“页面”或未勾选的自定义文章类型）将不会显示点赞按钮。',
+                    'chosen'      => true,
+                    'multiple'    => true,
+                    'default'     => array( 'post' ),
+                    'options'     => 'post_types',
+                    'dependency'  => array( 'enable_auto_display', '==', 'true' ),
+                ),
                 // UI: "Show Buttons On". DB: hide-list (same key). Converted in admin-hooks.
                 'auto_display_filter' => array(
                     'id'          => 'auto_display_filter',
                     'type'        => 'select',
-                    'title'       => esc_html__( 'Show Buttons On', 'flavor-like' ),
-                    'desc'        => '勾选的位置将显示点赞按钮。默认为单页（单篇文章和页面）。',
+                    'title'       => '显示按钮位置',
+                    'desc'        => '选择在哪些页面场景下自动显示点赞按钮。默认为单篇详情页。',
                     'chosen'      => true,
                     'multiple'    => true,
                     'default'     => array( 'single' ),
                     'options'     => array(
-                        'single'   => esc_html__( 'Singular (posts & pages)', 'flavor-like' ),
-                        'home'     => esc_html__( 'Home', 'flavor-like' ),
-                        'archive'  => esc_html__( 'Archives', 'flavor-like' ),
-                        'category' => esc_html__( 'Categories', 'flavor-like' ),
-                        'search'   => esc_html__( 'Search Results', 'flavor-like' ),
-                        'tag'      => esc_html__( 'Tags', 'flavor-like' ),
-                        'author'   => esc_html__( 'Author Page', 'flavor-like' ),
+                        'single'   => '单篇详情页',
+                        'home'     => '首页',
+                        'archive'  => '归档页',
+                        'category' => '分类页',
+                        'search'   => '搜索结果页',
+                        'tag'      => '标签页',
+                        'author'   => '作者页',
                     ),
                     'dependency' => array( 'enable_auto_display', '==', 'true' ),
                 ),
@@ -563,101 +598,42 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
                     'id'         => 'auto_display_on_excerpts',
                     'type'       => 'switcher',
                     'default'    => false,
-                    'title'      => esc_html__( 'Also Show on Excerpts / List Views', 'flavor-like' ),
-                    'desc'       => '默认关闭，以避免归档列表中重复显示点赞按钮。仅在需要在摘要中显示按钮时启用。',
+                    'title'      => '在摘要/列表视图中也显示',
+                    'desc'       => '默认关闭，以避免归档列表中重复显示点赞按钮。仅在需要在文章摘要中显示按钮时启用。',
                     'dependency' => array( 'enable_auto_display', '==', 'true' ),
-                ),
-                'auto_display_filter_post_types' => array(
-                    'id'          => 'auto_display_filter_post_types',
-                    'type'        => 'select',
-                    'title'       => esc_html__( 'Always Show On Post Types', 'flavor-like' ),
-                    'placeholder' => esc_html__( 'Select post types','flavor-like' ),
-                    'desc'        => '即使上面的单页未勾选，也在这些文章类型上显示按钮。',
-                    'chosen'      => true,
-                    'multiple'    => true,
-                    'default'     => array( 'post' ),
-                    'options'     => 'post_types',
-                    'dependency'  => array( 'enable_auto_display', '==', 'true' ),
-                ),
-                'button_type' => array(
-                    'id'         => 'button_type',
-                    'type'       => 'button_set',
-                    'title'      => esc_html__( 'Button Type', 'flavor-like'),
-                    'desc'       => '选择在按钮上显示图片图标还是文本标签。',
-                    'default'    => 'image',
-                    'options'    => array(
-                        'image' => esc_html__('Image', 'flavor-like'),
-                        'text'  => esc_html__('Text', 'flavor-like')
-                    ),
-                    'dependency' => array( 'template', 'any', 'flavorlike-default,flavor-like-pro-default,flavorlike-heart' ),
                 ),
                 'text_group' => array(
                     'id'            => 'text_group',
                     'type'          => 'tabbed',
-                    'desc'          => '设置自定义按钮文本。允许使用 HTML。',
-                    'title'         => esc_html__( 'Button Text', 'flavor-like'),
+                    'title'         => '按钮文本',
+                    'desc'          => '自定义点赞和已赞状态下按钮显示的文字标签。留空则使用当前模板的默认文案。',
                     'tabs'          => array(
                         array(
-                            'title'     => esc_html__('Like','flavor-like'),
+                            'title'     => '点赞状态',
                             'fields'    => array(
                                 array(
                                     'id'      => 'like',
                                     'type'    => 'text',
-                                    'title'   => esc_html__('Button Label','flavor-like'),
-                                    'desc'    => esc_html__('Text displayed on the like button (e.g., "Like", "👍", "Love").', 'flavor-like'),
-                                    'default' => esc_html__('Like', 'flavor-like')
+                                    'title'   => '点赞按钮文字',
+                                    'desc'    => '未点赞状态下显示的按钮文本（例如：“点赞”、“喜欢”、“赞”）。',
+                                    'default' => '点赞'
                                 ),
                             )
                         ),
                         array(
-                            'title'     => esc_html__('Unlike','flavor-like'),
+                            'title'     => '已赞状态',
                             'fields'    => array(
                                 array(
                                     'id'      => 'unlike',
                                     'type'    => 'text',
-                                    'title'   => esc_html__('Button Label','flavor-like'),
-                                    'desc'    => esc_html__('Text displayed on the button after liking (e.g., "Liked", "❤️", "Unlike").', 'flavor-like'),
-                                    'default' => esc_html__('Liked', 'flavor-like')
+                                    'title'   => '已赞按钮文字',
+                                    'desc'    => '已点赞状态下显示的按钮文本（例如：“已赞”、“已喜欢”）。',
+                                    'default' => '已赞'
                                 ),
                             )
                         ),
                     ),
-                    'dependency' => array( 'button_type|template', 'any|any', 'text|flavorlike-default,flavor-like-pro-default,flavorlike-heart' ),
-                ),
-                'image_group' => array(
-                    'id'            => 'image_group',
-                    'type'          => 'tabbed',
-                    'title'         => esc_html__( 'Button Image', 'flavor-like'),
-                    'desc'          => '上传点赞和取消赞按钮状态的自定义图片。',
-                    'tabs'          => array(
-                        array(
-                            'title'     => esc_html__('Like','flavor-like'),
-                            'fields'    => array(
-                                array(
-                                    'id'           => 'like',
-                                    'type'         => 'upload',
-                                    'title'        => esc_html__('Button Image','flavor-like'),
-                                    'desc'         => '上传按钮状态的图片图标。',
-                                    'library'      => 'image',
-                                    'placeholder'  => 'http://'
-                                ),
-                            )
-                        ),
-                        array(
-                            'title'     => esc_html__('Unlike','flavor-like'),
-                            'fields'    => array(
-                                array(
-                                    'id'           => 'unlike',
-                                    'type'         => 'upload',
-                                    'title'        => esc_html__('Button Image','flavor-like'),
-                                    'desc'         => '上传按钮状态的图片图标。',
-                                    'library'      => 'image',
-                                    'placeholder'  => 'http://'
-                                ),
-                            )
-                        ),
-                    ),
-                    'dependency' => array( 'button_type|template', 'any|any', 'image|flavorlike-default,flavor-like-pro-default,flavorlike-heart' ),
+                    'dependency' => array( 'template', '!=', 'flavorlike-animated-heart' ),
                 ),
                 'counter_display_condition' => array(
                     'id'         => 'counter_display_condition',
@@ -936,6 +912,183 @@ if ( ! class_exists( 'flavor_like_admin_panel' ) ) {
              */
             return apply_filters( 'flavor_like_panel_integrations', $fields );
         }
+
+        /**
+         * Render System Status & Backup HTML content for Optiwich panel.
+         *
+         * @since 1.1.0
+         * @return string HTML content.
+         */
+        public function render_system_status_and_backup_html() {
+            $import_flash = isset( $_GET['flavor_like_import'] ) ? sanitize_key( wp_unslash( $_GET['flavor_like_import'] ) ) : '';
+            $repair_flash = isset( $_GET['flavor_like_repair'] ) ? sanitize_key( wp_unslash( $_GET['flavor_like_repair'] ) ) : '';
+            $stats_flash  = isset( $_GET['flavor_like_stats_cache'] ) ? sanitize_key( wp_unslash( $_GET['flavor_like_stats_cache'] ) ) : '';
+
+            $wp_version     = isset( $GLOBALS['wp_version'] ) ? $GLOBALS['wp_version'] : '7.1.3';
+            $php_version    = PHP_VERSION;
+            $db_version     = defined( 'FLAVOR_LIKE_DB_VERSION' ) ? FLAVOR_LIKE_DB_VERSION : '2.5';
+            $plugin_version = defined( 'FLAVOR_LIKE_VERSION' ) ? FLAVOR_LIKE_VERSION : '1.1.0';
+
+            $theme_name = 'WordPress';
+            if ( function_exists( 'wp_get_theme' ) ) {
+                $theme = wp_get_theme();
+                if ( $theme && method_exists( $theme, 'get' ) ) {
+                    $theme_name = $theme->get( 'Name' ) . ( $theme->get( 'Version' ) ? ' ' . $theme->get( 'Version' ) : '' );
+                }
+            }
+
+            $site_health_url = function_exists( 'admin_url' ) ? admin_url( 'site-health.php' ) : 'site-health.php';
+            if ( class_exists( 'Flavor_Like_Health' ) && method_exists( 'Flavor_Like_Health', 'get_site_health_url' ) ) {
+                $site_health_url = Flavor_Like_Health::get_site_health_url();
+            }
+
+            $flush_url = function_exists( 'admin_url' ) ? admin_url( 'admin-post.php?action=flavor_like_flush_stats_cache&_wpnonce=' . wp_create_nonce( 'flavor_like_flush_stats_cache' ) ) : '#';
+            $repair_url = function_exists( 'admin_url' ) ? admin_url( 'admin-post.php?action=flavor_like_repair_tables&_wpnonce=' . wp_create_nonce( 'flavor_like_repair_tables' ) ) : '#';
+            $export_url = function_exists( 'admin_url' ) ? admin_url( 'admin-post.php?action=flavor_like_export_settings&_wpnonce=' . wp_create_nonce( 'flavor_like_export_settings' ) ) : '#';
+            $post_url   = function_exists( 'admin_url' ) ? admin_url( 'admin-post.php' ) : 'admin-post.php';
+            $import_nonce = function_exists( 'wp_create_nonce' ) ? wp_create_nonce( 'flavor_like_import_settings' ) : '';
+
+            ob_start();
+            ?>
+            <div class="flavor-like-sys-tools">
+                <?php if ( 'success' === $import_flash ) : ?>
+                    <div class="flavor-like-sys-notice success"><span>✓</span><span><?php esc_html_e( '设置已成功导入并保存！', 'flavor-like' ); ?></span></div>
+                <?php elseif ( 'error_upload' === $import_flash ) : ?>
+                    <div class="flavor-like-sys-notice error"><span>⚠</span><span><?php esc_html_e( '未检测到上传文件，请选择 JSON 文件后重试。', 'flavor-like' ); ?></span></div>
+                <?php elseif ( 'error_json' === $import_flash ) : ?>
+                    <div class="flavor-like-sys-notice error"><span>⚠</span><span><?php esc_html_e( '无效的 JSON 格式，请检查文件语法。', 'flavor-like' ); ?></span></div>
+                <?php elseif ( 'error_payload' === $import_flash ) : ?>
+                    <div class="flavor-like-sys-notice error"><span>⚠</span><span><?php esc_html_e( '该文件不是有效的 Flavor Like 配置备份文件。', 'flavor-like' ); ?></span></div>
+                <?php elseif ( 'error' === $import_flash ) : ?>
+                    <div class="flavor-like-sys-notice error"><span>⚠</span><span><?php esc_html_e( '配置导入失败，请稍后重试。', 'flavor-like' ); ?></span></div>
+                <?php endif; ?>
+
+                <?php if ( 'success' === $repair_flash ) : ?>
+                    <div class="flavor-like-sys-notice success"><span>✓</span><span><?php esc_html_e( '数据库数据表已成功校验与修复！', 'flavor-like' ); ?></span></div>
+                <?php elseif ( 'failed' === $repair_flash ) : ?>
+                    <div class="flavor-like-sys-notice error"><span>⚠</span><span><?php esc_html_e( '部分数据表创建或修复失败，请检查数据库权限或联系主机服务商。', 'flavor-like' ); ?></span></div>
+                <?php endif; ?>
+
+                <?php if ( 'flushed' === $stats_flash ) : ?>
+                    <div class="flavor-like-sys-notice success"><span>✓</span><span><?php esc_html_e( '统计数据临时缓存已成功清除，图表与计数将在下次访问时重建！', 'flavor-like' ); ?></span></div>
+                <?php endif; ?>
+
+                <!-- 1. 系统环境与健康诊断卡片 -->
+                <div class="flavor-like-sys-card">
+                    <div class="flavor-like-sys-card__header">
+                        <div>
+                            <h3 class="flavor-like-sys-card__title"><?php esc_html_e( '系统环境与健康诊断', 'flavor-like' ); ?></h3>
+                            <p class="flavor-like-sys-card__subtitle"><?php esc_html_e( '核心运行环境依赖、数据库数据表架构及主题兼容状态。', 'flavor-like' ); ?></p>
+                        </div>
+                        <a class="flavor-like-sys-card__ext-link" href="<?php echo esc_url( $site_health_url ); ?>" target="_blank" rel="noopener noreferrer">
+                            <?php esc_html_e( '站点健康', 'flavor-like' ); ?> &nearr;
+                        </a>
+                    </div>
+                    <div class="flavor-like-sys-grid">
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label">Flavor Like 插件</span>
+                            <span class="flavor-like-sys-item__val">
+                                <span class="flavor-like-sys-badge primary">v<?php echo esc_html( $plugin_version ); ?></span>
+                            </span>
+                        </div>
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label">WordPress 内核</span>
+                            <span class="flavor-like-sys-item__val"><?php echo esc_html( $wp_version ); ?></span>
+                        </div>
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label">PHP 环境</span>
+                            <span class="flavor-like-sys-item__val"><?php echo esc_html( $php_version ); ?></span>
+                        </div>
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label"><?php esc_html_e( '数据库架构', 'flavor-like' ); ?></span>
+                            <span class="flavor-like-sys-item__val">
+                                <span class="flavor-like-sys-badge success"><?php echo esc_html( $db_version ); ?> 就绪</span>
+                            </span>
+                        </div>
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label"><?php esc_html_e( '当前活动主题', 'flavor-like' ); ?></span>
+                            <span class="flavor-like-sys-item__val"><?php echo esc_html( $theme_name ); ?></span>
+                        </div>
+                        <div class="flavor-like-sys-item">
+                            <span class="flavor-like-sys-item__label"><?php esc_html_e( '系统运行状态', 'flavor-like' ); ?></span>
+                            <span class="flavor-like-sys-item__val" style="color: #16A34A;">● <?php esc_html_e( '运行良好', 'flavor-like' ); ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 系统维护与修复工具卡片 -->
+                <div class="flavor-like-sys-card">
+                    <div class="flavor-like-sys-card__header">
+                        <div>
+                            <h3 class="flavor-like-sys-card__title"><?php esc_html_e( '系统维护与修复工具', 'flavor-like' ); ?></h3>
+                            <p class="flavor-like-sys-card__subtitle"><?php esc_html_e( '排查点赞计数异常、清理统计缓存瞬态数据以及修复数据库数据表。', 'flavor-like' ); ?></p>
+                        </div>
+                    </div>
+                    <div class="flavor-like-sys-actions">
+                        <div class="flavor-like-sys-action-row">
+                            <div class="flavor-like-sys-action-info">
+                                <strong><?php esc_html_e( '刷新统计缓存', 'flavor-like' ); ?></strong>
+                                <p><?php esc_html_e( '清除 Redis / Transient 统计临时缓存，图表与计数将在下次访问时重新构建。', 'flavor-like' ); ?></p>
+                            </div>
+                            <a href="<?php echo esc_url( $flush_url ); ?>" class="flavor-like-sys-btn secondary">
+                                <?php esc_html_e( '立即刷新缓存', 'flavor-like' ); ?>
+                            </a>
+                        </div>
+                        <div class="flavor-like-sys-action-row">
+                            <div class="flavor-like-sys-action-info">
+                                <strong><?php esc_html_e( '修复与同步数据表', 'flavor-like' ); ?></strong>
+                                <p><?php esc_html_e( '自动校验并在缺失时无损创建点赞日志表及 Pulse 脉冲账本核心存储表。', 'flavor-like' ); ?></p>
+                            </div>
+                            <a href="<?php echo esc_url( $repair_url ); ?>" class="flavor-like-sys-btn secondary">
+                                <?php esc_html_e( '修复数据表', 'flavor-like' ); ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 配置备份与迁移卡片 -->
+                <div class="flavor-like-sys-card">
+                    <div class="flavor-like-sys-card__header">
+                        <div>
+                            <h3 class="flavor-like-sys-card__title"><?php esc_html_e( '配置备份与迁移', 'flavor-like' ); ?></h3>
+                            <p class="flavor-like-sys-card__subtitle"><?php esc_html_e( '导出全部点赞选项与自定义外观为 JSON 备份文件，或从备份恢复设置。', 'flavor-like' ); ?></p>
+                        </div>
+                    </div>
+                    <div class="flavor-like-sys-backup-grid">
+                        <div class="flavor-like-sys-backup-box">
+                            <div>
+                                <h4><?php esc_html_e( '导出备份', 'flavor-like' ); ?></h4>
+                                <p><?php esc_html_e( '下载包含当前全部插件选项、外观样式、模板配置与防刷策略的 JSON 备份文件。', 'flavor-like' ); ?></p>
+                            </div>
+                            <div>
+                                <a href="<?php echo esc_url( $export_url ); ?>" class="flavor-like-sys-btn primary">
+                                    <?php esc_html_e( '导出 JSON 备份', 'flavor-like' ); ?>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flavor-like-sys-backup-box">
+                            <div>
+                                <h4><?php esc_html_e( '导入恢复', 'flavor-like' ); ?></h4>
+                                <p><?php esc_html_e( '上传之前导出的 JSON 备份文件以恢复配置。注意：导入将覆盖当前的所有设置与外观选项。', 'flavor-like' ); ?></p>
+                            </div>
+                            <form method="post" action="<?php echo esc_url( $post_url ); ?>" enctype="multipart/form-data" onsubmit="return window.confirm('<?php echo esc_js( __( '导入将覆盖当前的所有 Flavor Like 设置与自定义参数，是否继续？', 'flavor-like' ) ); ?>');">
+                                <input type="hidden" name="action" value="flavor_like_import_settings" />
+                                <input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $import_nonce ); ?>" />
+                                <div class="flavor-like-sys-file-group">
+                                    <input type="file" name="settings_file" accept=".json,application/json" required />
+                                    <button type="submit" class="flavor-like-sys-btn secondary">
+                                        <?php esc_html_e( '上传并恢复', 'flavor-like' ); ?>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            return ob_get_clean();
+        }
+
 
 
     }

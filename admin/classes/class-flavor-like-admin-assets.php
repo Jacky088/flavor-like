@@ -165,6 +165,10 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
   border: 1px solid #E2E8F0 !important;
   border-inline-start: 4px solid #2563EB !important;
 }
+
+/* ==========================================================================
+   Overview (概览) - SaaS 现代白卡风格（与设置页面保持 100% 视觉统一）
+   ========================================================================== */
 .wrap.flavor-like-about, .flavor-like-about {
   max-width: 100% !important;
   width: 100% !important;
@@ -172,27 +176,383 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
   padding-right: 24px !important;
   box-sizing: border-box !important;
 }
-.flavor-like-about__layout {
-  gap: 24px !important;
-}
-.flavor-like-about-card {
-  border-radius: 12px !important;
-  border: 1px solid #E2E8F0 !important;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+.flavor-like-about__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
 }
 .flavor-like-about__badge {
   background: #EFF6FF !important;
   color: #2563EB !important;
   border: 1px solid #BFDBFE !important;
   border-radius: 9999px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 2px 10px !important;
+}
+.flavor-like-about__lead {
+  color: #64748B !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 24px !important;
+  max-width: 100% !important;
+}
+.flavor-like-about__layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 300px !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+@media (max-width: 960px) {
+  .flavor-like-about__layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+.flavor-like-about-card {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  padding: 24px 24px !important;
+  box-sizing: border-box !important;
+}
+.flavor-like-about-card__header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 18px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+.flavor-like-about-card__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
 }
 .flavor-like-about-card__link {
   color: #2563EB !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-decoration: none !important;
 }
-.flavor-like-about-actions__btn.button-primary {
-  background: #2563EB !important;
-  border-color: #1D4ED8 !important;
+.flavor-like-about-card__link:hover {
+  color: #1D4ED8 !important;
+  text-decoration: underline !important;
+}
+.flavor-like-about-summary {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  border-inline-start: 4px solid #2563EB !important;
   border-radius: 8px !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  padding: 12px 16px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 18px !important;
+}
+.flavor-like-about-status-group__title {
+  color: #64748B !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin: 18px 0 10px !important;
+}
+.flavor-like-about-status {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 14px !important;
+}
+.flavor-like-about-status__item {
+  padding: 14px 16px !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.flavor-like-about-status__item:hover {
+  border-color: #BFDBFE !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08) !important;
+}
+.flavor-like-about-status__label {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: #64748B !important;
+  margin-bottom: 6px !important;
+}
+.flavor-like-about-status__value {
+  display: block !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-about-status__hint {
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 12px !important;
+  color: #64748B !important;
+}
+.flavor-like-about-status__item--good {
+  border-color: #86EFAC !important;
+  background: #F0FDF4 !important;
+}
+.flavor-like-about-status__item--good .flavor-like-about-status__value {
+  color: #15803D !important;
+}
+.flavor-like-about-status__item--bad {
+  border-color: #FECACA !important;
+  background: #FEF2F2 !important;
+}
+.flavor-like-about-status__item--bad .flavor-like-about-status__value {
+  color: #B91C1C !important;
+}
+.flavor-like-about-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin-top: 14px !important;
+}
+.flavor-like-about-actions__btn.button-primary,
+.flavor-like-about-task__actions .button-primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border: 1px solid #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  padding: 8px 18px !important;
+  min-height: 38px !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-about-actions__btn.button-primary:hover,
+.flavor-like-about-task__actions .button-primary:hover {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-about-actions__btn.button-secondary,
+.flavor-like-about-card .button-secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  padding: 7px 16px !important;
+  min-height: 36px !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-about-actions__btn.button-secondary:hover,
+.flavor-like-about-card .button-secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+.flavor-like-about-meta div {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  font-size: 13px !important;
+}
+.flavor-like-about-meta dt {
+  color: #64748B !important;
+  font-weight: 500 !important;
+}
+.flavor-like-about-meta dd {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+}
+.flavor-like-about-meta a {
+  color: #2563EB !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+.flavor-like-about-backup,
+.flavor-like-about-card--muted {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-about-backup__intro {
+  color: #64748B !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 14px !important;
+}
+.flavor-like-about-backup__import {
+  border-top: 1px solid #F1F5F9 !important;
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+}
+.flavor-like-about-backup__import summary {
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  cursor: pointer !important;
+}
+.flavor-like-about-backup__label {
+  color: #1E293B !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+}
+.flavor-like-about-backup__file {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #F8FAFC !important;
+  padding: 8px 12px !important;
+  font-size: 12.5px !important;
+  color: #1E293B !important;
+}
+.flavor-like-about-backup .button {
+  border-radius: 8px !important;
+  min-height: 36px !important;
+  font-weight: 500 !important;
+}
+
+/* System Status & Backup (Settings Panel) */
+.flavor-like-sys-tools {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+.flavor-like-sys-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-sys-card__header {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+.flavor-like-sys-card__title {
+  margin: 0 0 4px 0 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-card__subtitle {
+  margin: 0 !important;
+  font-size: 12.5px !important;
+  color: #64748B !important;
+}
+.flavor-like-sys-card__ext-link {
+  color: #2563EB !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+.flavor-like-sys-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 12px !important;
+}
+.flavor-like-sys-item {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.flavor-like-sys-item__label {
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  color: #64748B !important;
+  text-transform: uppercase !important;
+}
+.flavor-like-sys-item__val {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+.flavor-like-sys-badge {
+  display: inline-block !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+}
+.flavor-like-sys-badge.primary {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border: 1px solid #BFDBFE !important;
+}
+.flavor-like-sys-badge.success {
+  background: #F0FDF4 !important;
+  color: #16A34A !important;
+  border: 1px solid #BBF7D0 !important;
+}
+.flavor-like-sys-action-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 18px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  gap: 16px !important;
+}
+.flavor-like-sys-backup-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 16px !important;
+}
+.flavor-like-sys-backup-box {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  padding: 18px !important;
+}
+.flavor-like-sys-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 18px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+.flavor-like-sys-btn.primary {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-sys-btn.secondary {
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1px solid #CBD5E1 !important;
 }
 ';
 			wp_add_inline_style( 'flavor-like-admin', $saas_admin_css );
@@ -209,6 +569,21 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 				array(),
 				FLAVOR_LIKE_VERSION
 			);
+
+			wp_enqueue_style(
+				'flavor_like_admin_docs_modal',
+				FLAVOR_LIKE_ADMIN_URL . '/assets/css/flavor-like-docs-modal.css',
+				array(),
+				FLAVOR_LIKE_VERSION
+			);
+
+			wp_enqueue_script(
+				'flavor_like_admin_docs_modal',
+				FLAVOR_LIKE_ADMIN_URL . '/assets/js/flavor-like-docs-modal.js',
+				array(),
+				FLAVOR_LIKE_VERSION,
+				true
+			);
 		}
 
 
@@ -222,17 +597,23 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 
 			wp_dequeue_script( 'svg-painter' );
 
+		$stats_css_ver = defined( 'FLAVOR_LIKE_VERSION' ) ? FLAVOR_LIKE_VERSION : '1.1.0';
+		$stats_css_path = FLAVOR_LIKE_ADMIN_DIR . '/includes/statistics/stats.css';
+		if ( file_exists( $stats_css_path ) ) {
+			$stats_css_ver .= '.' . filemtime( $stats_css_path );
+		}
+
 		wp_enqueue_style(
 			'flavor_like_admin_react',
 			FLAVOR_LIKE_ADMIN_URL . '/includes/statistics/stats.css',
 			array(),
-			FLAVOR_LIKE_VERSION
+			$stats_css_ver
 		);
 
 		// 修复：覆盖统计页面 CSS 中的 overflow:hidden，恢复页面滚动
 		// 同时确保暗色模式在 WordPress 暗色插件下正确触发
 		$stats_inline = '
-:root, .flavor-like-stats-app {
+:root, .flavor-like-stats-app, #root .flavor-like-stats-app {
   --flavor-like-stats-color-primary: #2563EB !important;
   --flavor-like-stats-color-primary-rgb: 37, 99, 235 !important;
   --flavor-like-stats-color-primary-darker-10: #1D4ED8 !important;
@@ -253,8 +634,269 @@ html[data-darkreader-mode] .flavor-like-about-meta dd {
 html:has(.flavor-like-stats-app){overflow:auto!important}
 body:has(.flavor-like-stats-app){overflow:auto!important}
 body:has(.flavor-like-stats-app) #wpcontent{overflow:visible!important}
-.flavor-like-stats-card, .flavor-like-stats-section { border-radius: 12px !important; }
-.flavor-like-stats-pro-preview-btn--primary { background: #2563EB !important; border-radius: 8px !important; }
+
+/* ==========================================================================
+   Statistics (统计) - SaaS 现代白卡风格（与设置页面保持 100% 视觉统一）
+   ========================================================================== */
+.flavor-like-stats-app, #root .flavor-like-stats-app {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-header, #root .flavor-like-stats-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 14px 24px !important;
+  min-height: 52px !important;
+}
+.flavor-like-stats-header-brand .flavor-like-stats-logo-text {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+.flavor-like-stats-header-context-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+.flavor-like-stats-header-refresh,
+.flavor-like-stats-header-focus-toggle,
+.flavor-like-stats-header-menu-toggle {
+  border-radius: 8px !important;
+  border: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  color: #475569 !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-header-refresh:hover,
+.flavor-like-stats-header-focus-toggle:hover,
+.flavor-like-stats-header-menu-toggle:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+  border-color: #BFDBFE !important;
+}
+.flavor-like-stats-sidebar, #root .flavor-like-stats-sidebar {
+  background: #FFFFFF !important;
+  border-inline-end: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-stats-sidebar-mobile-header {
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+.flavor-like-stats-nav {
+  padding: 8px 10px 14px !important;
+}
+.flavor-like-stats-nav-item,
+.flavor-like-stats-nav-child {
+  border-radius: 8px !important;
+  margin: 3px 0 !important;
+  padding: 9px 12px !important;
+  color: #475569 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  border: 1px solid transparent !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-nav-item:hover:not(.active),
+.flavor-like-stats-nav-child:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-nav-item.active,
+.flavor-like-stats-nav-child.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+}
+.flavor-like-stats-nav-item.active .flavor-like-stats-nav-icon,
+.flavor-like-stats-nav-child.active .flavor-like-stats-nav-icon,
+.flavor-like-stats-nav-item.active .flavor-like-stats-nav-arrow {
+  color: #2563EB !important;
+}
+.flavor-like-stats-nav-pro-badge {
+  color: #D97706 !important;
+  background: #FEF3C7 !important;
+  border: 1px solid #FDE68A !important;
+  border-radius: 9999px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 1px 6px !important;
+}
+.flavor-like-stats-sidebar-upgrade {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+  border: 1px solid #BFDBFE !important;
+  border-radius: 10px !important;
+  color: #1E40AF !important;
+}
+.flavor-like-stats-sidebar-upgrade-link {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+  border: none !important;
+}
+.flavor-like-stats-sidebar-footer {
+  border-top: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+}
+.flavor-like-stats-sidebar-footer-link {
+  border-radius: 8px !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-sidebar-footer-link:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-card,
+.flavor-like-stats-section,
+.flavor-like-stats-stat-card,
+.flavor-like-stats-metric,
+.flavor-like-stats-pro-teaser-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.flavor-like-stats-stat-card:hover,
+.flavor-like-stats-pro-teaser-card:hover {
+  border-color: #93C5FD !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+.flavor-like-stats-card-header {
+  border-bottom: 1px solid #F1F5F9 !important;
+  padding: 14px 18px !important;
+}
+.flavor-like-stats-card-title,
+.flavor-like-stats-card-title-text {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+}
+.flavor-like-stats-card-subtitle {
+  color: #64748B !important;
+  font-size: 12px !important;
+}
+.flavor-like-stats-card-icon {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+}
+.flavor-like-stats-stat-card-value,
+.flavor-like-stats-metric-value {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+.flavor-like-stats-stat-card-label,
+.flavor-like-stats-metric-label {
+  color: #64748B !important;
+  font-weight: 500 !important;
+}
+.flavor-like-stats-filter-pill {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-filter-pill:hover {
+  border-color: #BFDBFE !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+}
+.flavor-like-stats-report-toolbar-select,
+select.flavor-like-stats-select {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+.flavor-like-stats-report-toolbar-select:focus,
+select.flavor-like-stats-select:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18) !important;
+  outline: none !important;
+}
+.flavor-like-stats-table-wrap {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  background: #FFFFFF !important;
+}
+.flavor-like-stats-table th {
+  background: #F8FAFC !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 12px 16px !important;
+}
+.flavor-like-stats-table td {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+}
+.flavor-like-stats-table tbody tr:hover {
+  background: #F8FAFC !important;
+}
+.flavor-like-stats-btn--primary,
+.flavor-like-stats-pro-preview-btn--primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border: 1px solid #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  transition: all 0.15s ease !important;
+}
+.flavor-like-stats-btn--primary:hover,
+.flavor-like-stats-pro-preview-btn--primary:hover {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+.flavor-like-stats-btn--secondary,
+.flavor-like-stats-pro-preview-btn--secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+.flavor-like-stats-btn--secondary:hover,
+.flavor-like-stats-pro-preview-btn--secondary:hover {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+.flavor-like-stats-migration-notice {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  border-inline-start: 4px solid #2563EB !important;
+  border-radius: 10px !important;
+}
+.flavor-like-stats-migration-notice-title {
+  color: #1E40AF !important;
+  font-weight: 700 !important;
+}
+.flavor-like-stats-migration-notice-message {
+  color: #1E3A8A !important;
+}
 body.dark-mode .flavor-like-stats-app,
 body.flavor-dark .flavor-like-stats-app,
 html[data-darkreader-mode] .flavor-like-stats-app {
@@ -269,14 +911,83 @@ html[data-darkreader-mode] .flavor-like-stats-app {
   --flavor-like-stats-color-border: #4b535e;
   --flavor-like-stats-color-header-bg: #2d333b;
 }
+
+/* 移除统计页面底部左侧设置下方的帮助按钮 */
+.flavor-like-stats-sidebar-footer-links a[href*="about"],
+.flavor-like-stats-sidebar-footer-links a[href*="flavor-like-about"],
+.flavor-like-stats-sidebar-footer-links a:has(svg[data-name="circle-help"]) {
+  display: none !important;
+}
+
+/* 帮助文档弹窗内 SVG 尺寸严格限定（防止意外自适应铺满全屏） */
+.flavor-like-docs-modal svg {
+  max-width: 100% !important;
+  box-sizing: content-box !important;
+}
+.flavor-like-docs-section-icon svg,
+.flavor-like-docs-section-title svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+.flavor-like-docs-icon-badge svg {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+  flex-shrink: 0 !important;
+}
+.flavor-like-docs-tab-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  flex-shrink: 0 !important;
+}
+.flavor-like-docs-callout svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  flex-shrink: 0 !important;
+}
 ';
 		wp_add_inline_style( 'flavor_like_admin_react', $stats_inline );
+
+		wp_enqueue_style(
+			'flavor_like_admin_docs_modal',
+			FLAVOR_LIKE_ADMIN_URL . '/assets/css/flavor-like-docs-modal.css',
+			array(),
+			FLAVOR_LIKE_VERSION
+		);
+
+		wp_enqueue_script(
+			'flavor_like_admin_docs_modal',
+			FLAVOR_LIKE_ADMIN_URL . '/assets/js/flavor-like-docs-modal.js',
+			array(),
+			FLAVOR_LIKE_VERSION,
+			true
+		);
+
+		$stats_js_ver = defined( 'FLAVOR_LIKE_VERSION' ) ? FLAVOR_LIKE_VERSION : '1.1.0';
+		$stats_js_path = FLAVOR_LIKE_ADMIN_DIR . '/includes/statistics/stats.js';
+		if ( file_exists( $stats_js_path ) ) {
+			$stats_js_ver .= '.' . filemtime( $stats_js_path );
+		}
 
 		wp_enqueue_script(
 			'flavor_like_admin_react',
 			FLAVOR_LIKE_ADMIN_URL . '/includes/statistics/stats.js',
-			array(),
-			FLAVOR_LIKE_VERSION,
+			array( 'flavor_like_admin_docs_modal' ),
+			$stats_js_ver,
 			true
 		);
 
@@ -419,6 +1130,491 @@ html[data-darkreader-mode] .flavor-like-stats-app {
 .optiwich-settings .optiwich-wp-button--primary { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important; border: 1px solid #1D4ED8 !important; color: #FFFFFF !important; font-weight: 600 !important; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important; }
 .optiwich-settings .optiwich-wp-button--primary:hover:not(:disabled) { background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important; border-color: #1E40AF !important; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important; transform: translateY(-1px) !important; }
 .optiwich-settings .optiwich-wp-button--secondary { background: #FFFFFF !important; border: 1px solid #CBD5E1 !important; color: #334155 !important; }
+.optiwich-settings .optiwich-wp-button--secondary:hover:not(:disabled) { background: #F1F5F9 !important; border-color: #94A3B8 !important; color: #0F172A !important; }
+
+/* ==========================================================================
+   Customize (自定义) - SaaS 现代白卡风格（与设置页面保持 100% 视觉统一）
+   ========================================================================== */
+.optiwich-app.optiwich-customizer-editor,
+#optiwich-root .optiwich-customizer-editor,
+.optiwich-customizer-preview-panel {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+.optiwich-customizer-header,
+#optiwich-root .optiwich-customizer-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 0 16px !important;
+  min-height: 52px !important;
+}
+.optiwich-customizer-header .optiwich-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+.optiwich-customizer-toolbar-context {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+}
+.optiwich-customizer-toolbar-icon-button {
+  border-radius: 8px !important;
+  color: #475569 !important;
+  border: 1px solid transparent !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-toolbar-icon-button:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+}
+.optiwich-customizer-toolbar-icon-button.is-active {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-color: #BFDBFE !important;
+}
+.optiwich-customizer-header-button.optiwich-customizer-header-button-primary,
+.optiwich-customizer-editor .optiwich-wp-button--primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+  border: 1px solid #1D4ED8 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25) !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-header-button.optiwich-customizer-header-button-primary:hover:not(:disabled),
+.optiwich-customizer-editor .optiwich-wp-button--primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+  border-color: #1E40AF !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+  color: #FFFFFF !important;
+}
+.optiwich-customizer-header-button,
+.optiwich-customizer-editor .optiwich-wp-button--secondary {
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-header-button:hover:not(:disabled),
+.optiwich-customizer-editor .optiwich-wp-button--secondary:hover:not(:disabled) {
+  background: #F1F5F9 !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}
+.optiwich-customizer-sidebar,
+#optiwich-root .optiwich-customizer-sidebar {
+  background: #FFFFFF !important;
+  border-inline-end: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.optiwich-customizer-sidebar-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 14px 18px !important;
+}
+.optiwich-customizer-sidebar-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+}
+.optiwich-customizer-template-selector {
+  border-bottom: 1px solid #F1F5F9 !important;
+  padding-bottom: 14px !important;
+}
+.optiwich-customizer-template-button {
+  border: 1.5px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  padding: 10px 14px !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.optiwich-customizer-template-button:hover:not(.active) {
+  border-color: #93C5FD !important;
+  background: #F8FAFC !important;
+  transform: translateY(-1px) !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.08) !important;
+}
+.optiwich-customizer-template-button.active {
+  border: 2px solid #2563EB !important;
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  transform: translateY(-1px) !important;
+}
+.optiwich-customizer-template-button.active svg {
+  color: #2563EB !important;
+}
+.optiwich-customizer-nav-item {
+  border-radius: 8px !important;
+  margin: 3px 0 !important;
+  padding: 9px 12px !important;
+  color: #475569 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  border: 1px solid transparent !important;
+  border-inline-start: none !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-nav-item:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.optiwich-customizer-nav-item.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+  border-inline-start: none !important;
+}
+.optiwich-customizer-nav-item.active svg {
+  color: #2563EB !important;
+}
+.optiwich-customizer-nav-children {
+  border-inline-start: 1.5px solid #E2E8F0 !important;
+  margin-top: 4px !important;
+  padding-inline-start: 8px !important;
+}
+.optiwich-customizer-nav-child {
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 7px 12px !important;
+  color: #475569 !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-nav-child:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.optiwich-customizer-nav-child.active {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 600 !important;
+}
+.optiwich-customizer-preview-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  padding: 10px 18px !important;
+}
+.optiwich-customizer-preview-title {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+}
+.optiwich-customizer-preview-devices {
+  border-inline-end: 1px solid #E2E8F0 !important;
+}
+.optiwich-customizer-preview-device {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  color: #64748B !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-preview-device:hover:not(.active) {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+.optiwich-customizer-preview-device.active {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #2563EB !important;
+}
+.optiwich-customizer-preview-refresh {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  color: #64748B !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-preview-refresh:hover {
+  background: #F1F5F9 !important;
+  color: #2563EB !important;
+}
+.optiwich-customizer-preview-content.optiwich-customizer-preview-desktop .optiwich-customizer-preview-frame-wrapper {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  background: #FFFFFF !important;
+}
+.optiwich-customizer-preview-content.optiwich-customizer-preview-tablet .optiwich-customizer-preview-frame-wrapper {
+  border: 8px solid #1E293B !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+}
+.optiwich-customizer-preview-content.optiwich-customizer-preview-mobile .optiwich-customizer-preview-frame-wrapper {
+  border: 8px solid #1E293B !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+}
+.optiwich-customizer-controls-panel,
+#optiwich-root .optiwich-customizer-controls-panel {
+  background: #FFFFFF !important;
+  border-inline-start: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+.optiwich-customizer-controls-header {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  padding: 18px 20px 16px !important;
+}
+.optiwich-customizer-controls-tab {
+  color: #2563EB !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+.optiwich-customizer-controls-title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+.optiwich-customizer-controls-desc {
+  color: #64748B !important;
+  font-size: 13px !important;
+}
+.optiwich-customizer-block-icon {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  border-radius: 8px !important;
+}
+.optiwich-customizer-field-group {
+  border-top: 1px solid #F1F5F9 !important;
+}
+.optiwich-customizer-field-group-header {
+  padding: 12px 18px !important;
+  border-radius: 8px !important;
+  margin: 4px 10px !important;
+  font-weight: 600 !important;
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-field-group-header:hover {
+  background: #F8FAFC !important;
+  color: #2563EB !important;
+}
+.optiwich-customizer-field-group-header svg {
+  color: #64748B !important;
+}
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field {
+  padding: 16px 20px !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+}
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field-label {
+  color: #1E293B !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+}
+.optiwich-customizer-editor .optiwich-customizer-controls-body .optiwich-field-desc {
+  color: #64748B !important;
+  font-size: 12.5px !important;
+}
+.optiwich-customizer-editor input.optiwich-input,
+.optiwich-customizer-editor textarea.optiwich-textarea,
+.optiwich-customizer-editor select.optiwich-select,
+.optiwich-customizer-editor .optiwich-typography-input,
+.optiwich-customizer-editor .optiwich-typography-number-input,
+.optiwich-customizer-editor .optiwich-spacing-controls,
+.optiwich-customizer-editor .optiwich-dimensions-controls {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  padding: 7px 12px !important;
+  font-size: 13px !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.15s ease !important;
+}
+.optiwich-customizer-editor input.optiwich-input:focus,
+.optiwich-customizer-editor textarea.optiwich-textarea:focus,
+.optiwich-customizer-editor select.optiwich-select:focus,
+.optiwich-customizer-editor .optiwich-typography-input:focus,
+.optiwich-customizer-editor .optiwich-typography-number-input:focus,
+.optiwich-customizer-editor .optiwich-spacing-controls:focus-within,
+.optiwich-customizer-editor .optiwich-dimensions-controls:focus-within {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18) !important;
+  outline: none !important;
+}
+.optiwich-customizer-editor .optiwich-switcher-slider {
+  background-color: #CBD5E1 !important;
+  border-radius: 9999px !important;
+}
+.optiwich-customizer-editor .optiwich-switcher-input:checked + .optiwich-switcher-slider {
+  background: #2563EB !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+}
+.optiwich-customizer-editor .optiwich-repeater-item {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+  background: #FFFFFF !important;
+}
+.optiwich-color-swatch,
+.optiwich-border-color-swatch {
+  border-radius: 6px !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+}
+';
+				$optiwich_saas_css .= '
+/* ==========================================================================
+   WordPress Left Admin Menu Fix - Keep Menu Fixed and Independent from Page Scroll
+   ========================================================================== */
+@media screen and (min-width: 783px) {
+  body.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.toplevel_page_flavor-like-statistics #adminmenuback,
+  body[class*="flavor-like"] #adminmenuback,
+  body:has(#optiwich-root) #adminmenuback {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 1 !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body[class*="flavor-like"] #adminmenuwrap,
+  body:has(#optiwich-root) #adminmenuwrap {
+    position: fixed !important;
+    top: var(--wp-admin--admin-bar--height, 32px) !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 9990 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuback,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuback,
+  body.rtl[class*="flavor-like"] #adminmenuback,
+  body.rtl:has(#optiwich-root) #adminmenuback {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  body.rtl.flavor-like_page_flavor-like-settings #adminmenuwrap,
+  body.rtl.toplevel_page_flavor-like-statistics #adminmenuwrap,
+  body.rtl[class*="flavor-like"] #adminmenuwrap,
+  body.rtl:has(#optiwich-root) #adminmenuwrap {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  /* 1. Only fly out submenus for non-current / closed top-level items when sidebar is expanded */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    position: fixed !important;
+    left: 160px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 2. Lock the current open submenu (Flavor Like -> 统计/设置) strictly inline inside sidebar to prevent hover flicker */
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded)[class*="flavor-like"] #adminmenu li.wp-menu-open:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body:not(.folded):has(#optiwich-root) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: block !important;
+    z-index: 1 !important;
+    transform: none !important;
+  }
+
+  /* 3. Folded sidebar (collapsed to 36px icon strip) */
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    position: fixed !important;
+    left: 36px !important;
+    z-index: 99999 !important;
+  }
+
+  /* 4. RTL mode */
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded).flavor-like_page_flavor-like-settings #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded)[class*="flavor-like"] #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.wp-has-submenu:not(.wp-has-current-submenu):not(.wp-menu-open):hover ul.wp-submenu,
+  body.rtl:not(.folded):has(#optiwich-root) #adminmenu li.opensub:not(.wp-has-current-submenu):not(.wp-menu-open) ul.wp-submenu {
+    left: auto !important;
+    right: 160px !important;
+  }
+
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-has-current-submenu:hover ul.wp-submenu,
+  body.rtl:not(.folded) #adminmenu li.wp-menu-open:hover ul.wp-submenu {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded.flavor-like_page_flavor-like-settings #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded[class*="flavor-like"] #adminmenu .opensub ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .wp-has-submenu:hover ul.wp-submenu,
+  body.rtl.folded:has(#optiwich-root) #adminmenu .opensub ul.wp-submenu {
+    left: auto !important;
+    right: 36px !important;
+  }
+
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-thumb,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-thumb,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 4px !important;
+  }
+  body.flavor-like_page_flavor-like-settings #adminmenuwrap::-webkit-scrollbar-track,
+  body[class*="flavor-like"] #adminmenuwrap::-webkit-scrollbar-track,
+  body:has(#optiwich-root) #adminmenuwrap::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+}
 ';
 				wp_add_inline_style( 'flavor-like-optiwich', $optiwich_saas_css );
 

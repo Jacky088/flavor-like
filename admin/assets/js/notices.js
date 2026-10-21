@@ -102,4 +102,32 @@
 			}
 		} );
 	} );
+
+	// Lock WordPress admin sidebar menu from scrolling away with page content
+	function lockAdminMenuOnScroll() {
+		var isFlavorLikePage = document.querySelector( '#optiwich-root, .flavor-like-stats-app, [class*="flavor-like-settings"]' ) ||
+			( document.body && document.body.className && document.body.className.indexOf( 'flavor-like' ) !== -1 );
+
+		if ( ! isFlavorLikePage ) {
+			return;
+		}
+
+		if ( typeof window.jQuery !== 'undefined' ) {
+			window.jQuery( window ).off( 'scroll.pin-menu' );
+			window.jQuery( document.body ).addClass( 'sticky-menu' );
+			var wrap = document.getElementById( 'adminmenuwrap' );
+			if ( wrap ) {
+				wrap.style.top = '';
+				wrap.style.bottom = '';
+			}
+		}
+	}
+
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', lockAdminMenuOnScroll );
+	} else {
+		lockAdminMenuOnScroll();
+	}
+	window.addEventListener( 'load', lockAdminMenuOnScroll );
+
 } )();

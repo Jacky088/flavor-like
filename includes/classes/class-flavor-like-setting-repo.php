@@ -102,7 +102,11 @@ class flavor_like_setting_repo {
 		if ( ! is_array( $text_group ) ) {
 			$text_group = array();
 		}
-		$text_value = ! empty( $text_group[$status] ) ? $text_group[$status] : ucfirst( $status );
+		if ( ! empty( $text_group[$status] ) ) {
+			$text_value = $text_group[$status];
+		} else {
+			$text_value = ( 'unlike' === $status ) ? '已赞' : '点赞';
+		}
 		return apply_filters( 'flavor_like_button_text', flavor_like_kses( $text_value ), $status, self::getSettingKey( $typeName ) );
 	}
 

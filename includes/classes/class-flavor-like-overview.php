@@ -23,7 +23,7 @@ if ( ! class_exists( 'Flavor_Like_Overview' ) ) {
 		 * @return string
 		 */
 		public static function get_about_url() {
-			return admin_url( 'admin.php?page=flavor-like-about' );
+			return admin_url( 'admin.php?page=flavor-like-settings&settings-page=system_status&settings-section=system_tools' );
 		}
 
 		/**
@@ -422,7 +422,7 @@ if ( ! class_exists( 'Flavor_Like_Overview' ) ) {
 
 			check_admin_referer( 'flavor_like_import_settings' );
 
-			$redirect = admin_url( 'admin.php?page=flavor-like-about' );
+			$redirect = self::get_about_url();
 
 			if (
 				empty( $_FILES['settings_file']['tmp_name'] )
@@ -769,7 +769,7 @@ if ( ! class_exists( 'Flavor_Like_Overview' ) ) {
 			if ( ! empty( $post_types ) && is_array( $post_types ) ) {
 				$parts[] = sprintf(
 					/* translators: %s: comma-separated post type slugs */
-					esc_html__( 'exceptions: %s', 'flavor-like' ),
+					'启用的文章类型: %s',
 					implode( ', ', array_map( 'sanitize_key', $post_types ) )
 				);
 			}

@@ -106,9 +106,12 @@ if ( ! class_exists( 'flavor_like_stats' ) ) {
 		 * @return array
 		 */
 		public function get_overview_api_data() {
+			$tables = $this->get_tables();
+			$primary_type = ! empty( $tables['posts'] ) ? $tables['posts'] : ( ! empty( $tables ) ? reset( $tables ) : 'post' );
 			return array(
 				'overview'   => $this->get_overview(),
 				'peak_hours' => $this->get_peak_hours(),
+				'chart'      => $this->dataset( $primary_type ),
 			);
 		}
 
